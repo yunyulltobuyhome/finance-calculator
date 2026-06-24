@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://finance-calculator-bi5.pages.dev/sitemap.xml
