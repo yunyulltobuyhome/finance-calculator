@@ -1,0 +1,91 @@
+export const SALARY_TAX_DATA = {
+  US: {
+    name: '🇺🇸 United States',
+    currency: 'USD',
+    brackets: [
+      { min: 0, max: 11000, rate: 0.1 },
+      { min: 11000, max: 44725, rate: 0.12 },
+      { min: 44725, max: 95375, rate: 0.22 },
+      { min: 95375, max: 182100, rate: 0.24 },
+      { min: 182100, max: 231250, rate: 0.32 },
+      { min: 231250, max: 578125, rate: 0.35 },
+      { min: 578125, max: Infinity, rate: 0.37 },
+    ],
+    socialSecurity: 0.062,
+    socialSecurityCap: 184500,
+    medicare: 0.0145,
+    states: [
+      { name: 'California', tax: 0.093 },
+      { name: 'Texas', tax: 0 },
+      { name: 'New York', tax: 0.065 },
+      { name: 'Florida', tax: 0 },
+      { name: 'Illinois', tax: 0.0495 },
+      { name: 'Nevada', tax: 0 },
+      { name: 'Washington', tax: 0 },
+    ],
+  },
+  UK: {
+    name: '🇬🇧 United Kingdom',
+    currency: 'GBP',
+    brackets: [
+      { min: 0, max: 12570, rate: 0 },
+      { min: 12570, max: 50270, rate: 0.2 },
+      { min: 50270, max: 125140, rate: 0.4 },
+      { min: 125140, max: Infinity, rate: 0.45 },
+    ],
+    nationalInsurance: 0.08,
+    nationalInsuranceCap: 50270,
+    studentLoan: 0.09,
+    studentLoanThreshold: 27295,
+  },
+  CA: {
+    name: '🇨🇦 Canada',
+    currency: 'CAD',
+    federalBrackets: [
+      { min: 0, max: 15705, rate: 0.15 },
+      { min: 15705, max: 63144, rate: 0.205 },
+      { min: 63144, max: 110076, rate: 0.26 },
+      { min: 110076, max: 173205, rate: 0.29 },
+      { min: 173205, max: Infinity, rate: 0.33 },
+    ],
+    provinces: [
+      { name: 'Ontario', brackets: [
+        { min: 0, max: 11865, rate: 0.0505 },
+        { min: 11865, max: 47316, rate: 0.0915 },
+        { min: 47316, max: 94635, rate: 0.1116 },
+        { min: 94635, max: 150000, rate: 0.1216 },
+        { min: 150000, max: Infinity, rate: 0.1316 },
+      ]},
+      { name: 'British Columbia', brackets: [
+        { min: 0, max: 11291, rate: 0.0506 },
+        { min: 11291, max: 45654, rate: 0.0770 },
+        { min: 45654, max: 102894, rate: 0.1050 },
+        { min: 102894, max: 131454, rate: 0.1229 },
+        { min: 131454, max: Infinity, rate: 0.1679 },
+      ]},
+    ],
+    cpp: 0.0595,
+    cppMax: 3867.50,
+    ei: 0.0163,
+  },
+  AU: {
+    name: '🇦🇺 Australia',
+    currency: 'AUD',
+    brackets: [
+      { min: 0, max: 18200, rate: 0 },
+      { min: 18200, max: 45000, rate: 0.19 },
+      { min: 45000, max: 120000, rate: 0.325 },
+      { min: 120000, max: 180000, rate: 0.37 },
+      { min: 180000, max: Infinity, rate: 0.45 },
+    ],
+    medicareLevey: 0.02,
+    superannuation: 0.115,
+  },
+};
+
+export const EXCHANGE_RATES = {
+  USD: 1,
+  GBP: 1.27,
+  CAD: 0.72,
+  AUD: 0.65,
+};
