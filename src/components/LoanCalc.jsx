@@ -1,120 +1,204 @@
 import { useState } from 'react'
-
-const US_STATES = [
-  { name: 'California', propertyTaxRate: 0.76 },
-  { name: 'New York', propertyTaxRate: 1.72 },
-  { name: 'Texas', propertyTaxRate: 1.60 },
-  { name: 'Florida', propertyTaxRate: 0.91 },
-  { name: 'Illinois', propertyTaxRate: 2.27 },
-  { name: 'New Jersey', propertyTaxRate: 2.47 },
-  { name: 'Washington', propertyTaxRate: 0.98 },
-  { name: 'Nevada', propertyTaxRate: 0.55 },
-]
-
-const EU_COUNTRIES = [
-  { name: 'Germany', avgRate: 3.8 },
-  { name: 'France', avgRate: 3.6 },
-  { name: 'Netherlands', avgRate: 4.1 },
-  { name: 'Spain', avgRate: 3.5 },
-  { name: 'Italy', avgRate: 3.9 },
-  { name: 'United Kingdom', avgRate: 4.5 },
-  { name: 'Sweden', avgRate: 3.2 },
-  { name: 'Portugal', avgRate: 3.7 },
-]
+import { LOAN_DATA } from '../data/loanRates'
 
 export default function LoanCalc() {
-  const [region, setRegion] = useState('US')
-  const [state, setState] = useState(US_STATES[0])
-  const [country, setCountry] = useState(EU_COUNTRIES[0])
-  const [form, setForm] = useState({ principal: 300000, rate: 4.5, years: 30, extra: 0 })
+  const [country, setCountry] = useState('US')
+  const [loanType, setLoanType] = useState(0)
+  const [repaymentMethod, setRepaymentMethod] = useState('Fixed-Rate')
+  const [principal, setPrincipal] = useState(300000)
+  const [customRate, setCustomRate] = useState(null)
+  const [customTerm, setCustomTerm] = useState(null)
+  const [extraPayment, setExtraPayment] = useState(0)
+  const [balloonPercent, setBalloonPercent] = useState(20)
   const [result, setResult] = useState(null)
 
+  const countryData = LOAN_DATA[country]
+  const selectedLoan = countryData.types[loanType]
+  const rate = (customRate !== null ? customRate : selectedLoan.rate) / 100 / 12
+  const term = (customTerm !== null ? customTerm : selectedLoan.term) * 12
+  const currency = countryData.currency
+  const symbol = currency === 'USD' ? '$' : currency === 'GBP' ? '£' : currency === 'CAD' ? 'C$' : 'A$'
+
+  const fmt = (n) => symbol + Math.round(n).toLocaleString()
+
   const calc = () => {
-    const p = +form.principal
-    const r = +form.rate / 100 / 12
-    const n = +form.years * 12
-    const extra = +form.extra
-    const monthly = r === 0 ? p / n : p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1)
-    const totalPay = monthly * n
-    const totalInt = totalPay - p
-    let bal = p, months = 0
-    if (extra > 0) {
-      while (bal > 0 && months < n) { bal = bal * (1 + r) - (monthly + extra); months++ }
+    if (repaymentMethod === 'Fixed-Rate') {
+      const monthlyRate = rate
+      const monthlyPayment = rate === 0 
+        ? principal / term 
+        : principal * (monthlyRate * Math.pow(1 + monthlyRate, term)) / (Math.pow(1 + monthlyRate, term) - 1)
+
+      let balance = principal
+      let totalInterest = 0
+      let months = 0
+      const schedule = []
+
+      while (balance > 0 && months < term) {
+        const interestPayment = balance * monthlyRate
+        let principalPayment = monthlyPayment - interestPayment
+        const extraPay = extraPayment || 0
+
+        if (principalPayment + extraPay >= balance) {
+          principalPayment = balance
+          balance = 0
+        } else {
+          balance -= principalPayment + extraPay
+        }
+
+        totalInterest += interestPayment
+        months++
+
+        if (months % Math.ceil(term / 12) === 0 || balance <= 0) {
+          schedule.push({
+            month: months,
+            payment: Math.round(monthlyPayment + extraPay),
+            principal: Math.round(principalPayment),
+            interest: Math.round(interestPayment),
+            balance: Math.max(0, Math.round(balance)),
+          })
+        }
+      }
+
+      setResult({
+        monthlyPayment: Math.round(monthlyPayment),
+        totalInterest: Math.round(totalInterest),
+        totalPayment: Math.round(principal + totalInterest),
+        payoffMonths: months,
+        payoffYears: Math.round(months / 12 * 10) / 10,
+        schedule,
+        method: 'Fixed-Rate',
+      })
+    } else if (repaymentMethod === 'Interest-Only') {
+      const monthlyInterest = principal * rate
+      const balloonAmount = (principal * balloonPercent) / 100
+      const remainingPrincipal = principal - balloonAmount
+
+      setResult({
+        monthlyPayment: Math.round(monthlyInterest),
+        monthlyInterestOnly: Math.round(monthlyInterest),
+        balloonAmount: Math.round(balloonAmount),
+        totalPaid: Math.round(monthlyInterest * term + balloonAmount),
+        term: term,
+        payoffYears: Math.round(term / 12),
+        method: 'Interest-Only',
+      })
     }
-    const annualPropertyTax = region === 'US' ? p * state.propertyTaxRate / 100 : 0
-    setResult({
-      monthly: Math.round(monthly),
-      totalInt: Math.round(totalInt),
-      totalPay: Math.round(totalPay),
-      earlyYears: extra > 0 ? Math.round(months / 12 * 10) / 10 : null,
-      principalPct: Math.round(p / totalPay * 100),
-      annualPropertyTax: Math.round(annualPropertyTax),
-      monthlyWithTax: Math.round(monthly + annualPropertyTax / 12),
-    })
   }
 
-  const fmt = (n) => '$' + n.toLocaleString()
+  const countryList = Object.entries(LOAN_DATA).map(([key, val]) => ({
+    key,
+    name: val.name,
+  }))
 
   return (
     <div>
-      <h2 className="text-base font-semibold text-gray-700 mb-4">Mortgage & Loan Calculator</h2>
+      <h2 className="text-base font-semibold text-gray-700 mb-4">Global Loan Calculator</h2>
 
-      <div className="flex gap-2 mb-4">
-        {['US', 'Europe'].map(r => (
-          <button
-            key={r}
-            onClick={() => setRegion(r)}
-            className={`flex-1 py-1.5 rounded-lg text-sm font-medium border transition-all ${
-              region === r
-                ? 'bg-indigo-600 text-white border-indigo-600'
-                : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-            }`}
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Country</label>
+          <select
+            value={country}
+            onChange={(e) => {
+              setCountry(e.target.value)
+              setLoanType(0)
+              setRepaymentMethod(LOAN_DATA[e.target.value].repaymentMethods[0])
+            }}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
           >
-            {r === 'US' ? '🇺🇸 United States' : '🇪🇺 Europe'}
-          </button>
-        ))}
-      </div>
+            {countryList.map(({ key, name }) => (
+              <option key={key} value={key}>{name}</option>
+            ))}
+          </select>
+        </div>
 
-      <div className="mb-4">
-        <label className="text-xs text-gray-500 block mb-1">
-          {region === 'US' ? 'State (affects property tax estimate)' : 'Country (reference rates)'}
-        </label>
-        <select
-          onChange={e => {
-            if (region === 'US') setState(US_STATES.find(s => s.name === e.target.value))
-            else setCountry(EU_COUNTRIES.find(c => c.name === e.target.value))
-          }}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-        >
-          {(region === 'US' ? US_STATES : EU_COUNTRIES).map(item => (
-            <option key={item.name}>{item.name}</option>
-          ))}
-        </select>
-        <p className="text-xs text-gray-400 mt-1">
-          {region === 'US'
-            ? `Avg property tax: ${state.propertyTaxRate}% per year`
-            : `Avg mortgage rate in ${country.name}: ~${country.avgRate}%`}
-        </p>
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Loan Type</label>
+          <select
+            value={loanType}
+            onChange={(e) => setLoanType(+e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          >
+            {countryData.types.map((type, i) => (
+              <option key={i} value={i}>{type.name} ({(type.rate * 100).toFixed(2)}%)</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Repayment Method</label>
+          <select
+            value={repaymentMethod}
+            onChange={(e) => setRepaymentMethod(e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          >
+            {countryData.repaymentMethods.map((method) => (
+              <option key={method}>{method}</option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Loan Amount</label>
+          <input
+            type="number"
+            value={principal}
+            onChange={(e) => setPrincipal(+e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        {[
-          { label: 'Loan Amount ($)', key: 'principal' },
-          { label: 'Annual Interest Rate (%)', key: 'rate' },
-          { label: 'Loan Term (years)', key: 'years' },
-          { label: 'Extra Monthly Payment ($)', key: 'extra' },
-        ].map(({ label, key }) => (
-          <div key={key}>
-            <label className="text-xs text-gray-500 block mb-1">{label}</label>
-            <input
-              type="number"
-              value={form[key]}
-              onChange={e => setForm({ ...form, [key]: e.target.value })}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-            />
-          </div>
-        ))}
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Interest Rate (%) - Leave blank to use default</label>
+          <input
+            type="number"
+            step="0.1"
+            value={customRate || ''}
+            onChange={(e) => setCustomRate(e.target.value ? +e.target.value : null)}
+            placeholder={`Default: ${(selectedLoan.rate * 100).toFixed(2)}%`}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          />
+        </div>
+
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Loan Term (years) - Leave blank to use default</label>
+          <input
+            type="number"
+            value={customTerm || ''}
+            onChange={(e) => setCustomTerm(e.target.value ? +e.target.value : null)}
+            placeholder={`Default: ${selectedLoan.term} years`}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          />
+        </div>
       </div>
+
+      {repaymentMethod === 'Fixed-Rate' && (
+        <div className="mb-4">
+          <label className="text-xs text-gray-500 block mb-1">Extra Monthly Payment ($)</label>
+          <input
+            type="number"
+            value={extraPayment}
+            onChange={(e) => setExtraPayment(+e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          />
+        </div>
+      )}
+
+      {repaymentMethod === 'Interest-Only' && (
+        <div className="mb-4">
+          <label className="text-xs text-gray-500 block mb-1">Balloon Payment (% of loan amount)</label>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value={balloonPercent}
+            onChange={(e) => setBalloonPercent(+e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          />
+        </div>
+      )}
 
       <button
         onClick={calc}
@@ -125,46 +209,75 @@ export default function LoanCalc() {
 
       {result && (
         <div className="mt-5">
-          <div className="grid grid-cols-2 gap-2 mb-3">
-            {[
-              { label: 'Monthly Payment', val: fmt(result.monthly) },
-              { label: 'Total Interest', val: fmt(result.totalInt) },
-              { label: 'Total Payment', val: fmt(result.totalPay) },
-              ...(region === 'US' ? [{ label: 'Monthly (incl. property tax est.)', val: fmt(result.monthlyWithTax) }] : []),
-            ].map(({ label, val }) => (
-              <div key={label} className="bg-gray-50 rounded-xl p-3">
-                <p className="text-xs text-gray-400 mb-1">{label}</p>
-                <p className="text-base font-semibold text-gray-800">{val}</p>
+          {result.method === 'Fixed-Rate' ? (
+            <>
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                {[
+                  { label: 'Monthly Payment', val: fmt(result.monthlyPayment) },
+                  { label: 'Total Interest', val: fmt(result.totalInterest) },
+                  { label: 'Total Payment', val: fmt(result.totalPayment) },
+                  { label: 'Payoff Time', val: `${result.payoffYears} years` },
+                ].map(({ label, val }) => (
+                  <div key={label} className="bg-gray-50 rounded-xl p-3">
+                    <p className="text-xs text-gray-400 mb-1">{label}</p>
+                    <p className="text-base font-semibold text-gray-800">{val}</p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          <div className="space-y-2 text-xs mb-3">
-            {[
-              { label: 'Principal', pct: result.principalPct, color: 'bg-indigo-400' },
-              { label: 'Interest', pct: 100 - result.principalPct, color: 'bg-orange-400' },
-            ].map(({ label, pct, color }) => (
-              <div key={label} className="flex items-center gap-2">
-                <span className="w-14 text-gray-400">{label}</span>
-                <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
-                  <div className={`h-full ${color} rounded-full flex items-center pl-2 text-white`} style={{ width: `${pct}%` }}>
-                    {pct}%
+              <div className="space-y-2 text-xs mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-16 text-gray-400">Principal</span>
+                  <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                    <div className="h-full bg-indigo-400 rounded-full flex items-center pl-2 text-white" style={{width: '100%'}}>
+                      {fmt(principal)}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-16 text-gray-400">Interest</span>
+                  <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                    <div className="h-full bg-orange-400 rounded-full flex items-center pl-2 text-white" style={{width: `${(result.totalInterest / result.totalPayment) * 100}%`}}>
+                      {fmt(result.totalInterest)}
+                    </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {result.earlyYears && (
-            <div className="bg-indigo-50 rounded-xl p-3 text-sm text-indigo-700">
-              💡 With extra payments, paid off in <strong>{result.earlyYears} years</strong>
-            </div>
-          )}
-
-          {region === 'US' && (
-            <p className="text-xs text-gray-400 mt-2">
-              * Property tax estimate based on {state.name} avg rate ({state.propertyTaxRate}%). Actual rates vary by county.
-            </p>
+              {result.schedule.length > 0 && (
+                <div className="bg-gray-50 rounded-xl p-3">
+                  <p className="text-xs text-gray-600 font-medium mb-2">Payment Schedule (Yearly)</p>
+                  <div className="space-y-1 max-h-48 overflow-y-auto">
+                    {result.schedule.map((s) => (
+                      <div key={s.month} className="flex justify-between text-xs text-gray-600">
+                        <span>Month {s.month}</span>
+                        <span>{fmt(s.payment)}</span>
+                        <span className="text-gray-400">Balance: {fmt(s.balance)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="grid grid-cols-2 gap-2 mb-3">
+                {[
+                  { label: 'Monthly Payment (Interest)', val: fmt(result.monthlyPayment) },
+                  { label: 'Balloon Payment', val: fmt(result.balloonAmount) },
+                  { label: 'Term', val: `${result.payoffYears} years` },
+                  { label: 'Total Paid', val: fmt(result.totalPaid) },
+                ].map(({ label, val }) => (
+                  <div key={label} className="bg-gray-50 rounded-xl p-3">
+                    <p className="text-xs text-gray-400 mb-1">{label}</p>
+                    <p className="text-base font-semibold text-gray-800">{val}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-orange-50 rounded-xl p-3 text-xs text-orange-700">
+                💡 You pay only interest for {result.payoffYears} years, then {fmt(result.balloonAmount)} in balloon payment at the end.
+              </div>
+            </>
           )}
         </div>
       )}
