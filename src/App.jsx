@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import FIRECalc from './components/FIRECalc'
 import DividendCalc from './components/DividendCalc'
 import LoanCalc from './components/LoanCalc'
 import CompoundCalc from './components/CompoundCalc'
@@ -10,10 +11,11 @@ export default function App() {
   const [active, setActive] = useState(0)
 
   const tabs = [
+    { label: 'FIRE', icon: '🔥' },
     { label: 'Dividend', icon: '💰' },
     { label: 'Loan', icon: '🏠' },
-    { label: 'Compound', icon: '📈' },
     { label: 'Salary', icon: '💼' },
+    { label: 'Compound', icon: '📈' },
   ]
 
   if (page === 'privacy') {
@@ -32,8 +34,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-800">JoinCalc</h1>
-        <p className="text-sm text-gray-500">Free calculators for everyone</p>
+        <h1 className="text-2xl font-bold text-gray-800">JoinCalc</h1>
+        <p className="text-sm text-gray-500">Free Financial Calculators - FIRE, Dividends, Loans, Salary & More</p>
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6">
@@ -54,15 +56,16 @@ export default function App() {
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
-          {active === 0 && <DividendCalc />}
-          {active === 1 && <LoanCalc />}
-          {active === 2 && <CompoundCalc />}
+          {active === 0 && <FIRECalc />}
+          {active === 1 && <DividendCalc />}
+          {active === 2 && <LoanCalc />}
           {active === 3 && <SalaryCalc />}
+          {active === 4 && <CompoundCalc />}
         </div>
 
         <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
           <p className="text-xs text-yellow-700 leading-relaxed">
-            ⚠️ <strong>Disclaimer:</strong> For informational purposes only. Not financial, tax, or legal advice. Always consult professionals before making decisions.
+            ⚠️ <strong>Disclaimer:</strong> For informational purposes only. Not financial, tax, or legal advice. Always consult professionals.
           </p>
         </div>
       </main>
