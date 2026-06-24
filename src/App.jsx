@@ -4,6 +4,7 @@ import DividendCalc from './components/DividendCalc'
 import LoanCalc from './components/LoanCalc'
 import CompoundCalc from './components/CompoundCalc'
 import SalaryCalc from './components/SalaryCalc'
+import BuyVsRentCalc from './components/BuyVsRentCalc'
 import Privacy from './components/Privacy'
 
 export default function App() {
@@ -12,8 +13,9 @@ export default function App() {
 
   const tabs = [
     { label: 'FIRE', icon: '🔥' },
+    { label: 'Buy vs Rent', icon: '🏠' },
     { label: 'Dividend', icon: '💰' },
-    { label: 'Loan', icon: '🏠' },
+    { label: 'Loan', icon: '📋' },
     { label: 'Salary', icon: '💼' },
     { label: 'Compound', icon: '📈' },
   ]
@@ -35,7 +37,7 @@ export default function App() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 px-6 py-4">
         <h1 className="text-2xl font-bold text-gray-800">JoinCalc</h1>
-        <p className="text-sm text-gray-500">Free Financial Calculators - FIRE, Dividends, Loans, Salary & More</p>
+        <p className="text-sm text-gray-500">Free Financial Calculators - FIRE, Buy vs Rent, Dividend, Loan, Salary & More</p>
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6">
@@ -57,10 +59,11 @@ export default function App() {
 
         <div className="bg-white rounded-2xl border border-gray-200 p-6">
           {active === 0 && <FIRECalc />}
-          {active === 1 && <DividendCalc />}
-          {active === 2 && <LoanCalc />}
-          {active === 3 && <SalaryCalc />}
-          {active === 4 && <CompoundCalc />}
+          {active === 1 && <BuyVsRentCalc />}
+          {active === 2 && <DividendCalc />}
+          {active === 3 && <LoanCalc />}
+          {active === 4 && <SalaryCalc />}
+          {active === 5 && <CompoundCalc />}
         </div>
 
         <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
