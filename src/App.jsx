@@ -6,6 +6,7 @@ import LoanCalc from './components/LoanCalc'
 import CompoundCalc from './components/CompoundCalc'
 import SalaryCalc from './components/SalaryCalc'
 import BuyVsRentCalc from './components/BuyVsRentCalc'
+import StampDutyCalc from './components/StampDutyCalc'
 import Privacy from './components/Privacy'
 
 const tabs = [
@@ -18,6 +19,11 @@ const tabs = [
     label: 'Buy vs Rent', icon: '🏠', path: '/buy-vs-rent',
     title: 'Buy vs Rent Calculator — Should You Buy or Rent a Home? | JoinCalc',
     description: 'Compare buying vs renting a home with our free calculator. See total costs over time for US, UK, Canada and Australia.',
+  },
+  {
+    label: 'Stamp Duty', icon: '🏛️', path: '/stamp-duty',
+    title: 'Stamp Duty Calculator 2026 — UK SDLT Calculator | JoinCalc',
+    description: 'Calculate UK Stamp Duty Land Tax (SDLT) instantly. Updated April 2025 rates for standard buyers, first-time buyers and additional properties.',
   },
   {
     label: 'Dividend', icon: '💰', path: '/dividend',
@@ -64,7 +70,7 @@ function Layout() {
           </h1>
         </Link>
         <p className="text-sm text-gray-500">
-          Free Financial Calculators — FIRE, Buy vs Rent, Dividend, Loan, Salary & More
+          Free Financial Calculators — FIRE, Buy vs Rent, Stamp Duty, Loan, Salary & More
         </p>
       </header>
 
@@ -105,6 +111,7 @@ function Layout() {
             <Route path="/"            element={<FIRECalc />} />
             <Route path="/fire"        element={<FIRECalc />} />
             <Route path="/buy-vs-rent" element={<BuyVsRentCalc />} />
+            <Route path="/stamp-duty"  element={<StampDutyCalc />} />
             <Route path="/dividend"    element={<DividendCalc />} />
             <Route path="/loan"        element={<LoanCalc />} />
             <Route path="/salary"      element={<SalaryCalc />} />
