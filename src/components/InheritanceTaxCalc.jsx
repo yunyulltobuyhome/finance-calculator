@@ -1,20 +1,14 @@
 import { useState } from 'react'
 
-// ===== 2026 세율 =====
-// UK IHT
-const UK_NRB = 325000      // Nil-Rate Band
-const UK_RNRB = 175000     // Residence Nil-Rate Band
-const UK_IHT_RATE = 0.40   // 40%
-const UK_CHARITY_RATE = 0.36 // 자선단체 10% 이상 기부 시
-
-// US Estate Tax 2026 (OBBBA 이후)
-const US_EXEMPTION = 15000000  // $15M per person
-const US_ESTATE_RATE = 0.40    // 40%
+const UK_NRB = 325000
+const UK_RNRB = 175000
+const UK_IHT_RATE = 0.40
+const UK_CHARITY_RATE = 0.36
+const US_EXEMPTION = 15000000
+const US_ESTATE_RATE = 0.40
 
 export default function InheritanceTaxCalc() {
   const [country, setCountry] = useState('uk')
-
-  // UK 상태
   const [estateValue, setEstateValue] = useState('')
   const [debts, setDebts] = useState('')
   const [hasSpouse, setHasSpouse] = useState(false)
@@ -23,69 +17,38 @@ export default function InheritanceTaxCalc() {
   const [propertyToDescendants, setPropertyToDescendants] = useState(false)
   const [charityGift, setCharityGift] = useState('')
   const [gifts7yr, setGifts7yr] = useState('')
-
-  // US 상태
   const [grossEstate, setGrossEstate] = useState('')
   const [usDebts, setUsDebts] = useState('')
   const [maritalDeduction, setMaritalDeduction] = useState('')
   const [charityDeduction, setCharityDeduction] = useState('')
   const [priorGifts, setPriorGifts] = useState('')
-
   const [result, setResult] = useState(null)
 
-  const fmt = (n, cur = country) => {
-    const sym = cur === 'uk' ? '£' : '$'
-    return sym + Math.round(n).toLocaleString()
-  }
+  const fmt = (n) => (country === 'uk' ? '£' : '$') + Math.round(n).toLocaleString()
 
   const calculateUK = () => {
     const estate = parseFloat(estateValue) || 0
     const debt = parseFloat(debts) || 0
     const charity = parseFloat(charityGift) || 0
     const gifts = parseFloat(gifts7yr) || 0
-
     const netEstate = Math.max(0, estate - debt)
-
-    // NRB 계산
     let totalNRB = UK_NRB
-    if (spouseUnusedNRB) totalNRB += UK_NRB // 배우자 미사용 NRB 이전
-
-    // RNRB (주거 부동산을 직계 후손에게 남길 때)
+    if (spouseUnusedNRB) totalNRB += UK_NRB
     let rnrb = 0
     if (hasProperty && propertyToDescendants) {
       rnrb = UK_RNRB
-      if (spouseUnusedNRB) rnrb += UK_RNRB // 배우자 미사용 RNRB 이전
-      // £2M 초과 시 테이퍼링
+      if (spouseUnusedNRB) rnrb += UK_RNRB
       if (netEstate > 2000000) {
         const taper = Math.floor((netEstate - 2000000) / 2)
         rnrb = Math.max(0, rnrb - taper)
       }
     }
-
-    // 자선 공제
     const charityDeductible = Math.min(charity, netEstate)
     const taxableEstate = Math.max(0, netEstate - totalNRB - rnrb - charityDeductible - gifts)
-
-    // 자선 10% 이상 기부 시 할인율
     const charityPercent = netEstate > 0 ? charity / netEstate : 0
     const rate = charityPercent >= 0.10 ? UK_CHARITY_RATE : UK_IHT_RATE
-
     const tax = taxableEstate > 0 ? taxableEstate * rate : 0
-    const netToHeirs = netEstate - tax
-
-    setResult({
-      country: 'uk',
-      netEstate,
-      totalNRB,
-      rnrb,
-      charityDeductible,
-      gifts,
-      taxableEstate,
-      rate,
-      tax,
-      netToHeirs,
-      charityPercent,
-    })
+    setResult({ country: 'uk', netEstate, totalNRB, rnrb, charityDeductible, gifts, taxableEstate, rate, tax, netToHeirs: netEstate - tax, charityPercent })
   }
 
   const calculateUS = () => {
@@ -94,54 +57,28 @@ export default function InheritanceTaxCalc() {
     const marital = parseFloat(maritalDeduction) || 0
     const charity = parseFloat(charityDeduction) || 0
     const gifts = parseFloat(priorGifts) || 0
-
     const adjustedEstate = Math.max(0, gross - debt - marital - charity)
     const taxableEstate = Math.max(0, adjustedEstate + gifts - US_EXEMPTION)
     const tax = taxableEstate > 0 ? taxableEstate * US_ESTATE_RATE : 0
-    const netToHeirs = Math.max(0, gross - debt - tax)
-
-    setResult({
-      country: 'us',
-      grossEstate: gross,
-      adjustedEstate,
-      exemption: US_EXEMPTION,
-      taxableEstate,
-      tax,
-      netToHeirs,
-      marital,
-      charity,
-    })
+    setResult({ country: 'us', grossEstate: gross, adjustedEstate, exemption: US_EXEMPTION, taxableEstate, tax, netToHeirs: Math.max(0, gross - debt - tax), marital, charity })
   }
 
-  const calculate = () => {
-    if (country === 'uk') calculateUK()
-    else calculateUS()
-  }
+  const calculate = () => country === 'uk' ? calculateUK() : calculateUS()
 
   return (
     <div>
       <div className="mb-6">
         <h2 className="text-xl font-bold text-gray-800 mb-1">Inheritance Tax Calculator 2026</h2>
-        <p className="text-sm text-gray-500">
-          Estimate UK Inheritance Tax (IHT) or US Estate Tax based on the latest 2026 rates.
-        </p>
-        <p className="text-xs text-gray-400 mt-1">
-          UK rates: updated April 2026 | US rates: updated July 2025 (OBBBA)
-        </p>
+        <p className="text-sm text-gray-500">Estimate UK Inheritance Tax (IHT) or US Estate Tax based on the latest 2026 rates.</p>
+        <p className="text-xs text-gray-400 mt-1">UK rates: updated April 2026 | US rates: updated July 2025 (OBBBA)</p>
       </div>
 
-      {/* 국가 선택 */}
       <div className="mb-5">
         <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
         <div className="grid grid-cols-2 gap-2">
-          {[
-            { value: 'uk', label: '🇬🇧 United Kingdom (IHT)' },
-            { value: 'us', label: '🇺🇸 United States (Estate Tax)' },
-          ].map(opt => (
+          {[{ value: 'uk', label: '🇬🇧 United Kingdom (IHT)' }, { value: 'us', label: '🇺🇸 United States (Estate Tax)' }].map(opt => (
             <button key={opt.value} onClick={() => { setCountry(opt.value); setResult(null) }}
-              className={`py-2 px-3 rounded-lg text-sm font-medium border transition-all ${
-                country === opt.value ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-              }`}>
+              className={`py-2 px-3 rounded-lg text-sm font-medium border transition-all ${country === opt.value ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}>
               {opt.label}
             </button>
           ))}
@@ -150,89 +87,68 @@ export default function InheritanceTaxCalc() {
 
       {country === 'uk' ? (
         <div className="space-y-4">
-          {/* 총 자산 */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Total Estate Value</label>
             <p className="text-xs text-gray-400 mb-1">Property, savings, investments, personal possessions</p>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
-              <input type="number" value={estateValue} onChange={e => setEstateValue(e.target.value)}
-                placeholder="500,000"
+              <input type="number" value={estateValue} onChange={e => setEstateValue(e.target.value)} placeholder="500,000"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
-
-          {/* 부채 */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Debts & Liabilities</label>
             <p className="text-xs text-gray-400 mb-1">Mortgage, loans, credit cards</p>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
-              <input type="number" value={debts} onChange={e => setDebts(e.target.value)}
-                placeholder="0"
+              <input type="number" value={debts} onChange={e => setDebts(e.target.value)} placeholder="0"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
-
-          {/* 7년 이내 증여 */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Gifts Made in Last 7 Years</label>
             <p className="text-xs text-gray-400 mb-1">Gifts above £3,000/year annual exemption</p>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
-              <input type="number" value={gifts7yr} onChange={e => setGifts7yr(e.target.value)}
-                placeholder="0"
+              <input type="number" value={gifts7yr} onChange={e => setGifts7yr(e.target.value)} placeholder="0"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
-
-          {/* 자선 기부 */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Charitable Gifts in Will</label>
             <p className="text-xs text-gray-400 mb-1">Donating 10%+ of estate reduces rate to 36%</p>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
-              <input type="number" value={charityGift} onChange={e => setCharityGift(e.target.value)}
-                placeholder="0"
+              <input type="number" value={charityGift} onChange={e => setCharityGift(e.target.value)} placeholder="0"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
-
-          {/* 체크박스 옵션들 */}
           <div className="bg-gray-50 rounded-xl p-4 space-y-3">
             <p className="text-sm font-semibold text-gray-700 mb-2">Allowances & Reliefs</p>
-
             <label className="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" checked={hasSpouse} onChange={e => setHasSpouse(e.target.checked)}
-                className="w-4 h-4 mt-0.5 accent-indigo-600" />
+              <input type="checkbox" checked={hasSpouse} onChange={e => setHasSpouse(e.target.checked)} className="w-4 h-4 mt-0.5 accent-indigo-600" />
               <div>
                 <p className="text-sm text-gray-700 font-medium">Married / Civil Partner</p>
                 <p className="text-xs text-gray-400">Assets left to spouse/partner are IHT-free</p>
               </div>
             </label>
-
             <label className="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" checked={spouseUnusedNRB} onChange={e => setSpouseUnusedNRB(e.target.checked)}
-                className="w-4 h-4 mt-0.5 accent-indigo-600" />
+              <input type="checkbox" checked={spouseUnusedNRB} onChange={e => setSpouseUnusedNRB(e.target.checked)} className="w-4 h-4 mt-0.5 accent-indigo-600" />
               <div>
                 <p className="text-sm text-gray-700 font-medium">Transfer Unused NRB from Late Spouse</p>
                 <p className="text-xs text-gray-400">Doubles nil-rate band to £650,000</p>
               </div>
             </label>
-
             <label className="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" checked={hasProperty} onChange={e => setHasProperty(e.target.checked)}
-                className="w-4 h-4 mt-0.5 accent-indigo-600" />
+              <input type="checkbox" checked={hasProperty} onChange={e => setHasProperty(e.target.checked)} className="w-4 h-4 mt-0.5 accent-indigo-600" />
               <div>
                 <p className="text-sm text-gray-700 font-medium">Estate Includes Main Residence</p>
                 <p className="text-xs text-gray-400">Required for Residence Nil-Rate Band (RNRB)</p>
               </div>
             </label>
-
             {hasProperty && (
               <label className="flex items-start gap-3 cursor-pointer ml-4">
-                <input type="checkbox" checked={propertyToDescendants} onChange={e => setPropertyToDescendants(e.target.checked)}
-                  className="w-4 h-4 mt-0.5 accent-indigo-600" />
+                <input type="checkbox" checked={propertyToDescendants} onChange={e => setPropertyToDescendants(e.target.checked)} className="w-4 h-4 mt-0.5 accent-indigo-600" />
                 <div>
                   <p className="text-sm text-gray-700 font-medium">Leaving Home to Direct Descendants</p>
                   <p className="text-xs text-gray-400">+£175,000 RNRB (children, grandchildren)</p>
@@ -246,80 +162,39 @@ export default function InheritanceTaxCalc() {
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 text-xs text-blue-700">
             ℹ️ US federal estate tax exemption is <strong>$15,000,000</strong> per person in 2026 (OBBBA). Most estates will owe $0.
           </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Gross Estate Value</label>
-            <p className="text-xs text-gray-400 mb-1">Total value of all assets at fair market value</p>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-              <input type="number" value={grossEstate} onChange={e => setGrossEstate(e.target.value)}
-                placeholder="5,000,000"
-                className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+          {[
+            { label: 'Gross Estate Value', hint: 'Total value of all assets at fair market value', val: grossEstate, set: setGrossEstate, placeholder: '5,000,000' },
+            { label: 'Debts & Expenses', hint: null, val: usDebts, set: setUsDebts, placeholder: '0' },
+            { label: 'Marital Deduction', hint: 'Assets left to US citizen spouse (unlimited deduction)', val: maritalDeduction, set: setMaritalDeduction, placeholder: '0' },
+            { label: 'Charitable Deduction', hint: null, val: charityDeduction, set: setCharityDeduction, placeholder: '0' },
+            { label: 'Prior Taxable Gifts (Lifetime)', hint: 'Gifts exceeding annual exclusion ($19,000/person in 2026)', val: priorGifts, set: setPriorGifts, placeholder: '0' },
+          ].map(({ label, hint, val, set, placeholder }) => (
+            <div key={label}>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">{label}</label>
+              {hint && <p className="text-xs text-gray-400 mb-1">{hint}</p>}
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                <input type="number" value={val} onChange={e => set(e.target.value)} placeholder={placeholder}
+                  className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+              </div>
             </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Debts & Expenses</label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-              <input type="number" value={usDebts} onChange={e => setUsDebts(e.target.value)}
-                placeholder="0"
-                className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Marital Deduction</label>
-            <p className="text-xs text-gray-400 mb-1">Assets left to US citizen spouse (unlimited deduction)</p>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-              <input type="number" value={maritalDeduction} onChange={e => setMaritalDeduction(e.target.value)}
-                placeholder="0"
-                className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Charitable Deduction</label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-              <input type="number" value={charityDeduction} onChange={e => setCharityDeduction(e.target.value)}
-                placeholder="0"
-                className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Prior Taxable Gifts (Lifetime)</label>
-            <p className="text-xs text-gray-400 mb-1">Gifts exceeding annual exclusion ($19,000/person in 2026)</p>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-              <input type="number" value={priorGifts} onChange={e => setPriorGifts(e.target.value)}
-                placeholder="0"
-                className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-            </div>
-          </div>
+          ))}
         </div>
       )}
 
-      <button onClick={calculate}
-        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors mt-6">
+      <button onClick={calculate} className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors mt-6">
         Calculate Inheritance Tax
       </button>
 
-      {/* 결과 */}
       {result && (
         <div className="mt-6 space-y-4">
-          {/* 세금 총액 */}
           <div className={`rounded-xl p-5 border ${result.tax === 0 ? 'bg-green-50 border-green-200' : 'bg-indigo-50 border-indigo-200'}`}>
             <div className="flex justify-between items-center">
               <div>
                 <p className={`text-sm font-semibold mb-1 ${result.tax === 0 ? 'text-green-600' : 'text-indigo-600'}`}>
                   {result.tax === 0 ? '✅ No Tax Due' : 'Estimated Tax Due'}
                 </p>
-                <p className={`text-4xl font-black ${result.tax === 0 ? 'text-green-700' : 'text-indigo-700'}`}>
-                  {fmt(result.tax)}
-                </p>
+                <p className={`text-4xl font-black ${result.tax === 0 ? 'text-green-700' : 'text-indigo-700'}`}>{fmt(result.tax)}</p>
               </div>
               <div className="text-right">
                 <p className="text-sm text-gray-500">Heirs Receive</p>
@@ -328,114 +203,111 @@ export default function InheritanceTaxCalc() {
             </div>
           </div>
 
-          {/* UK 상세 */}
           {result.country === 'uk' && (
             <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-500">Net Estate (after debts)</span>
-                <span className="font-semibold">{fmt(result.netEstate)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Nil-Rate Band</span>
-                <span className="font-semibold text-green-600">- {fmt(result.totalNRB)}</span>
-              </div>
-              {result.rnrb > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Residence NRB</span>
-                  <span className="font-semibold text-green-600">- {fmt(result.rnrb)}</span>
-                </div>
-              )}
-              {result.charityDeductible > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Charitable Gift</span>
-                  <span className="font-semibold text-green-600">- {fmt(result.charityDeductible)}</span>
-                </div>
-              )}
-              {result.gifts > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">7-Year Gifts</span>
-                  <span className="font-semibold text-green-600">- {fmt(result.gifts)}</span>
-                </div>
-              )}
-              <div className="border-t border-gray-200 pt-2 flex justify-between font-bold">
-                <span>Taxable Estate</span>
-                <span>{fmt(Math.max(0, result.taxableEstate))}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">IHT Rate</span>
-                <span className="font-semibold">{(result.rate * 100).toFixed(0)}%
-                  {result.charityPercent >= 0.10 && <span className="text-xs text-green-600 ml-1">(charity discount)</span>}
-                </span>
-              </div>
-              <div className="flex justify-between font-bold text-red-500">
-                <span>Tax Due</span>
-                <span>{fmt(result.tax)}</span>
-              </div>
+              <div className="flex justify-between"><span className="text-gray-500">Net Estate (after debts)</span><span className="font-semibold">{fmt(result.netEstate)}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">Nil-Rate Band</span><span className="font-semibold text-green-600">- {fmt(result.totalNRB)}</span></div>
+              {result.rnrb > 0 && <div className="flex justify-between"><span className="text-gray-500">Residence NRB</span><span className="font-semibold text-green-600">- {fmt(result.rnrb)}</span></div>}
+              {result.charityDeductible > 0 && <div className="flex justify-between"><span className="text-gray-500">Charitable Gift</span><span className="font-semibold text-green-600">- {fmt(result.charityDeductible)}</span></div>}
+              {result.gifts > 0 && <div className="flex justify-between"><span className="text-gray-500">7-Year Gifts</span><span className="font-semibold text-green-600">- {fmt(result.gifts)}</span></div>}
+              <div className="border-t border-gray-200 pt-2 flex justify-between font-bold"><span>Taxable Estate</span><span>{fmt(Math.max(0, result.taxableEstate))}</span></div>
+              <div className="flex justify-between"><span className="text-gray-500">IHT Rate</span><span className="font-semibold">{(result.rate * 100).toFixed(0)}%{result.charityPercent >= 0.10 && <span className="text-xs text-green-600 ml-1">(charity discount)</span>}</span></div>
+              <div className="flex justify-between font-bold text-red-500"><span>Tax Due</span><span>{fmt(result.tax)}</span></div>
             </div>
           )}
 
-          {/* US 상세 */}
           {result.country === 'us' && (
             <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-500">Gross Estate</span>
-                <span className="font-semibold">{fmt(result.grossEstate)}</span>
-              </div>
-              {result.marital > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Marital Deduction</span>
-                  <span className="font-semibold text-green-600">- {fmt(result.marital)}</span>
-                </div>
-              )}
-              {result.charity > 0 && (
-                <div className="flex justify-between">
-                  <span className="text-gray-500">Charitable Deduction</span>
-                  <span className="font-semibold text-green-600">- {fmt(result.charity)}</span>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <span className="text-gray-500">Adjusted Estate</span>
-                <span className="font-semibold">{fmt(result.adjustedEstate)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Federal Exemption (2026)</span>
-                <span className="font-semibold text-green-600">- {fmt(result.exemption)}</span>
-              </div>
-              <div className="border-t border-gray-200 pt-2 flex justify-between font-bold">
-                <span>Taxable Estate</span>
-                <span>{fmt(Math.max(0, result.taxableEstate))}</span>
-              </div>
-              <div className="flex justify-between font-bold text-red-500">
-                <span>Federal Estate Tax (40%)</span>
-                <span>{fmt(result.tax)}</span>
-              </div>
+              <div className="flex justify-between"><span className="text-gray-500">Gross Estate</span><span className="font-semibold">{fmt(result.grossEstate)}</span></div>
+              {result.marital > 0 && <div className="flex justify-between"><span className="text-gray-500">Marital Deduction</span><span className="font-semibold text-green-600">- {fmt(result.marital)}</span></div>}
+              {result.charity > 0 && <div className="flex justify-between"><span className="text-gray-500">Charitable Deduction</span><span className="font-semibold text-green-600">- {fmt(result.charity)}</span></div>}
+              <div className="flex justify-between"><span className="text-gray-500">Federal Exemption (2026)</span><span className="font-semibold text-green-600">- {fmt(result.exemption)}</span></div>
+              <div className="border-t border-gray-200 pt-2 flex justify-between font-bold"><span>Taxable Estate</span><span>{fmt(Math.max(0, result.taxableEstate))}</span></div>
+              <div className="flex justify-between font-bold text-red-500"><span>Federal Estate Tax (40%)</span><span>{fmt(result.tax)}</span></div>
             </div>
           )}
 
-          {/* 안내 박스 */}
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-xs text-blue-700 space-y-1">
             {result.country === 'uk' ? (
               <>
-                <p className="font-bold">ℹ️ UK IHT 2026/27 Key Facts</p>
+                <p className="font-bold">ℹ️ UK IHT 2026/27</p>
                 <p>• Nil-Rate Band: £325,000 per person</p>
                 <p>• Residence NRB: +£175,000 (home to direct descendants)</p>
-                <p>• Spouse transfer: doubles both allowances</p>
+                <p>• Spouse transfer doubles both allowances</p>
                 <p>• Standard rate: 40% | Charity 10%+ rate: 36%</p>
-                <p>• Gifts within 7 years may still be taxable (taper relief applies)</p>
               </>
             ) : (
               <>
-                <p className="font-bold">ℹ️ US Estate Tax 2026 Key Facts</p>
+                <p className="font-bold">ℹ️ US Estate Tax 2026</p>
                 <p>• Federal exemption: $15,000,000 per person (OBBBA 2025)</p>
-                <p>• Portability: unused exemption transfers to surviving spouse</p>
                 <p>• Rate: flat 40% above exemption</p>
-                <p>• Annual gift exclusion: $19,000 per recipient in 2026</p>
-                <p>• State estate taxes vary — not included in this estimate</p>
+                <p>• Annual gift exclusion: $19,000 per recipient</p>
+                <p>• State estate taxes vary — not included</p>
               </>
             )}
           </div>
         </div>
       )}
+
+      {/* SEO Content */}
+      <div className="mt-8 space-y-6 text-sm text-gray-600 border-t border-gray-100 pt-6">
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Inheritance Tax in 2026</h2>
+          <p className="leading-relaxed">
+            Inheritance tax is charged on the estate of someone who has died. In the UK it's called Inheritance Tax (IHT),
+            charged at 40% above the nil-rate threshold. In the US it's called Estate Tax, with a very high federal exemption
+            of $15 million per person in 2026 — meaning most Americans pay nothing.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">UK vs US Inheritance Tax 2026</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Feature</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">🇬🇧 UK IHT</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">🇺🇸 US Estate Tax</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Tax-free threshold', '£325,000 (NRB)', '$15,000,000 (2026)'],
+                  ['Extra allowance', '+£175,000 RNRB (home to children)', 'Unlimited marital deduction'],
+                  ['Rate', '40% flat', '40% flat above exemption'],
+                  ['Charity discount', '36% if 10%+ left to charity', 'Charitable deduction available'],
+                  ['Spouse exemption', 'Fully exempt', 'Fully exempt (US citizen)'],
+                  ['Annual gift exclusion', '£3,000/yr', '$19,000/person/yr (2026)'],
+                ].map(([feature, uk, us], i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="p-2 border border-gray-200 font-medium">{feature}</td>
+                    <td className="p-2 border border-gray-200">{uk}</td>
+                    <td className="p-2 border border-gray-200">{us}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {[
+              { q: 'How much can I inherit before paying UK inheritance tax?', a: 'Everyone has a nil-rate band of £325,000. If you\'re leaving your home to children or grandchildren, you also get the Residence Nil-Rate Band of £175,000, bringing the total to £500,000. Married couples can combine their allowances, giving up to £1,000,000 tax-free.' },
+              { q: 'Do most Americans pay estate tax?', a: 'No. The federal exemption is $15,000,000 per person in 2026 (doubled for married couples). Only estates above this threshold pay federal estate tax. However, some states have their own estate taxes with lower thresholds.' },
+              { q: 'How can I reduce UK inheritance tax?', a: 'Key strategies include: making gifts (potentially IHT-free after 7 years), leaving 10%+ to charity (reduces rate to 36%), using trusts, maximising pension contributions (pensions are outside your estate), and using annual gift allowances of £3,000/year.' },
+              { q: 'Does leaving money to my spouse avoid IHT?', a: 'Yes. In both the UK and US, assets left to a spouse or civil partner are fully exempt from inheritance/estate tax. In the UK, the surviving spouse also inherits any unused nil-rate band, effectively doubling their own allowance.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 rounded-lg p-4">
+                <p className="font-semibold text-gray-700 mb-1">{item.q}</p>
+                <p className="text-gray-600 leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

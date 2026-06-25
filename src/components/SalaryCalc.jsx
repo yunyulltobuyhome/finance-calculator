@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SALARY_TAX_DATA, EXCHANGE_RATES } from '../data/salaryTaxRates'
+import { SALARY_TAX_DATA } from '../data/salaryTaxRates'
 
 export default function SalaryCalc() {
   const [country, setCountry] = useState('US')
@@ -15,116 +15,77 @@ export default function SalaryCalc() {
 
     switch (country) {
       case 'US': {
-        const brackets = data.brackets
-        for (let bracket of brackets) {
+        for (let bracket of data.brackets) {
           if (gross > bracket.min) {
-            const taxableInBracket = Math.min(gross, bracket.max) - bracket.min
-            federalTax += taxableInBracket * bracket.rate
+            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
           }
         }
         const ssWages = Math.min(gross, data.socialSecurityCap)
-        const ss = ssWages * data.socialSecurity
-        const medicare = gross * data.medicare
         const stateData = data.states.find(s => s.name === state)
-        const stateTax = gross * (stateData?.tax || 0)
-        
         deductions = {
           federalTax: Math.round(federalTax),
-          stateTax: Math.round(stateTax),
-          socialSecurity: Math.round(ss),
-          medicare: Math.round(medicare),
+          stateTax: Math.round(gross * (stateData?.tax || 0)),
+          socialSecurity: Math.round(ssWages * data.socialSecurity),
+          medicare: Math.round(gross * data.medicare),
         }
         break
       }
-
       case 'UK': {
-        const brackets = data.brackets
-        for (let bracket of brackets) {
+        for (let bracket of data.brackets) {
           if (gross > bracket.min) {
-            const taxableInBracket = Math.min(gross, bracket.max) - bracket.min
-            federalTax += taxableInBracket * bracket.rate
+            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
           }
         }
-        const niWages = Math.max(0, gross - 12570)
-        const ni = niWages * data.nationalInsurance
-        const studentLoan = Math.max(0, gross - data.studentLoanThreshold) * data.studentLoan
-        
         deductions = {
           incomeTax: Math.round(federalTax),
-          nationalInsurance: Math.round(ni),
-          studentLoan: Math.round(studentLoan),
+          nationalInsurance: Math.round(Math.max(0, gross - 12570) * data.nationalInsurance),
+          studentLoan: Math.round(Math.max(0, gross - data.studentLoanThreshold) * data.studentLoan),
         }
         break
       }
-
       case 'CA': {
-        const fedBrackets = data.federalBrackets
-        for (let bracket of fedBrackets) {
+        for (let bracket of data.federalBrackets) {
           if (gross > bracket.min) {
-            const taxableInBracket = Math.min(gross, bracket.max) - bracket.min
-            federalTax += taxableInBracket * bracket.rate
+            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
           }
         }
-        
         const provData = data.provinces.find(p => p.name === province)
         let provTax = 0
         if (provData) {
           for (let bracket of provData.brackets) {
-            if (gross > bracket.min) {
-              const taxableInBracket = Math.min(gross, bracket.max) - bracket.min
-              provTax += taxableInBracket * bracket.rate
-            }
+            if (gross > bracket.min) provTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
           }
         }
-        
-        const cpp = Math.min(gross * data.cpp, data.cppMax)
-        const ei = gross * data.ei
-        
         deductions = {
           federalTax: Math.round(federalTax),
           provinceTax: Math.round(provTax),
-          cpp: Math.round(cpp),
-          ei: Math.round(ei),
+          cpp: Math.round(Math.min(gross * data.cpp, data.cppMax)),
+          ei: Math.round(gross * data.ei),
         }
         break
       }
-
       case 'AU': {
-        const brackets = data.brackets
-        for (let bracket of brackets) {
+        for (let bracket of data.brackets) {
           if (gross > bracket.min) {
-            const taxableInBracket = Math.min(gross, bracket.max) - bracket.min
-            federalTax += taxableInBracket * bracket.rate
+            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
           }
         }
-        const medicare = gross * data.medicareLevey
-        const superannuation = gross * data.superannuation
-        
         deductions = {
           incomeTax: Math.round(federalTax),
-          medicareLevey: Math.round(medicare),
-          superannuation: Math.round(superannuation),
+          medicareLevey: Math.round(gross * data.medicareLevey),
+          superannuation: Math.round(gross * data.superannuation),
         }
         break
       }
     }
 
     const totalTaxAndDeductions = Object.values(deductions).reduce((a, b) => a + b, 0)
-    return {
-      gross,
-      deductions,
-      net: gross - totalTaxAndDeductions,
-      totalDeductions: totalTaxAndDeductions,
-    }
+    return { gross, deductions, net: gross - totalTaxAndDeductions, totalDeductions: totalTaxAndDeductions }
   }
 
   const calc = () => {
     const res = calculateTax(annualSalary)
-    setResult({
-      ...res,
-      monthly: Math.round(res.net / 12),
-      biweekly: Math.round(res.net / 26),
-    })
+    setResult({ ...res, monthly: Math.round(res.net / 12), biweekly: Math.round(res.net / 26) })
   }
 
   const fmt = (n) => {
@@ -133,28 +94,21 @@ export default function SalaryCalc() {
     return symbol + n.toLocaleString()
   }
 
-  const countryList = Object.entries(SALARY_TAX_DATA).map(([key, val]) => ({
-    key,
-    name: val.name,
-  }))
-
   return (
     <div>
-      <h2 className="text-base font-semibold text-gray-700 mb-4">Global Salary Calculator</h2>
+      <h2 className="text-base font-semibold text-gray-700 mb-4">Salary Take-Home Calculator 2026</h2>
 
       <div className="mb-4">
         <label className="text-xs text-gray-500 block mb-1">Select Country</label>
-        <select
-          value={country}
+        <select value={country}
           onChange={(e) => {
             setCountry(e.target.value)
             setState(SALARY_TAX_DATA[e.target.value].states?.[0]?.name || '')
             setProvince(SALARY_TAX_DATA[e.target.value].provinces?.[0]?.name || '')
           }}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-        >
-          {countryList.map(({ key, name }) => (
-            <option key={key} value={key}>{name}</option>
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+          {Object.entries(SALARY_TAX_DATA).map(([key, val]) => (
+            <option key={key} value={key}>{val.name}</option>
           ))}
         </select>
       </div>
@@ -162,14 +116,9 @@ export default function SalaryCalc() {
       {country === 'US' && (
         <div className="mb-4">
           <label className="text-xs text-gray-500 block mb-1">State (affects tax)</label>
-          <select
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-          >
-            {SALARY_TAX_DATA.US.states.map((s) => (
-              <option key={s.name}>{s.name}</option>
-            ))}
+          <select value={state} onChange={(e) => setState(e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            {SALARY_TAX_DATA.US.states.map((s) => <option key={s.name}>{s.name}</option>)}
           </select>
         </div>
       )}
@@ -177,33 +126,22 @@ export default function SalaryCalc() {
       {country === 'CA' && (
         <div className="mb-4">
           <label className="text-xs text-gray-500 block mb-1">Province (affects tax)</label>
-          <select
-            value={province}
-            onChange={(e) => setProvince(e.target.value)}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-          >
-            {SALARY_TAX_DATA.CA.provinces.map((p) => (
-              <option key={p.name}>{p.name}</option>
-            ))}
+          <select value={province} onChange={(e) => setProvince(e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            {SALARY_TAX_DATA.CA.provinces.map((p) => <option key={p.name}>{p.name}</option>)}
           </select>
         </div>
       )}
 
       <div className="mb-4">
         <label className="text-xs text-gray-500 block mb-1">Annual Salary</label>
-        <input
-          type="number"
-          value={annualSalary}
-          onChange={(e) => setAnnualSalary(+e.target.value)}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-        />
+        <input type="number" value={annualSalary} onChange={(e) => setAnnualSalary(+e.target.value)}
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
       </div>
 
-      <button
-        onClick={calc}
-        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors"
-      >
-        Calculate
+      <button onClick={calc}
+        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors">
+        Calculate Take-Home Pay
       </button>
 
       {result && (
@@ -235,33 +173,83 @@ export default function SalaryCalc() {
           </div>
 
           <div className="space-y-2 text-xs">
-            <div className="flex items-center gap-2">
-              <span className="w-16 text-gray-400">Gross</span>
-              <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
-                <div className="h-full bg-indigo-400 rounded-full flex items-center pl-2 text-white" style={{width: '100%'}}>
-                  {fmt(result.gross)}
+            {[
+              { label: 'Gross', val: result.gross, pct: 100, color: 'bg-indigo-400' },
+              { label: 'Taxes', val: result.totalDeductions, pct: (result.totalDeductions / result.gross) * 100, color: 'bg-orange-400' },
+              { label: 'Net', val: result.net, pct: (result.net / result.gross) * 100, color: 'bg-green-400' },
+            ].map(({ label, val, pct, color }) => (
+              <div key={label} className="flex items-center gap-2">
+                <span className="w-16 text-gray-400">{label}</span>
+                <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                  <div className={`h-full ${color} rounded-full flex items-center pl-2 text-white`} style={{ width: `${pct}%` }}>
+                    {fmt(val)}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-16 text-gray-400">Taxes</span>
-              <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
-                <div className="h-full bg-orange-400 rounded-full flex items-center pl-2 text-white" style={{width: `${(result.totalDeductions / result.gross) * 100}%`}}>
-                  {fmt(result.totalDeductions)}
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-16 text-gray-400">Net</span>
-              <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
-                <div className="h-full bg-green-400 rounded-full flex items-center pl-2 text-white" style={{width: `${(result.net / result.gross) * 100}%`}}>
-                  {fmt(result.net)}
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       )}
+
+      {/* SEO Content */}
+      <div className="mt-8 space-y-6 text-sm text-gray-600 border-t border-gray-100 pt-6">
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">How Much Tax Will I Pay on My Salary?</h2>
+          <p className="leading-relaxed">
+            Your take-home pay depends on your gross salary, country, and filing status.
+            All countries use progressive tax systems — meaning higher income is taxed at higher rates.
+            This calculator shows your net pay after income tax, social security, and other mandatory deductions.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Tax Rates by Country 2026</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Country</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Top Income Tax Rate</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Social Security / NI</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Tax-Free Allowance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['🇺🇸 United States', '37% (federal)', '6.2% SS + 1.45% Medicare', 'Standard deduction $16,100'],
+                  ['🇬🇧 United Kingdom', '45% (additional rate)', '8% National Insurance', 'Personal allowance £12,570'],
+                  ['🇨🇦 Canada', '33% (federal)', 'CPP + EI contributions', 'Basic personal amount ~$16,129'],
+                  ['🇦🇺 Australia', '45% (top rate)', 'Medicare levy 2%', 'Tax-free threshold A$18,200'],
+                ].map(([country, top, ss, allowance], i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="p-2 border border-gray-200 font-medium">{country}</td>
+                    <td className="p-2 border border-gray-200">{top}</td>
+                    <td className="p-2 border border-gray-200">{ss}</td>
+                    <td className="p-2 border border-gray-200">{allowance}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {[
+              { q: 'What is take-home pay?', a: 'Take-home pay (also called net pay) is your salary after all deductions — income tax, social security, national insurance, and other mandatory contributions. It\'s the actual amount deposited into your bank account each payday.' },
+              { q: 'How much tax do I pay on $100,000 in the US?', a: 'On a $100,000 salary, federal income tax is approximately $17,400 (2026 brackets). Add Social Security (6.2%), Medicare (1.45%), and state tax (varies). In California, total deductions would be around $30,000–$35,000, leaving a take-home of roughly $65,000–$70,000.' },
+              { q: 'What is the UK personal allowance for 2026?', a: 'The personal allowance for 2026/27 is £12,570. You pay no income tax on earnings below this amount. Above £12,570, you pay 20% basic rate, 40% higher rate (above £50,270), and 45% additional rate (above £125,140).' },
+              { q: 'How does Australian tax work?', a: 'Australia uses a progressive tax system with a tax-free threshold of A$18,200. Rates range from 19% to 45%. A Medicare levy of 2% applies to most taxpayers. Employers also contribute 11.5% of your salary to your superannuation (pension) fund in 2026.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 rounded-lg p-4">
+                <p className="font-semibold text-gray-700 mb-1">{item.q}</p>
+                <p className="text-gray-600 leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

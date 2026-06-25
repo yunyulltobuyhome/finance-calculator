@@ -35,6 +35,7 @@ export default function CompoundCalc() {
         data.push({ yr: Math.round(i / 12), val: Math.round(total) })
       }
     }
+
     setResult({
       total: Math.round(total),
       totalInvested: Math.round(totalInvested),
@@ -54,15 +55,10 @@ export default function CompoundCalc() {
         <label className="text-xs text-gray-500 block mb-1">Benchmark / Preset Rate</label>
         <div className="grid grid-cols-2 gap-1.5">
           {BENCHMARKS.map(b => (
-            <button
-              key={b.name}
-              onClick={() => handleBenchmark(b)}
+            <button key={b.name} onClick={() => handleBenchmark(b)}
               className={`text-left px-2.5 py-1.5 rounded-lg text-xs border transition-all ${
-                benchmark.name === b.name
-                  ? 'bg-indigo-600 text-white border-indigo-600'
-                  : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-              }`}
-            >
+                benchmark.name === b.name ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
+              }`}>
               {b.name}{b.rate !== null ? ` (${b.rate}%)` : ''}
             </button>
           ))}
@@ -78,20 +74,14 @@ export default function CompoundCalc() {
         ].map(({ label, key }) => (
           <div key={key}>
             <label className="text-xs text-gray-500 block mb-1">{label}</label>
-            <input
-              type="number"
-              value={form[key]}
-              onChange={e => setForm({ ...form, [key]: e.target.value })}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"
-            />
+            <input type="number" value={form[key]} onChange={e => setForm({ ...form, [key]: e.target.value })}
+              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
           </div>
         ))}
       </div>
 
-      <button
-        onClick={calc}
-        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors"
-      >
+      <button onClick={calc}
+        className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors">
         Calculate
       </button>
 
@@ -119,10 +109,7 @@ export default function CompoundCalc() {
                 <div key={yr} className="flex items-center gap-2 text-xs">
                   <span className="w-8 text-gray-400 text-right">{yr}yr</span>
                   <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
-                    <div
-                      className="h-full bg-orange-400 rounded-full flex items-center pl-2 text-white"
-                      style={{ width: `${pct}%` }}
-                    >
+                    <div className="h-full bg-orange-400 rounded-full flex items-center pl-2 text-white" style={{ width: `${pct}%` }}>
                       {fmt(val)}
                     </div>
                   </div>
@@ -136,6 +123,70 @@ export default function CompoundCalc() {
           </p>
         </div>
       )}
+
+      {/* SEO Content */}
+      <div className="mt-8 space-y-6 text-sm text-gray-600 border-t border-gray-100 pt-6">
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">How Does Compound Interest Work?</h2>
+          <p className="leading-relaxed">
+            Compound interest means you earn interest on your interest — not just on your original investment.
+            Over time, this creates an exponential growth effect often called the "snowball effect."
+            The longer you invest, the more powerful compounding becomes.
+            Albert Einstein reportedly called compound interest "the eighth wonder of the world."
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Historical Investment Returns 2026</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Investment</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Avg Annual Return</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Risk Level</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">$10k grows to (30yr)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['S&P 500 Index',        '~10.5%',  'Medium-High', '~$202,000'],
+                  ['MSCI World Index',     '~9.2%',   'Medium',      '~$143,000'],
+                  ['60/40 Stock/Bond Mix', '~7.5%',   'Medium',      '~$87,000'],
+                  ['Conservative Bonds',   '~5.0%',   'Low',         '~$43,000'],
+                  ['High-Yield Savings',   '~4.5%',   'Very Low',    '~$37,000'],
+                  ['Cash/Savings Account', '~1–2%',   'None',        '~$13,500'],
+                ].map(([inv, ret, risk, growth], i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="p-2 border border-gray-200 font-medium">{inv}</td>
+                    <td className="p-2 border border-gray-200 text-indigo-600 font-semibold">{ret}</td>
+                    <td className="p-2 border border-gray-200">{risk}</td>
+                    <td className="p-2 border border-gray-200 font-semibold">{growth}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-xs text-gray-400 mt-2">Past performance does not guarantee future results. For illustrative purposes only.</p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {[
+              { q: 'What is the Rule of 72?', a: 'The Rule of 72 is a quick way to estimate how long it takes to double your money. Divide 72 by your annual return rate. At 10% return, your money doubles in 7.2 years. At 6%, it takes 12 years. At 4%, it takes 18 years. This shows why higher returns have such a dramatic impact over time.' },
+              { q: 'How much should I invest monthly to become a millionaire?', a: 'At a 10% annual return (S&P 500 historical average): investing $200/month for 40 years grows to ~$1.2 million. Investing $500/month for 30 years grows to ~$1.1 million. Starting earlier is far more powerful than investing more — time is your greatest asset.' },
+              { q: 'What is the difference between simple and compound interest?', a: 'Simple interest is calculated only on your original principal. Compound interest is calculated on your principal plus all previously earned interest. On a $10,000 investment at 10% for 30 years: simple interest gives you $40,000. Compound interest gives you $174,000 — more than 4x more.' },
+              { q: 'How often is interest compounded?', a: 'Interest can compound daily, monthly, quarterly, or annually. More frequent compounding means faster growth. Most investment accounts and index funds effectively compound continuously. This calculator uses monthly compounding, which is standard for most investment and savings accounts.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 rounded-lg p-4">
+                <p className="font-semibold text-gray-700 mb-1">{item.q}</p>
+                <p className="text-gray-600 leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

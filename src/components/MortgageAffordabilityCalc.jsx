@@ -2,23 +2,16 @@ import { useState } from 'react'
 
 export default function MortgageAffordabilityCalc() {
   const [country, setCountry] = useState('us')
-
-  // US 공통
   const [annualIncome, setAnnualIncome] = useState('')
   const [monthlyDebts, setMonthlyDebts] = useState('')
   const [downPayment, setDownPayment] = useState('')
   const [interestRate, setInterestRate] = useState('6.52')
   const [loanTerm, setLoanTerm] = useState('30')
-
-  // UK 전용
   const [partnerIncome, setPartnerIncome] = useState('')
-  const [incomeMultiple, setIncomeMultiple] = useState('4.5')
-
   const [result, setResult] = useState(null)
 
-  const fmt = (n, cur = country) => (cur === 'uk' ? '£' : '$') + Math.round(n).toLocaleString()
+  const fmt = (n) => (country === 'uk' ? '£' : '$') + Math.round(n).toLocaleString()
 
-  // 월 모기지 계산 (원리금 균등상환)
   const calcMonthlyPayment = (principal, annualRate, years) => {
     const r = annualRate / 100 / 12
     const n = years * 12
@@ -34,22 +27,6 @@ export default function MortgageAffordabilityCalc() {
     const term = parseInt(loanTerm) || 30
     const monthlyIncome = income / 12
 
-    // 28/36 rule (conventional)
-    const maxHousingPayment_conservative = monthlyIncome * 0.28
-    const maxTotalDebt_conservative = monthlyIncome * 0.36
-    const maxHousingPayment_con = Math.min(maxHousingPayment_conservative, maxTotalDebt_conservative - debts)
-
-    // 36/43 rule (standard)
-    const maxHousingPayment_standard = monthlyIncome * 0.36
-    const maxTotalDebt_standard = monthlyIncome * 0.43
-    const maxHousingPayment_std = Math.min(maxHousingPayment_standard, maxTotalDebt_standard - debts)
-
-    // 43/50 FHA
-    const maxHousingPayment_fha_front = monthlyIncome * 0.31
-    const maxTotalDebt_fha = monthlyIncome * 0.50
-    const maxHousingPayment_fha = Math.min(maxHousingPayment_fha_front, maxTotalDebt_fha - debts)
-
-    // 대출 한도 계산 (역산)
     const calcMaxLoan = (maxPayment) => {
       const r = rate / 100 / 12
       const n = term * 12
@@ -61,38 +38,32 @@ export default function MortgageAffordabilityCalc() {
       {
         label: 'Conservative',
         desc: '28/36 Rule — Comfortable budget',
-        maxLoan: Math.max(0, calcMaxLoan(maxHousingPayment_con)),
-        maxPayment: Math.max(0, maxHousingPayment_con),
         color: 'green',
+        maxPayment: Math.max(0, Math.min(monthlyIncome * 0.28, monthlyIncome * 0.36 - debts)),
       },
       {
         label: 'Standard',
         desc: '36/43 Rule — Most lenders approve',
-        maxLoan: Math.max(0, calcMaxLoan(maxHousingPayment_std)),
-        maxPayment: Math.max(0, maxHousingPayment_std),
         color: 'blue',
+        maxPayment: Math.max(0, Math.min(monthlyIncome * 0.36, monthlyIncome * 0.43 - debts)),
       },
       {
         label: 'Maximum (FHA)',
         desc: '31/50 Rule — Stretched budget',
-        maxLoan: Math.max(0, calcMaxLoan(maxHousingPayment_fha)),
-        maxPayment: Math.max(0, maxHousingPayment_fha),
         color: 'orange',
+        maxPayment: Math.max(0, Math.min(monthlyIncome * 0.31, monthlyIncome * 0.50 - debts)),
       },
-    ]
+    ].map(s => ({
+      ...s,
+      maxLoan: Math.max(0, calcMaxLoan(s.maxPayment)),
+      maxHome: Math.max(0, calcMaxLoan(s.maxPayment)) + down,
+    }))
 
-    const dti = debts > 0 ? ((debts + scenarios[1].maxPayment) / monthlyIncome * 100).toFixed(1) : null
+    const dti = monthlyIncome > 0
+      ? (((debts + scenarios[1].maxPayment) / monthlyIncome) * 100).toFixed(1)
+      : null
 
-    setResult({
-      country: 'us',
-      scenarios: scenarios.map(s => ({ ...s, maxHome: s.maxLoan + down })),
-      monthlyIncome,
-      debts,
-      down,
-      dti,
-      rate,
-      term,
-    })
+    setResult({ country: 'us', scenarios, monthlyIncome, debts, down, dti, rate, term })
   }
 
   const calculateUK = () => {
@@ -101,36 +72,29 @@ export default function MortgageAffordabilityCalc() {
     const down = parseFloat(downPayment) || 0
     const rate = parseFloat(interestRate) || 5.0
     const term = parseInt(loanTerm) || 25
-    const multiple = parseFloat(incomeMultiple) || 4.5
     const combined = income + partner
 
     const scenarios = [
-      { label: 'Conservative (4x)', desc: 'Comfortable — stress test safe', multiple: 4.0 },
-      { label: 'Standard (4.5x)',   desc: 'Most high-street lenders',       multiple: 4.5 },
-      { label: 'Enhanced (5.5x)',   desc: 'Higher earners (£75k+)',         multiple: 5.5 },
-    ]
-
-    const results = scenarios.map(s => {
+      { label: 'Conservative (4x)',  desc: 'Comfortable — stress test safe', multiple: 4.0 },
+      { label: 'Standard (4.5x)',    desc: 'Most high-street lenders',        multiple: 4.5 },
+      { label: 'Enhanced (5.5x)',    desc: 'Higher earners (£75k+)',          multiple: 5.5 },
+    ].map(s => {
       const maxLoan = combined * s.multiple
-      const maxHome = maxLoan + down
-      const monthly = calcMonthlyPayment(maxLoan, rate, term)
-      // 스트레스 테스트 (rate + 3%)
-      const stressMonthly = calcMonthlyPayment(maxLoan, rate + 3, term)
-      return { ...s, maxLoan, maxHome, monthly, stressMonthly }
+      return {
+        ...s,
+        maxLoan,
+        maxHome: maxLoan + down,
+        monthly: calcMonthlyPayment(maxLoan, rate, term),
+        stressMonthly: calcMonthlyPayment(maxLoan, rate + 3, term),
+      }
     })
 
-    setResult({ country: 'uk', scenarios: results, income, partner, combined, down, rate, term })
+    setResult({ country: 'uk', scenarios, income, partner, combined, down, rate, term })
   }
 
   const calculate = () => {
     if (country === 'us') calculateUS()
     else calculateUK()
-  }
-
-  const colorMap = {
-    green: 'bg-green-50 border-green-200 text-green-700',
-    blue: 'bg-blue-50 border-blue-200 text-blue-700',
-    orange: 'bg-orange-50 border-orange-200 text-orange-700',
   }
 
   return (
@@ -141,18 +105,12 @@ export default function MortgageAffordabilityCalc() {
         <p className="text-xs text-gray-400 mt-1">US rates: 30yr avg 6.52% (Jun 2026) | UK multiples: 4x–5.5x</p>
       </div>
 
-      {/* 국가 선택 */}
       <div className="mb-5">
         <label className="block text-sm font-semibold text-gray-700 mb-2">Country</label>
         <div className="grid grid-cols-2 gap-2">
-          {[
-            { value: 'us', label: '🇺🇸 United States' },
-            { value: 'uk', label: '🇬🇧 United Kingdom' },
-          ].map(opt => (
+          {[{ value: 'us', label: '🇺🇸 United States' }, { value: 'uk', label: '🇬🇧 United Kingdom' }].map(opt => (
             <button key={opt.value} onClick={() => { setCountry(opt.value); setResult(null) }}
-              className={`py-2 px-3 rounded-lg text-sm font-medium border transition-all ${
-                country === opt.value ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
-              }`}>
+              className={`py-2 px-3 rounded-lg text-sm font-medium border transition-all ${country === opt.value ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}>
               {opt.label}
             </button>
           ))}
@@ -160,7 +118,6 @@ export default function MortgageAffordabilityCalc() {
       </div>
 
       <div className="space-y-4">
-        {/* 소득 */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">
             {country === 'uk' ? 'Your Annual Income (gross)' : 'Annual Household Income'}
@@ -173,34 +130,29 @@ export default function MortgageAffordabilityCalc() {
           </div>
         </div>
 
-        {/* UK 파트너 소득 */}
         {country === 'uk' && (
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Partner's Annual Income (optional)</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">£</span>
-              <input type="number" value={partnerIncome} onChange={e => setPartnerIncome(e.target.value)}
-                placeholder="0"
+              <input type="number" value={partnerIncome} onChange={e => setPartnerIncome(e.target.value)} placeholder="0"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
         )}
 
-        {/* US: 월 부채 */}
         {country === 'us' && (
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Monthly Debt Payments</label>
             <p className="text-xs text-gray-400 mb-1">Car loans, student loans, credit card minimums (exclude rent)</p>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-              <input type="number" value={monthlyDebts} onChange={e => setMonthlyDebts(e.target.value)}
-                placeholder="500"
+              <input type="number" value={monthlyDebts} onChange={e => setMonthlyDebts(e.target.value)} placeholder="500"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
           </div>
         )}
 
-        {/* 다운페이 */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">Down Payment / Deposit</label>
           <div className="relative">
@@ -211,7 +163,6 @@ export default function MortgageAffordabilityCalc() {
           </div>
         </div>
 
-        {/* 금리 & 기간 */}
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">Interest Rate (%)</label>
@@ -222,21 +173,18 @@ export default function MortgageAffordabilityCalc() {
             <label className="block text-sm font-semibold text-gray-700 mb-1">Loan Term (years)</label>
             <select value={loanTerm} onChange={e => setLoanTerm(e.target.value)}
               className="w-full px-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300">
-              {country === 'us'
-                ? ['10','15','20','25','30'].map(y => <option key={y} value={y}>{y} years</option>)
-                : ['10','15','20','25','30','35'].map(y => <option key={y} value={y}>{y} years</option>)
-              }
+              {(country === 'us' ? ['10','15','20','25','30'] : ['10','15','20','25','30','35']).map(y => (
+                <option key={y} value={y}>{y} years</option>
+              ))}
             </select>
           </div>
         </div>
       </div>
 
-      <button onClick={calculate}
-        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors mt-6">
+      <button onClick={calculate} className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-colors mt-6">
         Calculate Affordability
       </button>
 
-      {/* 결과 */}
       {result && (
         <div className="mt-6 space-y-4">
           <p className="text-sm font-bold text-gray-600">
@@ -247,7 +195,7 @@ export default function MortgageAffordabilityCalc() {
             <div key={i} className={`rounded-xl border p-4 ${
               i === 0 ? 'border-green-200 bg-green-50' :
               i === 1 ? 'border-blue-200 bg-blue-50' :
-              'border-orange-200 bg-orange-50'
+                        'border-orange-200 bg-orange-50'
             }`}>
               <div className="flex justify-between items-start mb-2">
                 <div>
@@ -259,21 +207,15 @@ export default function MortgageAffordabilityCalc() {
                 <div className="text-right">
                   <p className="text-xs text-gray-500">Max Home Price</p>
                   <p className={`text-xl font-black ${i === 0 ? 'text-green-700' : i === 1 ? 'text-blue-700' : 'text-orange-700'}`}>
-                    {fmt(s.maxHome || s.maxLoan + (parseFloat(downPayment) || 0))}
+                    {fmt(s.maxHome)}
                   </p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2 text-xs text-gray-600 mt-2">
                 <div>Max Loan: <span className="font-semibold">{fmt(s.maxLoan)}</span></div>
-                <div>
-                  Monthly Payment:{' '}
-                  <span className="font-semibold">
-                    {fmt(result.country === 'us'
-                      ? s.maxPayment
-                      : s.monthly
-                    )}
-                  </span>
-                </div>
+                <div>Monthly: <span className="font-semibold">
+                  {fmt(result.country === 'us' ? s.maxPayment : s.monthly)}
+                </span></div>
                 {result.country === 'uk' && (
                   <div className="col-span-2">
                     Stress Test (+3%): <span className="font-semibold text-orange-600">{fmt(s.stressMonthly)}/mo</span>
@@ -283,10 +225,9 @@ export default function MortgageAffordabilityCalc() {
             </div>
           ))}
 
-          {/* DTI 요약 (US) */}
           {result.country === 'us' && result.dti && (
-            <div className="bg-gray-50 rounded-xl p-4 text-sm">
-              <p className="font-semibold text-gray-700 mb-2">Your DTI Summary</p>
+            <div className="bg-gray-50 rounded-xl p-4 text-sm space-y-2">
+              <p className="font-semibold text-gray-700">Your DTI Summary</p>
               <div className="flex justify-between">
                 <span className="text-gray-500">Monthly Income</span>
                 <span className="font-semibold">{fmt(result.monthlyIncome)}</span>
@@ -302,7 +243,6 @@ export default function MortgageAffordabilityCalc() {
             </div>
           )}
 
-          {/* 안내 */}
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-xs text-blue-700 space-y-1">
             {result.country === 'us' ? (
               <>
@@ -320,12 +260,71 @@ export default function MortgageAffordabilityCalc() {
                 <p>• Enhanced: up to 5.5x for higher earners (£75k+)</p>
                 <p>• All lenders stress test at rate +3% (FCA MCOB 11.6)</p>
                 <p>• BoE caps &gt;4.5x lending at 15% of each lender's flow</p>
-                <p>• Actual offer depends on credit score & outgoings</p>
               </>
             )}
           </div>
         </div>
       )}
+
+      {/* SEO Content */}
+      <div className="mt-8 space-y-6 text-sm text-gray-600 border-t border-gray-100 pt-6">
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">How Much Mortgage Can I Afford?</h2>
+          <p className="leading-relaxed">
+            Mortgage affordability depends on your income, existing debts, and the lender's criteria.
+            In the US, lenders use the debt-to-income (DTI) ratio — most conventional lenders allow a back-end DTI of up to 43%.
+            In the UK, lenders typically offer 4 to 4.5 times your annual salary, with some offering up to 5.5x for higher earners.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">US vs UK Mortgage Rules 2026</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="text-left p-2 border border-gray-200 font-semibold">Rule</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">🇺🇸 United States</th>
+                  <th className="text-left p-2 border border-gray-200 font-semibold">🇬🇧 United Kingdom</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Method',        'DTI Ratio',              'Income Multiple'],
+                  ['Conservative',  '28/36 DTI',              '4x salary'],
+                  ['Standard',      '36/43 DTI',              '4.5x salary'],
+                  ['Maximum',       '31/50 DTI (FHA)',         '5.5x (higher earners)'],
+                  ['Stress Test',   'Rate + affordability',   'Rate + 3% (FCA rule)'],
+                  ['Current Rate',  '~6.52% (30yr, Jun 2026)','~4.5–5.5% (2yr fix)'],
+                ].map(([rule, us, uk], i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="p-2 border border-gray-200 font-medium">{rule}</td>
+                    <td className="p-2 border border-gray-200">{us}</td>
+                    <td className="p-2 border border-gray-200">{uk}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {[
+              { q: 'How much mortgage can I get on a $80,000 salary?', a: 'Using the standard 36/43 DTI rule with no existing debts and a 6.52% rate on a 30-year loan, you could borrow approximately $280,000–$320,000. With a 20% down payment, that means a home price of around $350,000–$400,000.' },
+              { q: 'How much can I borrow on a £50,000 salary in the UK?', a: 'Most UK lenders will offer 4x to 4.5x your salary, so between £200,000 and £225,000. Some lenders offer up to 5.5x (£275,000) for higher earners. Add your deposit to get your maximum property price.' },
+              { q: 'What is a DTI ratio?', a: 'Debt-to-income (DTI) is your total monthly debt payments divided by gross monthly income. A back-end DTI below 36% is considered strong. Most US lenders accept up to 43%, and FHA loans may allow up to 50%.' },
+              { q: 'What is the UK mortgage stress test?', a: 'UK lenders must verify you can still afford repayments if interest rates rise by 3%. Required by the FCA under MCOB 11.6. This means the amount you can borrow may be lower than the simple income multiple suggests.' },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 rounded-lg p-4">
+                <p className="font-semibold text-gray-700 mb-1">{item.q}</p>
+                <p className="text-gray-600 leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
