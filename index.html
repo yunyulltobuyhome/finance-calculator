@@ -5,41 +5,86 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Core SEO -->
-  <title>Free Financial Calculators - FIRE, Buy vs Rent, Salary, Dividend | JoinCalc</title>
-  <meta name="description" content="Calculate FIRE number, compare buying vs renting, estimate dividend income, calculate loans, and compute salary taxes. Free financial calculators for US, UK, Canada, Australia with no sign-up required." />
+  <!-- Core SEO (동적으로 react-helmet이 덮어씀) -->
+  <title>Free Financial Calculators 2026 — FIRE, Tax, Mortgage, Pension | JoinCalc</title>
+  <meta name="description" content="Free financial calculators for 2026: FIRE number, stamp duty, capital gains tax, inheritance tax, mortgage affordability, 401k/pension, salary take-home, and more. US & UK. No sign-up required." />
+  <meta name="keywords" content="FIRE calculator, stamp duty calculator 2026, capital gains tax calculator, inheritance tax calculator, mortgage affordability calculator, 401k calculator 2026, UK pension calculator, salary calculator, buy vs rent calculator, dividend calculator, compound interest calculator, financial independence calculator" />
+  <meta name="author" content="JoinCalc" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
 
-  <!-- Keywords - Comprehensive -->
-  <meta name="keywords" content="
-    FIRE calculator, financial independence retire early, buy vs rent calculator,
-    dividend calculator, dividend yield, loan calculator, mortgage calculator,
-    salary calculator, take home pay, compound interest calculator,
-    financial freedom, retirement planning, investment calculator,
-    home buying calculator, rent vs buy decision, property investment
-  " />
+  <!-- Canonical -->
+  <link rel="canonical" href="https://joincalc.com/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Free Financial Calculators - FIRE, Buy vs Rent, Dividend & More" />
-  <meta property="og:description" content="Plan your financial future with free calculators: FIRE, buy vs rent comparison, dividend income, loan payments, salary tax, and compound interest." />
+  <meta property="og:site_name" content="JoinCalc" />
+  <meta property="og:title" content="Free Financial Calculators 2026 | JoinCalc" />
+  <meta property="og:description" content="Free calculators for FIRE, stamp duty, capital gains tax, inheritance tax, mortgage affordability, 401k/pension, salary, and more. US & UK. Updated for 2026." />
   <meta property="og:url" content="https://joincalc.com" />
+  <meta property="og:image" content="https://joincalc.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Free Financial Calculators | JoinCalc" />
-  <meta name="twitter:description" content="Free financial calculators for FIRE, buy vs rent, dividends, loans, salary, and compound interest. No ads, no sign-up." />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Financial Calculators 2026 | JoinCalc" />
+  <meta name="twitter:description" content="FIRE, stamp duty, capital gains tax, mortgage affordability, 401k, pension & more. Free, no sign-up. US & UK." />
+  <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
 
-  <!-- Google & Robots -->
-  <meta name="robots" content="index, follow" />
-  <meta name="googlebot" content="index, follow" />
-  <link rel="canonical" href="https://joincalc.com" />
+  <!-- Structured Data: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "JoinCalc",
+    "url": "https://joincalc.com",
+    "description": "Free financial calculators for FIRE, tax, mortgage, retirement, and more.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://joincalc.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "JoinCalc",
+    "url": "https://joincalc.com",
+    "logo": "https://joincalc.com/vite.svg",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JoinCalc Financial Calculators",
+    "url": "https://joincalc.com",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Free financial calculators including FIRE, stamp duty, capital gains tax, inheritance tax, mortgage affordability, 401k, pension, salary, and compound interest."
+  }
+  </script>
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6079116585044991"
      crossorigin="anonymous"></script>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>

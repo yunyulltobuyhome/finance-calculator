@@ -10,58 +10,103 @@ import BuyVsRentCalc from './components/BuyVsRentCalc'
 import StampDutyCalc from './components/StampDutyCalc'
 import CapitalGainsCalc from './components/CapitalGainsCalc'
 import InheritanceTaxCalc from './components/InheritanceTaxCalc'
+import MortgageAffordabilityCalc from './components/MortgageAffordabilityCalc'
+import RetirementCalc from './components/RetirementCalc'
 import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
 
-const tabs = [
+const NAV = [
   {
-    label: 'FIRE Calculator', icon: '🔥', path: '/fire',
-    title: 'FIRE Calculator — Financial Independence Retire Early | JoinCalc',
-    description: 'Calculate your FIRE number, retirement age, and savings goal. Free FIRE calculator for US, UK, Canada and Australia.',
+    category: '🏦 Tax Calculators',
+    items: [
+      {
+        label: 'Stamp Duty', icon: '🏛️', path: '/stamp-duty',
+        title: 'Stamp Duty Calculator 2026 — UK SDLT | JoinCalc',
+        description: 'Calculate UK Stamp Duty Land Tax (SDLT). Updated April 2025 rates for first-time buyers, standard buyers and additional properties.',
+        keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty, stamp duty rates 2026',
+      },
+      {
+        label: 'Capital Gains', icon: '📊', path: '/capital-gains',
+        title: 'Capital Gains Tax Calculator 2026 — US & UK | JoinCalc',
+        description: 'Calculate capital gains tax for the US or UK. 2026 rates: long-term, short-term, NIIT, and UK annual exempt amount.',
+        keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains, short term capital gains, NIIT calculator',
+      },
+      {
+        label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
+        title: 'Inheritance Tax Calculator 2026 — UK IHT & US Estate Tax | JoinCalc',
+        description: 'Calculate UK Inheritance Tax or US Estate Tax. 2026 nil-rate band, RNRB, and $15M US exemption included.',
+        keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band, RNRB calculator, inheritance tax threshold',
+      },
+    ],
   },
   {
-    label: 'Buy vs Rent', icon: '🏠', path: '/buy-vs-rent',
-    title: 'Buy vs Rent Calculator — Should You Buy or Rent a Home? | JoinCalc',
-    description: 'Compare buying vs renting a home with our free calculator. See total costs over time for US, UK, Canada and Australia.',
+    category: '🏠 Property',
+    items: [
+      {
+        label: 'Buy vs Rent', icon: '🏠', path: '/buy-vs-rent',
+        title: 'Buy vs Rent Calculator 2026 | JoinCalc',
+        description: 'Should you buy or rent? Compare total costs over time for US, UK, Canada and Australia.',
+        keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent, buy vs rent comparison 2026',
+      },
+      {
+        label: 'Mortgage', icon: '🔑', path: '/mortgage',
+        title: 'Mortgage Affordability Calculator 2026 — How Much Can I Borrow? | JoinCalc',
+        description: 'Calculate how much mortgage you can afford. US DTI method and UK income multiple (4x–5.5x). Updated June 2026.',
+        keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK, DTI calculator, income multiple mortgage UK',
+      },
+    ],
   },
   {
-    label: 'Stamp Duty', icon: '🏛️', path: '/stamp-duty',
-    title: 'Stamp Duty Calculator 2026 — UK SDLT Calculator | JoinCalc',
-    description: 'Calculate UK Stamp Duty Land Tax (SDLT) instantly. Updated April 2025 rates for standard buyers, first-time buyers and additional properties.',
+    category: '📈 Investing & Retirement',
+    items: [
+      {
+        label: 'FIRE', icon: '🔥', path: '/fire',
+        title: 'FIRE Calculator 2026 — Financial Independence Retire Early | JoinCalc',
+        description: 'Calculate your FIRE number, retirement age, and savings goal. Free FIRE calculator for US, UK, Canada and Australia.',
+        keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator, lean FIRE, fat FIRE, retirement age calculator',
+      },
+      {
+        label: '401k / Pension', icon: '🧓', path: '/retirement',
+        title: '401k & Pension Calculator 2026 — Retirement Savings | JoinCalc',
+        description: 'Project your 401k or UK pension pot. 2026 IRS limits ($24,500), employer match, compound growth, and UK £60,000 annual allowance.',
+        keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator, employer match calculator, UK pension annual allowance 2026',
+      },
+      {
+        label: 'Dividend Income', icon: '💰', path: '/dividend',
+        title: 'Dividend Income Calculator | JoinCalc',
+        description: 'Estimate dividend income and passive cash flow with DRIP reinvestment support.',
+        keywords: 'dividend calculator, dividend income calculator, DRIP calculator, dividend yield calculator, passive income calculator',
+      },
+      {
+        label: 'Compound Interest', icon: '📈', path: '/compound',
+        title: 'Compound Interest Calculator | JoinCalc',
+        description: 'See how your money grows with compound interest and monthly contributions.',
+        keywords: 'compound interest calculator, compound growth calculator, investment growth calculator',
+      },
+    ],
   },
   {
-    label: 'Capital Gains Tax', icon: '📊', path: '/capital-gains',
-    title: 'Capital Gains Tax Calculator 2026 — US & UK CGT | JoinCalc',
-    description: 'Calculate capital gains tax for the US or UK. Latest 2026 rates including long-term, short-term, NIIT and UK annual exempt amount.',
-  },
-  {
-    label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
-    title: 'Inheritance Tax Calculator 2026 — UK IHT & US Estate Tax | JoinCalc',
-    description: 'Calculate UK Inheritance Tax (IHT) or US Estate Tax. Updated 2026 rates including nil-rate band, RNRB, and $15M US exemption.',
-  },
-  {
-    label: 'Dividend Income', icon: '💰', path: '/dividend',
-    title: 'Dividend Income Calculator — Estimate Passive Income | JoinCalc',
-    description: 'Calculate your dividend income and passive cash flow. Free dividend calculator with reinvestment (DRIP) support.',
-  },
-  {
-    label: 'Loan Calculator', icon: '📋', path: '/loan',
-    title: 'Loan Calculator — Monthly Payments & Amortization | JoinCalc',
-    description: 'Calculate monthly loan payments, total interest and amortization schedule. Supports mortgage, auto, and personal loans.',
-  },
-  {
-    label: 'Salary & Tax', icon: '💼', path: '/salary',
-    title: 'Salary Take-Home Calculator — After Tax Income | JoinCalc',
-    description: 'Calculate your take-home pay after tax. Free salary calculator for US, UK, Canada and Australia.',
-  },
-  {
-    label: 'Compound Interest', icon: '📈', path: '/compound',
-    title: 'Compound Interest Calculator — Grow Your Savings | JoinCalc',
-    description: 'See how your money grows with compound interest. Free compound interest calculator with monthly contributions.',
+    category: '💼 Income',
+    items: [
+      {
+        label: 'Salary & Tax', icon: '💼', path: '/salary',
+        title: 'Salary Take-Home Calculator 2026 — After Tax Income | JoinCalc',
+        description: 'Calculate your take-home pay after tax for US, UK, Canada and Australia.',
+        keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator, UK salary calculator, US salary calculator',
+      },
+      {
+        label: 'Loan Calculator', icon: '📋', path: '/loan',
+        title: 'Loan Calculator — Monthly Payments & Amortization | JoinCalc',
+        description: 'Calculate monthly loan payments, total interest and amortization schedule.',
+        keywords: 'loan calculator, monthly payment calculator, amortization calculator, mortgage payment calculator',
+      },
+    ],
   },
 ]
+
+const allTabs = NAV.flatMap(g => g.items)
 
 function Sidebar({ onClose }) {
   const location = useLocation()
@@ -74,19 +119,29 @@ function Sidebar({ onClose }) {
         </Link>
       </div>
       <div className="flex-1 overflow-y-auto py-3 px-3">
-        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-2">Calculators</p>
-        {tabs.map((tab) => {
-          const isActive = location.pathname === tab.path || (location.pathname === '/' && tab.path === '/fire')
-          return (
-            <Link key={tab.path} to={tab.path} onClick={onClose}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-all ${
-                isActive ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
-              }`}>
-              <span className="text-base w-5 text-center">{tab.icon}</span>
-              <span>{tab.label}</span>
-            </Link>
-          )
-        })}
+        {NAV.map((group) => (
+          <div key={group.category} className="mb-4">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
+              {group.category}
+            </p>
+            {group.items.map((tab) => {
+              const isActive = location.pathname === tab.path || (location.pathname === '/' && tab.path === '/fire')
+              return (
+                <Link
+                  key={tab.path}
+                  to={tab.path}
+                  onClick={onClose}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-sm font-medium transition-all ${
+                    isActive ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  <span className="text-base w-5 text-center">{tab.icon}</span>
+                  <span>{tab.label}</span>
+                </Link>
+              )
+            })}
+          </div>
+        ))}
       </div>
       <div className="p-4 border-t border-gray-100 space-y-1">
         <Link to="/privacy" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">Privacy Policy</Link>
@@ -102,7 +157,7 @@ function Layout() {
   const isPrivacy = location.pathname === '/privacy'
   const isTerms = location.pathname === '/terms'
   const isStatic = isPrivacy || isTerms
-  const currentTab = tabs.find(t => t.path === location.pathname) || tabs[0]
+  const currentTab = allTabs.find(t => t.path === location.pathname) || allTabs.find(t => t.path === '/fire')
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
@@ -110,10 +165,32 @@ function Layout() {
       <Helmet>
         <title>{currentTab.title}</title>
         <meta name="description" content={currentTab.description} />
+        <meta name="keywords" content={currentTab.keywords || ''} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="JoinCalc" />
         <meta property="og:title" content={currentTab.title} />
         <meta property="og:description" content={currentTab.description} />
         <meta property="og:url" content={`https://joincalc.com${currentTab.path}`} />
+        <meta property="og:image" content="https://joincalc.com/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={currentTab.title} />
+        <meta name="twitter:description" content={currentTab.description} />
+        <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
         <link rel="canonical" href={`https://joincalc.com${currentTab.path}`} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": currentTab.title,
+          "description": currentTab.description,
+          "url": `https://joincalc.com${currentTab.path}`,
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "JoinCalc",
+            "url": "https://joincalc.com"
+          }
+        })}</script>
       </Helmet>
 
       {/* 데스크탑 사이드바 */}
@@ -170,6 +247,8 @@ function Layout() {
               <Route path="/stamp-duty"      element={<StampDutyCalc />} />
               <Route path="/capital-gains"   element={<CapitalGainsCalc />} />
               <Route path="/inheritance-tax" element={<InheritanceTaxCalc />} />
+              <Route path="/mortgage"        element={<MortgageAffordabilityCalc />} />
+              <Route path="/retirement"      element={<RetirementCalc />} />
               <Route path="/dividend"        element={<DividendCalc />} />
               <Route path="/loan"            element={<LoanCalc />} />
               <Route path="/salary"          element={<SalaryCalc />} />
@@ -180,7 +259,6 @@ function Layout() {
             </Routes>
           </div>
 
-          {/* 강화된 Disclaimer */}
           {!isStatic && (
             <div className="mt-4 space-y-2">
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
