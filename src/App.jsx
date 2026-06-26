@@ -14,6 +14,8 @@ import MortgageAffordabilityCalc from './components/MortgageAffordabilityCalc'
 import RetirementCalc from './components/RetirementCalc'
 import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
+import About from './components/About'
+import Home from './components/Home'
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
 
@@ -26,18 +28,21 @@ const NAV = [
         title: 'Stamp Duty Calculator 2026 — UK SDLT | JoinCalc',
         description: 'Calculate UK Stamp Duty Land Tax (SDLT). Updated April 2025 rates for first-time buyers, standard buyers and additional properties.',
         keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty, stamp duty rates 2026',
+        lastUpdated: 'April 2025',
       },
       {
         label: 'Capital Gains', icon: '📊', path: '/capital-gains',
         title: 'Capital Gains Tax Calculator 2026 — US & UK | JoinCalc',
         description: 'Calculate capital gains tax for the US or UK. 2026 rates: long-term, short-term, NIIT, and UK annual exempt amount.',
         keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains, short term capital gains, NIIT calculator',
+        lastUpdated: 'January 2026',
       },
       {
         label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
         title: 'Inheritance Tax Calculator 2026 — UK IHT & US Estate Tax | JoinCalc',
         description: 'Calculate UK Inheritance Tax or US Estate Tax. 2026 nil-rate band, RNRB, and $15M US exemption included.',
         keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band, RNRB calculator, inheritance tax threshold',
+        lastUpdated: 'July 2025',
       },
     ],
   },
@@ -49,12 +54,14 @@ const NAV = [
         title: 'Buy vs Rent Calculator 2026 | JoinCalc',
         description: 'Should you buy or rent? Compare total costs over time for US, UK, Canada and Australia.',
         keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent, buy vs rent comparison 2026',
+        lastUpdated: 'June 2026',
       },
       {
         label: 'Mortgage', icon: '🔑', path: '/mortgage',
         title: 'Mortgage Affordability Calculator 2026 — How Much Can I Borrow? | JoinCalc',
         description: 'Calculate how much mortgage you can afford. US DTI method and UK income multiple (4x–5.5x). Updated June 2026.',
         keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK, DTI calculator, income multiple mortgage UK',
+        lastUpdated: 'June 2026',
       },
     ],
   },
@@ -66,24 +73,28 @@ const NAV = [
         title: 'FIRE Calculator 2026 — Financial Independence Retire Early | JoinCalc',
         description: 'Calculate your FIRE number, retirement age, and savings goal. Free FIRE calculator for US, UK, Canada and Australia.',
         keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator, lean FIRE, fat FIRE, retirement age calculator',
+        lastUpdated: 'June 2026',
       },
       {
         label: '401k / Pension', icon: '🧓', path: '/retirement',
         title: '401k & Pension Calculator 2026 — Retirement Savings | JoinCalc',
         description: 'Project your 401k or UK pension pot. 2026 IRS limits ($24,500), employer match, compound growth, and UK £60,000 annual allowance.',
         keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator, employer match calculator, UK pension annual allowance 2026',
+        lastUpdated: 'July 2025',
       },
       {
         label: 'Dividend Income', icon: '💰', path: '/dividend',
         title: 'Dividend Income Calculator | JoinCalc',
         description: 'Estimate dividend income and passive cash flow with DRIP reinvestment support.',
         keywords: 'dividend calculator, dividend income calculator, DRIP calculator, dividend yield calculator, passive income calculator',
+        lastUpdated: 'June 2026',
       },
       {
         label: 'Compound Interest', icon: '📈', path: '/compound',
         title: 'Compound Interest Calculator | JoinCalc',
         description: 'See how your money grows with compound interest and monthly contributions.',
         keywords: 'compound interest calculator, compound growth calculator, investment growth calculator',
+        lastUpdated: 'June 2026',
       },
     ],
   },
@@ -95,12 +106,14 @@ const NAV = [
         title: 'Salary Take-Home Calculator 2026 — After Tax Income | JoinCalc',
         description: 'Calculate your take-home pay after tax for US, UK, Canada and Australia.',
         keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator, UK salary calculator, US salary calculator',
+        lastUpdated: 'April 2026',
       },
       {
         label: 'Loan Calculator', icon: '📋', path: '/loan',
         title: 'Loan Calculator — Monthly Payments & Amortization | JoinCalc',
         description: 'Calculate monthly loan payments, total interest and amortization schedule.',
         keywords: 'loan calculator, monthly payment calculator, amortization calculator, mortgage payment calculator',
+        lastUpdated: 'June 2026',
       },
     ],
   },
@@ -108,33 +121,39 @@ const NAV = [
 
 const allTabs = NAV.flatMap(g => g.items)
 
+const STATIC_PAGES = ['/privacy', '/terms', '/about']
+
 function Sidebar({ onClose }) {
   const location = useLocation()
   return (
     <nav className="flex flex-col h-full">
       <div className="p-5 border-b border-gray-100">
-        <Link to="/fire" onClick={onClose}>
+        <Link to="/" onClick={onClose}>
           <h1 className="text-xl font-black text-indigo-600">JoinCalc</h1>
           <p className="text-xs text-gray-400 mt-0.5">Free Financial Calculators</p>
         </Link>
       </div>
       <div className="flex-1 overflow-y-auto py-3 px-3">
+        <Link to="/" onClick={onClose}
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
+            location.pathname === '/' ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+          }`}>
+          <span className="text-base w-5 text-center">🏠</span>
+          <span>All Calculators</span>
+        </Link>
+
         {NAV.map((group) => (
           <div key={group.category} className="mb-4">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
               {group.category}
             </p>
             {group.items.map((tab) => {
-              const isActive = location.pathname === tab.path || (location.pathname === '/' && tab.path === '/fire')
+              const isActive = location.pathname === tab.path
               return (
-                <Link
-                  key={tab.path}
-                  to={tab.path}
-                  onClick={onClose}
+                <Link key={tab.path} to={tab.path} onClick={onClose}
                   className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-sm font-medium transition-all ${
                     isActive ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
-                  }`}
-                >
+                  }`}>
                   <span className="text-base w-5 text-center">{tab.icon}</span>
                   <span>{tab.label}</span>
                 </Link>
@@ -144,6 +163,7 @@ function Sidebar({ onClose }) {
         ))}
       </div>
       <div className="p-4 border-t border-gray-100 space-y-1">
+        <Link to="/about" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">About JoinCalc</Link>
         <Link to="/privacy" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">Privacy Policy</Link>
         <Link to="/terms" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">Terms of Service</Link>
         <p className="text-xs text-gray-300 mt-2">© 2026 JoinCalc</p>
@@ -154,43 +174,132 @@ function Sidebar({ onClose }) {
 
 function Layout() {
   const location = useLocation()
-  const isPrivacy = location.pathname === '/privacy'
-  const isTerms = location.pathname === '/terms'
-  const isStatic = isPrivacy || isTerms
-  const currentTab = allTabs.find(t => t.path === location.pathname) || allTabs.find(t => t.path === '/fire')
+  const isStatic = STATIC_PAGES.includes(location.pathname)
+  const isHome = location.pathname === '/'
+  const currentTab = allTabs.find(t => t.path === location.pathname)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  // 페이지별 SEO 정보
+  const seoTitle = isHome
+    ? 'Free Financial Calculators 2026 — Tax, Mortgage, Retirement | JoinCalc'
+    : isStatic
+    ? 'JoinCalc — Free Financial Calculators'
+    : currentTab?.title || 'JoinCalc'
+
+  const seoDesc = isHome
+    ? 'Free financial calculators for 2026: stamp duty, capital gains tax, inheritance tax, mortgage affordability, 401k, pension, salary, FIRE, and more. US & UK. No sign-up required.'
+    : currentTab?.description || ''
+
+  const seoKeywords = isHome
+    ? 'financial calculator, stamp duty calculator 2026, capital gains tax calculator, inheritance tax calculator, mortgage affordability, 401k calculator, pension calculator UK, salary calculator, FIRE calculator'
+    : currentTab?.keywords || ''
+
+  const canonicalUrl = `https://joincalc.com${location.pathname}`
+
+  // Schema.org JSON-LD
+  const schemaWebSite = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "JoinCalc",
+    "url": "https://joincalc.com",
+    "description": "Free financial calculators for US, UK, Canada and Australia",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://joincalc.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+
+  const schemaOrg = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "JoinCalc",
+    "url": "https://joincalc.com",
+    "logo": "https://joincalc.com/vite.svg",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@joincalc.com",
+      "contactType": "customer support"
+    }
+  }
+
+  const schemaApp = currentTab ? {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": currentTab.title,
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": currentTab.description,
+    "url": canonicalUrl,
+    "dateModified": `2026-06-25`,
+    "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" }
+  } : null
+
+  const schemaFAQ = currentTab ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `What is the ${currentTab.label} calculator?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": currentTab.description
+        }
+      }
+    ]
+  } : null
+
+  const schemaBreadcrumb = !isHome && !isStatic && currentTab ? {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" },
+      { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }
+    ]
+  } : null
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <Helmet>
-        <title>{currentTab.title}</title>
-        <meta name="description" content={currentTab.description} />
-        <meta name="keywords" content={currentTab.keywords || ''} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <meta name="keywords" content={seoKeywords} />
+        <meta name="author" content="JoinCalc" />
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="JoinCalc" />
-        <meta property="og:title" content={currentTab.title} />
-        <meta property="og:description" content={currentTab.description} />
-        <meta property="og:url" content={`https://joincalc.com${currentTab.path}`} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDesc} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://joincalc.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={currentTab.title} />
-        <meta name="twitter:description" content={currentTab.description} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDesc} />
         <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
-        <link rel="canonical" href={`https://joincalc.com${currentTab.path}`} />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "name": currentTab.title,
-          "description": currentTab.description,
-          "url": `https://joincalc.com${currentTab.path}`,
-          "isPartOf": {
-            "@type": "WebSite",
-            "name": "JoinCalc",
-            "url": "https://joincalc.com"
-          }
-        })}</script>
+
+        {/* Last Updated (E-E-A-T) */}
+        {currentTab?.lastUpdated && (
+          <meta name="revised" content={`${currentTab.lastUpdated}`} />
+        )}
+
+        {/* Schema JSON-LD */}
+        <script type="application/ld+json">{JSON.stringify(schemaWebSite)}</script>
+        <script type="application/ld+json">{JSON.stringify(schemaOrg)}</script>
+        {schemaApp && <script type="application/ld+json">{JSON.stringify(schemaApp)}</script>}
+        {schemaFAQ && <script type="application/ld+json">{JSON.stringify(schemaFAQ)}</script>}
+        {schemaBreadcrumb && <script type="application/ld+json">{JSON.stringify(schemaBreadcrumb)}</script>}
       </Helmet>
 
       {/* 데스크탑 사이드바 */}
@@ -219,29 +328,49 @@ function Layout() {
           </button>
           <div>
             <span className="font-black text-indigo-600 text-lg">JoinCalc</span>
-            <span className="text-gray-400 text-xs ml-2">{currentTab.icon} {currentTab.label}</span>
+            {currentTab && <span className="text-gray-400 text-xs ml-2">{currentTab.icon} {currentTab.label}</span>}
           </div>
         </header>
 
         {/* 데스크탑 헤더 */}
-        <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">{currentTab.icon}</span>
-            <h2 className="text-lg font-bold text-gray-800">{currentTab.label}</h2>
-          </div>
-          <p className="text-sm text-gray-400 mt-0.5">{currentTab.description}</p>
-        </header>
+        {!isHome && !isStatic && currentTab && (
+          <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
+            {/* Breadcrumb */}
+            <nav className="text-xs text-gray-400 mb-2">
+              <Link to="/" className="hover:text-indigo-500">Home</Link>
+              <span className="mx-2">›</span>
+              <span className="text-gray-600">{currentTab.label}</span>
+            </nav>
+            <div className="flex items-center gap-2">
+              <span className="text-xl">{currentTab.icon}</span>
+              <h2 className="text-lg font-bold text-gray-800">{currentTab.label}</h2>
+              {currentTab.lastUpdated && (
+                <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
+                  ✓ Rates verified: {currentTab.lastUpdated}
+                </span>
+              )}
+            </div>
+            <p className="text-sm text-gray-400 mt-0.5">{currentTab.description}</p>
+          </header>
+        )}
+
+        {isHome && (
+          <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
+            <h2 className="text-lg font-bold text-gray-800">All Calculators</h2>
+            <p className="text-sm text-gray-400 mt-0.5">Free financial calculators for US, UK, Canada & Australia — updated for 2026</p>
+          </header>
+        )}
 
         <main className="max-w-2xl mx-auto px-4 md:px-8 py-6">
           {isStatic && (
-            <Link to="/fire" className="text-sm text-indigo-600 hover:underline block mb-4">
+            <Link to="/" className="text-sm text-indigo-600 hover:underline block mb-4">
               ← Back to Calculators
             </Link>
           )}
 
-          <div className={isStatic ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
+          <div className={isStatic ? '' : (isHome ? '' : 'bg-white rounded-2xl border border-gray-200 p-6')}>
             <Routes>
-              <Route path="/"                element={<FIRECalc />} />
+              <Route path="/"                element={<Home />} />
               <Route path="/fire"            element={<FIRECalc />} />
               <Route path="/buy-vs-rent"     element={<BuyVsRentCalc />} />
               <Route path="/stamp-duty"      element={<StampDutyCalc />} />
@@ -255,11 +384,12 @@ function Layout() {
               <Route path="/compound"        element={<CompoundCalc />} />
               <Route path="/privacy"         element={<Privacy />} />
               <Route path="/terms"           element={<TermsOfService />} />
-              <Route path="*"               element={<FIRECalc />} />
+              <Route path="/about"           element={<About />} />
+              <Route path="*"               element={<Home />} />
             </Routes>
           </div>
 
-          {!isStatic && (
+          {!isStatic && !isHome && (
             <div className="mt-4 space-y-2">
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                 <p className="text-xs text-amber-800 leading-relaxed">

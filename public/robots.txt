@@ -1,3 +1,18 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+
 Sitemap: https://joincalc.com/sitemap.xml
+
+# Allow major crawlers explicitly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
