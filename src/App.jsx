@@ -16,6 +16,7 @@ import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
 import Home from './components/Home'
+import Logo from './components/Logo'
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
 
@@ -120,7 +121,6 @@ const NAV = [
 ]
 
 const allTabs = NAV.flatMap(g => g.items)
-
 const STATIC_PAGES = ['/privacy', '/terms', '/about']
 
 function Sidebar({ onClose }) {
@@ -129,8 +129,7 @@ function Sidebar({ onClose }) {
     <nav className="flex flex-col h-full">
       <div className="p-5 border-b border-gray-100">
         <Link to="/" onClick={onClose}>
-          <h1 className="text-xl font-black text-indigo-600">JoinCalc</h1>
-          <p className="text-xs text-gray-400 mt-0.5">Free Financial Calculators</p>
+          <Logo size="md" theme="light" />
         </Link>
       </div>
       <div className="flex-1 overflow-y-auto py-3 px-3">
@@ -141,7 +140,6 @@ function Sidebar({ onClose }) {
           <span className="text-base w-5 text-center">🏠</span>
           <span>All Calculators</span>
         </Link>
-
         {NAV.map((group) => (
           <div key={group.category} className="mb-4">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
@@ -179,11 +177,9 @@ function Layout() {
   const currentTab = allTabs.find(t => t.path === location.pathname)
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // 페이지별 SEO 정보
   const seoTitle = isHome
     ? 'Free Financial Calculators 2026 — Tax, Mortgage, Retirement | JoinCalc'
-    : isStatic
-    ? 'JoinCalc — Free Financial Calculators'
+    : isStatic ? 'JoinCalc — Free Financial Calculators'
     : currentTab?.title || 'JoinCalc'
 
   const seoDesc = isHome
@@ -196,64 +192,31 @@ function Layout() {
 
   const canonicalUrl = `https://joincalc.com${location.pathname}`
 
-  // Schema.org JSON-LD
   const schemaWebSite = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "JoinCalc",
-    "url": "https://joincalc.com",
+    "@context": "https://schema.org", "@type": "WebSite",
+    "name": "JoinCalc", "url": "https://joincalc.com",
     "description": "Free financial calculators for US, UK, Canada and Australia",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://joincalc.com/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "potentialAction": { "@type": "SearchAction", "target": "https://joincalc.com/?q={search_term_string}", "query-input": "required name=search_term_string" }
   }
-
   const schemaOrg = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "JoinCalc",
-    "url": "https://joincalc.com",
-    "logo": "https://joincalc.com/vite.svg",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "hello@joincalc.com",
-      "contactType": "customer support"
-    }
+    "@context": "https://schema.org", "@type": "Organization",
+    "name": "JoinCalc", "url": "https://joincalc.com",
+    "logo": "https://joincalc.com/favicon.svg",
+    "contactPoint": { "@type": "ContactPoint", "email": "hello@joincalc.com", "contactType": "customer support" }
   }
-
   const schemaApp = currentTab ? {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": currentTab.title,
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": currentTab.description,
-    "url": canonicalUrl,
-    "dateModified": `2026-06-25`,
+    "@context": "https://schema.org", "@type": "SoftwareApplication",
+    "name": currentTab.title, "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-26",
     "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" }
   } : null
-
   const schemaFAQ = currentTab ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": `What is the ${currentTab.label} calculator?`,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": currentTab.description
-        }
-      }
-    ]
+    "@context": "https://schema.org", "@type": "FAQPage",
+    "mainEntity": [{ "@type": "Question", "name": `What is the ${currentTab.label} calculator?`, "acceptedAnswer": { "@type": "Answer", "text": currentTab.description } }]
   } : null
-
   const schemaBreadcrumb = !isHome && !isStatic && currentTab ? {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" },
       { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }
@@ -268,11 +231,8 @@ function Layout() {
         <meta name="keywords" content={seoKeywords} />
         <meta name="author" content="JoinCalc" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-
-        {/* Canonical */}
         <link rel="canonical" href={canonicalUrl} />
-
-        {/* Open Graph */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="JoinCalc" />
         <meta property="og:title" content={seoTitle} />
@@ -282,19 +242,11 @@ function Layout() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
-
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDesc} />
         <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
-
-        {/* Last Updated (E-E-A-T) */}
-        {currentTab?.lastUpdated && (
-          <meta name="revised" content={`${currentTab.lastUpdated}`} />
-        )}
-
-        {/* Schema JSON-LD */}
+        {currentTab?.lastUpdated && <meta name="revised" content={currentTab.lastUpdated} />}
         <script type="application/ld+json">{JSON.stringify(schemaWebSite)}</script>
         <script type="application/ld+json">{JSON.stringify(schemaOrg)}</script>
         {schemaApp && <script type="application/ld+json">{JSON.stringify(schemaApp)}</script>}
@@ -307,7 +259,7 @@ function Layout() {
         <Sidebar onClose={() => {}} />
       </aside>
 
-      {/* 모바일 오버레이 */}
+      {/* 모바일 오버레이 — 햄버거 누르면 나오는 사이드 메뉴 */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
@@ -317,25 +269,37 @@ function Layout() {
         </div>
       )}
 
-      {/* 메인 */}
+      {/* 메인 콘텐츠 */}
       <div className="flex-1 md:ml-56">
-        {/* 모바일 헤더 */}
+
+        {/* 모바일 헤더 — 모바일에서만 보임 (md 이상에서는 숨김) */}
         <header className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3 sticky top-0 z-30">
-          <button onClick={() => setMobileOpen(true)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          {/* 햄버거 버튼 */}
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          >
             <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <div>
-            <span className="font-black text-indigo-600 text-lg">JoinCalc</span>
-            {currentTab && <span className="text-gray-400 text-xs ml-2">{currentTab.icon} {currentTab.label}</span>}
-          </div>
+
+          {/* 로고 — 모바일 헤더에 표시 */}
+          <Link to="/">
+            <Logo size="sm" theme="light" />
+          </Link>
+
+          {/* 현재 페이지 이름 */}
+          {currentTab && (
+            <span className="text-gray-400 text-xs ml-auto">
+              {currentTab.icon} {currentTab.label}
+            </span>
+          )}
         </header>
 
-        {/* 데스크탑 헤더 */}
+        {/* 데스크탑 헤더 — 계산기 페이지에서만 표시 */}
         {!isHome && !isStatic && currentTab && (
           <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
-            {/* Breadcrumb */}
             <nav className="text-xs text-gray-400 mb-2">
               <Link to="/" className="hover:text-indigo-500">Home</Link>
               <span className="mx-2">›</span>
@@ -354,6 +318,7 @@ function Layout() {
           </header>
         )}
 
+        {/* 홈 헤더 */}
         {isHome && (
           <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
             <h2 className="text-lg font-bold text-gray-800">All Calculators</h2>
