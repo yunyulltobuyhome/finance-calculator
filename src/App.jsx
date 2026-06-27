@@ -12,6 +12,11 @@ import CapitalGainsCalc from './components/CapitalGainsCalc'
 import InheritanceTaxCalc from './components/InheritanceTaxCalc'
 import MortgageAffordabilityCalc from './components/MortgageAffordabilityCalc'
 import RetirementCalc from './components/RetirementCalc'
+import RedundancyCalc from './components/RedundancyCalc'
+import NICalc from './components/NICalc'
+import HolidayCalc from './components/HolidayCalc'
+import StudentLoanCalc from './components/StudentLoanCalc'
+import RothIRACalc from './components/RothIRACalc'
 import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
@@ -44,6 +49,13 @@ const NAV = [
         description: 'Calculate UK Inheritance Tax or US Estate Tax. 2026 nil-rate band, RNRB, and $15M US exemption included.',
         keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band, RNRB calculator, inheritance tax threshold',
         lastUpdated: 'July 2025',
+      },
+      {
+        label: 'National Insurance', icon: '🏥', path: '/national-insurance',
+        title: 'UK National Insurance Calculator 2026/27 | JoinCalc',
+        description: 'Estimate your UK National Insurance contributions for 2026/27. Employee 8%/2% rates, employer 15% rate, and take-home pay breakdown.',
+        keywords: 'national insurance calculator 2026, NI calculator UK, how much national insurance do I pay, class 1 NI 2026',
+        lastUpdated: 'April 2026',
       },
     ],
   },
@@ -84,6 +96,13 @@ const NAV = [
         lastUpdated: 'July 2025',
       },
       {
+        label: 'Roth vs Traditional IRA', icon: '🏦', path: '/roth-ira',
+        title: 'Roth vs Traditional IRA Calculator 2026 | JoinCalc',
+        description: 'Compare Roth IRA vs Traditional IRA projected values. 2026 IRS limits, income phase-outs, tax break-even analysis. Free US retirement calculator.',
+        keywords: 'roth ira calculator 2026, roth vs traditional ira, roth ira vs traditional ira calculator, ira contribution limit 2026, backdoor roth ira',
+        lastUpdated: 'January 2026',
+      },
+      {
         label: 'Dividend Income', icon: '💰', path: '/dividend',
         title: 'Dividend Income Calculator | JoinCalc',
         description: 'Estimate dividend income and passive cash flow with DRIP reinvestment support.',
@@ -100,7 +119,7 @@ const NAV = [
     ],
   },
   {
-    category: '💼 Income',
+    category: '💼 Income & Employment',
     items: [
       {
         label: 'Salary & Tax', icon: '💼', path: '/salary',
@@ -110,7 +129,28 @@ const NAV = [
         lastUpdated: 'April 2026',
       },
       {
-        label: 'Loan Calculator', icon: '📋', path: '/loan',
+        label: 'Redundancy Pay', icon: '📋', path: '/redundancy',
+        title: 'UK Statutory Redundancy Pay Calculator 2026 | JoinCalc',
+        description: 'Estimate your UK statutory redundancy pay entitlement. Updated April 2026 rates — GB £751/week cap, NI £749/week cap.',
+        keywords: 'redundancy pay calculator UK 2026, statutory redundancy calculator, redundancy entitlement UK, how much redundancy pay',
+        lastUpdated: 'April 2026',
+      },
+      {
+        label: 'Holiday Entitlement', icon: '🌴', path: '/holiday',
+        title: 'UK Holiday Entitlement Calculator 2026 | JoinCalc',
+        description: 'Calculate your statutory UK annual leave entitlement. Full-time, part-time and irregular hours workers. Based on Working Time Regulations 1998.',
+        keywords: 'holiday entitlement calculator UK 2026, statutory holiday calculator, how many days holiday am I entitled to, annual leave calculator UK',
+        lastUpdated: 'April 2026',
+      },
+      {
+        label: 'Student Loan', icon: '🎓', path: '/student-loan',
+        title: 'UK Student Loan Repayment Calculator 2026 — Plan 1, 2, 4, 5 & PG | JoinCalc',
+        description: 'Estimate your UK student loan monthly repayments. Covers Plan 1, Plan 2, Plan 4, Plan 5 and Postgraduate loans. Updated for 2026/27 thresholds.',
+        keywords: 'student loan calculator UK 2026, student loan repayment calculator, plan 2 student loan calculator, plan 5 student loan 2026',
+        lastUpdated: 'April 2026',
+      },
+      {
+        label: 'Loan Calculator', icon: '🏦', path: '/loan',
         title: 'Loan Calculator — Monthly Payments & Amortization | JoinCalc',
         description: 'Calculate monthly loan payments, total interest and amortization schedule.',
         keywords: 'loan calculator, monthly payment calculator, amortization calculator, mortgage payment calculator',
@@ -183,11 +223,11 @@ function Layout() {
     : currentTab?.title || 'JoinCalc'
 
   const seoDesc = isHome
-    ? 'Free financial calculators for 2026: stamp duty, capital gains tax, inheritance tax, mortgage affordability, 401k, pension, salary, FIRE, and more. US & UK. No sign-up required.'
+    ? 'Free financial calculators for 2026: stamp duty, capital gains tax, national insurance, redundancy pay, student loan, roth vs traditional IRA, mortgage, 401k, pension, salary, FIRE, and more. US & UK. No sign-up required.'
     : currentTab?.description || ''
 
   const seoKeywords = isHome
-    ? 'financial calculator, stamp duty calculator 2026, capital gains tax calculator, inheritance tax calculator, mortgage affordability, 401k calculator, pension calculator UK, salary calculator, FIRE calculator'
+    ? 'financial calculator, stamp duty calculator 2026, capital gains tax calculator, national insurance calculator, redundancy pay calculator, student loan calculator UK, roth ira calculator 2026, mortgage affordability, 401k calculator, salary calculator, FIRE calculator'
     : currentTab?.keywords || ''
 
   const canonicalUrl = `https://joincalc.com${location.pathname}`
@@ -208,7 +248,7 @@ function Layout() {
     "@context": "https://schema.org", "@type": "SoftwareApplication",
     "name": currentTab.title, "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-26",
+    "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-27",
     "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" }
   } : null
   const schemaFAQ = currentTab ? {
@@ -254,12 +294,10 @@ function Layout() {
         {schemaBreadcrumb && <script type="application/ld+json">{JSON.stringify(schemaBreadcrumb)}</script>}
       </Helmet>
 
-      {/* 데스크탑 사이드바 */}
       <aside className="hidden md:flex flex-col w-56 bg-white border-r border-gray-200 fixed h-full z-10">
         <Sidebar onClose={() => {}} />
       </aside>
 
-      {/* 모바일 오버레이 — 햄버거 누르면 나오는 사이드 메뉴 */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
@@ -269,35 +307,19 @@ function Layout() {
         </div>
       )}
 
-      {/* 메인 콘텐츠 */}
       <div className="flex-1 md:ml-56">
-
-        {/* 모바일 헤더 — 모바일에서만 보임 (md 이상에서는 숨김) */}
         <header className="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3 sticky top-0 z-30">
-          {/* 햄버거 버튼 */}
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          >
+          <button onClick={() => setMobileOpen(true)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-
-          {/* 로고 — 모바일 헤더에 표시 */}
-          <Link to="/">
-            <Logo size="sm" theme="light" />
-          </Link>
-
-          {/* 현재 페이지 이름 */}
+          <Link to="/"><Logo size="sm" theme="light" /></Link>
           {currentTab && (
-            <span className="text-gray-400 text-xs ml-auto">
-              {currentTab.icon} {currentTab.label}
-            </span>
+            <span className="text-gray-400 text-xs ml-auto">{currentTab.icon} {currentTab.label}</span>
           )}
         </header>
 
-        {/* 데스크탑 헤더 — 계산기 페이지에서만 표시 */}
         {!isHome && !isStatic && currentTab && (
           <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
             <nav className="text-xs text-gray-400 mb-2">
@@ -318,7 +340,6 @@ function Layout() {
           </header>
         )}
 
-        {/* 홈 헤더 */}
         {isHome && (
           <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
             <h2 className="text-lg font-bold text-gray-800">All Calculators</h2>
@@ -332,25 +353,29 @@ function Layout() {
               ← Back to Calculators
             </Link>
           )}
-
           <div className={isStatic ? '' : (isHome ? '' : 'bg-white rounded-2xl border border-gray-200 p-6')}>
             <Routes>
-              <Route path="/"                element={<Home />} />
-              <Route path="/fire"            element={<FIRECalc />} />
-              <Route path="/buy-vs-rent"     element={<BuyVsRentCalc />} />
-              <Route path="/stamp-duty"      element={<StampDutyCalc />} />
-              <Route path="/capital-gains"   element={<CapitalGainsCalc />} />
-              <Route path="/inheritance-tax" element={<InheritanceTaxCalc />} />
-              <Route path="/mortgage"        element={<MortgageAffordabilityCalc />} />
-              <Route path="/retirement"      element={<RetirementCalc />} />
-              <Route path="/dividend"        element={<DividendCalc />} />
-              <Route path="/loan"            element={<LoanCalc />} />
-              <Route path="/salary"          element={<SalaryCalc />} />
-              <Route path="/compound"        element={<CompoundCalc />} />
-              <Route path="/privacy"         element={<Privacy />} />
-              <Route path="/terms"           element={<TermsOfService />} />
-              <Route path="/about"           element={<About />} />
-              <Route path="*"               element={<Home />} />
+              <Route path="/"                   element={<Home />} />
+              <Route path="/fire"               element={<FIRECalc />} />
+              <Route path="/buy-vs-rent"        element={<BuyVsRentCalc />} />
+              <Route path="/stamp-duty"         element={<StampDutyCalc />} />
+              <Route path="/capital-gains"      element={<CapitalGainsCalc />} />
+              <Route path="/inheritance-tax"    element={<InheritanceTaxCalc />} />
+              <Route path="/mortgage"           element={<MortgageAffordabilityCalc />} />
+              <Route path="/retirement"         element={<RetirementCalc />} />
+              <Route path="/roth-ira"           element={<RothIRACalc />} />
+              <Route path="/dividend"           element={<DividendCalc />} />
+              <Route path="/loan"               element={<LoanCalc />} />
+              <Route path="/salary"             element={<SalaryCalc />} />
+              <Route path="/compound"           element={<CompoundCalc />} />
+              <Route path="/redundancy"         element={<RedundancyCalc />} />
+              <Route path="/national-insurance" element={<NICalc />} />
+              <Route path="/holiday"            element={<HolidayCalc />} />
+              <Route path="/student-loan"       element={<StudentLoanCalc />} />
+              <Route path="/privacy"            element={<Privacy />} />
+              <Route path="/terms"              element={<TermsOfService />} />
+              <Route path="/about"              element={<About />} />
+              <Route path="*"                  element={<Home />} />
             </Routes>
           </div>
 
