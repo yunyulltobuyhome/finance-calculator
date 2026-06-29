@@ -9,6 +9,7 @@ const CATEGORIES = [
       { label: 'Capital Gains Tax', desc: 'US & UK CGT — stocks, property, crypto', path: '/capital-gains', icon: '📊' },
       { label: 'Inheritance Tax', desc: 'UK IHT & US Estate Tax 2026', path: '/inheritance-tax', icon: '🏦' },
       { label: 'National Insurance', desc: 'Employee NI contributions 2026/27', path: '/national-insurance', icon: '🏥' },
+      { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer tax estimate', path: '/self-employed', icon: '🧾' },
     ],
   },
   {

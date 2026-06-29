@@ -17,6 +17,7 @@ import NICalc from './components/NICalc'
 import HolidayCalc from './components/HolidayCalc'
 import StudentLoanCalc from './components/StudentLoanCalc'
 import RothIRACalc from './components/RothIRACalc'
+import SelfEmployedCalc from './components/SelfEmployedCalc'
 import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
@@ -33,28 +34,35 @@ const NAV = [
         label: 'Stamp Duty', icon: '🏛️', path: '/stamp-duty',
         title: 'Stamp Duty Calculator 2026 — UK SDLT | JoinCalc',
         description: 'Calculate UK Stamp Duty Land Tax (SDLT). Updated April 2025 rates for first-time buyers, standard buyers and additional properties.',
-        keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty, stamp duty rates 2026',
+        keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty',
         lastUpdated: 'April 2025',
       },
       {
         label: 'Capital Gains', icon: '📊', path: '/capital-gains',
         title: 'Capital Gains Tax Calculator 2026 — US & UK | JoinCalc',
         description: 'Calculate capital gains tax for the US or UK. 2026 rates: long-term, short-term, NIIT, and UK annual exempt amount.',
-        keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains, short term capital gains, NIIT calculator',
+        keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains',
         lastUpdated: 'January 2026',
       },
       {
         label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
         title: 'Inheritance Tax Calculator 2026 — UK IHT & US Estate Tax | JoinCalc',
         description: 'Calculate UK Inheritance Tax or US Estate Tax. 2026 nil-rate band, RNRB, and $15M US exemption included.',
-        keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band, RNRB calculator, inheritance tax threshold',
+        keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band',
         lastUpdated: 'July 2025',
       },
       {
         label: 'National Insurance', icon: '🏥', path: '/national-insurance',
         title: 'UK National Insurance Calculator 2026/27 | JoinCalc',
         description: 'Estimate your UK National Insurance contributions for 2026/27. Employee 8%/2% rates, employer 15% rate, and take-home pay breakdown.',
-        keywords: 'national insurance calculator 2026, NI calculator UK, how much national insurance do I pay, class 1 NI 2026',
+        keywords: 'national insurance calculator 2026, NI calculator UK, how much national insurance do I pay',
+        lastUpdated: 'April 2026',
+      },
+      {
+        label: 'Self-Employed Tax', icon: '🧾', path: '/self-employed',
+        title: 'UK Self-Employed Tax Calculator 2026/27 — Sole Trader & Freelancer | JoinCalc',
+        description: 'Calculate Income Tax and Class 4 NI as a self-employed sole trader or freelancer. 2026/27 HMRC rates, pension deductions, and take-home profit estimate.',
+        keywords: 'self employed tax calculator UK 2026, sole trader tax calculator, freelancer tax calculator UK, class 4 national insurance calculator, self assessment tax estimate',
         lastUpdated: 'April 2026',
       },
     ],
@@ -66,14 +74,14 @@ const NAV = [
         label: 'Buy vs Rent', icon: '🏠', path: '/buy-vs-rent',
         title: 'Buy vs Rent Calculator 2026 | JoinCalc',
         description: 'Should you buy or rent? Compare total costs over time for US, UK, Canada and Australia.',
-        keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent, buy vs rent comparison 2026',
+        keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Mortgage', icon: '🔑', path: '/mortgage',
         title: 'Mortgage Affordability Calculator 2026 — How Much Can I Borrow? | JoinCalc',
         description: 'Calculate how much mortgage you can afford. US DTI method and UK income multiple (4x–5.5x). Updated June 2026.',
-        keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK, DTI calculator, income multiple mortgage UK',
+        keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK',
         lastUpdated: 'June 2026',
       },
     ],
@@ -84,36 +92,36 @@ const NAV = [
       {
         label: 'FIRE', icon: '🔥', path: '/fire',
         title: 'FIRE Calculator 2026 — Financial Independence Retire Early | JoinCalc',
-        description: 'Calculate your FIRE number, retirement age, and savings goal. Free FIRE calculator for US, UK, Canada and Australia.',
-        keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator, lean FIRE, fat FIRE, retirement age calculator',
+        description: 'Calculate your FIRE number, retirement age, and savings goal.',
+        keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator',
         lastUpdated: 'June 2026',
       },
       {
         label: '401k / Pension', icon: '🧓', path: '/retirement',
         title: '401k & Pension Calculator 2026 — Retirement Savings | JoinCalc',
-        description: 'Project your 401k or UK pension pot. 2026 IRS limits ($24,500), employer match, compound growth, and UK £60,000 annual allowance.',
-        keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator, employer match calculator, UK pension annual allowance 2026',
+        description: 'Project your 401k or UK pension pot. 2026 IRS limits ($24,500), employer match, and UK £60,000 annual allowance.',
+        keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator',
         lastUpdated: 'July 2025',
       },
       {
         label: 'Roth vs Traditional IRA', icon: '🏦', path: '/roth-ira',
         title: 'Roth vs Traditional IRA Calculator 2026 | JoinCalc',
-        description: 'Compare Roth IRA vs Traditional IRA projected values. 2026 IRS limits, income phase-outs, tax break-even analysis. Free US retirement calculator.',
-        keywords: 'roth ira calculator 2026, roth vs traditional ira, roth ira vs traditional ira calculator, ira contribution limit 2026, backdoor roth ira',
+        description: 'Compare Roth IRA vs Traditional IRA projected values. 2026 IRS limits, income phase-outs, tax break-even analysis.',
+        keywords: 'roth ira calculator 2026, roth vs traditional ira, ira contribution limit 2026',
         lastUpdated: 'January 2026',
       },
       {
         label: 'Dividend Income', icon: '💰', path: '/dividend',
         title: 'Dividend Income Calculator | JoinCalc',
         description: 'Estimate dividend income and passive cash flow with DRIP reinvestment support.',
-        keywords: 'dividend calculator, dividend income calculator, DRIP calculator, dividend yield calculator, passive income calculator',
+        keywords: 'dividend calculator, dividend income calculator, DRIP calculator',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Compound Interest', icon: '📈', path: '/compound',
         title: 'Compound Interest Calculator | JoinCalc',
         description: 'See how your money grows with compound interest and monthly contributions.',
-        keywords: 'compound interest calculator, compound growth calculator, investment growth calculator',
+        keywords: 'compound interest calculator, compound growth calculator',
         lastUpdated: 'June 2026',
       },
     ],
@@ -125,35 +133,35 @@ const NAV = [
         label: 'Salary & Tax', icon: '💼', path: '/salary',
         title: 'Salary Take-Home Calculator 2026 — After Tax Income | JoinCalc',
         description: 'Calculate your take-home pay after tax for US, UK, Canada and Australia.',
-        keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator, UK salary calculator, US salary calculator',
+        keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Redundancy Pay', icon: '📋', path: '/redundancy',
         title: 'UK Statutory Redundancy Pay Calculator 2026 | JoinCalc',
-        description: 'Estimate your UK statutory redundancy pay entitlement. Updated April 2026 rates — GB £751/week cap, NI £749/week cap.',
-        keywords: 'redundancy pay calculator UK 2026, statutory redundancy calculator, redundancy entitlement UK, how much redundancy pay',
+        description: 'Estimate your UK statutory redundancy pay entitlement. Updated April 2026 rates.',
+        keywords: 'redundancy pay calculator UK 2026, statutory redundancy calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Holiday Entitlement', icon: '🌴', path: '/holiday',
         title: 'UK Holiday Entitlement Calculator 2026 | JoinCalc',
-        description: 'Calculate your statutory UK annual leave entitlement. Full-time, part-time and irregular hours workers. Based on Working Time Regulations 1998.',
-        keywords: 'holiday entitlement calculator UK 2026, statutory holiday calculator, how many days holiday am I entitled to, annual leave calculator UK',
+        description: 'Calculate your statutory UK annual leave entitlement. Full-time, part-time and irregular hours workers.',
+        keywords: 'holiday entitlement calculator UK 2026, statutory holiday calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Student Loan', icon: '🎓', path: '/student-loan',
         title: 'UK Student Loan Repayment Calculator 2026 — Plan 1, 2, 4, 5 & PG | JoinCalc',
-        description: 'Estimate your UK student loan monthly repayments. Covers Plan 1, Plan 2, Plan 4, Plan 5 and Postgraduate loans. Updated for 2026/27 thresholds.',
-        keywords: 'student loan calculator UK 2026, student loan repayment calculator, plan 2 student loan calculator, plan 5 student loan 2026',
+        description: 'Estimate your UK student loan monthly repayments. Covers Plan 1, 2, 4, 5 and Postgraduate loans.',
+        keywords: 'student loan calculator UK 2026, student loan repayment calculator, plan 2 student loan',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Loan Calculator', icon: '🏦', path: '/loan',
         title: 'Loan Calculator — Monthly Payments & Amortization | JoinCalc',
         description: 'Calculate monthly loan payments, total interest and amortization schedule.',
-        keywords: 'loan calculator, monthly payment calculator, amortization calculator, mortgage payment calculator',
+        keywords: 'loan calculator, monthly payment calculator, amortization calculator',
         lastUpdated: 'June 2026',
       },
     ],
@@ -168,9 +176,7 @@ function Sidebar({ onClose }) {
   return (
     <nav className="flex flex-col h-full">
       <div className="p-5 border-b border-gray-100">
-        <Link to="/" onClick={onClose}>
-          <Logo size="md" theme="light" />
-        </Link>
+        <Link to="/" onClick={onClose}><Logo size="md" theme="light" /></Link>
       </div>
       <div className="flex-1 overflow-y-auto py-3 px-3">
         <Link to="/" onClick={onClose}
@@ -223,11 +229,11 @@ function Layout() {
     : currentTab?.title || 'JoinCalc'
 
   const seoDesc = isHome
-    ? 'Free financial calculators for 2026: stamp duty, capital gains tax, national insurance, redundancy pay, student loan, roth vs traditional IRA, mortgage, 401k, pension, salary, FIRE, and more. US & UK. No sign-up required.'
+    ? 'Free financial calculators for 2026: stamp duty, capital gains tax, self-employed tax, national insurance, redundancy pay, student loan, mortgage, 401k, pension, salary, FIRE, and more. US & UK. No sign-up required.'
     : currentTab?.description || ''
 
   const seoKeywords = isHome
-    ? 'financial calculator, stamp duty calculator 2026, capital gains tax calculator, national insurance calculator, redundancy pay calculator, student loan calculator UK, roth ira calculator 2026, mortgage affordability, 401k calculator, salary calculator, FIRE calculator'
+    ? 'financial calculator, stamp duty calculator 2026, capital gains tax calculator, self employed tax calculator UK, national insurance calculator, redundancy pay calculator, student loan calculator UK, mortgage affordability, 401k calculator, salary calculator, FIRE calculator'
     : currentTab?.keywords || ''
 
   const canonicalUrl = `https://joincalc.com${location.pathname}`
@@ -248,7 +254,7 @@ function Layout() {
     "@context": "https://schema.org", "@type": "SoftwareApplication",
     "name": currentTab.title, "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-27",
+    "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-29",
     "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" }
   } : null
   const schemaFAQ = currentTab ? {
@@ -315,9 +321,7 @@ function Layout() {
             </svg>
           </button>
           <Link to="/"><Logo size="sm" theme="light" /></Link>
-          {currentTab && (
-            <span className="text-gray-400 text-xs ml-auto">{currentTab.icon} {currentTab.label}</span>
-          )}
+          {currentTab && <span className="text-gray-400 text-xs ml-auto">{currentTab.icon} {currentTab.label}</span>}
         </header>
 
         {!isHome && !isStatic && currentTab && (
@@ -349,9 +353,7 @@ function Layout() {
 
         <main className="max-w-2xl mx-auto px-4 md:px-8 py-6">
           {isStatic && (
-            <Link to="/" className="text-sm text-indigo-600 hover:underline block mb-4">
-              ← Back to Calculators
-            </Link>
+            <Link to="/" className="text-sm text-indigo-600 hover:underline block mb-4">← Back to Calculators</Link>
           )}
           <div className={isStatic ? '' : (isHome ? '' : 'bg-white rounded-2xl border border-gray-200 p-6')}>
             <Routes>
@@ -372,6 +374,7 @@ function Layout() {
               <Route path="/national-insurance" element={<NICalc />} />
               <Route path="/holiday"            element={<HolidayCalc />} />
               <Route path="/student-loan"       element={<StudentLoanCalc />} />
+              <Route path="/self-employed"      element={<SelfEmployedCalc />} />
               <Route path="/privacy"            element={<Privacy />} />
               <Route path="/terms"              element={<TermsOfService />} />
               <Route path="/about"              element={<About />} />
