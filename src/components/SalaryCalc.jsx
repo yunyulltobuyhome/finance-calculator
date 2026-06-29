@@ -249,6 +249,35 @@ export default function SalaryCalc() {
             ))}
           </div>
         </div>
+
+        {/* Popular salary lookups — internal links */}
+      <div className="mt-8 border-t border-gray-100 pt-6">
+        <h2 className="text-base font-bold text-gray-800 mb-3">Popular Salary Lookups</h2>
+        <div className="space-y-4 text-sm">
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase mb-2">🇬🇧 UK After Tax</p>
+            <div className="flex flex-wrap gap-2">
+              {[20000, 25000, 30000, 35000, 40000, 50000, 60000, 75000, 100000].map(a => (
+                <a key={a} href={`/salary/${a}-after-tax-uk`}
+                  className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5">
+                  £{a.toLocaleString()}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-semibold text-gray-400 uppercase mb-2">🇺🇸 US After Tax</p>
+            <div className="flex flex-wrap gap-2">
+              {[40000, 50000, 60000, 70000, 80000, 100000, 120000, 150000].map(a => (
+                <a key={a} href={`/salary/${a}-after-tax-us`}
+                  className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5">
+                  ${a.toLocaleString()}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   )
