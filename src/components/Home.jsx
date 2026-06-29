@@ -10,6 +10,7 @@ const CATEGORIES = [
       { label: 'Inheritance Tax', desc: 'UK IHT & US Estate Tax 2026', path: '/inheritance-tax', icon: '🏦' },
       { label: 'National Insurance', desc: 'Employee NI contributions 2026/27', path: '/national-insurance', icon: '🏥' },
       { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer tax estimate', path: '/self-employed', icon: '🧾' },
+      { label: 'Corporation Tax', desc: 'UK company tax + Marginal Relief 2026', path: '/corporation-tax', icon: '🏢' },
     ],
   },
   {
@@ -27,6 +28,8 @@ const CATEGORIES = [
       { label: 'FIRE Calculator', desc: 'When can you retire early?', path: '/fire', icon: '🔥' },
       { label: '401k & Pension', desc: 'Project your retirement pot', path: '/retirement', icon: '🧓' },
       { label: 'Roth vs Traditional IRA', desc: 'Compare IRA options for 2026', path: '/roth-ira', icon: '🏦' },
+      { label: 'Social Security', desc: 'US benefit estimate — ages 62–70', path: '/social-security', icon: '🇺🇸' },
+      { label: 'Pension Credit', desc: 'UK Guarantee & Savings Credit 2026', path: '/pension-credit', icon: '🧓' },
       { label: 'Dividend Income', desc: 'Passive income from dividends', path: '/dividend', icon: '💰' },
       { label: 'Compound Interest', desc: 'Watch your money grow', path: '/compound', icon: '📈' },
     ],

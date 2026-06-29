@@ -18,6 +18,9 @@ import HolidayCalc from './components/HolidayCalc'
 import StudentLoanCalc from './components/StudentLoanCalc'
 import RothIRACalc from './components/RothIRACalc'
 import SelfEmployedCalc from './components/SelfEmployedCalc'
+import CorporationTaxCalc from './components/CorporationTaxCalc'
+import PensionCreditCalc from './components/PensionCreditCalc'
+import SocialSecurityCalc from './components/SocialSecurityCalc'
 import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
@@ -62,7 +65,14 @@ const NAV = [
         label: 'Self-Employed Tax', icon: '🧾', path: '/self-employed',
         title: 'UK Self-Employed Tax Calculator 2026/27 — Sole Trader & Freelancer | JoinCalc',
         description: 'Calculate Income Tax and Class 4 NI as a self-employed sole trader or freelancer. 2026/27 HMRC rates, pension deductions, and take-home profit estimate.',
-        keywords: 'self employed tax calculator UK 2026, sole trader tax calculator, freelancer tax calculator UK, class 4 national insurance calculator, self assessment tax estimate',
+        keywords: 'self employed tax calculator UK 2026, sole trader tax calculator, freelancer tax calculator UK, class 4 national insurance calculator',
+        lastUpdated: 'April 2026',
+      },
+      {
+        label: 'Corporation Tax', icon: '🏢', path: '/corporation-tax',
+        title: 'UK Corporation Tax Calculator 2026/27 — Marginal Relief | JoinCalc',
+        description: 'Calculate UK Corporation Tax for 2026/27. 19% small profits rate, 25% main rate, and Marginal Relief for profits between £50,000 and £250,000.',
+        keywords: 'corporation tax calculator UK 2026, UK company tax calculator, marginal relief calculator, small profits rate 2026',
         lastUpdated: 'April 2026',
       },
     ],
@@ -109,6 +119,20 @@ const NAV = [
         description: 'Compare Roth IRA vs Traditional IRA projected values. 2026 IRS limits, income phase-outs, tax break-even analysis.',
         keywords: 'roth ira calculator 2026, roth vs traditional ira, ira contribution limit 2026',
         lastUpdated: 'January 2026',
+      },
+      {
+        label: 'Social Security', icon: '🇺🇸', path: '/social-security',
+        title: 'US Social Security Benefits Calculator 2026 | JoinCalc',
+        description: 'Estimate your monthly Social Security retirement benefit. Compare claiming ages 62–70, FRA benefit, delayed credits, and early reduction.',
+        keywords: 'social security calculator 2026, when to claim social security, social security retirement benefit estimate, full retirement age calculator',
+        lastUpdated: 'January 2026',
+      },
+      {
+        label: 'Pension Credit', icon: '🧓', path: '/pension-credit',
+        title: 'UK Pension Credit Calculator 2026/27 | JoinCalc',
+        description: 'Estimate your UK Pension Credit entitlement — Guarantee Credit and Savings Credit. Updated 2026/27 HMRC rates.',
+        keywords: 'pension credit calculator UK 2026, guarantee credit calculator, pension credit eligibility, how much pension credit',
+        lastUpdated: 'April 2026',
       },
       {
         label: 'Dividend Income', icon: '💰', path: '/dividend',
@@ -207,9 +231,9 @@ function Sidebar({ onClose }) {
         ))}
       </div>
       <div className="p-4 border-t border-gray-100 space-y-1">
-        <Link to="/about" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">About JoinCalc</Link>
-        <Link to="/privacy" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">Privacy Policy</Link>
-        <Link to="/terms" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500 transition-colors">Terms of Service</Link>
+        <Link to="/about" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">About JoinCalc</Link>
+        <Link to="/privacy" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Privacy Policy</Link>
+        <Link to="/terms" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Terms of Service</Link>
         <p className="text-xs text-gray-300 mt-2">© 2026 JoinCalc</p>
       </div>
     </nav>
@@ -229,45 +253,20 @@ function Layout() {
     : currentTab?.title || 'JoinCalc'
 
   const seoDesc = isHome
-    ? 'Free financial calculators for 2026: stamp duty, capital gains tax, self-employed tax, national insurance, redundancy pay, student loan, mortgage, 401k, pension, salary, FIRE, and more. US & UK. No sign-up required.'
+    ? 'Free financial calculators for 2026: stamp duty, capital gains, corporation tax, self-employed tax, national insurance, social security, pension credit, mortgage, 401k, salary, FIRE, and more. US & UK.'
     : currentTab?.description || ''
 
   const seoKeywords = isHome
-    ? 'financial calculator, stamp duty calculator 2026, capital gains tax calculator, self employed tax calculator UK, national insurance calculator, redundancy pay calculator, student loan calculator UK, mortgage affordability, 401k calculator, salary calculator, FIRE calculator'
+    ? 'financial calculator, stamp duty calculator 2026, corporation tax calculator UK, self employed tax calculator, social security calculator 2026, pension credit calculator, national insurance calculator, mortgage affordability, 401k calculator, salary calculator'
     : currentTab?.keywords || ''
 
   const canonicalUrl = `https://joincalc.com${location.pathname}`
 
-  const schemaWebSite = {
-    "@context": "https://schema.org", "@type": "WebSite",
-    "name": "JoinCalc", "url": "https://joincalc.com",
-    "description": "Free financial calculators for US, UK, Canada and Australia",
-    "potentialAction": { "@type": "SearchAction", "target": "https://joincalc.com/?q={search_term_string}", "query-input": "required name=search_term_string" }
-  }
-  const schemaOrg = {
-    "@context": "https://schema.org", "@type": "Organization",
-    "name": "JoinCalc", "url": "https://joincalc.com",
-    "logo": "https://joincalc.com/favicon.svg",
-    "contactPoint": { "@type": "ContactPoint", "email": "hello@joincalc.com", "contactType": "customer support" }
-  }
-  const schemaApp = currentTab ? {
-    "@context": "https://schema.org", "@type": "SoftwareApplication",
-    "name": currentTab.title, "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-29",
-    "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" }
-  } : null
-  const schemaFAQ = currentTab ? {
-    "@context": "https://schema.org", "@type": "FAQPage",
-    "mainEntity": [{ "@type": "Question", "name": `What is the ${currentTab.label} calculator?`, "acceptedAnswer": { "@type": "Answer", "text": currentTab.description } }]
-  } : null
-  const schemaBreadcrumb = !isHome && !isStatic && currentTab ? {
-    "@context": "https://schema.org", "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" },
-      { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }
-    ]
-  } : null
+  const schemaWebSite = { "@context": "https://schema.org", "@type": "WebSite", "name": "JoinCalc", "url": "https://joincalc.com", "description": "Free financial calculators for US, UK, Canada and Australia", "potentialAction": { "@type": "SearchAction", "target": "https://joincalc.com/?q={search_term_string}", "query-input": "required name=search_term_string" } }
+  const schemaOrg = { "@context": "https://schema.org", "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com", "logo": "https://joincalc.com/favicon.svg", "contactPoint": { "@type": "ContactPoint", "email": "hello@joincalc.com", "contactType": "customer support" } }
+  const schemaApp = currentTab ? { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": currentTab.title, "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-29", "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" } } : null
+  const schemaFAQ = currentTab ? { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": `What is the ${currentTab.label} calculator?`, "acceptedAnswer": { "@type": "Answer", "text": currentTab.description } }] } : null
+  const schemaBreadcrumb = !isHome && !isStatic && currentTab ? { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" }, { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }] } : null
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -375,6 +374,9 @@ function Layout() {
               <Route path="/holiday"            element={<HolidayCalc />} />
               <Route path="/student-loan"       element={<StudentLoanCalc />} />
               <Route path="/self-employed"      element={<SelfEmployedCalc />} />
+              <Route path="/corporation-tax"    element={<CorporationTaxCalc />} />
+              <Route path="/pension-credit"     element={<PensionCreditCalc />} />
+              <Route path="/social-security"    element={<SocialSecurityCalc />} />
               <Route path="/privacy"            element={<Privacy />} />
               <Route path="/terms"              element={<TermsOfService />} />
               <Route path="/about"              element={<About />} />
