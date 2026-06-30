@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { GUIDES } from '../content/guides'
 
 const CATEGORIES = [
   {
@@ -85,6 +86,25 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-10">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-base font-bold text-gray-700">📚 Money Guides</h2>
+          <Link to="/guides" className="text-xs font-medium text-indigo-600 hover:underline">View all →</Link>
+        </div>
+        <p className="text-xs text-gray-400 mb-3">
+          New to UK tax? These plain-English guides explain how it works — each with a free calculator inside.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-2">
+          {GUIDES.map((g) => (
+            <Link key={g.slug} to={`/guides/${g.slug}`}
+              className="block bg-white border border-gray-200 rounded-xl p-3 hover:border-indigo-300 hover:bg-indigo-50 transition-colors">
+              <p className="text-sm font-semibold text-gray-800 leading-tight">{g.h1}</p>
+              <p className="text-xs text-gray-400 mt-1">{g.readMins} min read</p>
+            </Link>
+          ))}
+        </div>
       </div>
 
       <div className="mt-10 space-y-4 text-sm text-gray-500 border-t border-gray-100 pt-6">

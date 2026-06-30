@@ -27,9 +27,20 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Home from './components/Home'
 import SalaryLanding from './components/SalaryLanding'
+import GuidesIndex from './components/GuidesIndex'
+import ArticlePage from './components/ArticlePage'
 import Logo from './components/Logo'
 import ResultActions from './components/ResultActions'
 import CookieConsent from './components/CookieConsent'
+
+// Calculator → matching in-depth guide, for a tool↔content funnel (more
+// pageviews per session = more ad impressions, plus better dwell time/SEO).
+const CALC_GUIDE = {
+  '/stamp-duty': { slug: 'how-is-stamp-duty-calculated-uk', label: 'How is stamp duty calculated?' },
+  '/capital-gains': { slug: 'how-much-capital-gains-tax-uk', label: 'How much capital gains tax will I pay?' },
+  '/national-insurance': { slug: 'how-is-national-insurance-calculated-uk', label: 'How is National Insurance calculated?' },
+  '/redundancy': { slug: 'how-much-redundancy-pay-uk', label: 'How much redundancy pay am I entitled to?' },
+}
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
 
@@ -204,6 +215,7 @@ function SiteFooter() {
     <footer className="no-print border-t border-gray-100 mt-10 pt-6 pb-8 text-center">
       <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-400">
         <Link to="/" className="hover:text-indigo-500">All Calculators</Link>
+        <Link to="/guides" className="hover:text-indigo-500">Guides</Link>
         <Link to="/about" className="hover:text-indigo-500">About</Link>
         <Link to="/contact" className="hover:text-indigo-500">Contact</Link>
         <Link to="/privacy" className="hover:text-indigo-500">Privacy Policy</Link>
@@ -237,6 +249,13 @@ function Sidebar({ onClose }) {
           }`}>
           <span className="text-base w-5 text-center">🏠</span>
           <span>All Calculators</span>
+        </Link>
+        <Link to="/guides" onClick={onClose}
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
+            location.pathname.startsWith('/guides') ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+          }`}>
+          <span className="text-base w-5 text-center">📚</span>
+          <span>Money Guides</span>
         </Link>
         {NAV.map((group) => (
           <div key={group.category} className="mb-4">
@@ -273,10 +292,14 @@ function Layout() {
   const location = useLocation()
   const isStatic = STATIC_PAGES.includes(location.pathname)
   const isHome = location.pathname === '/'
-  // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) own their
-  // own <Helmet>, heading and disclaimer, so they render without the card chrome.
+  // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) and guide
+  // articles own their own <Helmet>, heading and disclaimer, so they render
+  // without the card chrome.
   const isLanding = location.pathname.startsWith('/salary/')
+  const isGuide = location.pathname === '/guides' || location.pathname.startsWith('/guides/')
+  const ownsMeta = isLanding || isGuide
   const currentTab = allTabs.find(t => t.path === location.pathname)
+  const relatedGuide = CALC_GUIDE[location.pathname]
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const seoTitle = isHome
@@ -303,17 +326,17 @@ function Layout() {
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <Helmet>
-        {/* Page-specific tags are skipped on /salary/:slug landing pages, which
-            set their own title/description/og via their own <Helmet>. */}
-        {!isLanding && <title>{seoTitle}</title>}
-        {!isLanding && <meta name="description" content={seoDesc} />}
-        {!isLanding && <meta name="keywords" content={seoKeywords} />}
-        {!isLanding && <meta property="og:title" content={seoTitle} />}
-        {!isLanding && <meta property="og:description" content={seoDesc} />}
-        {!isLanding && <meta property="og:url" content={canonicalUrl} />}
-        {!isLanding && <meta name="twitter:title" content={seoTitle} />}
-        {!isLanding && <meta name="twitter:description" content={seoDesc} />}
-        {!isLanding && <link rel="canonical" href={canonicalUrl} />}
+        {/* Page-specific tags are skipped on pages that own their own <Helmet>
+            (/salary/:slug landings and /guides articles). */}
+        {!ownsMeta && <title>{seoTitle}</title>}
+        {!ownsMeta && <meta name="description" content={seoDesc} />}
+        {!ownsMeta && <meta name="keywords" content={seoKeywords} />}
+        {!ownsMeta && <meta property="og:title" content={seoTitle} />}
+        {!ownsMeta && <meta property="og:description" content={seoDesc} />}
+        {!ownsMeta && <meta property="og:url" content={canonicalUrl} />}
+        {!ownsMeta && <meta name="twitter:title" content={seoTitle} />}
+        {!ownsMeta && <meta name="twitter:description" content={seoDesc} />}
+        {!ownsMeta && <link rel="canonical" href={canonicalUrl} />}
         {/* Route-independent defaults below */}
         <meta name="author" content="JoinCalc" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
@@ -389,10 +412,12 @@ function Layout() {
           {isStatic && (
             <Link to="/" className="text-sm text-indigo-600 hover:underline block mb-4">← Back to Calculators</Link>
           )}
-          <div className={(isStatic || isHome || isLanding) ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
+          <div className={(isStatic || isHome || ownsMeta) ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
             <Routes>
               <Route path="/"                   element={<Home />} />
               <Route path="/salary/:slug"       element={<SalaryLanding />} />
+              <Route path="/guides"             element={<GuidesIndex />} />
+              <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />
               <Route path="/buy-vs-rent"        element={<BuyVsRentCalc />} />
               <Route path="/stamp-duty"         element={<StampDutyCalc />} />
@@ -423,8 +448,15 @@ function Layout() {
 
           {!isStatic && !isHome && (
             <div className="mt-4 space-y-2">
+              {relatedGuide && (
+                <Link to={`/guides/${relatedGuide.slug}`}
+                  className="block bg-white border border-gray-200 rounded-xl p-4 hover:border-indigo-300 hover:bg-indigo-50 transition-colors">
+                  <p className="text-xs text-indigo-500 font-semibold mb-0.5">📖 Read the guide</p>
+                  <p className="text-sm font-bold text-gray-800">{relatedGuide.label}</p>
+                </Link>
+              )}
               <ResultActions />
-              {!isLanding && (
+              {!ownsMeta && (
                 <>
                   <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                     <p className="text-xs text-amber-800 leading-relaxed">
