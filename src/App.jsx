@@ -32,6 +32,10 @@ import CapitalGainsLanding from './components/CapitalGainsLanding'
 import MortgageLanding from './components/MortgageLanding'
 import VATCalc from './components/VATCalc'
 import PayRiseCalc from './components/PayRiseCalc'
+import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
+import AutoLoanCalc from './components/AutoLoanCalc'
+import AutoLoanLanding from './components/AutoLoanLanding'
+import CreditCardLanding from './components/CreditCardLanding'
 import GuidesIndex from './components/GuidesIndex'
 import ArticlePage from './components/ArticlePage'
 import NotFound from './components/NotFound'
@@ -55,6 +59,8 @@ const CALC_GUIDE = {
   '/mortgage': { slug: 'how-much-can-i-borrow-for-a-mortgage', label: 'How much can I borrow for a mortgage?' },
   '/fire': { slug: 'what-is-a-fire-number', label: 'What is a FIRE number?' },
   '/pay-rise': { slug: 'how-to-calculate-take-home-pay-uk', label: 'How to calculate your take-home pay' },
+  '/credit-card-payoff': { slug: 'how-to-pay-off-credit-card-debt-fast', label: 'How to pay off credit card debt fast' },
+  '/auto-loan': { slug: 'how-much-car-can-i-afford', label: 'How much car can I afford?' },
 }
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
@@ -234,6 +240,25 @@ const NAV = [
       },
     ],
   },
+  {
+    category: '💳 Loans & Debt',
+    items: [
+      {
+        label: 'Credit Card Payoff', icon: '💳', path: '/credit-card-payoff',
+        title: 'Credit Card Payoff Calculator 2026 — Months & Interest | JoinCalc',
+        description: 'See how long it takes to pay off your credit card, the total interest, and how much faster you clear it by paying more than the minimum.',
+        keywords: 'credit card payoff calculator, credit card interest calculator, pay off credit card, minimum payment calculator, debt payoff calculator',
+        lastUpdated: 'June 2026',
+      },
+      {
+        label: 'Auto Loan', icon: '🚗', path: '/auto-loan',
+        title: 'Auto Loan Calculator 2026 — Monthly Car Payment | JoinCalc',
+        description: 'Calculate your monthly car payment, total interest and cost. Factor in down payment, trade-in, sales tax, APR and loan term.',
+        keywords: 'auto loan calculator, car loan calculator, car payment calculator, monthly car payment, vehicle finance calculator',
+        lastUpdated: 'June 2026',
+      },
+    ],
+  },
 ]
 
 const allTabs = NAV.flatMap(g => g.items)
@@ -355,7 +380,7 @@ export function Layout() {
   // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) and guide
   // articles own their own <Helmet>, heading and disclaimer, so they render
   // without the card chrome.
-  const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/'].some(p => location.pathname.startsWith(p))
+  const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/', '/auto-loan/', '/credit-card-payoff/'].some(p => location.pathname.startsWith(p))
   const isGuide = location.pathname === '/guides' || location.pathname.startsWith('/guides/')
   // Static pages (about/contact/privacy/terms) set their own <Helmet>, so the
   // layout must not also emit title/description/canonical for them.
@@ -494,8 +519,12 @@ export function Layout() {
               <Route path="/stamp-duty/:slug"   element={<StampDutyLanding />} />
               <Route path="/capital-gains/:slug" element={<CapitalGainsLanding />} />
               <Route path="/mortgage/:slug"     element={<MortgageLanding />} />
+              <Route path="/auto-loan/:slug"    element={<AutoLoanLanding />} />
+              <Route path="/credit-card-payoff/:slug" element={<CreditCardLanding />} />
               <Route path="/vat"                element={<VATCalc />} />
               <Route path="/pay-rise"           element={<PayRiseCalc />} />
+              <Route path="/credit-card-payoff" element={<CreditCardPayoffCalc />} />
+              <Route path="/auto-loan"          element={<AutoLoanCalc />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />

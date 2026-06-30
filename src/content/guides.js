@@ -530,6 +530,130 @@ export const GUIDES = [
     ],
     related: ['how-compound-interest-works', 'how-to-calculate-take-home-pay-uk'],
   },
+
+  {
+    slug: 'how-to-pay-off-credit-card-debt-fast',
+    title: 'How to Pay Off Credit Card Debt Fast (2026) | JoinCalc',
+    h1: 'How to Pay Off Credit Card Debt Fast',
+    description: 'Practical, proven ways to clear credit card debt faster in 2026: pay more than the minimum, the avalanche method, 0% balance transfers, and lower-rate loans.',
+    keywords: 'how to pay off credit card debt, pay off debt fast, credit card payoff strategy, get out of debt, balance transfer',
+    updated: 'June 2026',
+    readMins: 7,
+    tool: { path: '/credit-card-payoff', label: 'Credit Card Payoff Calculator', cta: 'See how fast you could be debt-free' },
+    intro: 'Credit card debt is expensive because the average APR is around 20–24%, so most of a minimum payment goes to interest, not the balance. The good news: a few simple moves can cut years and thousands of dollars off your payoff. Here are the strategies that actually work.',
+    sections: [
+      {
+        h2: 'Pay more than the minimum',
+        body: ['Minimum payments are designed to keep you in debt. On a $5,000 balance at 22% APR, paying the minimum can take over a decade and cost more in interest than the original balance. Paying even an extra $50–$100 a month sends more to principal and dramatically shortens the payoff.'],
+      },
+      {
+        h2: 'Use the avalanche method',
+        body: ['List your cards by interest rate. Pay the minimum on all of them, then put every spare dollar toward the highest-APR card first. Once it is cleared, roll that payment onto the next. The avalanche method mathematically minimises the total interest you pay.'],
+      },
+      {
+        h2: 'Consider a 0% balance transfer',
+        body: ['A balance transfer card with a 0% introductory APR (often 12–21 months) lets your whole payment go to principal during the promo. Watch the transfer fee (typically 3–5%) and have a plan to clear the balance before the standard rate kicks in.'],
+      },
+      {
+        h2: 'Look at a lower-rate loan',
+        list: [
+          'A personal loan at a fixed, lower rate can consolidate several cards into one cheaper payment.',
+          'It replaces revolving debt with a fixed payoff date.',
+          'Only worth it if the new rate is meaningfully lower and you stop adding new card debt.',
+        ],
+      },
+      {
+        h2: 'Stop the bleeding',
+        body: ['None of this works if new charges keep landing on the card. Pause card spending, build a small emergency buffer so surprises do not go on the card, and automate your extra payment so it happens before you can spend it.'],
+      },
+    ],
+    faq: [
+      { q: 'Is it better to pay off debt or save?', a: 'Build a small starter emergency fund (around $1,000), then prioritise high-interest debt. Few savings accounts pay more than a 20%+ APR costs you, so clearing card debt is usually the better "return".' },
+      { q: 'Will a balance transfer hurt my credit?', a: 'There may be a small temporary dip from the new application, but lowering your overall balance improves your credit utilisation, which usually helps your score over time.' },
+      { q: 'What is the fastest way to pay off credit cards?', a: 'Pay as much as your budget allows above the minimum, target the highest-APR balance first, and cut the interest rate with a 0% transfer or lower-rate loan where possible.' },
+    ],
+    related: ['avalanche-vs-snowball-debt-payoff', 'how-compound-interest-works'],
+  },
+
+  {
+    slug: 'avalanche-vs-snowball-debt-payoff',
+    title: 'Avalanche vs Snowball: The Best Way to Pay Off Debt | JoinCalc',
+    h1: 'Avalanche vs Snowball: Which Debt Payoff Method Wins?',
+    description: 'Compare the debt avalanche and debt snowball methods — how each works, which saves the most money, which keeps you motivated, and how to choose.',
+    keywords: 'debt avalanche vs snowball, debt snowball method, debt avalanche method, best way to pay off debt, debt payoff strategy',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/credit-card-payoff', label: 'Credit Card Payoff Calculator', cta: 'Model your own payoff plan' },
+    intro: 'The two most popular debt payoff strategies are the avalanche and the snowball. Both have you pay the minimum on every debt and throw extra money at one target debt — they just disagree on which debt to attack first. Here is how they compare.',
+    sections: [
+      {
+        h2: 'The avalanche method (lowest cost)',
+        body: ['With the avalanche, you target the debt with the highest interest rate first, regardless of balance. Because you are killing the most expensive interest first, this method mathematically minimises the total interest paid and clears your debt soonest.'],
+      },
+      {
+        h2: 'The snowball method (most motivating)',
+        body: ['With the snowball, you target the smallest balance first. You get a quick win when the first debt disappears, then roll its payment onto the next. It usually costs slightly more interest than the avalanche, but the early wins keep many people motivated enough to actually finish.'],
+      },
+      {
+        h2: 'Which should you choose?',
+        list: [
+          'Choose avalanche if you want to pay the least interest and stay disciplined by the numbers.',
+          'Choose snowball if motivation is your biggest risk and quick wins keep you going.',
+          'The best method is the one you will actually stick with to the end.',
+        ],
+      },
+      {
+        h2: 'A worked comparison',
+        body: ['For most people with a few cards, the difference in total interest between the two methods is modest — often a few hundred dollars — while the difference in completion rate can be huge. That is why many advisers suggest the snowball for anyone who has struggled to stay on track.'],
+      },
+    ],
+    faq: [
+      { q: 'Does the avalanche or snowball save more money?', a: 'The avalanche method saves more interest because it tackles the highest-rate debt first. The snowball usually costs a little more but can be easier to stick with.' },
+      { q: 'Can I combine the two methods?', a: 'Yes. Some people clear one tiny balance first for a quick win (snowball), then switch to attacking the highest rate (avalanche) for the rest.' },
+      { q: 'Do these methods work for any debt?', a: 'Yes — credit cards, personal loans, car loans and more. List every debt, pay minimums on all, and direct your extra payment at the chosen target.' },
+    ],
+    related: ['how-to-pay-off-credit-card-debt-fast', 'how-compound-interest-works'],
+  },
+
+  {
+    slug: 'how-much-car-can-i-afford',
+    title: 'How Much Car Can I Afford? (2026 Guide) | JoinCalc',
+    h1: 'How Much Car Can I Afford?',
+    description: 'How to work out a car budget you can actually afford in 2026 — the 20/4/10 rule, total cost of ownership, down payments, and loan term traps.',
+    keywords: 'how much car can i afford, car affordability, 20/4/10 rule, car budget, auto loan affordability',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/auto-loan', label: 'Auto Loan Calculator', cta: 'Estimate your monthly car payment' },
+    intro: 'A car is one of the biggest purchases most people make, and the sticker price is only part of the story. Working out what you can really afford means looking at the down payment, the loan, and the running costs together. Here is a simple framework.',
+    sections: [
+      {
+        h2: 'The 20/4/10 rule',
+        list: [
+          'Put at least 20% down.',
+          'Finance for no more than 4 years (48 months).',
+          'Keep total car costs (payment + insurance) under 10% of your gross income.',
+        ],
+      },
+      {
+        h2: 'Look at total cost of ownership',
+        body: ['The monthly loan payment is just the start. Insurance, fuel, maintenance, tax and depreciation can add as much again. A cheaper car with lower running costs often beats a pricier one that strains your budget every month.'],
+      },
+      {
+        h2: 'Why long loan terms are a trap',
+        body: ['Stretching a loan to 72 or 84 months lowers the monthly payment but means far more interest and years of "negative equity", where you owe more than the car is worth. Keeping the term to 48–60 months protects your finances.'],
+      },
+      {
+        h2: 'Down payment matters',
+        body: ['A bigger down payment lowers your monthly payment and total interest, reduces the risk of going underwater, and can unlock a better rate. Aim for 20% on a new car, or 10% on a used one as a minimum.'],
+      },
+    ],
+    faq: [
+      { q: 'What car payment can I afford on $60,000 a year?', a: 'Using the 10% guideline, total car costs (payment plus insurance) of around $500 a month is a reasonable ceiling on a $60,000 salary — so a loan payment of roughly $350–$400 a month.' },
+      { q: 'How much should I spend on a car?', a: 'A common rule is to keep the total price under about half your annual income, with the loan kept short and the running costs comfortably within your monthly budget.' },
+      { q: 'Is it better to buy new or used?', a: 'Used cars avoid the steepest depreciation, which happens in the first few years, so they often offer better value — but newer cars may have lower maintenance costs and better finance rates.' },
+    ],
+    related: ['how-much-can-i-borrow-for-a-mortgage', 'how-to-pay-off-credit-card-debt-fast'],
+  },
 ]
 
 export const GUIDE_SLUGS = GUIDES.map(g => g.slug)

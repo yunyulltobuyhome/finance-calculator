@@ -22,6 +22,8 @@ import PensionCreditCalc from './components/PensionCreditCalc'
 import SocialSecurityCalc from './components/SocialSecurityCalc'
 import VATCalc from './components/VATCalc'
 import PayRiseCalc from './components/PayRiseCalc'
+import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
+import AutoLoanCalc from './components/AutoLoanCalc'
 
 export const CALC_REGISTRY = {
   'stamp-duty':        { C: StampDutyCalc, label: 'Stamp Duty Calculator' },
@@ -46,4 +48,6 @@ export const CALC_REGISTRY = {
   'holiday':           { C: HolidayCalc, label: 'Holiday Entitlement Calculator' },
   'student-loan':      { C: StudentLoanCalc, label: 'Student Loan Repayment Calculator' },
   'loan':              { C: LoanCalc, label: 'Loan Calculator' },
+  'credit-card-payoff':{ C: CreditCardPayoffCalc, label: 'Credit Card Payoff Calculator' },
+  'auto-loan':         { C: AutoLoanCalc, label: 'Auto Loan Calculator' },
 }

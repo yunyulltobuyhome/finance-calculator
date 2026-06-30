@@ -49,6 +49,14 @@ const CATEGORIES = [
       { label: 'Loan Calculator', desc: 'Monthly payments & amortization', path: '/loan', icon: '🏦' },
     ],
   },
+  {
+    title: '💳 Loans & Debt',
+    color: 'bg-rose-600',
+    items: [
+      { label: 'Credit Card Payoff', desc: 'Months to clear + interest saved', path: '/credit-card-payoff', icon: '💳' },
+      { label: 'Auto Loan', desc: 'Monthly car payment & total cost', path: '/auto-loan', icon: '🚗' },
+    ],
+  },
 ]
 
 const ALL_CALCS = CATEGORIES.flatMap(c => c.items)
