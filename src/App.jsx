@@ -34,6 +34,7 @@ import VATCalc from './components/VATCalc'
 import PayRiseCalc from './components/PayRiseCalc'
 import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
 import AutoLoanCalc from './components/AutoLoanCalc'
+import RefinanceCalc from './components/RefinanceCalc'
 import AutoLoanLanding from './components/AutoLoanLanding'
 import CreditCardLanding from './components/CreditCardLanding'
 import GuidesIndex from './components/GuidesIndex'
@@ -61,6 +62,7 @@ const CALC_GUIDE = {
   '/pay-rise': { slug: 'how-to-calculate-take-home-pay-uk', label: 'How to calculate your take-home pay' },
   '/credit-card-payoff': { slug: 'how-to-pay-off-credit-card-debt-fast', label: 'How to pay off credit card debt fast' },
   '/auto-loan': { slug: 'how-much-car-can-i-afford', label: 'How much car can I afford?' },
+  '/refinance': { slug: 'should-i-refinance-my-mortgage', label: 'Should I refinance my mortgage?' },
 }
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
@@ -135,6 +137,13 @@ const NAV = [
         title: 'Mortgage Affordability Calculator 2026 — How Much Can I Borrow? | JoinCalc',
         description: 'Calculate how much mortgage you can afford. US DTI method and UK income multiple (4x–5.5x). Updated June 2026.',
         keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK',
+        lastUpdated: 'June 2026',
+      },
+      {
+        label: 'Refinance', icon: '🔄', path: '/refinance',
+        title: 'Mortgage Refinance Calculator 2026 — Savings & Break-Even | JoinCalc',
+        description: 'Should you refinance? Calculate your new monthly payment, monthly savings, break-even point on closing costs, and lifetime interest.',
+        keywords: 'mortgage refinance calculator, refinance calculator, should i refinance, refinance break even calculator, refinance savings',
         lastUpdated: 'June 2026',
       },
     ],
@@ -525,6 +534,7 @@ export function Layout() {
               <Route path="/pay-rise"           element={<PayRiseCalc />} />
               <Route path="/credit-card-payoff" element={<CreditCardPayoffCalc />} />
               <Route path="/auto-loan"          element={<AutoLoanCalc />} />
+              <Route path="/refinance"          element={<RefinanceCalc />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />

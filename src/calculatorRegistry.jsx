@@ -24,6 +24,7 @@ import VATCalc from './components/VATCalc'
 import PayRiseCalc from './components/PayRiseCalc'
 import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
 import AutoLoanCalc from './components/AutoLoanCalc'
+import RefinanceCalc from './components/RefinanceCalc'
 
 export const CALC_REGISTRY = {
   'stamp-duty':        { C: StampDutyCalc, label: 'Stamp Duty Calculator' },
@@ -34,6 +35,7 @@ export const CALC_REGISTRY = {
   'corporation-tax':   { C: CorporationTaxCalc, label: 'Corporation Tax Calculator' },
   'vat':               { C: VATCalc, label: 'VAT Calculator' },
   'mortgage':          { C: MortgageAffordabilityCalc, label: 'Mortgage Affordability Calculator' },
+  'refinance':         { C: RefinanceCalc, label: 'Mortgage Refinance Calculator' },
   'buy-vs-rent':       { C: BuyVsRentCalc, label: 'Buy vs Rent Calculator' },
   'fire':              { C: FIRECalc, label: 'FIRE Calculator' },
   'retirement':        { C: RetirementCalc, label: '401k & Pension Calculator' },

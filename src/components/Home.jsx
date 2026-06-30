@@ -22,6 +22,7 @@ const CATEGORIES = [
     items: [
       { label: 'Buy vs Rent', desc: 'Should you buy or keep renting?', path: '/buy-vs-rent', icon: '🏠' },
       { label: 'Mortgage Affordability', desc: 'How much can you borrow?', path: '/mortgage', icon: '🔑' },
+      { label: 'Mortgage Refinance', desc: 'Savings & break-even point', path: '/refinance', icon: '🔄' },
     ],
   },
   {

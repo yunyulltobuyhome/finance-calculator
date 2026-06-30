@@ -654,6 +654,50 @@ export const GUIDES = [
     ],
     related: ['how-much-can-i-borrow-for-a-mortgage', 'how-to-pay-off-credit-card-debt-fast'],
   },
+
+  {
+    slug: 'should-i-refinance-my-mortgage',
+    title: 'Should I Refinance My Mortgage? (2026 Guide) | JoinCalc',
+    h1: 'Should I Refinance My Mortgage?',
+    description: 'When refinancing your mortgage is worth it in 2026: the break-even rule, closing costs, shortening your term, cash-out refinances, and the mistakes to avoid.',
+    keywords: 'should i refinance my mortgage, mortgage refinance, refinance break even, when to refinance, cash out refinance',
+    updated: 'June 2026',
+    readMins: 7,
+    tool: { path: '/refinance', label: 'Mortgage Refinance Calculator', cta: 'See your savings and break-even point' },
+    intro: 'Refinancing swaps your current mortgage for a new one, usually to get a lower rate or change the term. Because it costs money to do, the decision comes down to one question: will the savings outweigh the closing costs before you sell or move? Here is how to decide.',
+    sections: [
+      {
+        h2: 'The break-even rule',
+        body: ['Refinancing has closing costs of roughly 2–5% of the loan. Divide those costs by your monthly saving to get the break-even point — the number of months until you come out ahead. If closing costs are $4,000 and you save $400 a month, you break even in 10 months. If you plan to keep the home past that, refinancing makes sense.'],
+      },
+      {
+        h2: 'How big a rate drop do you need?',
+        body: ['A common rule of thumb is at least a 0.5–1% lower rate, but the real test is the break-even, not the rate gap. A smaller drop can still be worth it on a large balance, while a big drop may not pay off if you move soon or the costs are high.'],
+      },
+      {
+        h2: 'Shortening your term',
+        body: ['Refinancing from a 30-year to a 15-year loan usually raises the monthly payment but slashes total interest, because you pay for far fewer years and often at a lower rate. If you can afford the higher payment, it is one of the most powerful ways to save.'],
+      },
+      {
+        h2: 'Watch the term-reset trap',
+        list: [
+          'Refinancing a 30-year loan you are 7 years into back to a fresh 30 years restarts the clock.',
+          'Even at a lower rate, stretching the term can increase the total interest you pay.',
+          'Compare the lifetime interest of both loans (including closing costs), not just the monthly payment.',
+        ],
+      },
+      {
+        h2: 'Cash-out refinancing',
+        body: ['A cash-out refinance lets you borrow against your home equity by taking a larger new loan and pocketing the difference. It can fund renovations or consolidate higher-rate debt, but it increases what you owe on your home, so use it carefully.'],
+      },
+    ],
+    faq: [
+      { q: 'How much does it cost to refinance a mortgage?', a: 'Typically 2–5% of the loan amount in closing costs. On a $300,000 mortgage that is about $6,000–$15,000, though no-closing-cost options exist in exchange for a slightly higher rate.' },
+      { q: 'Is it worth refinancing for 1%?', a: 'Often yes, especially on a larger balance, but check the break-even point. If you will keep the loan well past the month your savings repay the closing costs, a 1% drop is usually worthwhile.' },
+      { q: 'Does refinancing restart my mortgage?', a: 'A new loan resets the term unless you choose a shorter one. Restarting a 30-year clock can raise lifetime interest even at a lower rate, so compare total interest, not just the monthly payment.' },
+    ],
+    related: ['how-much-can-i-borrow-for-a-mortgage', 'how-compound-interest-works'],
+  },
 ]
 
 export const GUIDE_SLUGS = GUIDES.map(g => g.slug)
