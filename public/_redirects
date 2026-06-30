@@ -1,0 +1,4 @@
+# SPA fallback for Netlify / Cloudflare Pages — serve index.html for every
+# client-routed path (e.g. /salary/50000-after-tax-uk) so deep links and
+# crawlers get a 200 instead of a 404.
+/*    /index.html    200

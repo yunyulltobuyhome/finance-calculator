@@ -14,10 +14,18 @@
   <meta name="googlebot" content="index, follow" />
   <meta name="theme-color" content="#4F46E5" />
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://joincalc.com/" />
+  <!-- PWA / Add to Home Screen -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="JoinCalc" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- Open Graph -->
+  <!-- Canonical is managed per-route by react-helmet-async (see App.jsx /
+       SalaryLanding.jsx) so each page emits exactly one correct canonical.
+       A static canonical here would duplicate it and point every subpage at "/". -->
+
+  <!-- Open Graph (default for non-JS social scrapers; Helmet overrides per route) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="JoinCalc" />
   <meta property="og:title" content="Free Financial Calculators 2026 — Tax, Mortgage, Retirement | JoinCalc" />
@@ -90,12 +98,16 @@
       "Capital Gains Tax Calculator US & UK",
       "Inheritance Tax Calculator UK & US",
       "National Insurance Calculator 2026",
+      "Self-Employed Tax Calculator UK 2026/27",
+      "Corporation Tax Calculator UK 2026/27",
       "Redundancy Pay Calculator UK 2026",
       "Student Loan Repayment Calculator UK",
       "Mortgage Affordability Calculator",
       "FIRE Calculator",
       "401k & Pension Calculator 2026",
       "Roth vs Traditional IRA Calculator 2026",
+      "Social Security Benefits Calculator 2026",
+      "Pension Credit Calculator UK 2026/27",
       "Salary Take-Home Calculator",
       "Dividend Income Calculator",
       "Compound Interest Calculator",
@@ -114,24 +126,28 @@
     "name": "JoinCalc Financial Calculators",
     "description": "Free financial calculators for US and UK, updated for 2026",
     "url": "https://joincalc.com",
-    "numberOfItems": 16,
+    "numberOfItems": 20,
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Stamp Duty Calculator 2026", "url": "https://joincalc.com/stamp-duty" },
       { "@type": "ListItem", "position": 2, "name": "Capital Gains Tax Calculator", "url": "https://joincalc.com/capital-gains" },
       { "@type": "ListItem", "position": 3, "name": "Inheritance Tax Calculator", "url": "https://joincalc.com/inheritance-tax" },
       { "@type": "ListItem", "position": 4, "name": "National Insurance Calculator 2026", "url": "https://joincalc.com/national-insurance" },
-      { "@type": "ListItem", "position": 5, "name": "Mortgage Affordability Calculator", "url": "https://joincalc.com/mortgage" },
-      { "@type": "ListItem", "position": 6, "name": "Buy vs Rent Calculator", "url": "https://joincalc.com/buy-vs-rent" },
-      { "@type": "ListItem", "position": 7, "name": "FIRE Calculator", "url": "https://joincalc.com/fire" },
-      { "@type": "ListItem", "position": 8, "name": "401k & Pension Calculator", "url": "https://joincalc.com/retirement" },
-      { "@type": "ListItem", "position": 9, "name": "Roth vs Traditional IRA Calculator", "url": "https://joincalc.com/roth-ira" },
-      { "@type": "ListItem", "position": 10, "name": "Dividend Income Calculator", "url": "https://joincalc.com/dividend" },
-      { "@type": "ListItem", "position": 11, "name": "Compound Interest Calculator", "url": "https://joincalc.com/compound" },
-      { "@type": "ListItem", "position": 12, "name": "Salary Take-Home Calculator", "url": "https://joincalc.com/salary" },
-      { "@type": "ListItem", "position": 13, "name": "Redundancy Pay Calculator UK", "url": "https://joincalc.com/redundancy" },
-      { "@type": "ListItem", "position": 14, "name": "Holiday Entitlement Calculator UK", "url": "https://joincalc.com/holiday" },
-      { "@type": "ListItem", "position": 15, "name": "Student Loan Repayment Calculator UK", "url": "https://joincalc.com/student-loan" },
-      { "@type": "ListItem", "position": 16, "name": "Loan Calculator", "url": "https://joincalc.com/loan" }
+      { "@type": "ListItem", "position": 5, "name": "Self-Employed Tax Calculator UK", "url": "https://joincalc.com/self-employed" },
+      { "@type": "ListItem", "position": 6, "name": "Corporation Tax Calculator UK", "url": "https://joincalc.com/corporation-tax" },
+      { "@type": "ListItem", "position": 7, "name": "Mortgage Affordability Calculator", "url": "https://joincalc.com/mortgage" },
+      { "@type": "ListItem", "position": 8, "name": "Buy vs Rent Calculator", "url": "https://joincalc.com/buy-vs-rent" },
+      { "@type": "ListItem", "position": 9, "name": "FIRE Calculator", "url": "https://joincalc.com/fire" },
+      { "@type": "ListItem", "position": 10, "name": "401k & Pension Calculator", "url": "https://joincalc.com/retirement" },
+      { "@type": "ListItem", "position": 11, "name": "Roth vs Traditional IRA Calculator", "url": "https://joincalc.com/roth-ira" },
+      { "@type": "ListItem", "position": 12, "name": "Social Security Benefits Calculator", "url": "https://joincalc.com/social-security" },
+      { "@type": "ListItem", "position": 13, "name": "Pension Credit Calculator UK", "url": "https://joincalc.com/pension-credit" },
+      { "@type": "ListItem", "position": 14, "name": "Dividend Income Calculator", "url": "https://joincalc.com/dividend" },
+      { "@type": "ListItem", "position": 15, "name": "Compound Interest Calculator", "url": "https://joincalc.com/compound" },
+      { "@type": "ListItem", "position": 16, "name": "Salary Take-Home Calculator", "url": "https://joincalc.com/salary" },
+      { "@type": "ListItem", "position": 17, "name": "Redundancy Pay Calculator UK", "url": "https://joincalc.com/redundancy" },
+      { "@type": "ListItem", "position": 18, "name": "Holiday Entitlement Calculator UK", "url": "https://joincalc.com/holiday" },
+      { "@type": "ListItem", "position": 19, "name": "Student Loan Repayment Calculator UK", "url": "https://joincalc.com/student-loan" },
+      { "@type": "ListItem", "position": 20, "name": "Loan Calculator", "url": "https://joincalc.com/loan" }
     ]
   }
   </script>

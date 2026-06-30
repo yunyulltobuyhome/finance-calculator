@@ -25,7 +25,9 @@ import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
 import Home from './components/Home'
+import SalaryLanding from './components/SalaryLanding'
 import Logo from './components/Logo'
+import ResultActions from './components/ResultActions'
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
 
@@ -244,6 +246,9 @@ function Layout() {
   const location = useLocation()
   const isStatic = STATIC_PAGES.includes(location.pathname)
   const isHome = location.pathname === '/'
+  // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) own their
+  // own <Helmet>, heading and disclaimer, so they render without the card chrome.
+  const isLanding = location.pathname.startsWith('/salary/')
   const currentTab = allTabs.find(t => t.path === location.pathname)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -264,32 +269,35 @@ function Layout() {
 
   const schemaWebSite = { "@context": "https://schema.org", "@type": "WebSite", "name": "JoinCalc", "url": "https://joincalc.com", "description": "Free financial calculators for US, UK, Canada and Australia", "potentialAction": { "@type": "SearchAction", "target": "https://joincalc.com/?q={search_term_string}", "query-input": "required name=search_term_string" } }
   const schemaOrg = { "@context": "https://schema.org", "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com", "logo": "https://joincalc.com/favicon.svg", "contactPoint": { "@type": "ContactPoint", "email": "hello@joincalc.com", "contactType": "customer support" } }
-  const schemaApp = currentTab ? { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": currentTab.title, "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-29", "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" } } : null
+  const schemaApp = currentTab ? { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": currentTab.title, "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-30", "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" } } : null
   const schemaFAQ = currentTab ? { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": `What is the ${currentTab.label} calculator?`, "acceptedAnswer": { "@type": "Answer", "text": currentTab.description } }] } : null
   const schemaBreadcrumb = !isHome && !isStatic && currentTab ? { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" }, { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }] } : null
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <Helmet>
-        <title>{seoTitle}</title>
-        <meta name="description" content={seoDesc} />
-        <meta name="keywords" content={seoKeywords} />
+        {/* Page-specific tags are skipped on /salary/:slug landing pages, which
+            set their own title/description/og via their own <Helmet>. */}
+        {!isLanding && <title>{seoTitle}</title>}
+        {!isLanding && <meta name="description" content={seoDesc} />}
+        {!isLanding && <meta name="keywords" content={seoKeywords} />}
+        {!isLanding && <meta property="og:title" content={seoTitle} />}
+        {!isLanding && <meta property="og:description" content={seoDesc} />}
+        {!isLanding && <meta property="og:url" content={canonicalUrl} />}
+        {!isLanding && <meta name="twitter:title" content={seoTitle} />}
+        {!isLanding && <meta name="twitter:description" content={seoDesc} />}
+        {!isLanding && <link rel="canonical" href={canonicalUrl} />}
+        {/* Route-independent defaults below */}
         <meta name="author" content="JoinCalc" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-        <link rel="canonical" href={canonicalUrl} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="JoinCalc" />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDesc} />
-        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://joincalc.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDesc} />
         <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
         {currentTab?.lastUpdated && <meta name="revised" content={currentTab.lastUpdated} />}
         <script type="application/ld+json">{JSON.stringify(schemaWebSite)}</script>
@@ -354,9 +362,10 @@ function Layout() {
           {isStatic && (
             <Link to="/" className="text-sm text-indigo-600 hover:underline block mb-4">← Back to Calculators</Link>
           )}
-          <div className={isStatic ? '' : (isHome ? '' : 'bg-white rounded-2xl border border-gray-200 p-6')}>
+          <div className={(isStatic || isHome || isLanding) ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
             <Routes>
               <Route path="/"                   element={<Home />} />
+              <Route path="/salary/:slug"       element={<SalaryLanding />} />
               <Route path="/fire"               element={<FIRECalc />} />
               <Route path="/buy-vs-rent"        element={<BuyVsRentCalc />} />
               <Route path="/stamp-duty"         element={<StampDutyCalc />} />
@@ -386,17 +395,22 @@ function Layout() {
 
           {!isStatic && !isHome && (
             <div className="mt-4 space-y-2">
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-                <p className="text-xs text-amber-800 leading-relaxed">
-                  ⚠️ <strong>Disclaimer:</strong> {DISCLAIMER}
-                </p>
-              </div>
-              <p className="text-xs text-gray-400 text-center">
-                By using JoinCalc you agree to our{' '}
-                <Link to="/terms" className="text-indigo-400 hover:underline">Terms of Service</Link>
-                {' '}and{' '}
-                <Link to="/privacy" className="text-indigo-400 hover:underline">Privacy Policy</Link>
-              </p>
+              <ResultActions />
+              {!isLanding && (
+                <>
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                    <p className="text-xs text-amber-800 leading-relaxed">
+                      ⚠️ <strong>Disclaimer:</strong> {DISCLAIMER}
+                    </p>
+                  </div>
+                  <p className="text-xs text-gray-400 text-center">
+                    By using JoinCalc you agree to our{' '}
+                    <Link to="/terms" className="text-indigo-400 hover:underline">Terms of Service</Link>
+                    {' '}and{' '}
+                    <Link to="/privacy" className="text-indigo-400 hover:underline">Privacy Policy</Link>
+                  </p>
+                </>
+              )}
             </div>
           )}
         </main>

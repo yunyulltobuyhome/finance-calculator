@@ -1,0 +1,20 @@
+{
+  "name": "JoinCalc — Free Financial Calculators",
+  "short_name": "JoinCalc",
+  "description": "Free financial calculators for the US and UK: tax, mortgage, salary, retirement, and more. Updated for 2026.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4F46E5",
+  "lang": "en",
+  "categories": ["finance", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
