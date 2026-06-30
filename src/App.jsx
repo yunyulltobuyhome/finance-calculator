@@ -24,10 +24,12 @@ import SocialSecurityCalc from './components/SocialSecurityCalc'
 import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
+import Contact from './components/Contact'
 import Home from './components/Home'
 import SalaryLanding from './components/SalaryLanding'
 import Logo from './components/Logo'
 import ResultActions from './components/ResultActions'
+import CookieConsent from './components/CookieConsent'
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
 
@@ -195,7 +197,31 @@ const NAV = [
 ]
 
 const allTabs = NAV.flatMap(g => g.items)
-const STATIC_PAGES = ['/privacy', '/terms', '/about']
+const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact']
+
+function SiteFooter() {
+  return (
+    <footer className="no-print border-t border-gray-100 mt-10 pt-6 pb-8 text-center">
+      <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-400">
+        <Link to="/" className="hover:text-indigo-500">All Calculators</Link>
+        <Link to="/about" className="hover:text-indigo-500">About</Link>
+        <Link to="/contact" className="hover:text-indigo-500">Contact</Link>
+        <Link to="/privacy" className="hover:text-indigo-500">Privacy Policy</Link>
+        <Link to="/terms" className="hover:text-indigo-500">Terms of Service</Link>
+        <button
+          onClick={() => window.dispatchEvent(new Event('open-cookie-settings'))}
+          className="hover:text-indigo-500"
+        >
+          Cookie settings
+        </button>
+      </nav>
+      <p className="text-xs text-gray-300 mt-3">
+        © 2026 JoinCalc — Free financial calculators for the US, UK, Canada &amp; Australia.
+        Estimates only; not financial advice.
+      </p>
+    </footer>
+  )
+}
 
 function Sidebar({ onClose }) {
   const location = useLocation()
@@ -234,6 +260,7 @@ function Sidebar({ onClose }) {
       </div>
       <div className="p-4 border-t border-gray-100 space-y-1">
         <Link to="/about" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">About JoinCalc</Link>
+        <Link to="/contact" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Contact</Link>
         <Link to="/privacy" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Privacy Policy</Link>
         <Link to="/terms" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Terms of Service</Link>
         <p className="text-xs text-gray-300 mt-2">© 2026 JoinCalc</p>
@@ -389,6 +416,7 @@ function Layout() {
               <Route path="/privacy"            element={<Privacy />} />
               <Route path="/terms"              element={<TermsOfService />} />
               <Route path="/about"              element={<About />} />
+              <Route path="/contact"            element={<Contact />} />
               <Route path="*"                  element={<Home />} />
             </Routes>
           </div>
@@ -413,8 +441,12 @@ function Layout() {
               )}
             </div>
           )}
+
+          <SiteFooter />
         </main>
       </div>
+
+      <CookieConsent />
     </div>
   )
 }
