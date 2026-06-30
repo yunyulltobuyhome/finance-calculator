@@ -7,6 +7,7 @@
   <url><loc>https://joincalc.com/national-insurance</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/self-employed</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/corporation-tax</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/vat</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/mortgage</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/fire</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/retirement</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-30</lastmod></url>
@@ -69,4 +70,31 @@
   <url><loc>https://joincalc.com/salary/150000-after-tax-us</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/salary/175000-after-tax-us</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
   <url><loc>https://joincalc.com/salary/200000-after-tax-us</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/100000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/125000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/150000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/175000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/200000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/225000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/250000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/275000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/300000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/350000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/400000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/425000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/450000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/500000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/550000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/600000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/650000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/700000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/750000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/800000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/850000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/900000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/950000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/1000000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/1250000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/1500000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
+  <url><loc>https://joincalc.com/stamp-duty/2000000</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-30</lastmod></url>
 </urlset>

@@ -27,6 +27,8 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Home from './components/Home'
 import SalaryLanding from './components/SalaryLanding'
+import StampDutyLanding from './components/StampDutyLanding'
+import VATCalc from './components/VATCalc'
 import GuidesIndex from './components/GuidesIndex'
 import ArticlePage from './components/ArticlePage'
 import Logo from './components/Logo'
@@ -89,6 +91,13 @@ const NAV = [
         description: 'Calculate UK Corporation Tax for 2026/27. 19% small profits rate, 25% main rate, and Marginal Relief for profits between £50,000 and £250,000.',
         keywords: 'corporation tax calculator UK 2026, UK company tax calculator, marginal relief calculator, small profits rate 2026',
         lastUpdated: 'April 2026',
+      },
+      {
+        label: 'VAT', icon: '🧮', path: '/vat',
+        title: 'VAT Calculator UK 2026 — Add or Remove VAT | JoinCalc',
+        description: 'Free UK VAT calculator. Add 20% VAT to a net price or remove VAT from a gross price. Supports the 20% standard, 5% reduced and 0% zero rates.',
+        keywords: 'vat calculator uk, add vat calculator, remove vat calculator, 20% vat calculator, how to work out vat',
+        lastUpdated: 'June 2026',
       },
     ],
   },
@@ -210,6 +219,37 @@ const NAV = [
 const allTabs = NAV.flatMap(g => g.items)
 const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact']
 
+const CALC_CATEGORY = {}
+NAV.forEach(g => g.items.forEach(it => { CALC_CATEGORY[it.path] = g.category }))
+
+// Suggest related calculators (same category first, then fill) — increases
+// internal linking and pages per session, the key lever for ad revenue.
+function relatedCalcs(path) {
+  const cat = CALC_CATEGORY[path]
+  const same = allTabs.filter(t => CALC_CATEGORY[t.path] === cat && t.path !== path)
+  const others = allTabs.filter(t => CALC_CATEGORY[t.path] !== cat && t.path !== path)
+  return [...same, ...others].slice(0, 4)
+}
+
+function RelatedCalcs({ path }) {
+  const items = relatedCalcs(path)
+  if (!items.length) return null
+  return (
+    <div className="bg-white border border-gray-200 rounded-xl p-5">
+      <h2 className="text-sm font-bold text-gray-700 mb-3">Related Calculators</h2>
+      <div className="grid grid-cols-2 gap-2">
+        {items.map(t => (
+          <Link key={t.path} to={t.path}
+            className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg px-3 py-2 transition-colors">
+            <span>{t.icon}</span>
+            <span className="font-medium leading-tight">{t.label}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function SiteFooter() {
   return (
     <footer className="no-print border-t border-gray-100 mt-10 pt-6 pb-8 text-center">
@@ -295,7 +335,7 @@ function Layout() {
   // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) and guide
   // articles own their own <Helmet>, heading and disclaimer, so they render
   // without the card chrome.
-  const isLanding = location.pathname.startsWith('/salary/')
+  const isLanding = location.pathname.startsWith('/salary/') || location.pathname.startsWith('/stamp-duty/')
   const isGuide = location.pathname === '/guides' || location.pathname.startsWith('/guides/')
   const ownsMeta = isLanding || isGuide
   const currentTab = allTabs.find(t => t.path === location.pathname)
@@ -416,6 +456,8 @@ function Layout() {
             <Routes>
               <Route path="/"                   element={<Home />} />
               <Route path="/salary/:slug"       element={<SalaryLanding />} />
+              <Route path="/stamp-duty/:slug"   element={<StampDutyLanding />} />
+              <Route path="/vat"                element={<VATCalc />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />
@@ -456,6 +498,7 @@ function Layout() {
                 </Link>
               )}
               <ResultActions />
+              {currentTab && <RelatedCalcs path={currentTab.path} />}
               {!ownsMeta && (
                 <>
                   <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">

@@ -12,6 +12,7 @@ const CATEGORIES = [
       { label: 'National Insurance', desc: 'Employee NI contributions 2026/27', path: '/national-insurance', icon: '🏥' },
       { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer tax estimate', path: '/self-employed', icon: '🧾' },
       { label: 'Corporation Tax', desc: 'UK company tax + Marginal Relief 2026', path: '/corporation-tax', icon: '🏢' },
+      { label: 'VAT Calculator', desc: 'Add or remove UK VAT (20% / 5%)', path: '/vat', icon: '🧮' },
     ],
   },
   {
