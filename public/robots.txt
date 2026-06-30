@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+# Embed pages are noindex utility iframes — don't spend crawl budget on them.
+Disallow: /embed/
 
 Sitemap: https://joincalc.com/sitemap.xml
 

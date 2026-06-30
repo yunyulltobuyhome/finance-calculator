@@ -30,6 +30,7 @@ export default function ArticlePage() {
     '@type': 'Article',
     headline: guide.h1,
     description: guide.description,
+    image: 'https://joincalc.com/og-image.png',
     author: { '@type': 'Organization', name: 'JoinCalc' },
     publisher: {
       '@type': 'Organization',
