@@ -31,8 +31,10 @@ import StampDutyLanding from './components/StampDutyLanding'
 import CapitalGainsLanding from './components/CapitalGainsLanding'
 import MortgageLanding from './components/MortgageLanding'
 import VATCalc from './components/VATCalc'
+import PayRiseCalc from './components/PayRiseCalc'
 import GuidesIndex from './components/GuidesIndex'
 import ArticlePage from './components/ArticlePage'
+import NotFound from './components/NotFound'
 import Logo from './components/Logo'
 import ResultActions from './components/ResultActions'
 import CookieConsent from './components/CookieConsent'
@@ -50,6 +52,7 @@ const CALC_GUIDE = {
   '/student-loan': { slug: 'student-loan-repayments-explained', label: 'UK student loan repayments explained' },
   '/mortgage': { slug: 'how-much-can-i-borrow-for-a-mortgage', label: 'How much can I borrow for a mortgage?' },
   '/fire': { slug: 'what-is-a-fire-number', label: 'What is a FIRE number?' },
+  '/pay-rise': { slug: 'how-to-calculate-take-home-pay-uk', label: 'How to calculate your take-home pay' },
 }
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
@@ -191,6 +194,13 @@ const NAV = [
         description: 'Calculate your take-home pay after tax for US, UK, Canada and Australia.',
         keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator',
         lastUpdated: 'April 2026',
+      },
+      {
+        label: 'Pay Rise', icon: '📈', path: '/pay-rise',
+        title: 'Pay Rise Calculator UK 2026 — How Much Will I Keep After Tax? | JoinCalc',
+        description: 'Work out your new salary after a pay rise and how much you actually keep after income tax and National Insurance. 2026/27 UK rates.',
+        keywords: 'pay rise calculator uk, salary increase calculator, pay rise after tax, how much of my pay rise will i keep',
+        lastUpdated: 'June 2026',
       },
       {
         label: 'Redundancy Pay', icon: '📋', path: '/redundancy',
@@ -348,6 +358,8 @@ function Layout() {
   const ownsMeta = isLanding || isGuide
   const currentTab = allTabs.find(t => t.path === location.pathname)
   const relatedGuide = CALC_GUIDE[location.pathname]
+  // Unknown URL → 404 page (renders without the calculator card/chrome).
+  const isUnknown = !isHome && !isStatic && !isGuide && !isLanding && !currentTab
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const seoTitle = isHome
@@ -387,7 +399,8 @@ function Layout() {
         {!ownsMeta && <link rel="canonical" href={canonicalUrl} />}
         {/* Route-independent defaults below */}
         <meta name="author" content="JoinCalc" />
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        {/* Landing/guide pages set their own robots; the 404 sets noindex. */}
+        {!ownsMeta && !isUnknown && <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="JoinCalc" />
@@ -460,7 +473,7 @@ function Layout() {
           {isStatic && (
             <Link to="/" className="text-sm text-indigo-600 hover:underline block mb-4">← Back to Calculators</Link>
           )}
-          <div className={(isStatic || isHome || ownsMeta) ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
+          <div className={(isStatic || isHome || ownsMeta || isUnknown) ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
             <Routes>
               <Route path="/"                   element={<Home />} />
               <Route path="/salary/:slug"       element={<SalaryLanding />} />
@@ -468,6 +481,7 @@ function Layout() {
               <Route path="/capital-gains/:slug" element={<CapitalGainsLanding />} />
               <Route path="/mortgage/:slug"     element={<MortgageLanding />} />
               <Route path="/vat"                element={<VATCalc />} />
+              <Route path="/pay-rise"           element={<PayRiseCalc />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />
@@ -494,11 +508,11 @@ function Layout() {
               <Route path="/terms"              element={<TermsOfService />} />
               <Route path="/about"              element={<About />} />
               <Route path="/contact"            element={<Contact />} />
-              <Route path="*"                  element={<Home />} />
+              <Route path="*"                  element={<NotFound />} />
             </Routes>
           </div>
 
-          {!isStatic && !isHome && (
+          {!isStatic && !isHome && !isUnknown && (
             <div className="mt-4 space-y-2">
               {relatedGuide && (
                 <Link to={`/guides/${relatedGuide.slug}`}
