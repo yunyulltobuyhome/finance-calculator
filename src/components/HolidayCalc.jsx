@@ -61,9 +61,9 @@ export default function HolidayCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-xl font-bold text-gray-800 mb-1">
           UK Holiday Entitlement Calculator 2026
-        </h2>
+        </h1>
         <p className="text-sm text-gray-500">
           Estimate your statutory annual leave entitlement based on your working pattern.
         </p>

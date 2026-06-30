@@ -49,7 +49,7 @@ export default function CompoundCalc() {
 
   return (
     <div>
-      <h2 className="text-base font-semibold text-gray-700 mb-4">Compound Interest Calculator</h2>
+      <h1 className="text-base font-semibold text-gray-700 mb-4">Compound Interest Calculator</h1>
 
       <div className="mb-4">
         <label className="text-xs text-gray-500 block mb-1">Benchmark / Preset Rate</label>

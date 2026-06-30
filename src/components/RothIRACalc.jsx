@@ -116,9 +116,9 @@ export default function RothIRACalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-xl font-bold text-gray-800 mb-1">
           Roth vs Traditional IRA Calculator 2026
-        </h2>
+        </h1>
         <p className="text-sm text-gray-500">
           Compare Roth and Traditional IRA projected values based on your tax situation and timeline.
         </p>

@@ -33,7 +33,7 @@ export default function VATCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">UK VAT Calculator 2026</h2>
+        <h1 className="text-xl font-bold text-gray-800 mb-1">UK VAT Calculator 2026</h1>
         <p className="text-sm text-gray-500">Add VAT to a net price or work out the VAT in a gross (VAT-inclusive) price.</p>
         <p className="text-xs text-gray-400 mt-1">✓ Standard 20% · Reduced 5% · Zero 0% — UK rates</p>
       </div>

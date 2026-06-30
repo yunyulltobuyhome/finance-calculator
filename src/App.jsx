@@ -28,6 +28,8 @@ import Contact from './components/Contact'
 import Home from './components/Home'
 import SalaryLanding from './components/SalaryLanding'
 import StampDutyLanding from './components/StampDutyLanding'
+import CapitalGainsLanding from './components/CapitalGainsLanding'
+import MortgageLanding from './components/MortgageLanding'
 import VATCalc from './components/VATCalc'
 import GuidesIndex from './components/GuidesIndex'
 import ArticlePage from './components/ArticlePage'
@@ -42,6 +44,12 @@ const CALC_GUIDE = {
   '/capital-gains': { slug: 'how-much-capital-gains-tax-uk', label: 'How much capital gains tax will I pay?' },
   '/national-insurance': { slug: 'how-is-national-insurance-calculated-uk', label: 'How is National Insurance calculated?' },
   '/redundancy': { slug: 'how-much-redundancy-pay-uk', label: 'How much redundancy pay am I entitled to?' },
+  '/salary': { slug: 'how-to-calculate-take-home-pay-uk', label: 'How to calculate your take-home pay' },
+  '/vat': { slug: 'uk-vat-rates-explained', label: 'UK VAT rates explained' },
+  '/compound': { slug: 'how-compound-interest-works', label: 'How compound interest works' },
+  '/student-loan': { slug: 'student-loan-repayments-explained', label: 'UK student loan repayments explained' },
+  '/mortgage': { slug: 'how-much-can-i-borrow-for-a-mortgage', label: 'How much can I borrow for a mortgage?' },
+  '/fire': { slug: 'what-is-a-fire-number', label: 'What is a FIRE number?' },
 }
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
@@ -335,7 +343,7 @@ function Layout() {
   // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) and guide
   // articles own their own <Helmet>, heading and disclaimer, so they render
   // without the card chrome.
-  const isLanding = location.pathname.startsWith('/salary/') || location.pathname.startsWith('/stamp-duty/')
+  const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/'].some(p => location.pathname.startsWith(p))
   const isGuide = location.pathname === '/guides' || location.pathname.startsWith('/guides/')
   const ownsMeta = isLanding || isGuide
   const currentTab = allTabs.find(t => t.path === location.pathname)
@@ -430,7 +438,7 @@ function Layout() {
             </nav>
             <div className="flex items-center gap-2">
               <span className="text-xl">{currentTab.icon}</span>
-              <h2 className="text-lg font-bold text-gray-800">{currentTab.label}</h2>
+              <div className="text-lg font-bold text-gray-800">{currentTab.label}</div>
               {currentTab.lastUpdated && (
                 <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
                   ✓ Rates verified: {currentTab.lastUpdated}
@@ -443,7 +451,7 @@ function Layout() {
 
         {isHome && (
           <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
-            <h2 className="text-lg font-bold text-gray-800">All Calculators</h2>
+            <div className="text-lg font-bold text-gray-800">All Calculators</div>
             <p className="text-sm text-gray-400 mt-0.5">Free financial calculators for US, UK, Canada & Australia — updated for 2026</p>
           </header>
         )}
@@ -457,6 +465,8 @@ function Layout() {
               <Route path="/"                   element={<Home />} />
               <Route path="/salary/:slug"       element={<SalaryLanding />} />
               <Route path="/stamp-duty/:slug"   element={<StampDutyLanding />} />
+              <Route path="/capital-gains/:slug" element={<CapitalGainsLanding />} />
+              <Route path="/mortgage/:slug"     element={<MortgageLanding />} />
               <Route path="/vat"                element={<VATCalc />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />

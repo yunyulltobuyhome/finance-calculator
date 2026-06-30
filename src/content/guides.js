@@ -261,6 +261,275 @@ export const GUIDES = [
     ],
     related: ['how-is-national-insurance-calculated-uk', 'how-much-capital-gains-tax-uk'],
   },
+
+  {
+    slug: 'how-to-calculate-take-home-pay-uk',
+    title: 'How to Calculate Your Take-Home Pay (UK 2026/27) | JoinCalc',
+    h1: 'How to Calculate Your Take-Home Pay in the UK',
+    description: 'Work out your UK take-home pay for 2026/27 — income tax bands, the £12,570 personal allowance, National Insurance, and what actually lands in your bank account.',
+    keywords: 'how to calculate take home pay, take home pay calculator uk, net salary uk 2026, after tax salary uk, what is my take home pay',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/salary', label: 'Salary Take-Home Calculator', cta: 'See your exact take-home pay after tax' },
+    intro: 'Your take-home pay (net pay) is what reaches your bank account after income tax and National Insurance are deducted from your gross salary. This guide shows how the 2026/27 deductions are worked out so you can sanity-check your payslip and understand exactly where your money goes.',
+    sections: [
+      {
+        h2: 'The two main deductions',
+        body: ['For most employees, take-home pay is gross salary minus income tax and National Insurance. Pension contributions and student loan repayments may also be taken off, but tax and NI are the two everyone pays.'],
+      },
+      {
+        h2: 'Income tax bands (2026/27)',
+        body: ['You get a tax-free personal allowance, then pay tax in bands on the rest:'],
+        table: {
+          headers: ['Band', 'Taxable income', 'Rate'],
+          rows: [
+            ['Personal allowance', 'Up to £12,570', '0%'],
+            ['Basic rate', '£12,571 – £50,270', '20%'],
+            ['Higher rate', '£50,271 – £125,140', '40%'],
+            ['Additional rate', 'Over £125,140', '45%'],
+          ],
+          note: 'The personal allowance tapers away by £1 for every £2 earned above £100,000.',
+        },
+      },
+      {
+        h2: 'National Insurance on top',
+        body: ['Employees also pay Class 1 National Insurance: 8% on earnings between £12,570 and £50,270, then 2% above that. NI is a separate deduction from income tax, with its own thresholds.'],
+      },
+      {
+        h2: 'Worked example: £35,000 salary',
+        list: [
+          'Income tax: 20% on £22,430 (£35,000 − £12,570) ≈ £4,486.',
+          'National Insurance: 8% on £22,430 ≈ £1,794.',
+          'Take-home pay ≈ £28,720 a year, or about £2,393 a month.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'How much is £30,000 after tax in the UK?', a: 'A £30,000 salary gives roughly £24,900 take-home for 2026/27 after income tax (about £3,486) and National Insurance (about £1,394) — around £2,075 a month.' },
+      { q: 'Does take-home pay include pension contributions?', a: 'If you contribute to a workplace pension, that comes out before you get your take-home pay, so it reduces your net figure but builds your retirement pot. This guide assumes no pension contribution.' },
+      { q: 'Why is my take-home pay lower than expected?', a: 'Common reasons include pension contributions, student loan repayments, a non-standard tax code, or benefits in kind being taxed through your code.' },
+    ],
+    related: ['how-is-national-insurance-calculated-uk', 'how-much-redundancy-pay-uk'],
+  },
+
+  {
+    slug: 'uk-vat-rates-explained',
+    title: 'UK VAT Rates Explained (2026) — Standard, Reduced & Zero | JoinCalc',
+    h1: 'UK VAT Rates Explained',
+    description: 'A simple guide to UK VAT in 2026: the 20% standard, 5% reduced and 0% zero rates, what each applies to, the £90,000 registration threshold, and how to add or remove VAT.',
+    keywords: 'uk vat rate, what is the vat rate, vat rates explained, how to work out vat, vat registration threshold 2026',
+    updated: 'June 2026',
+    readMins: 5,
+    tool: { path: '/vat', label: 'VAT Calculator', cta: 'Add or remove VAT in one click' },
+    intro: 'VAT (Value Added Tax) is a consumption tax added to most goods and services in the UK. The headline rate is 20%, but reduced and zero rates apply to certain items. This guide explains the rates, what they cover, and the simple maths for adding or removing VAT.',
+    sections: [
+      {
+        h2: 'The UK VAT rates',
+        table: {
+          headers: ['Rate', '%', 'Examples'],
+          rows: [
+            ['Standard', '20%', 'Most goods and services'],
+            ['Reduced', '5%', 'Domestic energy, children\'s car seats'],
+            ['Zero', '0%', 'Most food, books, children\'s clothing'],
+            ['Exempt', '—', 'Insurance, postage, financial services'],
+          ],
+          note: 'Zero-rated items are taxable at 0% (and can be reclaimed by businesses); exempt items are outside VAT entirely.',
+        },
+      },
+      {
+        h2: 'How to add VAT',
+        body: ['To add 20% VAT, multiply the net price by 1.20. So £100 net becomes £120 gross, of which £20 is VAT.'],
+      },
+      {
+        h2: 'How to remove VAT',
+        body: ['To find the VAT inside a gross (VAT-inclusive) price, divide by 1.20 — not subtract 20%. £120 gross ÷ 1.2 = £100 net, so the VAT is £20. Subtracting 20% would wrongly give £96.'],
+      },
+      {
+        h2: 'When does a business have to register?',
+        body: ['A business must register for VAT once its VAT-taxable turnover passes the registration threshold — £90,000 as of 2024, the latest confirmed figure. Below that, registration is optional but can let a business reclaim VAT on its purchases.'],
+      },
+    ],
+    faq: [
+      { q: 'What is the current UK VAT rate?', a: 'The standard rate is 20% and applies to most goods and services. Reduced (5%) and zero (0%) rates apply to specific categories.' },
+      { q: 'How do I work out 20% VAT?', a: 'To add VAT, multiply the net price by 1.2. To find VAT within a gross price, divide by 1.2 and subtract the result from the gross.' },
+      { q: 'Is there VAT on food in the UK?', a: 'Most basic foodstuffs are zero-rated, but there are exceptions such as hot takeaway food, confectionery, and restaurant meals, which are standard-rated at 20%.' },
+    ],
+    related: ['how-much-capital-gains-tax-uk', 'how-to-calculate-take-home-pay-uk'],
+  },
+
+  {
+    slug: 'how-compound-interest-works',
+    title: 'How Compound Interest Works (with Examples) | JoinCalc',
+    h1: 'How Compound Interest Works',
+    description: 'Understand compound interest: how earning interest on interest creates exponential growth, the Rule of 72, and worked examples showing why starting early matters most.',
+    keywords: 'how compound interest works, compound interest explained, rule of 72, compound interest examples, power of compounding',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/compound', label: 'Compound Interest Calculator', cta: 'See how your money could grow over time' },
+    intro: 'Compound interest is interest earned on both your original money and the interest it has already earned. Over time this snowballs into exponential growth, which is why it is often called the most powerful force in investing. Here is how it works and why time matters more than the amount.',
+    sections: [
+      {
+        h2: 'Simple vs compound interest',
+        body: ['Simple interest is paid only on your original principal. Compound interest is paid on the principal plus all previously earned interest, so each year you earn a little more than the last. On £10,000 at 8% for 30 years, compounding turns it into about £100,000 — far more than simple interest would.'],
+      },
+      {
+        h2: 'The Rule of 72',
+        body: ['A quick way to estimate doubling time is to divide 72 by your annual return. At 8%, money doubles roughly every 9 years; at 6%, every 12 years. It shows how higher returns and longer time horizons compound dramatically.'],
+      },
+      {
+        h2: 'Why starting early beats investing more',
+        list: [
+          'Investing £200/month from age 25 to 65 at 7% grows to roughly £525,000.',
+          'Waiting until 35 to start the same £200/month leaves you with about £245,000.',
+          'Ten extra years roughly doubles the result — time is the biggest lever.',
+        ],
+      },
+      {
+        h2: 'How often interest compounds',
+        body: ['Interest can compound annually, monthly or daily. More frequent compounding grows slightly faster. Most savings accounts and funds effectively compound monthly, which is what our calculator assumes.'],
+      },
+    ],
+    faq: [
+      { q: 'What is compound interest in simple terms?', a: 'It is interest earned on your interest. Each period you earn returns on a slightly larger balance, so growth accelerates over time.' },
+      { q: 'How can I become a millionaire with compound interest?', a: 'Investing around £500 a month at a 7–8% long-term return for about 35 years can compound past £1 million. Starting earlier dramatically reduces how much you need to contribute.' },
+      { q: 'Does compound interest beat inflation?', a: 'Over long periods, investments compounding at 6–8% have historically outpaced inflation, though returns are not guaranteed and inflation reduces real spending power.' },
+    ],
+    related: ['what-is-a-fire-number', 'how-to-calculate-take-home-pay-uk'],
+  },
+
+  {
+    slug: 'student-loan-repayments-explained',
+    title: 'UK Student Loan Repayments Explained (Plan 1, 2, 4, 5 & PG) | JoinCalc',
+    h1: 'UK Student Loan Repayments Explained',
+    description: 'How UK student loan repayments work in 2026: the repayment thresholds for Plan 1, 2, 4, 5 and Postgraduate loans, the 9% rate, and when loans are written off.',
+    keywords: 'student loan repayment uk, plan 2 student loan threshold, when do i repay student loan, student loan plan 5, postgraduate loan repayment',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/student-loan', label: 'Student Loan Repayment Calculator', cta: 'Estimate your monthly student loan repayment' },
+    intro: 'UK student loan repayments are income-contingent: you only repay once you earn above your plan\'s threshold, and the amount is a percentage of income above it — not the size of your debt. This guide explains the thresholds for each plan and how repayments and write-off work.',
+    sections: [
+      {
+        h2: 'You repay a percentage of income above a threshold',
+        body: ['For undergraduate plans you repay 9% of everything you earn above the repayment threshold. Postgraduate loans are 6%. Earn below the threshold and you repay nothing that month. The balance does not affect your monthly repayment.'],
+      },
+      {
+        h2: 'Repayment thresholds by plan (2026)',
+        table: {
+          headers: ['Plan', 'Annual threshold', 'Rate'],
+          rows: [
+            ['Plan 1', '£24,990', '9%'],
+            ['Plan 2', '£29,385', '9%'],
+            ['Plan 4 (Scotland)', '£32,745', '9%'],
+            ['Plan 5', '£25,000', '9%'],
+            ['Postgraduate', '£21,000', '6%'],
+          ],
+          note: 'Which plan you are on depends on where and when you started studying.',
+        },
+      },
+      {
+        h2: 'Worked example (Plan 2)',
+        list: [
+          'You earn £35,000 and are on Plan 2 (£29,385 threshold).',
+          'Income above the threshold: £5,615.',
+          'Repayment: 9% of £5,615 ≈ £505 a year, or about £42 a month.',
+        ],
+      },
+      {
+        h2: 'When is the loan written off?',
+        body: ['Any remaining balance is written off after a set period — for example 30 years after you become eligible to repay on Plan 2, and 40 years on Plan 5. Many borrowers never repay the full amount, so it often behaves more like a graduate contribution than a typical loan.'],
+      },
+    ],
+    faq: [
+      { q: 'How much do I repay on a £35,000 salary?', a: 'On Plan 2, you repay 9% of income above £29,385 — about £505 a year (£42 a month) at a £35,000 salary. Other plans use different thresholds.' },
+      { q: 'Do student loan repayments stop automatically?', a: 'Repayments stop when your income drops below the threshold and when the loan is repaid or written off. They are collected through PAYE, so they adjust automatically with your pay.' },
+      { q: 'Does my student loan affect my credit score?', a: 'No. UK student loans do not appear on your credit file and do not directly affect your credit score, though lenders may consider the repayment in affordability checks.' },
+    ],
+    related: ['how-to-calculate-take-home-pay-uk', 'how-is-national-insurance-calculated-uk'],
+  },
+
+  {
+    slug: 'how-much-can-i-borrow-for-a-mortgage',
+    title: 'How Much Can I Borrow for a Mortgage? (UK 2026) | JoinCalc',
+    h1: 'How Much Can I Borrow for a Mortgage?',
+    description: 'How UK mortgage affordability works in 2026: income multiples (typically 4–4.5x), affordability stress tests, deposits, and what lenders actually look at.',
+    keywords: 'how much can i borrow mortgage, mortgage affordability uk, income multiple mortgage, how much mortgage can i get, mortgage borrowing calculator',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/mortgage', label: 'Mortgage Affordability Calculator', cta: 'Estimate how much you could borrow' },
+    intro: 'How much you can borrow for a UK mortgage depends mainly on your income, your outgoings and your deposit. Lenders start from an income multiple and then apply affordability checks. This guide explains the rules of thumb and what really moves the number.',
+    sections: [
+      {
+        h2: 'The income multiple rule of thumb',
+        body: ['Most UK lenders cap borrowing at around 4 to 4.5 times your annual income, and occasionally up to 5.5x for higher earners or specific products. So a household income of £50,000 typically supports a mortgage of roughly £200,000–£225,000 before other factors.'],
+      },
+      {
+        h2: 'Affordability and stress tests',
+        body: ['Beyond the multiple, lenders assess affordability: your regular outgoings, existing debts, childcare and credit commitments. They also stress-test whether you could still pay if interest rates rose, so high outgoings reduce what you can borrow even on a good income.'],
+      },
+      {
+        h2: 'Your deposit changes everything',
+        list: [
+          'A bigger deposit lowers your loan-to-value (LTV) and unlocks better rates.',
+          'Typical deposits range from 5% to 25% of the property price.',
+          'At 90% LTV you borrow more but usually pay a higher interest rate than at 75% LTV.',
+        ],
+      },
+      {
+        h2: 'What lenders look at',
+        body: ['Income (including some bonuses and self-employed profits), outgoings, credit history, the property type, and the term all feed into the decision. A longer term lowers monthly payments and can increase the maximum loan, but costs more interest overall.'],
+      },
+    ],
+    faq: [
+      { q: 'How much can I borrow on a £50,000 salary?', a: 'As a rough guide, 4–4.5x income suggests about £200,000–£225,000, but your outgoings, deposit and credit profile can move this up or down significantly.' },
+      { q: 'Do two incomes count for a joint mortgage?', a: 'Yes. Lenders usually combine both applicants\' incomes, though the multiple applied to the joint figure may be slightly lower than for a single applicant.' },
+      { q: 'Does a bigger deposit mean I can borrow more?', a: 'A bigger deposit mainly lets you buy a more expensive home and access lower rates. The loan itself is still capped by income and affordability.' },
+    ],
+    related: ['how-is-stamp-duty-calculated-uk', 'how-to-calculate-take-home-pay-uk'],
+  },
+
+  {
+    slug: 'what-is-a-fire-number',
+    title: 'What Is a FIRE Number and How Do I Calculate It? | JoinCalc',
+    h1: 'What Is a FIRE Number?',
+    description: 'Learn what a FIRE number is, how the 25x rule and 4% safe withdrawal rate work, and how to estimate the pot you need to retire early.',
+    keywords: 'fire number, what is fire number, 4 percent rule, 25x rule retirement, how much to retire early, financial independence number',
+    updated: 'June 2026',
+    readMins: 6,
+    tool: { path: '/fire', label: 'FIRE Calculator', cta: 'Work out your FIRE number and target age' },
+    intro: 'FIRE stands for Financial Independence, Retire Early. Your "FIRE number" is the size of investment pot that could fund your lifestyle indefinitely from returns and withdrawals, so that paid work becomes optional. Here is how it is estimated.',
+    sections: [
+      {
+        h2: 'The 25x rule',
+        body: ['A common starting point is 25 times your annual spending. If you need £30,000 a year, your FIRE number is about £750,000. The logic comes from the 4% safe withdrawal rate, since 1 ÷ 0.04 = 25.'],
+      },
+      {
+        h2: 'The 4% rule',
+        body: ['The 4% rule suggests that withdrawing about 4% of your pot in the first year of retirement, then adjusting for inflation, has historically had a high chance of lasting 30+ years. It is a guide, not a guarantee — some choose a more cautious 3–3.5%.'],
+      },
+      {
+        h2: 'Worked example',
+        list: [
+          'Annual spending: £40,000.',
+          'FIRE number at 25x: £1,000,000.',
+          'A more cautious 30x (3.3% withdrawal): £1,200,000.',
+        ],
+      },
+      {
+        h2: 'Variations of FIRE',
+        list: [
+          'Lean FIRE — a smaller pot funding a frugal lifestyle.',
+          'Fat FIRE — a larger pot for a more comfortable lifestyle.',
+          'Coast FIRE — investing enough early that growth alone reaches your number by retirement age.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'How do I calculate my FIRE number?', a: 'Multiply your expected annual spending in retirement by 25 (the inverse of the 4% rule). For £30,000 a year that is £750,000.' },
+      { q: 'Is the 4% rule safe?', a: 'It has historically worked for 30-year retirements in most scenarios, but it is not guaranteed. Longer retirements or poor early returns may call for a lower withdrawal rate such as 3–3.5%.' },
+      { q: 'Does my pension count towards FIRE?', a: 'Yes. Pensions, ISAs and other investments all count toward your FIRE number, though access ages differ — private pensions are usually locked until your late 50s.' },
+    ],
+    related: ['how-compound-interest-works', 'how-to-calculate-take-home-pay-uk'],
+  },
 ]
 
 export const GUIDE_SLUGS = GUIDES.map(g => g.slug)

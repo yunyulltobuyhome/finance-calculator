@@ -70,9 +70,9 @@ export default function RetirementCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-xl font-bold text-gray-800 mb-1">
           {country === 'us' ? '401(k) Calculator 2026' : 'UK Pension Calculator 2026/27'}
-        </h2>
+        </h1>
         <p className="text-sm text-gray-500">Project your retirement pot with employer match, compound growth, and tax relief.</p>
         <p className="text-xs text-gray-400 mt-1">
           {country === 'us'

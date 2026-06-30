@@ -73,7 +73,7 @@ export default function StampDutyCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">UK Stamp Duty Calculator 2026</h2>
+        <h1 className="text-xl font-bold text-gray-800 mb-1">UK Stamp Duty Calculator 2026</h1>
         <p className="text-sm text-gray-500">Calculate your Stamp Duty Land Tax (SDLT) based on the latest 2026 rates (updated April 2025).</p>
       </div>
 

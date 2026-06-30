@@ -89,9 +89,9 @@ export default function SocialSecurityCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-xl font-bold text-gray-800 mb-1">
           US Social Security Benefits Calculator 2026
-        </h2>
+        </h1>
         <p className="text-sm text-gray-500">
           Estimate your monthly Social Security retirement benefit based on your Full Retirement Age benefit and claim age.
         </p>

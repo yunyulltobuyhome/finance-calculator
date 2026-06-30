@@ -63,7 +63,7 @@ export default function BuyVsRentCalc() {
 
   return (
     <div>
-      <h2 className="text-base font-semibold text-gray-700 mb-2">Buy vs Rent Calculator</h2>
+      <h1 className="text-base font-semibold text-gray-700 mb-2">Buy vs Rent Calculator</h1>
       <p className="text-xs text-gray-500 mb-4">Compare the financial impact of buying a home vs renting over time.</p>
 
       <div className="grid grid-cols-2 gap-3 mb-4">

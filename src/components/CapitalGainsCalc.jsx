@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const US_LT_SINGLE = [
   { max: 49450,    rate: 0 },
@@ -120,7 +121,7 @@ export default function CapitalGainsCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">Capital Gains Tax Calculator 2026</h2>
+        <h1 className="text-xl font-bold text-gray-800 mb-1">Capital Gains Tax Calculator 2026</h1>
         <p className="text-sm text-gray-500">Estimate your CGT for the US or UK based on the latest 2026 rates.</p>
       </div>
 
@@ -340,6 +341,17 @@ export default function CapitalGainsCalc() {
                 <p className="font-semibold text-gray-700 mb-1">{item.q}</p>
                 <p className="text-gray-600 leading-relaxed">{item.a}</p>
               </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">UK Capital Gains Tax by Amount</h2>
+          <div className="flex flex-wrap gap-2">
+            {[10000, 20000, 25000, 30000, 50000, 75000, 100000, 150000, 250000].map(g => (
+              <Link key={g} to={`/capital-gains/${g}`} className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5 text-sm">
+                £{g.toLocaleString()}
+              </Link>
             ))}
           </div>
         </div>

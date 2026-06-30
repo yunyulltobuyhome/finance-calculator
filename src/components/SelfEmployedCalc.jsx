@@ -109,9 +109,9 @@ export default function SelfEmployedCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-xl font-bold text-gray-800 mb-1">
           UK Self-Employed Tax Calculator 2026/27
-        </h2>
+        </h1>
         <p className="text-sm text-gray-500">
           Estimate your Income Tax and Class 4 National Insurance as a sole trader or freelancer.
         </p>

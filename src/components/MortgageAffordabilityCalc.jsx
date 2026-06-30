@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function MortgageAffordabilityCalc() {
   const [country, setCountry] = useState('us')
@@ -100,7 +101,7 @@ export default function MortgageAffordabilityCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">Mortgage Affordability Calculator 2026</h2>
+        <h1 className="text-xl font-bold text-gray-800 mb-1">Mortgage Affordability Calculator 2026</h1>
         <p className="text-sm text-gray-500">Find out how much you can borrow — US DTI method or UK income multiple.</p>
         <p className="text-xs text-gray-400 mt-1">US rates: 30yr avg 6.52% (Jun 2026) | UK multiples: 4x–5.5x</p>
       </div>
@@ -321,6 +322,17 @@ export default function MortgageAffordabilityCalc() {
                 <p className="font-semibold text-gray-700 mb-1">{item.q}</p>
                 <p className="text-gray-600 leading-relaxed">{item.a}</p>
               </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Mortgage Repayments by Amount</h2>
+          <div className="flex flex-wrap gap-2">
+            {[150000, 200000, 250000, 300000, 350000, 400000, 500000].map(a => (
+              <Link key={a} to={`/mortgage/${a}`} className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5 text-sm">
+                £{a.toLocaleString()}
+              </Link>
             ))}
           </div>
         </div>

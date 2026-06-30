@@ -78,7 +78,7 @@ export default function DividendCalc() {
 
   return (
     <div>
-      <h2 className="text-base font-semibold text-gray-700 mb-4">Dividend Reinvestment Calculator</h2>
+      <h1 className="text-base font-semibold text-gray-700 mb-4">Dividend Reinvestment Calculator</h1>
 
       <div className="flex gap-2 mb-4">
         {['US', 'Europe'].map(r => (

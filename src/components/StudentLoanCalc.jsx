@@ -101,9 +101,9 @@ export default function StudentLoanCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">
+        <h1 className="text-xl font-bold text-gray-800 mb-1">
           UK Student Loan Repayment Calculator 2026
-        </h2>
+        </h1>
         <p className="text-sm text-gray-500">
           Estimate your monthly student loan repayments across Plan 1, 2, 4, 5 and Postgraduate loans.
         </p>

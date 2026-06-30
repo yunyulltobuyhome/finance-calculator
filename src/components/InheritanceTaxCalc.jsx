@@ -68,7 +68,7 @@ export default function InheritanceTaxCalc() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-1">Inheritance Tax Calculator 2026</h2>
+        <h1 className="text-xl font-bold text-gray-800 mb-1">Inheritance Tax Calculator 2026</h1>
         <p className="text-sm text-gray-500">Estimate UK Inheritance Tax (IHT) or US Estate Tax based on the latest 2026 rates.</p>
         <p className="text-xs text-gray-400 mt-1">UK rates: updated April 2026 | US rates: updated July 2025 (OBBBA)</p>
       </div>
