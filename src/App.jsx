@@ -35,6 +35,8 @@ import PayRiseCalc from './components/PayRiseCalc'
 import GuidesIndex from './components/GuidesIndex'
 import ArticlePage from './components/ArticlePage'
 import NotFound from './components/NotFound'
+import EmbedCalc from './components/EmbedCalc'
+import EmbedSnippet from './components/EmbedSnippet'
 import Logo from './components/Logo'
 import ResultActions from './components/ResultActions'
 import CookieConsent from './components/CookieConsent'
@@ -362,6 +364,16 @@ function Layout() {
   const isUnknown = !isHome && !isStatic && !isGuide && !isLanding && !currentTab
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  // Embeddable calculators render chrome-less (no sidebar/header/footer/cookie
+  // banner) so third-party sites can iframe them.
+  if (location.pathname.startsWith('/embed/')) {
+    return (
+      <Routes>
+        <Route path="/embed/:slug" element={<EmbedCalc />} />
+      </Routes>
+    )
+  }
+
   const seoTitle = isHome
     ? 'Free Financial Calculators 2026 — Tax, Mortgage, Retirement | JoinCalc'
     : isStatic ? 'JoinCalc — Free Financial Calculators'
@@ -522,6 +534,7 @@ function Layout() {
                 </Link>
               )}
               <ResultActions />
+              {currentTab && <EmbedSnippet slug={currentTab.path.slice(1)} label={currentTab.label} />}
               {currentTab && <RelatedCalcs path={currentTab.path} />}
               {!ownsMeta && (
                 <>
