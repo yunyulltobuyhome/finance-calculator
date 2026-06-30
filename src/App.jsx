@@ -348,7 +348,7 @@ function Sidebar({ onClose }) {
   )
 }
 
-function Layout() {
+export function Layout() {
   const location = useLocation()
   const isStatic = STATIC_PAGES.includes(location.pathname)
   const isHome = location.pathname === '/'
@@ -357,7 +357,9 @@ function Layout() {
   // without the card chrome.
   const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/'].some(p => location.pathname.startsWith(p))
   const isGuide = location.pathname === '/guides' || location.pathname.startsWith('/guides/')
-  const ownsMeta = isLanding || isGuide
+  // Static pages (about/contact/privacy/terms) set their own <Helmet>, so the
+  // layout must not also emit title/description/canonical for them.
+  const ownsMeta = isLanding || isGuide || isStatic
   const currentTab = allTabs.find(t => t.path === location.pathname)
   const relatedGuide = CALC_GUIDE[location.pathname]
   // Unknown URL → 404 page (renders without the calculator card/chrome).
@@ -387,10 +389,13 @@ function Layout() {
     ? 'financial calculator, stamp duty calculator 2026, corporation tax calculator UK, self employed tax calculator, social security calculator 2026, pension credit calculator, national insurance calculator, mortgage affordability, 401k calculator, salary calculator'
     : currentTab?.keywords || ''
 
-  const canonicalUrl = `https://joincalc.com${location.pathname}`
+  // Normalise trailing slash so the canonical matches the prerendered one
+  // regardless of how the host serves /path vs /path/.
+  const canonicalPath = location.pathname.replace(/\/+$/, '') || '/'
+  const canonicalUrl = `https://joincalc.com${canonicalPath}`
 
-  const schemaWebSite = { "@context": "https://schema.org", "@type": "WebSite", "name": "JoinCalc", "url": "https://joincalc.com", "description": "Free financial calculators for US, UK, Canada and Australia", "potentialAction": { "@type": "SearchAction", "target": "https://joincalc.com/?q={search_term_string}", "query-input": "required name=search_term_string" } }
-  const schemaOrg = { "@context": "https://schema.org", "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com", "logo": "https://joincalc.com/favicon.svg", "contactPoint": { "@type": "ContactPoint", "email": "hello@joincalc.com", "contactType": "customer support" } }
+  // WebSite + Organization JSON-LD live in index.html (every page), so they are
+  // not re-injected here. Only page-specific schema is emitted below.
   const schemaApp = currentTab ? { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": currentTab.title, "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": currentTab.description, "url": canonicalUrl, "dateModified": "2026-06-30", "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" } } : null
   const schemaFAQ = currentTab ? { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": `What is the ${currentTab.label} calculator?`, "acceptedAnswer": { "@type": "Answer", "text": currentTab.description } }] } : null
   const schemaBreadcrumb = !isHome && !isStatic && currentTab ? { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" }, { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }] } : null
@@ -413,7 +418,6 @@ function Layout() {
         <meta name="author" content="JoinCalc" />
         {/* Landing/guide pages set their own robots; the 404 sets noindex. */}
         {!ownsMeta && !isUnknown && <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="JoinCalc" />
         <meta property="og:image" content="https://joincalc.com/og-image.png" />
@@ -423,8 +427,6 @@ function Layout() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
         {currentTab?.lastUpdated && <meta name="revised" content={currentTab.lastUpdated} />}
-        <script type="application/ld+json">{JSON.stringify(schemaWebSite)}</script>
-        <script type="application/ld+json">{JSON.stringify(schemaOrg)}</script>
         {schemaApp && <script type="application/ld+json">{JSON.stringify(schemaApp)}</script>}
         {schemaFAQ && <script type="application/ld+json">{JSON.stringify(schemaFAQ)}</script>}
         {schemaBreadcrumb && <script type="application/ld+json">{JSON.stringify(schemaBreadcrumb)}</script>}

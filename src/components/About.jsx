@@ -1,6 +1,13 @@
+import { Helmet } from 'react-helmet-async'
+
 export default function About() {
   return (
     <div className="max-w-2xl">
+      <Helmet>
+        <title>About JoinCalc — Free Financial Calculators</title>
+        <meta name="description" content="About JoinCalc: free, accurate financial calculators for the US, UK, Canada and Australia, built on official IRS, HMRC, ATO and CRA sources and updated for 2026." />
+        <link rel="canonical" href="https://joincalc.com/about" />
+      </Helmet>
       <h1 className="text-2xl font-bold text-gray-800 mb-2">About JoinCalc</h1>
       <p className="text-sm text-gray-500 mb-8">Free financial calculators for the US, UK, Canada and Australia</p>
 

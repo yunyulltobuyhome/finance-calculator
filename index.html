@@ -5,13 +5,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Primary SEO -->
+  <!-- title/description/keywords/author/canonical/robots and og:/twitter: tags
+       are managed per-route by react-helmet-async and baked into each page at
+       build time by prerender.js, so every URL has exactly one correct set.
+       This default <title> is a fallback for any non-prerendered path. -->
   <title>Free Financial Calculators 2026 — Tax, Mortgage, Retirement, Salary | JoinCalc</title>
-  <meta name="description" content="Free financial calculators updated for 2026: stamp duty, capital gains tax, inheritance tax, national insurance, redundancy pay, student loan repayment, mortgage affordability, 401k, Roth IRA, pension, salary take-home, FIRE, and more. US & UK. No sign-up required." />
-  <meta name="keywords" content="stamp duty calculator 2026, capital gains tax calculator UK, national insurance calculator 2026, redundancy pay calculator UK, student loan repayment calculator UK, mortgage affordability calculator, 401k calculator 2026, roth ira calculator 2026, pension calculator UK, salary take home calculator, FIRE calculator, inheritance tax calculator UK, buy vs rent calculator, compound interest calculator, dividend income calculator" />
-  <meta name="author" content="JoinCalc" />
-  <!-- robots is managed per-route by react-helmet-async (index for content,
-       noindex for the 404 page) so each page emits exactly one directive. -->
   <meta name="googlebot" content="index, follow" />
   <meta name="theme-color" content="#4F46E5" />
 
@@ -22,28 +20,7 @@
   <meta name="apple-mobile-web-app-title" content="JoinCalc" />
   <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- Canonical is managed per-route by react-helmet-async (see App.jsx /
-       SalaryLanding.jsx) so each page emits exactly one correct canonical.
-       A static canonical here would duplicate it and point every subpage at "/". -->
-
-  <!-- Open Graph (default for non-JS social scrapers; Helmet overrides per route) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="JoinCalc" />
-  <meta property="og:title" content="Free Financial Calculators 2026 — Tax, Mortgage, Retirement | JoinCalc" />
-  <meta property="og:description" content="Free calculators for stamp duty, capital gains tax, national insurance, redundancy pay, student loan, mortgage, 401k, Roth IRA, pension, salary, FIRE and more. US & UK. No sign-up." />
-  <meta property="og:url" content="https://joincalc.com" />
-  <meta property="og:image" content="https://joincalc.com/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="JoinCalc — Free Financial Calculators 2026" />
-  <meta property="og:locale" content="en_US" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@joincalc" />
-  <meta name="twitter:title" content="Free Financial Calculators 2026 | JoinCalc" />
-  <meta name="twitter:description" content="Stamp duty, CGT, NI, redundancy, student loan, mortgage, 401k, Roth IRA, pension, salary & FIRE calculators. Free, no sign-up. US & UK." />
-  <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
+  <!-- Open Graph / Twitter are injected per route by Helmet + prerender.js -->
 
   <!-- Schema: WebSite -->
   <script type="application/ld+json">
