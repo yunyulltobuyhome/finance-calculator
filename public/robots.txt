@@ -11,12 +11,35 @@ Disallow: /embed/
 # but are excluded from crawling/indexing while the site is under AdSense
 # review, since a high ratio of near-duplicate template pages relative to
 # original content is a common trigger for a "low value content" review flag.
-# Re-enable (remove these lines + re-add to sitemap.xml) once approved.
+# Re-enable (remove these six Disallow/Allow blocks + re-add to sitemap.xml)
+# once approved.
+#
+# Each base calculator page is explicitly re-Allowed (with and without a
+# trailing slash) so it stays crawlable even if the host normalizes
+# /salary -> /salary/ before Google evaluates the path — an Allow rule wins
+# over a Disallow rule of the same specificity.
 Disallow: /salary/
+Allow: /salary$
+Allow: /salary/$
+
 Disallow: /stamp-duty/
+Allow: /stamp-duty$
+Allow: /stamp-duty/$
+
 Disallow: /capital-gains/
+Allow: /capital-gains$
+Allow: /capital-gains/$
+
 Disallow: /mortgage/
+Allow: /mortgage$
+Allow: /mortgage/$
+
 Disallow: /auto-loan/
+Allow: /auto-loan$
+Allow: /auto-loan/$
+
 Disallow: /credit-card-payoff/
+Allow: /credit-card-payoff$
+Allow: /credit-card-payoff/$
 
 Sitemap: https://joincalc.com/sitemap.xml
