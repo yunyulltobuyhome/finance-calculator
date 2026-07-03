@@ -223,9 +223,32 @@ export default function DividendCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Worked Example: $100,000 at a 4% Yield</h2>
+          <p className="leading-relaxed">
+            Invest $100,000 in a portfolio yielding 4% and you receive $4,000 a year in dividends. If those
+            companies grow their dividends by 6% a year and you reinvest every payment (DRIP), that income snowballs:
+            after 20 years the same portfolio could be paying well over $15,000 a year — without you adding a single
+            extra dollar. This is why long-term dividend investors care as much about dividend <em>growth</em> as
+            the starting yield.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Yield vs Growth: What Really Matters</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>A very high yield is a warning sign.</strong> Yields above 7–8% often mean the share price has fallen because the market expects a dividend cut. Chase yield and you may lose both income and capital.</li>
+            <li><strong>Dividend growth compounds.</strong> A stock yielding 3% but growing its payout 8% a year overtakes a static 5% yielder within a decade — and keeps pulling ahead.</li>
+            <li><strong>Payout ratio matters.</strong> A company paying out more than 80–90% of its earnings has little room to keep raising the dividend; a lower ratio signals a safer, more sustainable payout.</li>
+            <li><strong>Reinvesting is the engine.</strong> Historically, reinvested dividends account for a large share of the stock market&apos;s total long-run return.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[
+              { q: 'How do I calculate dividend income?', a: 'Multiply the number of shares you own by the dividend per share, or multiply your total investment by the dividend yield. For example, $50,000 invested at a 3.5% yield produces $1,750 a year before tax. Reinvesting those dividends buys more shares, which then pay their own dividends.' },
+              { q: 'When are dividends paid?', a: 'Most US companies pay quarterly, while many UK and European companies pay twice a year. To receive a dividend you must own the shares before the "ex-dividend date". Holding companies with different schedules can give you income most months of the year.' },
               { q: 'What is a good dividend yield?', a: 'A dividend yield of 2–4% is generally considered healthy for quality companies. Yields above 5–6% can indicate higher risk or a falling share price. The best dividend stocks combine a reasonable yield (3–4%) with consistent dividend growth, which compounds powerfully over time.' },
               { q: 'What is DRIP investing?', a: 'DRIP stands for Dividend Reinvestment Plan. Instead of receiving dividends as cash, they are automatically used to buy more shares. Over 20–30 years, reinvesting dividends typically accounts for 40–50% of total investment returns, making it one of the most powerful wealth-building strategies available.' },
               { q: 'How much do I need to live off dividends?', a: 'At a 4% dividend yield, you need 25x your annual expenses invested. To generate $40,000/year in dividend income, you\'d need approximately $1,000,000 invested. At a more conservative 3% yield, you\'d need $1,333,000. Reinvesting dividends during your working years dramatically accelerates reaching this goal.' },

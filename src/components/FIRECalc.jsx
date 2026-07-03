@@ -216,6 +216,27 @@ export default function FIRECalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">The Two Levers of FIRE</h2>
+          <p className="leading-relaxed">
+            Reaching financial independence comes down to just two numbers: your <strong>savings rate</strong> and
+            your <strong>annual spending</strong>. They are linked — cutting spending both lowers the pot you need
+            (25× spending) and raises the amount you can save. Someone saving 15% of their income might take 40+
+            years to retire, while someone saving 50% can get there in around 17, and a 65% savings rate in roughly
+            a decade. That is why the FIRE community obsesses over the savings rate far more than investment returns.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Flavours of FIRE</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Lean FIRE</strong> — a smaller pot (often under $1M) funding a deliberately frugal lifestyle.</li>
+            <li><strong>Fat FIRE</strong> — a larger pot for a comfortable, no-compromise retirement.</li>
+            <li><strong>Coast FIRE</strong> — investing enough early that growth alone reaches your number by traditional retirement age, so you only need to cover current expenses.</li>
+            <li><strong>Barista FIRE</strong> — semi-retiring with part-time work that covers some costs and often provides health cover, letting your investments keep growing.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

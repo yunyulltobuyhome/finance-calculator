@@ -171,6 +171,28 @@ export default function CompoundCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Why Starting Early Beats Investing More</h2>
+          <p className="leading-relaxed">
+            Compound interest rewards time more than it rewards the amount you invest. Consider two people who each
+            earn a 7% annual return. Anna invests $200 a month from age 25 to 35 (just 10 years, $24,000 total) and
+            then stops. Ben invests the same $200 a month from age 35 all the way to 65 (30 years, $72,000 total).
+            At 65, Anna — despite investing a third as much — often ends up with a larger pot, because her early
+            money had an extra decade to compound. The lesson: the best day to start was years ago; the second best
+            day is today.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">What Slows Compounding Down</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Fees.</strong> A 1% annual fee sounds small but can eat 25%+ of your final pot over 40 years — favour low-cost index funds.</li>
+            <li><strong>Inflation.</strong> Growth is only "real" above the inflation rate. A 7% return with 3% inflation is really about 4% in spending power.</li>
+            <li><strong>Cashing out early.</strong> Interrupting compounding — or panic-selling in a downturn — resets the snowball and locks in losses.</li>
+            <li><strong>Taxes on gains.</strong> Using tax-sheltered accounts (ISA, 401(k), IRA) lets more of each year&apos;s growth stay invested.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

@@ -299,6 +299,27 @@ export default function RetirementCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Don't Leave the Employer Match on the Table</h2>
+          <p className="leading-relaxed">
+            An employer match is the closest thing to free money in personal finance. If your employer matches 100%
+            of the first 5% of salary you contribute, that is an instant 100% return before your investments grow at
+            all. On a $60,000 salary, contributing 5% ($3,000) earns another $3,000 from your employer every year.
+            Skipping it is effectively turning down a pay rise. The first rule of retirement saving is: always
+            contribute at least enough to capture the full match.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Getting the Most From Your Pension or 401(k)</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Increase contributions with every raise.</strong> Bumping your rate by 1% each time you get a pay rise barely dents take-home pay but hugely lifts your final pot.</li>
+            <li><strong>Mind the annual limits.</strong> The US 401(k) limit is $24,500 for 2026 (plus catch-up if over 50); the UK annual allowance is £60,000. Contributions above these lose the tax advantage.</li>
+            <li><strong>Keep fees low.</strong> Over decades, a 1% fee difference can cost tens of thousands — check your fund charges.</li>
+            <li><strong>Don&apos;t cash out when changing jobs.</strong> Roll over or transfer instead, so the balance keeps compounding.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

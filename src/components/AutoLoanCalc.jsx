@@ -111,6 +111,27 @@ export default function AutoLoanCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">The True Cost of a Car Loan</h2>
+          <p className="leading-relaxed">
+            The sticker price is only part of the story. On a $30,000 loan at 8% APR, choosing a 72-month term
+            instead of 48 months drops the monthly payment by around $200 — but you pay roughly $2,700 more in
+            total interest and spend two extra years in debt. Add sales tax, registration, insurance, fuel and
+            maintenance, and the real cost of ownership is far higher than the monthly payment suggests. Always
+            look at the total repaid, not just what fits your monthly budget.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Tips to Pay Less for Your Car</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Get pre-approved first.</strong> Walking in with a bank or credit-union rate turns the dealer&apos;s financing into a negotiation you can win.</li>
+            <li><strong>Negotiate the price, not the payment.</strong> Dealers can hit any monthly payment by stretching the term — agree the out-the-door price first.</li>
+            <li><strong>Put more down.</strong> A larger down payment cuts interest and protects you from negative equity if the car depreciates faster than you repay.</li>
+            <li><strong>Keep the term short.</strong> 48–60 months is a sensible ceiling; 72–84-month loans are where buyers most often end up "underwater".</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

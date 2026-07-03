@@ -105,6 +105,27 @@ export default function RefinanceCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Worked Example: Is It Worth It?</h2>
+          <p className="leading-relaxed">
+            Say you owe $300,000 at 7% with 25 years left, and you can refinance to 5.5% over a new 30-year term
+            with $4,000 in closing costs. Your payment drops from about $2,120 to $1,703 — a $417 monthly saving.
+            Divide the $4,000 of costs by that saving and you break even in about 10 months. If you plan to stay in
+            the home longer than that, refinancing pays off. The catch: the fresh 30-year term resets the clock, so
+            always compare the <em>total</em> interest of both loans, not just the monthly payment.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Refinancing Mistakes to Avoid</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Chasing a lower payment by extending the term.</strong> A longer loan can cost more interest overall even at a lower rate — check the lifetime cost.</li>
+            <li><strong>Refinancing right before you move.</strong> If you sell before the break-even point, the closing costs outweigh the savings.</li>
+            <li><strong>Rolling costs into the loan and ignoring them.</strong> Financing the fees means paying interest on them for decades; factor them into the comparison.</li>
+            <li><strong>Only checking your current lender.</strong> Rates and fees vary widely — get quotes from several lenders and compare the APR.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

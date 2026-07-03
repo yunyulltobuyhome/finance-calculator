@@ -166,6 +166,28 @@ export default function PayRiseCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Watch Out for Hidden Thresholds</h2>
+          <p className="leading-relaxed">
+            A pay rise can quietly push you past a threshold that costs far more than the higher tax band alone.
+            The biggest is the <strong>£100,000</strong> mark: for every £2 earned above it, you lose £1 of your
+            personal allowance, creating an effective tax rate of around 60% between £100,000 and £125,140. Crossing
+            it can also cost you tax-free childcare and 30 free childcare hours. Similarly, a rise can trigger the
+            <strong> High Income Child Benefit Charge</strong> or, in the US, move part of your income into a higher
+            bracket. Knowing these cliffs helps you decide whether to divert a rise into a pension instead.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">How to Keep More of a Pay Rise</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Salary sacrifice into your pension.</strong> Redirecting some or all of a rise into a pension can keep you below a threshold and get tax relief at your marginal rate.</li>
+            <li><strong>Use tax-efficient benefits.</strong> Cycle-to-work, EV schemes and additional pension contributions are taken before tax.</li>
+            <li><strong>Check your tax code.</strong> After a rise, make sure HMRC has updated your code so you are not over- or under-taxed.</li>
+            <li><strong>Remember the rise compounds.</strong> Even after tax, a higher base salary raises every future rise, bonus and pension contribution.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

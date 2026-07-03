@@ -229,6 +229,27 @@ export default function StampDutyCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Worked Example: A £350,000 Home</h2>
+          <p className="leading-relaxed">
+            Stamp duty is charged in slices, not as one flat rate. On a £350,000 home a standard buyer pays nothing
+            on the first £125,000, 2% on the next £125,000 (£2,500), and 5% on the final £100,000 (£5,000) — a total
+            of £7,500, or an effective rate of about 2.1%. A first-time buyer pays 5% only on the £50,000 above
+            £300,000 (£2,500). Someone buying it as an additional property adds the 5% surcharge to every band,
+            pushing the bill to £25,000.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Things Buyers Often Get Wrong</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Assuming one flat rate.</strong> Multiplying the whole price by a single percentage nearly always overstates the bill — each band is taxed separately.</li>
+            <li><strong>Forgetting the second-home surcharge.</strong> Buying an additional property (or one before selling your current home) adds 5% to every band; you can often reclaim it if you sell your old home within the time limit.</li>
+            <li><strong>Missing the £500,000 first-time-buyer cliff.</strong> First-time buyer relief disappears entirely above £500,000 — standard rates then apply to the whole price.</li>
+            <li><strong>Confusing the UK nations.</strong> This tool covers England and Northern Ireland; Scotland (LBTT) and Wales (LTT) use different bands.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

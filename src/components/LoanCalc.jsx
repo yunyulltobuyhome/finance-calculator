@@ -233,9 +233,33 @@ export default function LoanCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Worked Example: A $25,000 Personal Loan</h2>
+          <p className="leading-relaxed">
+            Suppose you borrow $25,000 over 5 years (60 months) at an 11% APR. Your monthly payment works out to
+            about $544, and over the full term you repay roughly $32,600 — so about $7,600 of that is interest.
+            Shortening the term to 3 years raises the monthly payment to about $819 but cuts the total interest to
+            around $4,500, saving you over $3,000. This is the core trade-off of every loan: a longer term feels
+            cheaper each month but costs far more overall.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Common Loan Mistakes to Avoid</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Focusing only on the monthly payment.</strong> A lower payment usually just means a longer term and far more total interest. Compare the total cost, not just the monthly figure.</li>
+            <li><strong>Ignoring fees and APR.</strong> Two loans with the same headline interest rate can cost very different amounts once origination fees and points are included — always compare the APR.</li>
+            <li><strong>Missing prepayment penalties.</strong> Some loans charge a fee for paying off early, which can wipe out the savings from overpaying. Check the terms first.</li>
+            <li><strong>Borrowing more than you need.</strong> Every extra dollar you borrow accrues interest for the whole term, so round down, not up.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[
+              { q: 'How is a loan monthly payment calculated?', a: 'Lenders use the amortization formula, which spreads the loan plus interest evenly across every month. Early payments are mostly interest; later payments are mostly principal. This calculator uses the same formula, so the figure matches a typical loan statement.' },
+              { q: 'Does paying every two weeks instead of monthly help?', a: 'Yes. Paying half your monthly amount every two weeks results in 26 half-payments a year — the equivalent of 13 monthly payments instead of 12. That one extra payment each year can shave years off a long loan and save meaningful interest.' },
+              { q: 'What credit score do I need for the best rate?', a: 'Generally a score above 720 unlocks the lowest advertised rates. Between 660 and 720 you will still qualify but pay more, and below 660 rates rise sharply. Checking your score and comparing several lenders before applying can save thousands.' },
               { q: 'How much does an extra $100/month save on a mortgage?', a: 'On a $300,000 mortgage at 6.5% over 30 years, paying an extra $100/month saves approximately $42,000 in interest and cuts 4 years off the loan. The savings grow significantly with larger extra payments.' },
               { q: 'What is an interest-only mortgage?', a: 'With an interest-only mortgage, you only pay the interest each month — not the principal. Your monthly payment is lower, but your balance doesn\'t decrease. At the end of the term, you pay the full principal as a balloon payment or refinance.' },
               { q: 'Should I choose a 15-year or 30-year mortgage?', a: 'A 15-year mortgage has higher monthly payments but saves a huge amount in interest — typically 50–60% less total interest paid. A 30-year mortgage gives lower monthly payments and more flexibility. Choose 15 years if you can comfortably afford the higher payment.' },

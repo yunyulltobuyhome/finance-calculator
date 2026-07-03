@@ -155,6 +155,26 @@ export default function VATCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Worked Example: £1,000 + VAT</h2>
+          <p className="leading-relaxed">
+            A tradesperson quotes £1,000 for a job "plus VAT". At the 20% standard rate, the VAT is £200, so the
+            customer pays £1,200 in total. If instead the quote was £1,000 "including VAT", the VAT already inside
+            that price is £166.67 (£1,000 ÷ 1.2 = £833.33 net), and the business keeps £833.33. Getting these two
+            the wrong way round is the single most common VAT error on invoices.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Common VAT Mistakes to Avoid</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Subtracting 20% to remove VAT.</strong> Taking 20% off a gross price is wrong. £120 minus 20% is £96, but the correct net is £100 (£120 ÷ 1.2). Always divide by 1.2, don&apos;t subtract.</li>
+            <li><strong>Confusing zero-rated and exempt.</strong> Zero-rated goods are taxable at 0% and a business can still reclaim its input VAT; exempt goods are outside VAT entirely and input VAT generally cannot be reclaimed.</li>
+            <li><strong>Forgetting the registration threshold.</strong> Once VAT-taxable turnover passes the threshold (£90,000), registration is compulsory — missing it can mean backdated VAT and penalties.</li>
+            <li><strong>Applying VAT to VAT-inclusive prices.</strong> Adding 20% to a price that already includes VAT double-charges the tax.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[
@@ -162,6 +182,8 @@ export default function VATCalc() {
               { q: 'How much VAT is in £100?', a: 'If £100 already includes 20% VAT, the VAT element is £16.67 (£100 ÷ 1.2 = £83.33 net, so £16.67 VAT). If you are adding 20% VAT to a £100 net price, the VAT is £20 and the total is £120.' },
               { q: 'What is the VAT registration threshold?', a: 'A business must register for VAT once its VAT-taxable turnover exceeds the registration threshold (£90,000 as of 2024, the latest confirmed figure). You can also register voluntarily below the threshold to reclaim VAT on purchases.' },
               { q: 'Is VAT the same as sales tax?', a: 'They are similar consumer taxes but VAT is collected at each stage of the supply chain, with businesses reclaiming VAT on their inputs, whereas US-style sales tax is charged only at the final sale.' },
+              { q: 'Can I claim VAT back?', a: 'VAT-registered businesses can reclaim the VAT they pay on eligible business purchases (input VAT) by offsetting it against the VAT they charge customers (output VAT). Consumers and non-registered businesses generally cannot reclaim VAT.' },
+              { q: 'Is there VAT on second-hand goods?', a: 'Often yes, but many second-hand items are sold under the VAT Margin Scheme, where VAT is charged only on the seller’s profit margin rather than the full selling price — which is why used-goods dealers may not show VAT separately.' },
             ].map((item, i) => (
               <div key={i} className="bg-gray-50 rounded-lg p-4">
                 <p className="font-semibold text-gray-700 mb-1">{item.q}</p>

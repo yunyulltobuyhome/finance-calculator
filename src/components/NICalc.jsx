@@ -217,6 +217,27 @@ export default function NICalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Worked Example: £35,000 Salary</h2>
+          <p className="leading-relaxed">
+            On a £35,000 salary for 2026/27, you pay no National Insurance on the first £12,570. The remaining
+            £22,430 falls in the main band, taxed at 8% — about £1,794 a year, or roughly £150 a month. Because the
+            main rate only applies between £12,570 and £50,270, someone earning £60,000 pays 8% on that middle band
+            and just 2% on earnings above £50,270 — so NI takes a <em>smaller</em> percentage of income as salaries
+            rise into the higher band, unlike income tax which rises.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">Key Things to Know About NI</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>It builds your State Pension.</strong> Your NI record decides your entitlement — you typically need about 35 qualifying years for the full new State Pension and at least 10 to get any.</li>
+            <li><strong>It stops at State Pension age.</strong> Employees stop paying Class 1 NI once they reach State Pension age, even if they keep working.</li>
+            <li><strong>It is separate from income tax.</strong> NI has its own thresholds, so your payslip shows two deductions that don&apos;t line up.</li>
+            <li><strong>Check for gaps.</strong> Missing years can sometimes be filled with voluntary Class 3 contributions to protect your pension.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

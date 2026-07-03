@@ -234,6 +234,27 @@ export default function SalaryCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Gross Pay vs Take-Home Pay</h2>
+          <p className="leading-relaxed">
+            Your <strong>gross</strong> salary is the headline figure in your job offer — before anything is taken
+            off. Your <strong>take-home</strong> (net) pay is what actually lands in your bank account after income
+            tax, and social contributions like National Insurance (UK) or Social Security and Medicare (US). Because
+            tax is banded, a pay rise is never taxed at your full marginal rate on the whole salary — only the slice
+            in each higher band is. That is why doubling your gross salary does not double your take-home.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">What Else Comes Out of Your Pay</h2>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Pension / retirement contributions.</strong> Workplace pension or 401(k) contributions reduce your take-home now but build long-term savings, often with an employer match and tax relief.</li>
+            <li><strong>Student loan repayments.</strong> In the UK these are a percentage of income above a threshold; in the US they are separate from payroll. Either way they lower disposable income.</li>
+            <li><strong>State and local taxes (US).</strong> This calculator uses federal figures; states like California or New York add their own income tax, while Texas and Florida have none.</li>
+            <li><strong>Benefits in kind.</strong> Perks such as a company car or private medical cover can be taxed through your code, quietly lowering your net pay.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[
