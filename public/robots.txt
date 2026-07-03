@@ -1,20 +1,22 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+
 # Embed pages are noindex utility iframes — don't spend crawl budget on them.
 Disallow: /embed/
 
+# Temporarily hidden from crawling: large clusters of programmatic
+# "template + number" landing pages (e.g. /salary/50000-after-tax-uk,
+# /stamp-duty/300000). These are still live and linked for direct visitors,
+# but are excluded from crawling/indexing while the site is under AdSense
+# review, since a high ratio of near-duplicate template pages relative to
+# original content is a common trigger for a "low value content" review flag.
+# Re-enable (remove these lines + re-add to sitemap.xml) once approved.
+Disallow: /salary/
+Disallow: /stamp-duty/
+Disallow: /capital-gains/
+Disallow: /mortgage/
+Disallow: /auto-loan/
+Disallow: /credit-card-payoff/
+
 Sitemap: https://joincalc.com/sitemap.xml
-
-# Allow major crawlers explicitly
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
