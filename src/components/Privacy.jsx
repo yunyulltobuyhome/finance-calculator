@@ -6,7 +6,7 @@ export default function Privacy() {
       <Helmet>
         <title>Privacy Policy — JoinCalc</title>
         <meta name="description" content="How JoinCalc handles data, cookies, and advertising. We use Google AdSense; calculations run entirely in your browser and we collect no personal data." />
-        <link rel="canonical" href="https://joincalc.com/privacy" />
+        <link rel="canonical" href="https://joincalc.com/privacy/" />
       </Helmet>
 
       <h1 className="text-2xl font-semibold text-gray-800 mb-2">Privacy Policy</h1>

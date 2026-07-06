@@ -23,11 +23,11 @@ export default function GuidesIndex() {
         <title>Money Guides — UK Tax & Finance Explained | JoinCalc</title>
         <meta name="description" content="Plain-English UK money guides on stamp duty, capital gains tax, National Insurance and redundancy pay — each with a free calculator to get your exact figure." />
         <meta name="keywords" content="uk tax guides, stamp duty explained, capital gains tax guide, national insurance explained, redundancy pay guide" />
-        <link rel="canonical" href="https://joincalc.com/guides" />
+        <link rel="canonical" href="https://joincalc.com/guides/" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Money Guides — UK Tax & Finance Explained | JoinCalc" />
-        <meta property="og:url" content="https://joincalc.com/guides" />
+        <meta property="og:url" content="https://joincalc.com/guides/" />
         <script type="application/ld+json">{JSON.stringify(schemaList)}</script>
       </Helmet>
 

@@ -425,7 +425,10 @@ export function Layout() {
 
   // Normalise trailing slash so the canonical matches the prerendered one
   // regardless of how the host serves /path vs /path/.
-  const canonicalPath = location.pathname.replace(/\/+$/, '') || '/'
+  // The host (Cloudflare Pages) serves directory-style pages with a trailing
+  // slash and 308-redirects /salary -> /salary/. So the canonical (and sitemap)
+  // must use the trailing-slash form to point at the real, non-redirecting URL.
+  const canonicalPath = location.pathname === '/' ? '/' : location.pathname.replace(/\/+$/, '') + '/'
   const canonicalUrl = `https://joincalc.com${canonicalPath}`
 
   // WebSite + Organization JSON-LD live in index.html (every page), so they are

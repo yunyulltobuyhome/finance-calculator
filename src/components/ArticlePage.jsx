@@ -22,7 +22,7 @@ export default function ArticlePage() {
   const guide = getGuide(slug)
   if (!guide) return <Navigate to="/guides" replace />
 
-  const canonical = `https://joincalc.com/guides/${guide.slug}`
+  const canonical = `https://joincalc.com/guides/${guide.slug}/`
   const related = (guide.related || []).map(getGuide).filter(Boolean)
 
   const schemaArticle = {

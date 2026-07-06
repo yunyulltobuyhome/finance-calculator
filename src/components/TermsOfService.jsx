@@ -6,7 +6,7 @@ export default function TermsOfService() {
       <Helmet>
         <title>Terms of Service — JoinCalc</title>
         <meta name="description" content="The terms of service for using JoinCalc's free financial calculators. Estimates are for information only and not financial, tax, or legal advice." />
-        <link rel="canonical" href="https://joincalc.com/terms" />
+        <link rel="canonical" href="https://joincalc.com/terms/" />
       </Helmet>
       <h1 className="text-xl font-bold text-gray-800 mb-4">Terms of Service</h1>
       <p className="text-xs text-gray-400 mb-6">Last updated: June 2026</p>

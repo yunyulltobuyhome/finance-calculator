@@ -6,7 +6,7 @@ export default function Contact() {
       <Helmet>
         <title>Contact JoinCalc — Get in Touch</title>
         <meta name="description" content="Contact the JoinCalc team about rate corrections, calculator suggestions, advertising, or privacy questions. We aim to reply within 2 business days." />
-        <link rel="canonical" href="https://joincalc.com/contact" />
+        <link rel="canonical" href="https://joincalc.com/contact/" />
       </Helmet>
 
       <h1 className="text-2xl font-bold text-gray-800 mb-2">Contact Us</h1>
