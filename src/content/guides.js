@@ -698,6 +698,255 @@ export const GUIDES = [
     ],
     related: ['how-much-can-i-borrow-for-a-mortgage', 'how-compound-interest-works'],
   },
+
+  // ── Long-tail question guides ────────────────────────────────────────────
+  // Deliberately narrow, exact-question topics with low search competition —
+  // a new domain can realistically rank for these while the big head terms
+  // ("salary calculator") are dominated by decade-old sites. Each answers one
+  // specific question precisely and funnels to the matching calculator.
+
+  {
+    slug: 'do-i-pay-tax-on-a-bonus-uk',
+    title: 'Do I Pay Tax on a Bonus in the UK? (2026) | JoinCalc',
+    h1: 'Do I Pay Tax on a Bonus in the UK?',
+    description: 'Yes — bonuses are taxed exactly like salary in the UK. See how much tax and National Insurance comes off a bonus in 2026/27, with a worked example.',
+    keywords: 'do i pay tax on a bonus uk, is bonus taxed the same as salary, bonus tax calculator uk, how much tax on bonus 2026',
+    updated: 'July 2026',
+    readMins: 4,
+    tool: { path: '/salary', label: 'Salary Take-Home Calculator', cta: 'See exactly how much of your bonus you keep' },
+    intro: 'Yes — in the UK, a bonus is not taxed differently from your normal salary. HMRC treats it as extra earnings in the pay period you receive it, so it is taxed through PAYE at your normal Income Tax and National Insurance rates. The confusion usually comes from the size of the deduction, which can look higher than expected.',
+    sections: [
+      {
+        h2: 'Why a bonus can feel "extra taxed"',
+        body: ['A £5,000 bonus paid on top of your normal monthly salary can push that single month\'s pay into a higher tax band, so PAYE deducts more that month than your usual payslip. Over the full tax year this evens out — you are not charged a special "bonus tax rate", it is just your normal marginal rate applied to a bigger paycheque that month.'],
+      },
+      {
+        h2: 'Worked example: a £5,000 bonus',
+        body: ['If you are a basic-rate taxpayer receiving a £5,000 bonus, it is taxed at 20% Income Tax and 8% National Insurance (assuming you are within the main NI band) — about £1,400 in deductions, leaving roughly £3,600. If the bonus pushes part of your income above £50,270, that portion is taxed at 40% instead, so a large bonus can be taxed at more than one rate across its own value.'],
+      },
+      {
+        h2: 'What else can reduce the tax on a bonus',
+        list: [
+          'Paying some or all of the bonus into your pension via salary sacrifice avoids Income Tax and NI on that portion entirely.',
+          'If the bonus tips you over £100,000, you start losing your personal allowance, creating an effective rate near 60% on that slice — pension contributions are the main way to avoid this.',
+          'A bonus does not get a separate "bonus tax code" — any PAYE overpayment from a one-off large month is usually refunded automatically later in the tax year.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Is a bonus taxed at a higher rate than salary?', a: 'No special bonus rate exists — it uses your normal Income Tax and NI bands. It can look like a higher rate because the bonus temporarily raises that month\'s income into a higher band, but this balances out across the tax year.' },
+      { q: 'Can I avoid tax on a bonus?', a: 'Not entirely, but sacrificing some or all of it into a pension avoids Income Tax and NI on that portion, since pension contributions come out before tax.' },
+      { q: 'Does a bonus count towards my student loan repayment?', a: 'Yes. A bonus is added to your income for that pay period, so if it pushes you above your student loan threshold, you repay 9% (or 6% for postgraduate loans) on the amount above it.' },
+    ],
+    related: ['how-to-calculate-take-home-pay-uk', 'how-is-national-insurance-calculated-uk'],
+  },
+
+  {
+    slug: 'do-i-pay-national-insurance-on-my-pension',
+    title: 'Do I Pay National Insurance on My Pension? (UK 2026) | JoinCalc',
+    h1: 'Do I Pay National Insurance on My Pension?',
+    description: 'No — pension income is not subject to National Insurance in the UK, though it is still taxed. See exactly what is and isn\'t deducted from your pension.',
+    keywords: 'do i pay national insurance on my pension, is pension income taxed, ni on pension uk, tax on private pension 2026',
+    updated: 'July 2026',
+    readMins: 4,
+    tool: { path: '/retirement', label: '401k & Pension Calculator', cta: 'Project your pension pot and income' },
+    intro: 'No. Once you start drawing your pension — whether it\'s the State Pension, a workplace pension or a private pension — you do not pay National Insurance on that income, regardless of your age. This is one of the few genuine tax advantages of retirement income over employment income.',
+    sections: [
+      {
+        h2: 'Why pension income is NI-free',
+        body: ['National Insurance is charged on earnings from work — employment or self-employment. Pension income is treated as "unearned" for NI purposes, so Class 1 (employee) and Class 4 (self-employed) National Insurance simply do not apply to it, even if you are under State Pension age when you start drawing a private pension.'],
+      },
+      {
+        h2: 'But Income Tax still applies',
+        body: ['Pension income is not NI-free of all deductions — it is still subject to Income Tax in the normal way, using your personal allowance (£12,570 for 2026/27) and the standard 20%/40%/45% bands. If your total income from the State Pension, a workplace pension and any part-time work exceeds your allowance, you pay tax on the excess.'],
+      },
+      {
+        h2: 'What if I keep working after taking my pension?',
+        list: [
+          'Employment income is still subject to NI, even while you are also drawing a pension — the two income types are assessed separately for NI purposes.',
+          'Once you reach State Pension age, you stop paying employee NI on any earnings, whether or not you have also started your pension.',
+          'The 25% pension tax-free lump sum, when taken, is not subject to Income Tax or NI.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Do I pay NI on the State Pension?', a: 'No. The State Pension is never subject to National Insurance, and by the time you can claim it you have already reached State Pension age, at which point NI stops on any income.' },
+      { q: 'Is a workplace pension taxed when I draw it?', a: 'Yes, for Income Tax — it is added to your taxable income and taxed at your normal rate above the personal allowance. It is just exempt from National Insurance.' },
+      { q: 'Do employer pension contributions count towards NI?', a: 'Employer pension contributions are not subject to NI for either the employer or employee, which is one reason salary sacrifice into a pension is tax-efficient.' },
+    ],
+    related: ['how-is-national-insurance-calculated-uk', 'how-to-calculate-take-home-pay-uk'],
+  },
+
+  {
+    slug: 'is-redundancy-pay-taxed-if-i-get-a-new-job',
+    title: 'Is Redundancy Pay Taxed If I Get a New Job Straight Away? | JoinCalc',
+    h1: 'Is Redundancy Pay Taxed If I Get a New Job Straight Away?',
+    description: 'No — the £30,000 tax-free redundancy allowance applies regardless of whether you start a new job immediately. Here\'s exactly how it works.',
+    keywords: 'is redundancy pay taxed if i get a new job, redundancy pay new job same year, tax free redundancy allowance, redundancy pay and new employment',
+    updated: 'July 2026',
+    readMins: 4,
+    tool: { path: '/redundancy', label: 'Redundancy Pay Calculator', cta: 'Work out your redundancy entitlement' },
+    intro: 'No — finding a new job straight away does not affect the tax treatment of your redundancy pay. The first £30,000 of a genuine redundancy payment is tax-free regardless of what you do next, including starting a new job the very next day.',
+    sections: [
+      {
+        h2: 'The £30,000 exemption is about the payment, not your employment status',
+        body: ['HMRC\'s £30,000 tax-free threshold applies to the redundancy payment itself, based on it being compensation for loss of employment — not on you remaining unemployed afterwards. Whether you are out of work for six months or start a new role on Monday, the same tax-free treatment applies to a genuine redundancy payment.'],
+      },
+      {
+        h2: 'What this does NOT cover',
+        list: [
+          'Anything above £30,000 is still taxed as income at your normal rate, regardless of your new job status.',
+          'Pay in lieu of notice (PILON), unpaid wages and accrued holiday pay are taxed as normal income and are separate from the £30,000 exemption.',
+          'If your new job starts in the same tax year, your redundancy payment and new salary are simply both added to your income for that tax year when working out your overall Income Tax — the redundancy exemption itself does not shrink because of the new job.',
+        ],
+      },
+      {
+        h2: 'A common misconception',
+        body: ['Some people believe redundancy pay becomes taxable if you are re-employed quickly, perhaps confusing it with unemployment benefit rules. There is no such rule for redundancy pay — the £30,000 exemption is a fixed feature of a genuine redundancy payment and does not depend on your subsequent employment.'],
+      },
+    ],
+    faq: [
+      { q: 'Do I have to tell HMRC I got a new job after redundancy?', a: 'Your new employer will collect tax through PAYE using your tax code as normal. You do not need to inform HMRC specifically about the redundancy payment — your employer reports it, and the £30,000 exemption is applied automatically by your former employer\'s payroll.' },
+      { q: 'Does redundancy pay affect my tax code at my new job?', a: 'It can temporarily, if the redundancy payment and new salary land in the same tax month and push your income unusually high, similar to a large bonus. Any overpaid tax is generally corrected automatically over the rest of the tax year.' },
+      { q: 'Is redundancy pay taxed differently if I retire instead of getting a new job?', a: 'No — the tax treatment of the £30,000 exemption is the same whether you retire, take time off, or start a new job immediately. It depends on the nature of the payment, not what you do afterwards.' },
+    ],
+    related: ['how-much-redundancy-pay-uk', 'how-to-calculate-take-home-pay-uk'],
+  },
+
+  {
+    slug: 'how-much-can-i-earn-before-40-percent-tax-uk',
+    title: 'How Much Can I Earn Before I Pay 40% Tax in the UK? | JoinCalc',
+    h1: 'How Much Can I Earn Before I Pay 40% Tax in the UK?',
+    description: 'You start paying the 40% higher rate once your taxable income passes £50,270 in 2026/27. See exactly where the threshold falls and how it is calculated.',
+    keywords: 'how much can i earn before 40 percent tax, higher rate tax threshold uk 2026, when do i pay 40 tax, 40 tax bracket uk',
+    updated: 'July 2026',
+    readMins: 4,
+    tool: { path: '/salary', label: 'Salary Take-Home Calculator', cta: 'See exactly how much tax you pay at your salary' },
+    intro: 'For the 2026/27 tax year, you start paying the 40% higher rate once your taxable income exceeds £50,270 a year. Below that, income above your personal allowance is taxed at the 20% basic rate. Only the portion of income above £50,270 is taxed at 40% — not your whole salary.',
+    sections: [
+      {
+        h2: 'The exact threshold',
+        table: {
+          headers: ['Band', 'Income range', 'Rate'],
+          rows: [
+            ['Personal allowance', 'Up to £12,570', '0%'],
+            ['Basic rate', '£12,571 – £50,270', '20%'],
+            ['Higher rate', '£50,271 – £125,140', '40%'],
+            ['Additional rate', 'Over £125,140', '45%'],
+          ],
+          note: 'These are 2026/27 figures for England, Wales and Northern Ireland. Scotland has its own income tax bands.',
+        },
+      },
+      {
+        h2: 'Only the excess is taxed at 40%',
+        body: ['Crossing £50,270 does not mean your whole salary is suddenly taxed at 40%. Only the slice of income above that threshold is taxed at the higher rate — the first £50,270 is still taxed at 0% and 20% as before. Someone earning £55,000 pays 40% only on the £4,730 above the threshold.'],
+      },
+      {
+        h2: 'Things that can push you into the higher rate unexpectedly',
+        list: [
+          'A pay rise or bonus that tips your annual income over £50,270.',
+          'Combining income from a second job, freelance work or rental income with your main salary.',
+          'Losing part of your personal allowance above £100,000, which raises your effective rate further.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Does the 40% threshold change every year?', a: 'The government sets it in the Budget and it has been frozen at £50,270 for several years running (a "fiscal drag" freeze), meaning more people cross it each year purely through pay rises and inflation.' },
+      { q: 'Can I avoid paying 40% tax?', a: 'You cannot avoid tax on income you keep, but pension contributions and salary sacrifice reduce your taxable income, which can keep you under the threshold or reduce how much falls into the higher band.' },
+      { q: 'Is the 40% threshold the same in Scotland?', a: 'No. Scotland sets its own income tax bands and rates, which differ from the rest of the UK — check the Scottish rates separately if you pay tax there.' },
+    ],
+    related: ['how-to-calculate-take-home-pay-uk', 'do-i-pay-tax-on-a-bonus-uk'],
+  },
+
+  {
+    slug: 'do-i-pay-tax-on-dividends-from-my-own-company',
+    title: 'Do I Pay Tax on Dividends From My Own Limited Company? | JoinCalc',
+    h1: 'Do I Pay Tax on Dividends From My Own Limited Company?',
+    description: 'Yes — dividends from your own limited company are taxed at dividend rates after a £500 allowance, separately from salary. Here\'s how it works for 2026/27.',
+    keywords: 'do i pay tax on dividends from my own company, director dividend tax uk, dividend allowance 2026, limited company dividend tax',
+    updated: 'July 2026',
+    readMins: 5,
+    tool: { path: '/dividend', label: 'Dividend Income Calculator', cta: 'Estimate your dividend income and tax' },
+    intro: 'Yes — dividends you pay yourself from your own limited company are taxed as personal income, separately from any salary you draw. They use their own tax-free allowance and their own set of rates, which are lower than Income Tax rates on salary — a major reason many director-shareholders pay themselves a mix of a small salary plus dividends.',
+    sections: [
+      {
+        h2: 'The dividend allowance and rates (2026/27)',
+        table: {
+          headers: ['Band', 'Rate on dividends'],
+          rows: [
+            ['Dividend allowance', '£500 tax-free'],
+            ['Basic rate', '8.75%'],
+            ['Higher rate', '33.75%'],
+            ['Additional rate', '39.35%'],
+          ],
+          note: 'Which rate applies depends on your total income (salary + dividends), stacked with your other income first.',
+        },
+      },
+      {
+        h2: 'Why dividends are separate from your salary',
+        body: ['Your salary is taxed through PAYE with Income Tax and National Insurance. Dividends are paid from the company\'s post-tax profits (the company has already paid Corporation Tax on that profit) and are taxed on you personally at the lower dividend rates, with no National Insurance charged on dividends at all. This is why many director-shareholders draw a small salary — often around the NI threshold — and take the rest of their income as dividends.'],
+      },
+      {
+        h2: 'What to watch for',
+        list: [
+          'You can only pay dividends from retained, post-tax profit — not from money the company hasn\'t actually earned.',
+          'The £500 dividend allowance is separate from your £12,570 personal allowance, but dividend income still counts towards which tax band you are in overall.',
+          'HMRC expects a dividend voucher and board minutes for each dividend payment as evidence it was properly declared.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'How much can I pay myself in dividends tax-free?', a: 'The dividend allowance is £500 for 2026/27. If you have no other income, you could also use your unused £12,570 personal allowance against dividends first, but most director-shareholders also draw a salary, which uses up that allowance.' },
+      { q: 'Do dividends count as income for a mortgage application?', a: 'Yes, lenders generally accept dividend income as evidence of earnings for self-employed directors, usually averaged over 1–3 years of accounts.' },
+      { q: 'Is it better to take a salary or dividends from my company?', a: 'A combination is usually most tax-efficient: a small salary (often around the NI threshold, to preserve State Pension qualifying years) plus dividends for the rest, since dividends avoid NI and are taxed at lower rates than salary.' },
+    ],
+    related: ['how-is-national-insurance-calculated-uk', 'how-to-calculate-take-home-pay-uk'],
+  },
+
+  {
+    slug: 'does-a-pay-rise-affect-my-student-loan-repayment',
+    title: 'Does a Pay Rise Affect My Student Loan Repayment? | JoinCalc',
+    h1: 'Does a Pay Rise Affect My Student Loan Repayment?',
+    description: 'Yes — student loan repayments are 9% of income above your plan\'s threshold, so a pay rise increases your monthly repayment. See exactly how much.',
+    keywords: 'does a pay rise affect my student loan, student loan repayment goes up, pay rise student loan uk, how much more do i repay student loan',
+    updated: 'July 2026',
+    readMins: 4,
+    tool: { path: '/student-loan', label: 'Student Loan Repayment Calculator', cta: 'See your new repayment after a pay rise' },
+    intro: 'Yes — because UK student loan repayments are calculated as 9% of your income above your plan\'s threshold (6% for Postgraduate loans), any pay rise that keeps you above the threshold increases your monthly repayment. The increase is smaller than you might expect, since only the amount above the threshold is used in the calculation.',
+    sections: [
+      {
+        h2: 'How the increase is calculated',
+        body: ['A pay rise adds to your income, and if you are already above your plan\'s repayment threshold, 9% (or 6% for Postgraduate loans) of the full pay rise goes toward extra repayment. For example, on Plan 2 (threshold £29,385), a £2,000 pay rise for someone already earning £35,000 adds £180 a year (£15 a month) to their repayment — not 9% of your whole new salary.'],
+      },
+      {
+        h2: 'Repayment thresholds by plan (2026)',
+        table: {
+          headers: ['Plan', 'Threshold', 'Rate'],
+          rows: [
+            ['Plan 1', '£24,990', '9%'],
+            ['Plan 2', '£29,385', '9%'],
+            ['Plan 4 (Scotland)', '£32,745', '9%'],
+            ['Plan 5', '£25,000', '9%'],
+            ['Postgraduate', '£21,000', '6%'],
+          ],
+        },
+      },
+      {
+        h2: 'What if the pay rise pushes me above the threshold for the first time?',
+        list: [
+          'If you were earning below the threshold and a pay rise takes you above it, you only start repaying on the amount above the threshold — not the whole salary.',
+          'If you have both a Plan and a Postgraduate loan simultaneously, both repayments (9% and 6%) apply on top of each other above their respective thresholds, which can add up to 15% combined.',
+          'A bonus is treated the same way as a pay rise for that pay period — it can temporarily increase that month\'s repayment.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Will my student loan repayment go up every time I get a raise?', a: 'Only if the raise keeps your income above your plan\'s threshold. If you are already above it, yes — 9% (or 6% for Postgraduate) of the extra income goes to repayment automatically through PAYE.' },
+      { q: 'Can I choose to repay less after a pay rise?', a: 'No — the repayment percentage is fixed by law based on your plan and income; you cannot opt to repay less unless your income actually falls or you have finished repaying the loan.' },
+      { q: 'Does overpaying my student loan voluntarily reduce future repayments?', a: 'Voluntary overpayments reduce your outstanding balance and can shorten how long you repay, but they do not change the 9%/6% rate applied to your income each month unless your balance is fully cleared.' },
+    ],
+    related: ['student-loan-repayments-explained', 'how-to-calculate-take-home-pay-uk'],
+  },
 ]
 
 export const GUIDE_SLUGS = GUIDES.map(g => g.slug)
