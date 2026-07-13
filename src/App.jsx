@@ -73,50 +73,50 @@ const NAV = [
     items: [
       {
         label: 'Stamp Duty', icon: '🏛️', path: '/stamp-duty',
-        title: 'Stamp Duty Calculator 2026 — UK SDLT | JoinCalc',
-        description: 'Calculate UK Stamp Duty Land Tax (SDLT). Updated April 2025 rates for first-time buyers, standard buyers and additional properties.',
+        title: "Stamp Duty Calculator UK 2026 — Instant & Free | JoinCalc",
+        description: "See exactly what stamp duty you'll pay in seconds — 2026 SDLT bands, first-time buyer relief and the second-home surcharge. Free, no sign-up.",
         keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty',
         lastUpdated: 'April 2025',
       },
       {
         label: 'Capital Gains', icon: '📊', path: '/capital-gains',
-        title: 'Capital Gains Tax Calculator 2026 — US & UK | JoinCalc',
-        description: 'Calculate capital gains tax for the US or UK. 2026 rates: long-term, short-term, NIIT, and UK annual exempt amount.',
+        title: "Capital Gains Tax Calculator 2026 — US & UK | JoinCalc",
+        description: "Work out your exact CGT bill in seconds for shares, property or crypto — 2026 US & UK rates and allowances built in. Free, no sign-up.",
         keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains',
         lastUpdated: 'January 2026',
       },
       {
         label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
-        title: 'Inheritance Tax Calculator 2026 — UK IHT & US Estate Tax | JoinCalc',
-        description: 'Calculate UK Inheritance Tax or US Estate Tax. 2026 nil-rate band, RNRB, and $15M US exemption included.',
+        title: "Inheritance Tax Calculator 2026 (UK & US) | JoinCalc",
+        description: "Estimate inheritance tax in seconds — UK nil-rate band & RNRB or the $15M US exemption, with a full breakdown. Free and anonymous.",
         keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band',
         lastUpdated: 'July 2025',
       },
       {
         label: 'National Insurance', icon: '🏥', path: '/national-insurance',
-        title: 'UK National Insurance Calculator 2026/27 | JoinCalc',
-        description: 'Estimate your UK National Insurance contributions for 2026/27. Employee 8%/2% rates, employer 15% rate, and take-home pay breakdown.',
+        title: "National Insurance Calculator 2026/27 (UK) | JoinCalc",
+        description: "See exactly how much National Insurance you'll pay in 2026/27, plus your take-home pay, with the 8% and 2% bands explained. Free & instant.",
         keywords: 'national insurance calculator 2026, NI calculator UK, how much national insurance do I pay',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Self-Employed Tax', icon: '🧾', path: '/self-employed',
-        title: 'UK Self-Employed Tax Calculator 2026/27 — Sole Trader & Freelancer | JoinCalc',
-        description: 'Calculate Income Tax and Class 4 NI as a self-employed sole trader or freelancer. 2026/27 HMRC rates, pension deductions, and take-home profit estimate.',
+        title: "Self-Employed Tax Calculator UK 2026/27 | JoinCalc",
+        description: "Sole trader or freelancer? See your Income Tax, Class 4 NI and take-home profit for 2026/27 in seconds. HMRC rates. Free, no sign-up.",
         keywords: 'self employed tax calculator UK 2026, sole trader tax calculator, freelancer tax calculator UK, class 4 national insurance calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Corporation Tax', icon: '🏢', path: '/corporation-tax',
-        title: 'UK Corporation Tax Calculator 2026/27 — Marginal Relief | JoinCalc',
-        description: 'Calculate UK Corporation Tax for 2026/27. 19% small profits rate, 25% main rate, and Marginal Relief for profits between £50,000 and £250,000.',
+        title: "Corporation Tax Calculator UK 2026/27 | JoinCalc",
+        description: "Work out your company's 2026/27 Corporation Tax in seconds — 19% and 25% rates with Marginal Relief calculated for you. Free, no sign-up.",
         keywords: 'corporation tax calculator UK 2026, UK company tax calculator, marginal relief calculator, small profits rate 2026',
         lastUpdated: 'April 2026',
       },
       {
         label: 'VAT', icon: '🧮', path: '/vat',
-        title: 'VAT Calculator UK 2026 — Add or Remove VAT | JoinCalc',
-        description: 'Free UK VAT calculator. Add 20% VAT to a net price or remove VAT from a gross price. Supports the 20% standard, 5% reduced and 0% zero rates.',
+        title: "VAT Calculator UK — Add or Remove VAT Instantly | JoinCalc",
+        description: "Add or strip UK VAT in one click at 20%, 5% or 0% — see the net, VAT and gross instantly, without the common ÷1.2 mistake. Free tool.",
         keywords: 'vat calculator uk, add vat calculator, remove vat calculator, 20% vat calculator, how to work out vat',
         lastUpdated: 'June 2026',
       },
@@ -127,22 +127,22 @@ const NAV = [
     items: [
       {
         label: 'Buy vs Rent', icon: '🏠', path: '/buy-vs-rent',
-        title: 'Buy vs Rent Calculator 2026 | JoinCalc',
-        description: 'Should you buy or rent? Compare total costs over time for US, UK, Canada and Australia.',
+        title: "Buy vs Rent Calculator — Which Saves You More? | JoinCalc",
+        description: "Renting or buying: which leaves you better off? Compare the true long-term costs for the US, UK, Canada & Australia in seconds. Free.",
         keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Mortgage', icon: '🔑', path: '/mortgage',
-        title: 'Mortgage Affordability Calculator 2026 — How Much Can I Borrow? | JoinCalc',
-        description: 'Calculate how much mortgage you can afford. US DTI method and UK income multiple (4x–5.5x). Updated June 2026.',
+        title: "How Much Can I Borrow? Mortgage Calculator 2026 | JoinCalc",
+        description: "See how much mortgage you could borrow in seconds — UK income multiples (4–5.5x) and the US DTI method side by side. Free, no sign-up.",
         keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Refinance', icon: '🔄', path: '/refinance',
-        title: 'Mortgage Refinance Calculator 2026 — Savings & Break-Even | JoinCalc',
-        description: 'Should you refinance? Calculate your new monthly payment, monthly savings, break-even point on closing costs, and lifetime interest.',
+        title: "Refinance Calculator — Should I Refinance? | JoinCalc",
+        description: "See your new payment, monthly savings and exact break-even month before you refinance — plus lifetime interest compared. Free & instant.",
         keywords: 'mortgage refinance calculator, refinance calculator, should i refinance, refinance break even calculator, refinance savings',
         lastUpdated: 'June 2026',
       },
@@ -153,50 +153,50 @@ const NAV = [
     items: [
       {
         label: 'FIRE', icon: '🔥', path: '/fire',
-        title: 'FIRE Calculator 2026 — Financial Independence Retire Early | JoinCalc',
-        description: 'Calculate your FIRE number, retirement age, and savings goal.',
+        title: "FIRE Calculator — When Can I Retire Early? | JoinCalc",
+        description: "Find your FIRE number and the age you could retire early, using the 4% rule and your real savings rate. Takes 30 seconds — free, no sign-up.",
         keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator',
         lastUpdated: 'June 2026',
       },
       {
         label: '401k / Pension', icon: '🧓', path: '/retirement',
-        title: '401k & Pension Calculator 2026 — Retirement Savings | JoinCalc',
-        description: 'Project your 401k or UK pension pot. 2026 IRS limits ($24,500), employer match, and UK £60,000 annual allowance.',
+        title: "401k & Pension Calculator 2026 — Your Pot at 65 | JoinCalc",
+        description: "Project your 401k or pension pot to retirement — employer match, 2026 IRS $24,500 limit and UK £60k allowance included. Free, no sign-up.",
         keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator',
         lastUpdated: 'July 2025',
       },
       {
         label: 'Roth vs Traditional IRA', icon: '🏦', path: '/roth-ira',
-        title: 'Roth vs Traditional IRA Calculator 2026 | JoinCalc',
-        description: 'Compare Roth IRA vs Traditional IRA projected values. 2026 IRS limits, income phase-outs, tax break-even analysis.',
+        title: "Roth vs Traditional IRA Calculator 2026 | JoinCalc",
+        description: "Roth or Traditional? Compare projected after-tax values side by side with 2026 IRS limits and income phase-outs. Decide in seconds — free.",
         keywords: 'roth ira calculator 2026, roth vs traditional ira, ira contribution limit 2026',
         lastUpdated: 'January 2026',
       },
       {
         label: 'Social Security', icon: '🇺🇸', path: '/social-security',
-        title: 'US Social Security Benefits Calculator 2026 | JoinCalc',
-        description: 'Estimate your monthly Social Security retirement benefit. Compare claiming ages 62–70, FRA benefit, delayed credits, and early reduction.',
+        title: "Social Security Calculator 2026 — Benefit by Age | JoinCalc",
+        description: "Estimate your monthly Social Security check and compare claiming at 62, 67 or 70 — see exactly what waiting is worth. Free, no sign-up.",
         keywords: 'social security calculator 2026, when to claim social security, social security retirement benefit estimate, full retirement age calculator',
         lastUpdated: 'January 2026',
       },
       {
         label: 'Pension Credit', icon: '🧓', path: '/pension-credit',
-        title: 'UK Pension Credit Calculator 2026/27 | JoinCalc',
-        description: 'Estimate your UK Pension Credit entitlement — Guarantee Credit and Savings Credit. Updated 2026/27 HMRC rates.',
+        title: "Pension Credit Calculator UK 2026/27 | JoinCalc",
+        description: "Check in seconds whether you qualify for Pension Credit and how much — Guarantee and Savings Credit at 2026/27 rates. Free and anonymous.",
         keywords: 'pension credit calculator UK 2026, guarantee credit calculator, pension credit eligibility, how much pension credit',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Dividend Income', icon: '💰', path: '/dividend',
-        title: 'Dividend Income Calculator | JoinCalc',
-        description: 'Estimate dividend income and passive cash flow with DRIP reinvestment support.',
+        title: "Dividend Income Calculator — Live Off Dividends? | JoinCalc",
+        description: "See the dividend income your portfolio could pay — with DRIP reinvestment and dividend growth compounding year by year. Free, no sign-up.",
         keywords: 'dividend calculator, dividend income calculator, DRIP calculator',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Compound Interest', icon: '📈', path: '/compound',
-        title: 'Compound Interest Calculator | JoinCalc',
-        description: 'See how your money grows with compound interest and monthly contributions.',
+        title: "Compound Interest Calculator — Watch Money Grow | JoinCalc",
+        description: "See what your savings become with compound growth and monthly deposits — S&P 500 and savings-account presets built in. Free, instant results.",
         keywords: 'compound interest calculator, compound growth calculator',
         lastUpdated: 'June 2026',
       },
@@ -207,43 +207,43 @@ const NAV = [
     items: [
       {
         label: 'Salary & Tax', icon: '💼', path: '/salary',
-        title: 'Salary Take-Home Calculator 2026 — After Tax Income | JoinCalc',
-        description: 'Calculate your take-home pay after tax for US, UK, Canada and Australia.',
+        title: "Salary Calculator 2026 — Take-Home Pay After Tax | JoinCalc",
+        description: "See your real take-home pay for 2026 in seconds — income tax, NI/FICA and monthly net for the US, UK, Canada & Australia. Free, no sign-up.",
         keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Pay Rise', icon: '📈', path: '/pay-rise',
-        title: 'Pay Rise Calculator UK 2026 — How Much Will I Keep After Tax? | JoinCalc',
-        description: 'Work out your new salary after a pay rise and how much you actually keep after income tax and National Insurance. 2026/27 UK rates.',
+        title: "Pay Rise Calculator UK — What You Actually Keep | JoinCalc",
+        description: "Got a pay rise? See your new salary and how much of the rise survives tax and NI — most people keep just 58–72%. Free, instant answer.",
         keywords: 'pay rise calculator uk, salary increase calculator, pay rise after tax, how much of my pay rise will i keep',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Redundancy Pay', icon: '📋', path: '/redundancy',
-        title: 'UK Statutory Redundancy Pay Calculator 2026 | JoinCalc',
-        description: 'Estimate your UK statutory redundancy pay entitlement. Updated April 2026 rates.',
+        title: "Redundancy Pay Calculator UK 2026 | JoinCalc",
+        description: "Facing redundancy? Check your exact statutory entitlement in seconds — 2026 £751 weekly cap and the £30,000 tax-free limit. Free tool.",
         keywords: 'redundancy pay calculator UK 2026, statutory redundancy calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Holiday Entitlement', icon: '🌴', path: '/holiday',
-        title: 'UK Holiday Entitlement Calculator 2026 | JoinCalc',
-        description: 'Calculate your statutory UK annual leave entitlement. Full-time, part-time and irregular hours workers.',
+        title: "Holiday Entitlement Calculator UK 2026 | JoinCalc",
+        description: "Work out your exact statutory holiday allowance — full-time, part-time and irregular hours, including bank holidays. Free & instant.",
         keywords: 'holiday entitlement calculator UK 2026, statutory holiday calculator',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Student Loan', icon: '🎓', path: '/student-loan',
-        title: 'UK Student Loan Repayment Calculator 2026 — Plan 1, 2, 4, 5 & PG | JoinCalc',
-        description: 'Estimate your UK student loan monthly repayments. Covers Plan 1, 2, 4, 5 and Postgraduate loans.',
+        title: "Student Loan Repayment Calculator UK — All Plans | JoinCalc",
+        description: "See your real monthly student loan repayment for Plan 1, 2, 4, 5 or Postgraduate — and when it's written off. Free, takes 20 seconds.",
         keywords: 'student loan calculator UK 2026, student loan repayment calculator, plan 2 student loan',
         lastUpdated: 'April 2026',
       },
       {
         label: 'Loan Calculator', icon: '🏦', path: '/loan',
-        title: 'Loan Calculator — Monthly Payments & Amortization | JoinCalc',
-        description: 'Calculate monthly loan payments, total interest and amortization schedule.',
+        title: "Loan Repayment Calculator — Payment & Interest | JoinCalc",
+        description: "Get your exact monthly payment, total interest and full amortization schedule for any loan, rate and term. Free — no sign-up, no email.",
         keywords: 'loan calculator, monthly payment calculator, amortization calculator',
         lastUpdated: 'June 2026',
       },
@@ -254,15 +254,15 @@ const NAV = [
     items: [
       {
         label: 'Credit Card Payoff', icon: '💳', path: '/credit-card-payoff',
-        title: 'Credit Card Payoff Calculator 2026 — Months & Interest | JoinCalc',
-        description: 'See how long it takes to pay off your credit card, the total interest, and how much faster you clear it by paying more than the minimum.',
+        title: "Credit Card Payoff Calculator — Debt-Free Date | JoinCalc",
+        description: "Find your debt-free date and total interest — and see what paying more than the minimum really saves you. Free, private, instant.",
         keywords: 'credit card payoff calculator, credit card interest calculator, pay off credit card, minimum payment calculator, debt payoff calculator',
         lastUpdated: 'June 2026',
       },
       {
         label: 'Auto Loan', icon: '🚗', path: '/auto-loan',
-        title: 'Auto Loan Calculator 2026 — Monthly Car Payment | JoinCalc',
-        description: 'Calculate your monthly car payment, total interest and cost. Factor in down payment, trade-in, sales tax, APR and loan term.',
+        title: "Auto Loan Calculator — Monthly Car Payment | JoinCalc",
+        description: "Get your real monthly car payment with tax, down payment and trade-in included — plus total interest by term. Free, no sign-up.",
         keywords: 'auto loan calculator, car loan calculator, car payment calculator, monthly car payment, vehicle finance calculator',
         lastUpdated: 'June 2026',
       },
@@ -411,12 +411,12 @@ export function Layout() {
   }
 
   const seoTitle = isHome
-    ? 'Free Financial Calculators 2026 — Tax, Mortgage, Retirement | JoinCalc'
+    ? 'Free Financial Calculators 2026 — Tax, Salary & More | JoinCalc'
     : isStatic ? 'JoinCalc — Free Financial Calculators'
     : currentTab?.title || 'JoinCalc'
 
   const seoDesc = isHome
-    ? 'Free financial calculators for 2026: stamp duty, capital gains, corporation tax, self-employed tax, national insurance, social security, pension credit, mortgage, 401k, salary, FIRE, and more. US & UK.'
+    ? '25 free calculators for tax, salary, mortgage, debt and retirement — 2026 rates for the US & UK. Instant answers in your browser, no sign-up ever.'
     : currentTab?.description || ''
 
   const seoKeywords = isHome
