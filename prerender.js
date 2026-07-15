@@ -49,6 +49,14 @@ for (const route of routes) {
   if (pageTitle) page = sub(page, /<title>[\s\S]*?<\/title>/, `<title>${pageTitle}</title>`)
   page = sub(page, '</head>', `${headTags}</head>`)
 
+  // Rewrite internal links to the trailing-slash form the host serves with a
+  // 200, so crawlers following prerendered links never hit the /path -> /path/
+  // 308 redirect (which kept non-canonical URL variants alive in Search
+  // Console). Only touches extension-less, root-relative paths; files like
+  // /og-image.png, /sitemap.xml and external URLs are left alone. After JS
+  // loads, React Router intercepts clicks anyway, so users are unaffected.
+  page = page.replace(/href="(\/[a-zA-Z0-9-]+(?:\/[a-zA-Z0-9-]+)*)"/g, 'href="$1/"')
+
   const outPath = route === '/' ? path.join(dist, 'index.html') : path.join(dist, route, 'index.html')
   fs.mkdirSync(path.dirname(outPath), { recursive: true })
   fs.writeFileSync(outPath, page)

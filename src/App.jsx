@@ -331,6 +331,8 @@ function SiteFooter() {
 
 function Sidebar({ onClose }) {
   const location = useLocation()
+  // Normalise the trailing slash so active states work on /salary/ etc.
+  const path = location.pathname !== '/' ? location.pathname.replace(/\/+$/, '') : '/'
   return (
     <nav className="flex flex-col h-full">
       <div className="p-5 border-b border-gray-100">
@@ -339,14 +341,14 @@ function Sidebar({ onClose }) {
       <div className="flex-1 overflow-y-auto py-3 px-3">
         <Link to="/" onClick={onClose}
           className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
-            location.pathname === '/' ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+            path === '/' ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
           }`}>
           <span className="text-base w-5 text-center">🏠</span>
           <span>All Calculators</span>
         </Link>
         <Link to="/guides" onClick={onClose}
           className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
-            location.pathname.startsWith('/guides') ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+            path.startsWith('/guides') ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
           }`}>
           <span className="text-base w-5 text-center">📚</span>
           <span>Money Guides</span>
@@ -357,7 +359,7 @@ function Sidebar({ onClose }) {
               {group.category}
             </p>
             {group.items.map((tab) => {
-              const isActive = location.pathname === tab.path
+              const isActive = path === tab.path
               return (
                 <Link key={tab.path} to={tab.path} onClick={onClose}
                   className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-sm font-medium transition-all ${
@@ -384,18 +386,23 @@ function Sidebar({ onClose }) {
 
 export function Layout() {
   const location = useLocation()
-  const isStatic = STATIC_PAGES.includes(location.pathname)
-  const isHome = location.pathname === '/'
+  // The host serves pages at trailing-slash URLs (/salary/), which is also the
+  // canonical form. Normalise before any flag/lookup comparison so /salary/ is
+  // recognised as the salary calculator — not mistaken for a /salary/:slug
+  // landing (which previously stripped the page chrome on canonical URLs).
+  const path = location.pathname !== '/' ? location.pathname.replace(/\/+$/, '') : '/'
+  const isStatic = STATIC_PAGES.includes(path)
+  const isHome = path === '/'
   // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) and guide
   // articles own their own <Helmet>, heading and disclaimer, so they render
-  // without the card chrome.
-  const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/', '/auto-loan/', '/credit-card-payoff/'].some(p => location.pathname.startsWith(p))
-  const isGuide = location.pathname === '/guides' || location.pathname.startsWith('/guides/')
+  // without the card chrome. (After normalisation, /salary/ no longer matches.)
+  const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/', '/auto-loan/', '/credit-card-payoff/'].some(p => path.startsWith(p))
+  const isGuide = path === '/guides' || path.startsWith('/guides/')
   // Static pages (about/contact/privacy/terms) set their own <Helmet>, so the
   // layout must not also emit title/description/canonical for them.
   const ownsMeta = isLanding || isGuide || isStatic
-  const currentTab = allTabs.find(t => t.path === location.pathname)
-  const relatedGuide = CALC_GUIDE[location.pathname]
+  const currentTab = allTabs.find(t => t.path === path)
+  const relatedGuide = CALC_GUIDE[path]
   // Unknown URL → 404 page (renders without the calculator card/chrome).
   const isUnknown = !isHome && !isStatic && !isGuide && !isLanding && !currentTab
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -428,7 +435,7 @@ export function Layout() {
   // The host (Cloudflare Pages) serves directory-style pages with a trailing
   // slash and 308-redirects /salary -> /salary/. So the canonical (and sitemap)
   // must use the trailing-slash form to point at the real, non-redirecting URL.
-  const canonicalPath = location.pathname === '/' ? '/' : location.pathname.replace(/\/+$/, '') + '/'
+  const canonicalPath = path === '/' ? '/' : path + '/'
   const canonicalUrl = `https://joincalc.com${canonicalPath}`
 
   // WebSite + Organization JSON-LD live in index.html (every page), so they are
