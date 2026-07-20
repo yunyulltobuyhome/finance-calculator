@@ -35,6 +35,8 @@ import PayRiseCalc from './components/PayRiseCalc'
 import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
 import AutoLoanCalc from './components/AutoLoanCalc'
 import RefinanceCalc from './components/RefinanceCalc'
+import HourlyToSalaryCalc from './components/HourlyToSalaryCalc'
+import DebtConsolidationCalc from './components/DebtConsolidationCalc'
 import AutoLoanLanding from './components/AutoLoanLanding'
 import CreditCardLanding from './components/CreditCardLanding'
 import GuidesIndex from './components/GuidesIndex'
@@ -63,6 +65,8 @@ const CALC_GUIDE = {
   '/credit-card-payoff': { slug: 'how-to-pay-off-credit-card-debt-fast', label: 'How to pay off credit card debt fast' },
   '/auto-loan': { slug: 'how-much-car-can-i-afford', label: 'How much car can I afford?' },
   '/refinance': { slug: 'should-i-refinance-my-mortgage', label: 'Should I refinance my mortgage?' },
+  '/hourly-to-salary': { slug: 'how-to-calculate-take-home-pay-uk', label: 'How to calculate your take-home pay' },
+  '/debt-consolidation': { slug: 'how-to-pay-off-credit-card-debt-fast', label: 'How to pay off credit card debt fast' },
 }
 
 const DISCLAIMER = "Results are estimates only and do not constitute financial, tax, or legal advice. Tax laws change frequently — always verify with official sources (IRS, HMRC) and consult a qualified professional before making decisions."
@@ -231,6 +235,14 @@ const NAV = [
         source: "IRS, HMRC, CRA & ATO",
       },
       {
+        label: 'Hourly to Salary', icon: '⏱️', path: '/hourly-to-salary',
+        title: "Hourly to Salary Calculator — Wage to Annual Pay | JoinCalc",
+        description: "Convert any hourly rate to yearly, monthly and weekly pay in one click — e.g. $25/hour is $52,000 a year. Free, instant, no sign-up.",
+        keywords: 'hourly to salary calculator, hourly wage to annual salary, 25 an hour is how much a year, wage converter',
+        lastUpdated: 'July 2026',
+        source: "standard payroll formula",
+      },
+      {
         label: 'Pay Rise', icon: '📈', path: '/pay-rise',
         title: "Pay Rise Calculator UK — What You Actually Keep | JoinCalc",
         description: "Got a pay rise? See your new salary and how much of the rise survives tax and NI — most people keep just 58–72%. Free, instant answer.",
@@ -289,6 +301,14 @@ const NAV = [
         description: "Get your real monthly car payment with tax, down payment and trade-in included — plus total interest by term. Free, no sign-up.",
         keywords: 'auto loan calculator, car loan calculator, car payment calculator, monthly car payment, vehicle finance calculator',
         lastUpdated: 'June 2026',
+        source: "standard amortization formula",
+      },
+      {
+        label: 'Debt Consolidation', icon: '📉', path: '/debt-consolidation',
+        title: "Debt Consolidation Calculator — Will You Save? | JoinCalc",
+        description: "Compare your current debts against a consolidation loan — new payment, total interest with fees, and exactly how much you save (or lose). Free.",
+        keywords: 'debt consolidation calculator, debt consolidation loan calculator, should i consolidate debt, consolidation savings calculator',
+        lastUpdated: 'July 2026',
         source: "standard amortization formula",
       },
     ],
@@ -466,7 +486,11 @@ export function Layout() {
   // WebSite + Organization JSON-LD live in index.html (every page), so they are
   // not re-injected here. Only page-specific schema is emitted below.
   const schemaApp = currentTab ? { "@context": "https://schema.org", "@type": "SoftwareApplication", "name": currentTab.title, "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "description": currentTab.description, "url": canonicalUrl, "image": "https://joincalc.com/og-image.png", "dateModified": "2026-06-30", "provider": { "@type": "Organization", "name": "JoinCalc", "url": "https://joincalc.com" } } : null
-  const schemaFAQ = currentTab ? { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{ "@type": "Question", "name": `What is the ${currentTab.label} calculator?`, "acceptedAnswer": { "@type": "Answer", "text": currentTab.description } }] } : null
+  // NOTE: no auto-generated FAQPage schema here. Google requires FAQ markup to
+  // mirror FAQs visible on the page; the old one-question schema ("What is the
+  // X calculator?") never appeared in the page body, which reads as spammy
+  // structured data. Guides emit real FAQPage schema that matches their
+  // visible FAQ sections.
   const schemaBreadcrumb = !isHome && !isStatic && currentTab ? { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joincalc.com" }, { "@type": "ListItem", "position": 2, "name": currentTab.label, "item": canonicalUrl }] } : null
 
   return (
@@ -497,7 +521,6 @@ export function Layout() {
         <meta name="twitter:image" content="https://joincalc.com/og-image.png" />
         {currentTab?.lastUpdated && <meta name="revised" content={currentTab.lastUpdated} />}
         {schemaApp && <script type="application/ld+json">{JSON.stringify(schemaApp)}</script>}
-        {schemaFAQ && <script type="application/ld+json">{JSON.stringify(schemaFAQ)}</script>}
         {schemaBreadcrumb && <script type="application/ld+json">{JSON.stringify(schemaBreadcrumb)}</script>}
       </Helmet>
 
@@ -571,6 +594,8 @@ export function Layout() {
               <Route path="/credit-card-payoff" element={<CreditCardPayoffCalc />} />
               <Route path="/auto-loan"          element={<AutoLoanCalc />} />
               <Route path="/refinance"          element={<RefinanceCalc />} />
+              <Route path="/hourly-to-salary"   element={<HourlyToSalaryCalc />} />
+              <Route path="/debt-consolidation" element={<DebtConsolidationCalc />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />

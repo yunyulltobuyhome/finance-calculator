@@ -43,6 +43,7 @@ const CATEGORIES = [
     color: 'bg-orange-500',
     items: [
       { label: 'Salary & Tax', desc: 'Take-home pay — US, UK, CA, AU', path: '/salary', icon: '💼' },
+      { label: 'Hourly to Salary', desc: '$25/hr = how much a year?', path: '/hourly-to-salary', icon: '⏱️' },
       { label: 'Pay Rise Calculator', desc: 'How much of a rise you keep after tax', path: '/pay-rise', icon: '📈' },
       { label: 'Redundancy Pay', desc: 'UK statutory redundancy entitlement', path: '/redundancy', icon: '📋' },
       { label: 'Holiday Entitlement', desc: 'UK annual leave calculator', path: '/holiday', icon: '🌴' },
@@ -56,6 +57,7 @@ const CATEGORIES = [
     items: [
       { label: 'Credit Card Payoff', desc: 'Months to clear + interest saved', path: '/credit-card-payoff', icon: '💳' },
       { label: 'Auto Loan', desc: 'Monthly car payment & total cost', path: '/auto-loan', icon: '🚗' },
+      { label: 'Debt Consolidation', desc: 'One loan vs your cards — who wins?', path: '/debt-consolidation', icon: '📉' },
     ],
   },
 ]

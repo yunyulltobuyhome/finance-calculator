@@ -25,6 +25,8 @@ import PayRiseCalc from './components/PayRiseCalc'
 import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
 import AutoLoanCalc from './components/AutoLoanCalc'
 import RefinanceCalc from './components/RefinanceCalc'
+import HourlyToSalaryCalc from './components/HourlyToSalaryCalc'
+import DebtConsolidationCalc from './components/DebtConsolidationCalc'
 
 export const CALC_REGISTRY = {
   'stamp-duty':        { C: StampDutyCalc, label: 'Stamp Duty Calculator' },
@@ -52,4 +54,6 @@ export const CALC_REGISTRY = {
   'loan':              { C: LoanCalc, label: 'Loan Calculator' },
   'credit-card-payoff':{ C: CreditCardPayoffCalc, label: 'Credit Card Payoff Calculator' },
   'auto-loan':         { C: AutoLoanCalc, label: 'Auto Loan Calculator' },
+  'hourly-to-salary':  { C: HourlyToSalaryCalc, label: 'Hourly to Salary Calculator' },
+  'debt-consolidation':{ C: DebtConsolidationCalc, label: 'Debt Consolidation Calculator' },
 }
