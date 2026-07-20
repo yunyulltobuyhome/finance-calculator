@@ -85,9 +85,14 @@ export default function ArticlePage() {
       </nav>
 
       <h1 className="text-2xl font-black text-gray-800 mb-2">{guide.h1}</h1>
-      <p className="text-xs text-gray-400 mb-5">
+      <p className={`text-xs text-gray-400 ${guide.source ? 'mb-1' : 'mb-5'}`}>
         Updated {guide.updated} · {guide.readMins} min read · Free calculator inside
       </p>
+      {guide.source && (
+        <p className="text-xs text-emerald-700 bg-emerald-50 inline-flex items-center gap-1 rounded-full px-2.5 py-1 mb-5">
+          ✓ Checked against {guide.source}
+        </p>
+      )}
 
       <p className="text-base text-gray-600 leading-relaxed mb-2">{guide.intro}</p>
 

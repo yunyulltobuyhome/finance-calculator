@@ -66,8 +66,11 @@ export default function About() {
           <p className="leading-relaxed">
             Tax rates change every year. We monitor official government announcements — including the
             UK Autumn Budget, US IRS inflation adjustments, and Australian ATO updates — and update
-            our calculators as soon as new rates are confirmed. Each calculator displays its last
-            verified date so you always know how current the information is.
+            our calculators as soon as new rates are confirmed. Each calculator and guide shows a
+            "✓ Checked against&nbsp;…" badge naming the specific body its figures are based on (HMRC, IRS,
+            SSA, GOV.UK), plus the date it was last verified. Tools that use a standard financial formula
+            rather than a government-set rate — like loan amortization or the 4% retirement rule — say so
+            directly instead of citing an authority that doesn't apply.
           </p>
         </section>
 

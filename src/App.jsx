@@ -77,6 +77,7 @@ const NAV = [
         description: "See exactly what stamp duty you'll pay in seconds — 2026 SDLT bands, first-time buyer relief and the second-home surcharge. Free, no sign-up.",
         keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty',
         lastUpdated: 'April 2025',
+        source: "HMRC",
       },
       {
         label: 'Capital Gains', icon: '📊', path: '/capital-gains',
@@ -84,6 +85,7 @@ const NAV = [
         description: "Work out your exact CGT bill in seconds for shares, property or crypto — 2026 US & UK rates and allowances built in. Free, no sign-up.",
         keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains',
         lastUpdated: 'January 2026',
+        source: "HMRC & IRS",
       },
       {
         label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
@@ -91,6 +93,7 @@ const NAV = [
         description: "Estimate inheritance tax in seconds — UK nil-rate band & RNRB or the $15M US exemption, with a full breakdown. Free and anonymous.",
         keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band',
         lastUpdated: 'July 2025',
+        source: "HMRC & IRS",
       },
       {
         label: 'National Insurance', icon: '🏥', path: '/national-insurance',
@@ -98,6 +101,7 @@ const NAV = [
         description: "See exactly how much National Insurance you'll pay in 2026/27, plus your take-home pay, with the 8% and 2% bands explained. Free & instant.",
         keywords: 'national insurance calculator 2026, NI calculator UK, how much national insurance do I pay',
         lastUpdated: 'April 2026',
+        source: "HMRC",
       },
       {
         label: 'Self-Employed Tax', icon: '🧾', path: '/self-employed',
@@ -105,6 +109,7 @@ const NAV = [
         description: "Sole trader or freelancer? See your Income Tax, Class 4 NI and take-home profit for 2026/27 in seconds. HMRC rates. Free, no sign-up.",
         keywords: 'self employed tax calculator UK 2026, sole trader tax calculator, freelancer tax calculator UK, class 4 national insurance calculator',
         lastUpdated: 'April 2026',
+        source: "HMRC",
       },
       {
         label: 'Corporation Tax', icon: '🏢', path: '/corporation-tax',
@@ -112,6 +117,7 @@ const NAV = [
         description: "Work out your company's 2026/27 Corporation Tax in seconds — 19% and 25% rates with Marginal Relief calculated for you. Free, no sign-up.",
         keywords: 'corporation tax calculator UK 2026, UK company tax calculator, marginal relief calculator, small profits rate 2026',
         lastUpdated: 'April 2026',
+        source: "HMRC",
       },
       {
         label: 'VAT', icon: '🧮', path: '/vat',
@@ -119,6 +125,7 @@ const NAV = [
         description: "Add or strip UK VAT in one click at 20%, 5% or 0% — see the net, VAT and gross instantly, without the common ÷1.2 mistake. Free tool.",
         keywords: 'vat calculator uk, add vat calculator, remove vat calculator, 20% vat calculator, how to work out vat',
         lastUpdated: 'June 2026',
+        source: "HMRC",
       },
     ],
   },
@@ -131,6 +138,7 @@ const NAV = [
         description: "Renting or buying: which leaves you better off? Compare the true long-term costs for the US, UK, Canada & Australia in seconds. Free.",
         keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent',
         lastUpdated: 'June 2026',
+        source: "standard cost-comparison methodology",
       },
       {
         label: 'Mortgage', icon: '🔑', path: '/mortgage',
@@ -138,6 +146,7 @@ const NAV = [
         description: "See how much mortgage you could borrow in seconds — UK income multiples (4–5.5x) and the US DTI method side by side. Free, no sign-up.",
         keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK',
         lastUpdated: 'June 2026',
+        source: "standard DTI & income-multiple methodology",
       },
       {
         label: 'Refinance', icon: '🔄', path: '/refinance',
@@ -145,6 +154,7 @@ const NAV = [
         description: "See your new payment, monthly savings and exact break-even month before you refinance — plus lifetime interest compared. Free & instant.",
         keywords: 'mortgage refinance calculator, refinance calculator, should i refinance, refinance break even calculator, refinance savings',
         lastUpdated: 'June 2026',
+        source: "standard amortization methodology",
       },
     ],
   },
@@ -157,6 +167,7 @@ const NAV = [
         description: "Find your FIRE number and the age you could retire early, using the 4% rule and your real savings rate. Takes 30 seconds — free, no sign-up.",
         keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator',
         lastUpdated: 'June 2026',
+        source: "the 4% rule methodology",
       },
       {
         label: '401k / Pension', icon: '🧓', path: '/retirement',
@@ -164,6 +175,7 @@ const NAV = [
         description: "Project your 401k or pension pot to retirement — employer match, 2026 IRS $24,500 limit and UK £60k allowance included. Free, no sign-up.",
         keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator',
         lastUpdated: 'July 2025',
+        source: "IRS & GOV.UK",
       },
       {
         label: 'Roth vs Traditional IRA', icon: '🏦', path: '/roth-ira',
@@ -171,6 +183,7 @@ const NAV = [
         description: "Roth or Traditional? Compare projected after-tax values side by side with 2026 IRS limits and income phase-outs. Decide in seconds — free.",
         keywords: 'roth ira calculator 2026, roth vs traditional ira, ira contribution limit 2026',
         lastUpdated: 'January 2026',
+        source: "IRS",
       },
       {
         label: 'Social Security', icon: '🇺🇸', path: '/social-security',
@@ -178,6 +191,7 @@ const NAV = [
         description: "Estimate your monthly Social Security check and compare claiming at 62, 67 or 70 — see exactly what waiting is worth. Free, no sign-up.",
         keywords: 'social security calculator 2026, when to claim social security, social security retirement benefit estimate, full retirement age calculator',
         lastUpdated: 'January 2026',
+        source: "SSA",
       },
       {
         label: 'Pension Credit', icon: '🧓', path: '/pension-credit',
@@ -185,6 +199,7 @@ const NAV = [
         description: "Check in seconds whether you qualify for Pension Credit and how much — Guarantee and Savings Credit at 2026/27 rates. Free and anonymous.",
         keywords: 'pension credit calculator UK 2026, guarantee credit calculator, pension credit eligibility, how much pension credit',
         lastUpdated: 'April 2026',
+        source: "GOV.UK",
       },
       {
         label: 'Dividend Income', icon: '💰', path: '/dividend',
@@ -192,6 +207,7 @@ const NAV = [
         description: "See the dividend income your portfolio could pay — with DRIP reinvestment and dividend growth compounding year by year. Free, no sign-up.",
         keywords: 'dividend calculator, dividend income calculator, DRIP calculator',
         lastUpdated: 'June 2026',
+        source: "IRS & HMRC",
       },
       {
         label: 'Compound Interest', icon: '📈', path: '/compound',
@@ -199,6 +215,7 @@ const NAV = [
         description: "See what your savings become with compound growth and monthly deposits — S&P 500 and savings-account presets built in. Free, instant results.",
         keywords: 'compound interest calculator, compound growth calculator',
         lastUpdated: 'June 2026',
+        source: "standard compound-interest formula",
       },
     ],
   },
@@ -211,6 +228,7 @@ const NAV = [
         description: "See your real take-home pay for 2026 in seconds — income tax, NI/FICA and monthly net for the US, UK, Canada & Australia. Free, no sign-up.",
         keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator',
         lastUpdated: 'April 2026',
+        source: "IRS, HMRC, CRA & ATO",
       },
       {
         label: 'Pay Rise', icon: '📈', path: '/pay-rise',
@@ -218,6 +236,7 @@ const NAV = [
         description: "Got a pay rise? See your new salary and how much of the rise survives tax and NI — most people keep just 58–72%. Free, instant answer.",
         keywords: 'pay rise calculator uk, salary increase calculator, pay rise after tax, how much of my pay rise will i keep',
         lastUpdated: 'June 2026',
+        source: "HMRC",
       },
       {
         label: 'Redundancy Pay', icon: '📋', path: '/redundancy',
@@ -225,6 +244,7 @@ const NAV = [
         description: "Facing redundancy? Check your exact statutory entitlement in seconds — 2026 £751 weekly cap and the £30,000 tax-free limit. Free tool.",
         keywords: 'redundancy pay calculator UK 2026, statutory redundancy calculator',
         lastUpdated: 'April 2026',
+        source: "GOV.UK",
       },
       {
         label: 'Holiday Entitlement', icon: '🌴', path: '/holiday',
@@ -232,6 +252,7 @@ const NAV = [
         description: "Work out your exact statutory holiday allowance — full-time, part-time and irregular hours, including bank holidays. Free & instant.",
         keywords: 'holiday entitlement calculator UK 2026, statutory holiday calculator',
         lastUpdated: 'April 2026',
+        source: "GOV.UK",
       },
       {
         label: 'Student Loan', icon: '🎓', path: '/student-loan',
@@ -239,6 +260,7 @@ const NAV = [
         description: "See your real monthly student loan repayment for Plan 1, 2, 4, 5 or Postgraduate — and when it's written off. Free, takes 20 seconds.",
         keywords: 'student loan calculator UK 2026, student loan repayment calculator, plan 2 student loan',
         lastUpdated: 'April 2026',
+        source: "GOV.UK",
       },
       {
         label: 'Loan Calculator', icon: '🏦', path: '/loan',
@@ -246,6 +268,7 @@ const NAV = [
         description: "Get your exact monthly payment, total interest and full amortization schedule for any loan, rate and term. Free — no sign-up, no email.",
         keywords: 'loan calculator, monthly payment calculator, amortization calculator',
         lastUpdated: 'June 2026',
+        source: "standard amortization formula",
       },
     ],
   },
@@ -258,6 +281,7 @@ const NAV = [
         description: "Find your debt-free date and total interest — and see what paying more than the minimum really saves you. Free, private, instant.",
         keywords: 'credit card payoff calculator, credit card interest calculator, pay off credit card, minimum payment calculator, debt payoff calculator',
         lastUpdated: 'June 2026',
+        source: "standard amortization formula",
       },
       {
         label: 'Auto Loan', icon: '🚗', path: '/auto-loan',
@@ -265,6 +289,7 @@ const NAV = [
         description: "Get your real monthly car payment with tax, down payment and trade-in included — plus total interest by term. Free, no sign-up.",
         keywords: 'auto loan calculator, car loan calculator, car payment calculator, monthly car payment, vehicle finance calculator',
         lastUpdated: 'June 2026',
+        source: "standard amortization formula",
       },
     ],
   },
@@ -511,8 +536,9 @@ export function Layout() {
               <span className="text-xl">{currentTab.icon}</span>
               <div className="text-lg font-bold text-gray-800">{currentTab.label}</div>
               {currentTab.lastUpdated && (
-                <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full">
-                  ✓ Rates verified: {currentTab.lastUpdated}
+                <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full"
+                  title={currentTab.source ? `Figures checked against ${currentTab.source}` : undefined}>
+                  ✓ {currentTab.source ? `Checked against ${currentTab.source}` : 'Verified'} · {currentTab.lastUpdated}
                 </span>
               )}
             </div>
