@@ -37,6 +37,8 @@ import AutoLoanCalc from './components/AutoLoanCalc'
 import RefinanceCalc from './components/RefinanceCalc'
 import HourlyToSalaryCalc from './components/HourlyToSalaryCalc'
 import DebtConsolidationCalc from './components/DebtConsolidationCalc'
+import TaxTablesUK from './components/TaxTablesUK'
+import TaxTablesUS from './components/TaxTablesUS'
 import AutoLoanLanding from './components/AutoLoanLanding'
 import CreditCardLanding from './components/CreditCardLanding'
 import GuidesIndex from './components/GuidesIndex'
@@ -316,7 +318,7 @@ const NAV = [
 ]
 
 const allTabs = NAV.flatMap(g => g.items)
-const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact']
+const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact', '/uk-tax-rates-2026', '/us-tax-rates-2026']
 
 const CALC_CATEGORY = {}
 NAV.forEach(g => g.items.forEach(it => { CALC_CATEGORY[it.path] = g.category }))
@@ -355,6 +357,7 @@ function SiteFooter() {
       <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-gray-400">
         <Link to="/" className="hover:text-indigo-500">All Calculators</Link>
         <Link to="/guides" className="hover:text-indigo-500">Guides</Link>
+        <Link to="/uk-tax-rates-2026" className="hover:text-indigo-500">2026 Tax Tables</Link>
         <Link to="/about" className="hover:text-indigo-500">About</Link>
         <Link to="/contact" className="hover:text-indigo-500">Contact</Link>
         <Link to="/privacy" className="hover:text-indigo-500">Privacy Policy</Link>
@@ -397,6 +400,13 @@ function Sidebar({ onClose }) {
           }`}>
           <span className="text-base w-5 text-center">📚</span>
           <span>Money Guides</span>
+        </Link>
+        <Link to="/uk-tax-rates-2026" onClick={onClose}
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
+            path.includes('-tax-rates-') ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+          }`}>
+          <span className="text-base w-5 text-center">📊</span>
+          <span>2026 Tax Tables</span>
         </Link>
         {NAV.map((group) => (
           <div key={group.category} className="mb-4">
@@ -596,6 +606,8 @@ export function Layout() {
               <Route path="/refinance"          element={<RefinanceCalc />} />
               <Route path="/hourly-to-salary"   element={<HourlyToSalaryCalc />} />
               <Route path="/debt-consolidation" element={<DebtConsolidationCalc />} />
+              <Route path="/uk-tax-rates-2026"  element={<TaxTablesUK />} />
+              <Route path="/us-tax-rates-2026"  element={<TaxTablesUS />} />
               <Route path="/guides"             element={<GuidesIndex />} />
               <Route path="/guides/:slug"       element={<ArticlePage />} />
               <Route path="/fire"               element={<FIRECalc />} />
