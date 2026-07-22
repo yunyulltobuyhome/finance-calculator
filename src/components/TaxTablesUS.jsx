@@ -51,6 +51,11 @@ export default function TaxTablesUS() {
         <meta name="keywords" content="2026 tax brackets, us tax rates 2026, standard deduction 2026, 401k limit 2026, capital gains brackets 2026, fica rates 2026" />
         <link rel="canonical" href="https://joincalc.com/us-tax-rates-2026/" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content="US Tax Brackets & Limits 2026 — All Tables | JoinCalc" />
+        <meta property="og:description" content="Every headline US federal tax figure for 2026 on one page: income tax brackets (single & married), standard deduction, FICA, capital gains, 401(k) limits and estate tax." />
+        <meta property="og:url" content="https://joincalc.com/us-tax-rates-2026/" />
+        <meta name="twitter:title" content="US Tax Brackets & Limits 2026 — All Tables | JoinCalc" />
+        <meta name="twitter:description" content="Every headline US federal tax figure for 2026 on one page: income tax brackets (single & married), standard deduction, FICA, capital gains, 401(k) limits and estate tax." />
       </Helmet>
 
       <h1 className="text-2xl font-black text-gray-800 mb-2">US Tax Brackets &amp; Limits 2026</h1>

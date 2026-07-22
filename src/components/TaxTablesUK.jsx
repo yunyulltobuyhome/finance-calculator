@@ -52,6 +52,11 @@ export default function TaxTablesUK() {
         <meta name="keywords" content="uk tax rates 2026/27, income tax bands 2026, national insurance thresholds 2026, dividend allowance 2026, cgt allowance 2026, tax tables uk" />
         <link rel="canonical" href="https://joincalc.com/uk-tax-rates-2026/" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+        <meta property="og:title" content="UK Tax Rates & Thresholds 2026/27 — All Tables | JoinCalc" />
+        <meta property="og:description" content="Every UK tax rate and threshold for 2026/27 on one page: income tax bands, National Insurance, dividends, CGT, stamp duty, VAT, corporation tax, IHT and more." />
+        <meta property="og:url" content="https://joincalc.com/uk-tax-rates-2026/" />
+        <meta name="twitter:title" content="UK Tax Rates & Thresholds 2026/27 — All Tables | JoinCalc" />
+        <meta name="twitter:description" content="Every UK tax rate and threshold for 2026/27 on one page: income tax bands, National Insurance, dividends, CGT, stamp duty, VAT, corporation tax, IHT and more." />
       </Helmet>
 
       <h1 className="text-2xl font-black text-gray-800 mb-2">UK Tax Rates &amp; Thresholds 2026/27</h1>
