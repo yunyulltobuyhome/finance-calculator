@@ -49,6 +49,7 @@ import EmbedSnippet from './components/EmbedSnippet'
 import Logo from './components/Logo'
 import ResultActions from './components/ResultActions'
 import CookieConsent from './components/CookieConsent'
+import { NEXT_STEPS } from './data/nextSteps'
 
 // Calculator → matching in-depth guide, for a tool↔content funnel (more
 // pageviews per session = more ad impressions, plus better dwell time/SEO).
@@ -323,13 +324,24 @@ const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact', '/uk-tax-rates
 const CALC_CATEGORY = {}
 NAV.forEach(g => g.items.forEach(it => { CALC_CATEGORY[it.path] = g.category }))
 
-// Suggest related calculators (same category first, then fill) — increases
-// internal linking and pages per session, the key lever for ad revenue.
+// Suggest what to work out next. Curated journeys come first (each with the
+// reason it follows on), then same-category calculators, then anything else.
+// Internal linking is the main lever on pages per session — and a suggestion
+// that says why it is relevant gets acted on far more than a bare label.
 function relatedCalcs(path) {
+  const curated = (NEXT_STEPS[path] || [])
+    .map(step => {
+      const tab = allTabs.find(t => t.path === step.path)
+      return tab ? { ...tab, why: step.why } : null
+    })
+    .filter(Boolean)
+
+  const taken = new Set([path, ...curated.map(c => c.path)])
   const cat = CALC_CATEGORY[path]
-  const same = allTabs.filter(t => CALC_CATEGORY[t.path] === cat && t.path !== path)
-  const others = allTabs.filter(t => CALC_CATEGORY[t.path] !== cat && t.path !== path)
-  return [...same, ...others].slice(0, 4)
+  const sameCat = allTabs.filter(t => !taken.has(t.path) && CALC_CATEGORY[t.path] === cat)
+  const others = allTabs.filter(t => !taken.has(t.path) && CALC_CATEGORY[t.path] !== cat)
+
+  return [...curated, ...sameCat, ...others].slice(0, 4)
 }
 
 function RelatedCalcs({ path }) {
@@ -337,13 +349,16 @@ function RelatedCalcs({ path }) {
   if (!items.length) return null
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-5">
-      <h2 className="text-sm font-bold text-gray-700 mb-3">Related Calculators</h2>
-      <div className="grid grid-cols-2 gap-2">
+      <h2 className="text-sm font-bold text-gray-700 mb-3">What to work out next</h2>
+      <div className="grid gap-2">
         {items.map(t => (
           <Link key={t.path} to={t.path}
-            className="flex items-center gap-2 text-sm text-gray-600 bg-gray-50 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg px-3 py-2 transition-colors">
-            <span>{t.icon}</span>
-            <span className="font-medium leading-tight">{t.label}</span>
+            className="flex items-start gap-2.5 bg-gray-50 hover:bg-indigo-50 rounded-lg px-3 py-2.5 transition-colors group">
+            <span className="mt-0.5">{t.icon}</span>
+            <span className="min-w-0">
+              <span className="block text-sm font-medium text-gray-700 group-hover:text-indigo-600 leading-tight">{t.label}</span>
+              {t.why && <span className="block text-xs text-gray-500 mt-0.5 leading-snug">{t.why}</span>}
+            </span>
           </Link>
         ))}
       </div>
