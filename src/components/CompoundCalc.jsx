@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { GrowthChart, SplitBar } from './ResultChart'
+import useShareableState from '../hooks/useShareableState'
 
 const BENCHMARKS = [
   { name: 'S&P 500 (historical avg)', rate: 10.5 },
@@ -11,7 +13,7 @@ const BENCHMARKS = [
 
 export default function CompoundCalc() {
   const [benchmark, setBenchmark] = useState(BENCHMARKS[0])
-  const [form, setForm] = useState({ principal: 5000, rate: 10.5, monthly: 200, years: 30 })
+  const [form, setForm] = useShareableState({ principal: 5000, rate: 10.5, monthly: 200, years: 30 })
   const [result, setResult] = useState(null)
 
   const handleBenchmark = (b) => {
@@ -26,13 +28,18 @@ export default function CompoundCalc() {
     const yrs = +form.years
     const n = yrs * 12
     let total = p
-    const data = []
     const totalInvested = p + m * n
+
+    // Sample yearly (thinned out on very long horizons) so the growth curve has
+    // enough points to actually look like a curve.
+    const step = Math.max(1, Math.ceil(yrs / 40))
+    const data = [{ label: '0y', value: Math.round(p) }]
 
     for (let i = 1; i <= n; i++) {
       total = total * (1 + r) + m
-      if (i % Math.ceil(n / 5) === 0 || i === n) {
-        data.push({ yr: Math.round(i / 12), val: Math.round(total) })
+      const year = i / 12
+      if ((i % 12 === 0 && year % step === 0) || i === n) {
+        data.push({ label: `${Math.round(year)}y`, value: Math.round(total) })
       }
     }
 
@@ -101,22 +108,22 @@ export default function CompoundCalc() {
             ))}
           </div>
 
-          <p className="text-xs text-gray-400 mb-2 font-medium">Portfolio growth over time</p>
-          <div className="space-y-2">
-            {result.data.map(({ yr, val }) => {
-              const pct = Math.round((val / result.total) * 100)
-              return (
-                <div key={yr} className="flex items-center gap-2 text-xs">
-                  <span className="w-8 text-gray-400 text-right">{yr}yr</span>
-                  <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
-                    <div className="h-full bg-orange-400 rounded-full flex items-center pl-2 text-white" style={{ width: `${pct}%` }}>
-                      {fmt(val)}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <GrowthChart
+            data={result.data}
+            format={fmt}
+            caption="Portfolio growth over time"
+            color="#4f46e5"
+            ariaLabel="Line chart showing portfolio value growing over the investment period"
+          />
+
+          <SplitBar
+            caption="What makes up your final pot"
+            format={fmt}
+            segments={[
+              { label: 'Your contributions', value: result.totalInvested, color: '#a5b4fc' },
+              { label: 'Compound growth', value: result.profit, color: '#4f46e5' },
+            ]}
+          />
 
           <p className="text-xs text-gray-400 mt-3">
             * Returns are hypothetical and based on a fixed annual rate. Past performance does not guarantee future results. Inflation not accounted for.

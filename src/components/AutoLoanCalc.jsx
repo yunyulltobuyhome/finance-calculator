@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { GrowthChart, SplitBar, toSeries } from './ResultChart'
+import useShareableState from '../hooks/useShareableState'
 
 export function autoLoanPayment(loan, apr, months) {
   const r = apr / 100 / 12
@@ -11,17 +13,29 @@ export function autoLoanPayment(loan, apr, months) {
 const fmt = (n) => '$' + Math.round(n).toLocaleString()
 
 export default function AutoLoanCalc() {
-  const [form, setForm] = useState({ price: 35000, down: 5000, trade: 0, tax: 0, apr: 7, months: 60 })
+  const [form, setForm] = useShareableState({ price: 35000, down: 5000, trade: 0, tax: 0, apr: 7, months: 60 })
   const [result, setResult] = useState(null)
 
   const calc = () => {
     const price = +form.price, down = +form.down, trade = +form.trade
     const tax = price * (+form.tax / 100)
     const loan = Math.max(0, price + tax - down - trade)
-    const monthly = autoLoanPayment(loan, +form.apr, +form.months)
-    const totalPaid = monthly * +form.months
+    const months = +form.months
+    const monthly = autoLoanPayment(loan, +form.apr, months)
+    const totalPaid = monthly * months
     const totalInterest = totalPaid - loan
-    setResult({ loan, monthly, totalInterest, totalPaid, tax })
+
+    // Walk the amortisation month by month so the balance curve is exact
+    // rather than a straight line between start and end.
+    const r = +form.apr / 100 / 12
+    let bal = loan
+    const balances = [loan]
+    for (let i = 0; i < months; i++) {
+      bal = Math.max(0, bal + bal * r - monthly)
+      balances.push(bal)
+    }
+
+    setResult({ loan, monthly, totalInterest, totalPaid, tax, series: toSeries(balances) })
   }
 
   return (
@@ -69,6 +83,24 @@ export default function AutoLoanCalc() {
                 <p className="text-sm font-bold text-gray-800">{val}</p>
               </div>
             ))}
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-xl p-4">
+            <GrowthChart
+              data={result.series}
+              format={fmt}
+              caption="What you still owe over the loan term"
+              color="#4f46e5"
+              ariaLabel="Chart showing the auto loan balance falling to zero over the term"
+            />
+            <SplitBar
+              caption="Total cost breakdown"
+              format={fmt}
+              segments={[
+                { label: 'Amount borrowed', value: result.loan, color: '#a5b4fc' },
+                { label: 'Interest', value: result.totalInterest, color: '#ef4444' },
+              ]}
+            />
           </div>
         </div>
       )}

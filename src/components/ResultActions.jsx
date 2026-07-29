@@ -12,9 +12,11 @@ export default function ResultActions() {
 
   const handleShare = async () => {
     const url = typeof window !== 'undefined' ? window.location.href : ''
+    // Calculators sync their inputs into the query string, so this link
+    // reopens the exact scenario the user is looking at.
     const shareData = {
       title: document.title,
-      text: 'Check out this free financial calculator on JoinCalc',
+      text: 'Here are the numbers I got on JoinCalc',
       url,
     }
     try {

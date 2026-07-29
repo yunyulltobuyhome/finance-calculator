@@ -1,18 +1,28 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { GrowthChart, SplitBar, toSeries } from './ResultChart'
+import useShareableState from '../hooks/useShareableState'
 
 // Simulate paying a fixed amount each month.
 export function payoffFixed(balance, apr, payment) {
   const r = apr / 100 / 12
   if (payment <= balance * r) return { never: true }
   let bal = balance, months = 0, interest = 0
+  const balances = [balance]
   while (bal > 0.005 && months < 1200) {
     const i = bal * r
     interest += i
     bal = bal + i - payment
     months++
+    balances.push(Math.max(0, bal))
   }
-  return { never: false, months, interest: Math.round(interest), totalPaid: Math.round(balance + interest) }
+  return {
+    never: false,
+    months,
+    interest: Math.round(interest),
+    totalPaid: Math.round(balance + interest),
+    series: toSeries(balances),
+  }
 }
 
 // Simulate paying only the minimum (1% of balance + interest, floor $25).
@@ -34,7 +44,7 @@ const fmt = (n) => '$' + Math.round(n).toLocaleString()
 const dur = (m) => `${Math.floor(m / 12)}y ${m % 12}m`
 
 export default function CreditCardPayoffCalc() {
-  const [form, setForm] = useState({ balance: 5000, apr: 22, payment: 200 })
+  const [form, setForm] = useShareableState({ balance: 5000, apr: 22, payment: 200 })
   const [result, setResult] = useState(null)
 
   const calc = () => {
@@ -86,6 +96,24 @@ export default function CreditCardPayoffCalc() {
                   <div className="bg-white rounded-lg p-3"><p className="text-xs text-gray-400">Total paid</p><p className="font-bold text-gray-800">{fmt(result.fixed.totalPaid)}</p></div>
                 </div>
               </div>
+              <div className="bg-white border border-gray-200 rounded-xl p-4">
+                <GrowthChart
+                  data={result.fixed.series}
+                  format={fmt}
+                  caption="Your balance as you pay it down"
+                  color="#4f46e5"
+                  ariaLabel="Chart showing the credit card balance falling to zero over time"
+                />
+                <SplitBar
+                  caption="Where your money goes"
+                  format={fmt}
+                  segments={[
+                    { label: 'Balance repaid', value: result.balance, color: '#a5b4fc' },
+                    { label: 'Interest to the lender', value: result.fixed.interest, color: '#ef4444' },
+                  ]}
+                />
+              </div>
+
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                 <p className="text-sm font-semibold text-amber-800 mb-1">If you paid only the minimum…</p>
                 <p className="text-xs text-amber-700 leading-relaxed">
