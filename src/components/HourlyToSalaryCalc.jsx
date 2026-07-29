@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import useShareableState from '../hooks/useShareableState'
 import { Link } from 'react-router-dom'
 
 const fmt0 = (sym, n) => sym + Math.round(n).toLocaleString()
 
 export default function HourlyToSalaryCalc() {
-  const [form, setForm] = useState({ rate: 25, hours: 40, weeks: 52 })
+  const [form, setForm] = useShareableState({ rate: 25, hours: 40, weeks: 52 })
   const [currency, setCurrency] = useState('$')
   const [result, setResult] = useState(null)
 

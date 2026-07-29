@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useShareableState from '../hooks/useShareableState'
 
 export function monthlyPayment(principal, ratePct, years) {
   const r = ratePct / 100 / 12
@@ -11,7 +12,7 @@ export function monthlyPayment(principal, ratePct, years) {
 const fmt = (n) => '$' + Math.round(n).toLocaleString()
 
 export default function RefinanceCalc() {
-  const [form, setForm] = useState({ balance: 300000, currentRate: 7, remainingYears: 25, newRate: 5.5, newYears: 30, closingCosts: 4000 })
+  const [form, setForm] = useShareableState({ balance: 300000, currentRate: 7, remainingYears: 25, newRate: 5.5, newYears: 30, closingCosts: 4000 })
   const [result, setResult] = useState(null)
 
   const calc = () => {

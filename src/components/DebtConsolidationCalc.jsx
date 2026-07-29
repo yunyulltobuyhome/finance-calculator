@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import useShareableState from '../hooks/useShareableState'
 import { Link } from 'react-router-dom'
 import { payoffFixed } from './CreditCardPayoffCalc'
 import { autoLoanPayment } from './AutoLoanCalc'
@@ -7,7 +8,7 @@ const fmt = (n) => '$' + Math.round(n).toLocaleString()
 const dur = (m) => `${Math.floor(m / 12)}y ${m % 12}m`
 
 export default function DebtConsolidationCalc() {
-  const [form, setForm] = useState({ balance: 15000, apr: 22, payment: 450, newApr: 11, newMonths: 48, feePct: 3 })
+  const [form, setForm] = useShareableState({ balance: 15000, apr: 22, payment: 450, newApr: 11, newMonths: 48, feePct: 3 })
   const [result, setResult] = useState(null)
 
   const calc = () => {

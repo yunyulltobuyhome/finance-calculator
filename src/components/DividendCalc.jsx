@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import useShareableState from '../hooks/useShareableState'
+import { GrowthChart } from './ResultChart'
 
 const US_STATES = [
   { name: 'California', stateTax: 13.3 },
@@ -36,7 +38,7 @@ export default function DividendCalc() {
   const [region, setRegion] = useState('US')
   const [state, setState] = useState(US_STATES[0])
   const [country, setCountry] = useState(EU_COUNTRIES[0])
-  const [form, setForm] = useState({ principal: 10000, yield: 4, years: 20, drip: true })
+  const [form, setForm] = useShareableState({ principal: 10000, yield: 4, years: 20, drip: true })
   const [result, setResult] = useState(null)
 
   const getTaxRate = () => {
@@ -51,6 +53,10 @@ export default function DividendCalc() {
     const taxRate = getTaxRate()
     let total = p
     const data = []
+    // Portfolio value year by year — with DRIP on, this is the compounding
+    // that the headline numbers alone don't show.
+    const series = [{ label: '0y', value: Math.round(p) }]
+    const step = Math.max(1, Math.ceil(yrs / 40))
 
     for (let i = 1; i <= yrs; i++) {
       const annual = total * y
@@ -58,6 +64,9 @@ export default function DividendCalc() {
       if (form.drip) total += afterTax
       if (i % Math.ceil(yrs / 5) === 0 || i === yrs) {
         data.push({ yr: i, gross: Math.round(annual), net: Math.round(afterTax) })
+      }
+      if (i % step === 0 || i === yrs) {
+        series.push({ label: `${i}y`, value: Math.round(total) })
       }
     }
 
@@ -71,6 +80,7 @@ export default function DividendCalc() {
       monthly: Math.round(netAnnual / 12),
       taxRate: Math.round(taxRate * 100 * 10) / 10,
       data,
+      series,
     })
   }
 
@@ -159,6 +169,14 @@ export default function DividendCalc() {
             {region === 'US' && ` (Federal ${FEDERAL_TAX}% + ${state.name} ${state.stateTax}%)`}
             {region === 'Europe' && ` (${country.name} withholding)`}
           </div>
+
+          <GrowthChart
+            data={result.series}
+            format={fmt}
+            caption={form.drip ? 'Portfolio value with dividends reinvested' : 'Portfolio value (dividends taken as income)'}
+            color="#4f46e5"
+            ariaLabel="Chart showing portfolio value over the holding period"
+          />
 
           <p className="text-xs text-gray-400 mb-2 font-medium">After-tax annual dividend over time</p>
           <div className="space-y-2">
