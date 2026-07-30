@@ -2,15 +2,18 @@ export const SALARY_TAX_DATA = {
   US: {
     name: '🇺🇸 United States',
     currency: 'USD',
+    // 2026 single-filer brackets, applied to income after the standard
+    // deduction. Mirrors the figures published on /us-tax-rates-2026/.
     brackets: [
-      { min: 0, max: 11000, rate: 0.1 },
-      { min: 11000, max: 44725, rate: 0.12 },
-      { min: 44725, max: 95375, rate: 0.22 },
-      { min: 95375, max: 182100, rate: 0.24 },
-      { min: 182100, max: 231250, rate: 0.32 },
-      { min: 231250, max: 578125, rate: 0.35 },
-      { min: 578125, max: Infinity, rate: 0.37 },
+      { min: 0, max: 11925, rate: 0.1 },
+      { min: 11925, max: 48475, rate: 0.12 },
+      { min: 48475, max: 103350, rate: 0.22 },
+      { min: 103350, max: 197300, rate: 0.24 },
+      { min: 197300, max: 250525, rate: 0.32 },
+      { min: 250525, max: 626350, rate: 0.35 },
+      { min: 626350, max: Infinity, rate: 0.37 },
     ],
+    standardDeduction: 16100,
     socialSecurity: 0.062,
     socialSecurityCap: 184500,
     medicare: 0.0145,
@@ -33,10 +36,28 @@ export const SALARY_TAX_DATA = {
       { min: 50270, max: 125140, rate: 0.4 },
       { min: 125140, max: Infinity, rate: 0.45 },
     ],
+    // Class 1 employee NI: 8% between the thresholds, 2% above the upper limit.
     nationalInsurance: 0.08,
+    nationalInsuranceThreshold: 12570,
     nationalInsuranceCap: 50270,
+    nationalInsuranceUpperRate: 0.02,
+    // Personal allowance tapers by £1 for every £2 earned over £100,000,
+    // reaching zero at £125,140 — the "60% tax trap" band.
+    personalAllowance: 12570,
+    taperThreshold: 100000,
     studentLoan: 0.09,
-    studentLoanThreshold: 27295,
+    studentLoanThreshold: 29385, // Plan 2, per /uk-tax-rates-2026/
+    // Thresholds and rates per /uk-tax-rates-2026/. Defaults to None because
+    // most employees do not have a student loan deduction, and assuming one
+    // overstates the deductions for everybody who does not.
+    studentLoanPlans: [
+      { name: 'None', threshold: 0, rate: 0 },
+      { name: 'Plan 1', threshold: 24990, rate: 0.09 },
+      { name: 'Plan 2', threshold: 29385, rate: 0.09 },
+      { name: 'Plan 4 (Scotland)', threshold: 32745, rate: 0.09 },
+      { name: 'Plan 5', threshold: 25000, rate: 0.09 },
+      { name: 'Postgraduate', threshold: 21000, rate: 0.06 },
+    ],
   },
   CA: {
     name: '🇨🇦 Canada',

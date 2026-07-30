@@ -6,6 +6,7 @@ export default function SalaryCalc() {
   const [state, setState] = useState('California')
   const [province, setProvince] = useState('Ontario')
   const [annualSalary, setAnnualSalary] = useState(100000)
+  const [loanPlan, setLoanPlan] = useState('None')
   const [result, setResult] = useState(null)
 
   const calculateTax = (gross) => {
@@ -15,9 +16,12 @@ export default function SalaryCalc() {
 
     switch (country) {
       case 'US': {
+        // Brackets apply to income after the standard deduction; FICA is on
+        // gross wages, which is why it is calculated separately below.
+        const taxable = Math.max(0, gross - data.standardDeduction)
         for (let bracket of data.brackets) {
-          if (gross > bracket.min) {
-            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
+          if (taxable > bracket.min) {
+            federalTax += (Math.min(taxable, bracket.max) - bracket.min) * bracket.rate
           }
         }
         const ssWages = Math.min(gross, data.socialSecurityCap)
@@ -31,15 +35,33 @@ export default function SalaryCalc() {
         break
       }
       case 'UK': {
-        for (let bracket of data.brackets) {
-          if (gross > bracket.min) {
-            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
-          }
-        }
+        // The personal allowance tapers away above £100,000, so the 0% band
+        // shrinks as income rises — this is what creates the 60% effective
+        // marginal rate between £100,000 and £125,140.
+        const taper = Math.max(0, (gross - data.taperThreshold) / 2)
+        const allowance = Math.max(0, data.personalAllowance - taper)
+        const taxable = Math.max(0, gross - allowance)
+
+        // Bands are measured on taxable income: 20% on the first £37,700,
+        // 40% up to £125,140, 45% above.
+        const basicBand = data.nationalInsuranceCap - data.personalAllowance
+        const additionalFrom = 125140
+        federalTax =
+          Math.min(taxable, basicBand) * 0.2 +
+          Math.max(0, Math.min(taxable, additionalFrom) - basicBand) * 0.4 +
+          Math.max(0, taxable - additionalFrom) * 0.45
+
+        // Class 1 NI: 8% between the thresholds, then 2% on everything above.
+        const niMain = Math.max(0, Math.min(gross, data.nationalInsuranceCap) - data.nationalInsuranceThreshold)
+        const niUpper = Math.max(0, gross - data.nationalInsuranceCap)
+
+        const plan = data.studentLoanPlans.find(p => p.name === loanPlan) || data.studentLoanPlans[0]
         deductions = {
           incomeTax: Math.round(federalTax),
-          nationalInsurance: Math.round(Math.max(0, gross - 12570) * data.nationalInsurance),
-          studentLoan: Math.round(Math.max(0, gross - data.studentLoanThreshold) * data.studentLoan),
+          nationalInsurance: Math.round(niMain * data.nationalInsurance + niUpper * data.nationalInsuranceUpperRate),
+        }
+        if (plan.rate > 0) {
+          deductions.studentLoan = Math.round(Math.max(0, gross - plan.threshold) * plan.rate)
         }
         break
       }
@@ -83,9 +105,49 @@ export default function SalaryCalc() {
     return { gross, deductions, net: gross - totalTaxAndDeductions, totalDeductions: totalTaxAndDeductions }
   }
 
+  // Most take-home calculators stop at the final number. The rate that actually
+  // drives decisions — asking for a raise, making a pension contribution — is
+  // the marginal one, so probe it by pricing the next slice of income. Doing it
+  // as a delta means it stays correct for every country without special-casing.
+  const STEP = 1000
+  const marginalAnalysis = (gross) => {
+    const here = calculateTax(gross)
+    const next = calculateTax(gross + STEP)
+    const extraDeductions = next.totalDeductions - here.totalDeductions
+    const keep = STEP - extraDeductions
+    return {
+      effectiveRate: gross > 0 ? (here.totalDeductions / gross) * 100 : 0,
+      marginalRate: (extraDeductions / STEP) * 100,
+      keepFromNext: Math.round(keep),
+    }
+  }
+
+  // Bands where the effective marginal rate jumps well above the headline rate.
+  // Purely a description of how the published thresholds interact — the figures
+  // come straight out of the calculation above.
+  const cliffNote = (gross) => {
+    if (country !== 'UK') return null
+    if (gross > 100000 && gross <= 125140) {
+      return 'You are inside the £100,000–£125,140 band where the personal allowance tapers away, so each extra £1 of salary is effectively taxed at 60% (plus National Insurance). A pension contribution that brings your income back under £100,000 restores the full allowance.'
+    }
+    if (gross > 95000 && gross <= 100000) {
+      return `You are ${fmt(Math.round(100000 - gross))} below £100,000, where the personal allowance starts to taper and the effective rate on the next slice of income jumps to about 60%.`
+    }
+    if (gross > 45000 && gross <= 50270) {
+      return `You are ${fmt(Math.round(50270 - gross))} below the £50,270 higher-rate threshold. Above it, income tax on the extra goes from 20% to 40% while NI drops from 8% to 2%.`
+    }
+    return null
+  }
+
   const calc = () => {
     const res = calculateTax(annualSalary)
-    setResult({ ...res, monthly: Math.round(res.net / 12), biweekly: Math.round(res.net / 26) })
+    setResult({
+      ...res,
+      monthly: Math.round(res.net / 12),
+      biweekly: Math.round(res.net / 26),
+      ...marginalAnalysis(annualSalary),
+      cliff: cliffNote(annualSalary),
+    })
   }
 
   const fmt = (n) => {
@@ -139,6 +201,18 @@ export default function SalaryCalc() {
           className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
       </div>
 
+      {country === 'UK' && (
+        <div className="mb-4">
+          <label className="text-xs text-gray-500 block mb-1">Student Loan Plan</label>
+          <select value={loanPlan} onChange={(e) => setLoanPlan(e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            {SALARY_TAX_DATA.UK.studentLoanPlans.map(p => (
+              <option key={p.name} value={p.name}>{p.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
       <button onClick={calc}
         className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors">
         Calculate Take-Home Pay
@@ -158,6 +232,34 @@ export default function SalaryCalc() {
                 <p className="text-base font-semibold text-gray-800">{val}</p>
               </div>
             ))}
+          </div>
+
+          {/* Effective vs marginal rate — the number that actually answers
+              "is a raise worth it" and "should I put this into a pension". */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 mb-3">
+            <p className="text-xs text-gray-400 font-medium mb-3">Your tax rates</p>
+            <div className="grid grid-cols-3 gap-3">
+              <div>
+                <p className="text-xs text-gray-400 mb-0.5">Effective rate</p>
+                <p className="text-lg font-bold text-gray-800">{result.effectiveRate.toFixed(1)}%</p>
+                <p className="text-xs text-gray-400 leading-snug mt-0.5">of your whole salary</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 mb-0.5">Marginal rate</p>
+                <p className="text-lg font-bold text-gray-800">{result.marginalRate.toFixed(1)}%</p>
+                <p className="text-xs text-gray-400 leading-snug mt-0.5">on your next {fmt(1000)}</p>
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 mb-0.5">You keep</p>
+                <p className="text-lg font-bold text-emerald-600">{fmt(result.keepFromNext)}</p>
+                <p className="text-xs text-gray-400 leading-snug mt-0.5">of the next {fmt(1000)} you earn</p>
+              </div>
+            </div>
+            {result.cliff && (
+              <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3 mt-3 leading-relaxed">
+                ⚠️ {result.cliff}
+              </p>
+            )}
           </div>
 
           <div className="bg-indigo-50 rounded-xl p-3 mb-3">
