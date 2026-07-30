@@ -1,6 +1,24 @@
 import { useState } from 'react'
 import { SALARY_TAX_DATA } from '../data/salaryTaxRates'
 
+// Sum a progressive bracket schedule for a given taxable amount.
+function bracketTax(taxable, brackets) {
+  let tax = 0
+  for (const b of brackets) {
+    if (taxable > b.min) tax += (Math.min(taxable, b.max) - b.min) * b.rate
+  }
+  return tax
+}
+
+// US state income tax. Handles bracketed states (their schedule applied after
+// the state standard deduction), flat states, and no-income-tax states.
+function usStateTax(gross, stateData) {
+  if (!stateData) return 0
+  const taxable = Math.max(0, gross - (stateData.deduction || 0))
+  if (stateData.brackets) return bracketTax(taxable, stateData.brackets)
+  return taxable * (stateData.flat || 0)
+}
+
 export default function SalaryCalc() {
   const [country, setCountry] = useState('US')
   const [state, setState] = useState('California')
@@ -19,19 +37,15 @@ export default function SalaryCalc() {
         // Brackets apply to income after the standard deduction; FICA is on
         // gross wages, which is why it is calculated separately below.
         const taxable = Math.max(0, gross - data.standardDeduction)
-        for (let bracket of data.brackets) {
-          if (taxable > bracket.min) {
-            federalTax += (Math.min(taxable, bracket.max) - bracket.min) * bracket.rate
-          }
-        }
+        federalTax = bracketTax(taxable, data.brackets)
         const ssWages = Math.min(gross, data.socialSecurityCap)
         const stateData = data.states.find(s => s.name === state)
-        deductions = {
-          federalTax: Math.round(federalTax),
-          stateTax: Math.round(gross * (stateData?.tax || 0)),
-          socialSecurity: Math.round(ssWages * data.socialSecurity),
-          medicare: Math.round(gross * data.medicare),
-        }
+        const st = Math.round(usStateTax(gross, stateData))
+        deductions = { federalTax: Math.round(federalTax) }
+        // No-income-tax states (TX, FL, NV, WA) simply omit the line.
+        if (st > 0) deductions.stateTax = st
+        deductions.socialSecurity = Math.round(ssWages * data.socialSecurity)
+        deductions.medicare = Math.round(gross * data.medicare)
         break
       }
       case 'UK': {
@@ -361,7 +375,7 @@ export default function SalaryCalc() {
           <div className="space-y-3">
             {[
               { q: 'What is take-home pay?', a: 'Take-home pay (also called net pay) is your salary after all deductions — income tax, social security, national insurance, and other mandatory contributions. It\'s the actual amount deposited into your bank account each payday.' },
-              { q: 'How much tax do I pay on $100,000 in the US?', a: 'On a $100,000 salary, federal income tax is approximately $17,400 (2026 brackets). Add Social Security (6.2%), Medicare (1.45%), and state tax (varies). In California, total deductions would be around $30,000–$35,000, leaving a take-home of roughly $65,000–$70,000.' },
+              { q: 'How much tax do I pay on $100,000 in the US?', a: 'On a $100,000 salary (2026 brackets, single, after the $16,100 standard deduction), federal income tax is about $13,400, plus Social Security (6.2%) and Medicare (1.45%). State tax is on top and varies: in California it is roughly $5,300, giving total deductions near $26,300 and take-home around $73,700. In no-income-tax states like Texas or Florida there is no state line, so take-home is closer to $79,000.' },
               { q: 'What is the UK personal allowance for 2026?', a: 'The personal allowance for 2026/27 is £12,570. You pay no income tax on earnings below this amount. Above £12,570, you pay 20% basic rate, 40% higher rate (above £50,270), and 45% additional rate (above £125,140).' },
               { q: 'How does Australian tax work?', a: 'Australia uses a progressive tax system with a tax-free threshold of A$18,200. Rates range from 19% to 45%. A Medicare levy of 2% applies to most taxpayers. Employers also contribute 11.5% of your salary to your superannuation (pension) fund in 2026.' },
             ].map((item, i) => (

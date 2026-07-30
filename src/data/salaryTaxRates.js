@@ -17,14 +17,46 @@ export const SALARY_TAX_DATA = {
     socialSecurity: 0.062,
     socialSecurityCap: 184500,
     medicare: 0.0145,
+    // State income tax. Progressive states carry their own bracket schedule and
+    // standard deduction (applied to income before the state brackets); flat
+    // states carry a single rate; no-income-tax states are rate 0. Applying a
+    // state's real brackets instead of one blended rate is materially more
+    // accurate at low and middle incomes, where a flat top-rate badly overstates
+    // the bill. State figures are single-filer; local taxes (e.g. NYC) excluded.
     states: [
-      { name: 'California', tax: 0.093 },
-      { name: 'Texas', tax: 0 },
-      { name: 'New York', tax: 0.065 },
-      { name: 'Florida', tax: 0 },
-      { name: 'Illinois', tax: 0.0495 },
-      { name: 'Nevada', tax: 0 },
-      { name: 'Washington', tax: 0 },
+      {
+        name: 'California', deduction: 5540, // FTB 2024 Schedule X
+        brackets: [
+          { min: 0, max: 10756, rate: 0.01 },
+          { min: 10756, max: 25499, rate: 0.02 },
+          { min: 25499, max: 40245, rate: 0.04 },
+          { min: 40245, max: 55866, rate: 0.06 },
+          { min: 55866, max: 70606, rate: 0.08 },
+          { min: 70606, max: 360659, rate: 0.093 },
+          { min: 360659, max: 432787, rate: 0.103 },
+          { min: 432787, max: 721314, rate: 0.113 },
+          { min: 721314, max: Infinity, rate: 0.123 },
+        ],
+      },
+      {
+        name: 'New York', deduction: 8000, // 2025 single filer
+        brackets: [
+          { min: 0, max: 8500, rate: 0.04 },
+          { min: 8500, max: 11700, rate: 0.045 },
+          { min: 11700, max: 13900, rate: 0.0525 },
+          { min: 13900, max: 80650, rate: 0.055 },
+          { min: 80650, max: 215400, rate: 0.06 },
+          { min: 215400, max: 1077550, rate: 0.0685 },
+          { min: 1077550, max: 5000000, rate: 0.0965 },
+          { min: 5000000, max: 25000000, rate: 0.103 },
+          { min: 25000000, max: Infinity, rate: 0.109 },
+        ],
+      },
+      { name: 'Illinois', flat: 0.0495, deduction: 2775 }, // flat rate, personal exemption
+      { name: 'Texas', flat: 0 },
+      { name: 'Florida', flat: 0 },
+      { name: 'Nevada', flat: 0 },
+      { name: 'Washington', flat: 0 },
     ],
   },
   UK: {
