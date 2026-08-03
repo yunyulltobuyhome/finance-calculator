@@ -231,9 +231,9 @@ const NAV = [
     items: [
       {
         label: 'Salary & Tax', icon: '💼', path: '/salary',
-        title: "Salary Calculator 2026 — Take-Home Pay After Tax | JoinCalc",
-        description: "See your real take-home pay for 2026 in seconds — income tax, NI/FICA and monthly net for the US, UK, Canada & Australia. Free, no sign-up.",
-        keywords: 'salary calculator 2026, take home pay calculator, after tax income calculator',
+        title: "Paycheck & Salary Calculator 2026 — Take-Home Pay After Tax | JoinCalc",
+        description: "Your real take-home pay per paycheck for 2026 — weekly, biweekly or monthly, after income tax, NI/FICA and 401(k)/pension. See what a raise or contribution really costs. US, UK, Canada & Australia.",
+        keywords: 'paycheck calculator, salary calculator 2026, take home pay calculator, biweekly paycheck calculator, 401k paycheck impact calculator, after tax income calculator',
         lastUpdated: 'April 2026',
         source: "IRS, HMRC, CRA & ATO",
       },

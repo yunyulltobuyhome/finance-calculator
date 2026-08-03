@@ -19,28 +19,55 @@ function usStateTax(gross, stateData) {
   return taxable * (stateData.flat || 0)
 }
 
+// Pay frequencies people actually get paid on, with the number of periods a
+// year — this is what "biweekly paycheck calculator" and friends look for.
+const PAY_PERIODS = [
+  { name: 'annual', label: 'a year', periods: 1 },
+  { name: 'monthly', label: 'a month', periods: 12 },
+  { name: 'semimonthly', label: 'a paycheck (twice a month)', periods: 24 },
+  { name: 'biweekly', label: 'a paycheck (every 2 weeks)', periods: 26 },
+  { name: 'weekly', label: 'a week', periods: 52 },
+]
+
+// What the pre-tax retirement pot is called in each country.
+const RETIREMENT_LABEL = {
+  US: '401(k) contribution',
+  UK: 'Pension contribution (salary sacrifice)',
+  CA: 'RRSP contribution',
+  AU: 'Salary-sacrifice super',
+}
+
 export default function SalaryCalc() {
   const [country, setCountry] = useState('US')
   const [state, setState] = useState('California')
   const [province, setProvince] = useState('Ontario')
   const [annualSalary, setAnnualSalary] = useState(100000)
   const [loanPlan, setLoanPlan] = useState('None')
+  const [retirementPct, setRetirementPct] = useState(0)
+  const [payFrequency, setPayFrequency] = useState('monthly')
   const [result, setResult] = useState(null)
 
-  const calculateTax = (gross) => {
+  // `contribution` is an annual pre-tax retirement amount (401(k) / pension /
+  // RRSP / salary-sacrifice super). Each country reduces the right base by it:
+  // it always lowers the income-tax base, and in the UK salary sacrifice also
+  // lowers National Insurance and the student-loan base — which is exactly why
+  // it can claw back the tapered personal allowance above £100,000.
+  const calculateTax = (gross, contribution = 0) => {
     const data = SALARY_TAX_DATA[country]
     let federalTax = 0
     let deductions = {}
+    // Income subject to income tax after the pre-tax contribution.
+    const incomeBase = Math.max(0, gross - contribution)
 
     switch (country) {
       case 'US': {
-        // Brackets apply to income after the standard deduction; FICA is on
-        // gross wages, which is why it is calculated separately below.
-        const taxable = Math.max(0, gross - data.standardDeduction)
+        // 401(k) is pre-tax for income tax but not for FICA, so Social Security
+        // and Medicare stay on full gross wages.
+        const taxable = Math.max(0, incomeBase - data.standardDeduction)
         federalTax = bracketTax(taxable, data.brackets)
         const ssWages = Math.min(gross, data.socialSecurityCap)
         const stateData = data.states.find(s => s.name === state)
-        const st = Math.round(usStateTax(gross, stateData))
+        const st = Math.round(usStateTax(incomeBase, stateData))
         deductions = { federalTax: Math.round(federalTax) }
         // No-income-tax states (TX, FL, NV, WA) simply omit the line.
         if (st > 0) deductions.stateTax = st
@@ -49,12 +76,11 @@ export default function SalaryCalc() {
         break
       }
       case 'UK': {
-        // The personal allowance tapers away above £100,000, so the 0% band
-        // shrinks as income rises — this is what creates the 60% effective
-        // marginal rate between £100,000 and £125,140.
-        const taper = Math.max(0, (gross - data.taperThreshold) / 2)
+        // Salary sacrifice reduces gross for income tax, NI and student loan
+        // alike, so everything here works off incomeBase, not gross.
+        const taper = Math.max(0, (incomeBase - data.taperThreshold) / 2)
         const allowance = Math.max(0, data.personalAllowance - taper)
-        const taxable = Math.max(0, gross - allowance)
+        const taxable = Math.max(0, incomeBase - allowance)
 
         // Bands are measured on taxable income: 20% on the first £37,700,
         // 40% up to £125,140, 45% above.
@@ -66,8 +92,8 @@ export default function SalaryCalc() {
           Math.max(0, taxable - additionalFrom) * 0.45
 
         // Class 1 NI: 8% between the thresholds, then 2% on everything above.
-        const niMain = Math.max(0, Math.min(gross, data.nationalInsuranceCap) - data.nationalInsuranceThreshold)
-        const niUpper = Math.max(0, gross - data.nationalInsuranceCap)
+        const niMain = Math.max(0, Math.min(incomeBase, data.nationalInsuranceCap) - data.nationalInsuranceThreshold)
+        const niUpper = Math.max(0, incomeBase - data.nationalInsuranceCap)
 
         const plan = data.studentLoanPlans.find(p => p.name === loanPlan) || data.studentLoanPlans[0]
         deductions = {
@@ -75,23 +101,15 @@ export default function SalaryCalc() {
           nationalInsurance: Math.round(niMain * data.nationalInsurance + niUpper * data.nationalInsuranceUpperRate),
         }
         if (plan.rate > 0) {
-          deductions.studentLoan = Math.round(Math.max(0, gross - plan.threshold) * plan.rate)
+          deductions.studentLoan = Math.round(Math.max(0, incomeBase - plan.threshold) * plan.rate)
         }
         break
       }
       case 'CA': {
-        for (let bracket of data.federalBrackets) {
-          if (gross > bracket.min) {
-            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
-          }
-        }
+        // RRSP contributions are deductible from income tax; CPP/EI stay on gross.
+        federalTax = bracketTax(incomeBase, data.federalBrackets)
         const provData = data.provinces.find(p => p.name === province)
-        let provTax = 0
-        if (provData) {
-          for (let bracket of provData.brackets) {
-            if (gross > bracket.min) provTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
-          }
-        }
+        const provTax = provData ? bracketTax(incomeBase, provData.brackets) : 0
         deductions = {
           federalTax: Math.round(federalTax),
           provinceTax: Math.round(provTax),
@@ -101,14 +119,12 @@ export default function SalaryCalc() {
         break
       }
       case 'AU': {
-        for (let bracket of data.brackets) {
-          if (gross > bracket.min) {
-            federalTax += (Math.min(gross, bracket.max) - bracket.min) * bracket.rate
-          }
-        }
+        // Salary-sacrifice super lowers taxable income (and the Medicare levy
+        // that rides on it); employer super is separate and stays on gross.
+        federalTax = bracketTax(incomeBase, data.brackets)
         deductions = {
           incomeTax: Math.round(federalTax),
-          medicareLevey: Math.round(gross * data.medicareLevey),
+          medicareLevey: Math.round(incomeBase * data.medicareLevey),
           superannuation: Math.round(gross * data.superannuation),
         }
         break
@@ -116,7 +132,9 @@ export default function SalaryCalc() {
     }
 
     const totalTaxAndDeductions = Object.values(deductions).reduce((a, b) => a + b, 0)
-    return { gross, deductions, net: gross - totalTaxAndDeductions, totalDeductions: totalTaxAndDeductions }
+    // Take-home is gross minus tax minus the money diverted into retirement.
+    const net = gross - totalTaxAndDeductions - contribution
+    return { gross, deductions, net, totalDeductions: totalTaxAndDeductions, contribution }
   }
 
   // Most take-home calculators stop at the final number. The rate that actually
@@ -124,9 +142,9 @@ export default function SalaryCalc() {
   // the marginal one, so probe it by pricing the next slice of income. Doing it
   // as a delta means it stays correct for every country without special-casing.
   const STEP = 1000
-  const marginalAnalysis = (gross) => {
-    const here = calculateTax(gross)
-    const next = calculateTax(gross + STEP)
+  const marginalAnalysis = (gross, contribution = 0) => {
+    const here = calculateTax(gross, contribution)
+    const next = calculateTax(gross + STEP, contribution)
     const extraDeductions = next.totalDeductions - here.totalDeductions
     const keep = STEP - extraDeductions
     return {
@@ -154,12 +172,42 @@ export default function SalaryCalc() {
   }
 
   const calc = () => {
-    const res = calculateTax(annualSalary)
+    const contribution = Math.round(annualSalary * (Math.min(100, Math.max(0, +retirementPct)) / 100))
+    const res = calculateTax(annualSalary, contribution)
+
+    // Per-paycheck view: divide the actual take-home by the number of pay
+    // periods in the year. "paycheck calculator" is what most people search.
+    const period = PAY_PERIODS.find(p => p.name === payFrequency) || PAY_PERIODS[0]
+    const perPaycheck = Math.round(res.net / period.periods)
+    const grossPerPaycheck = Math.round(annualSalary / period.periods)
+
+    let contributionImpact = null
+    if (contribution > 0) {
+      // The whole point of the feature: you divert `contribution` into
+      // retirement, but take-home only falls by `trueCost`, because the money
+      // came out before tax. The gap is the tax (and NI) you no longer pay.
+      const withoutC = calculateTax(annualSalary, 0)
+      const trueCost = withoutC.net - res.net
+      contributionImpact = {
+        contribution,
+        trueCost: Math.round(trueCost),
+        taxSaving: Math.round(contribution - trueCost),
+        effectiveCostRate: contribution > 0 ? (trueCost / contribution) * 100 : 0,
+        // Restoring the personal allowance shows up as take-home falling by far
+        // less than the contribution — flag it when it happens in the UK.
+        restoresAllowance: country === 'UK' && annualSalary > 100000 && (annualSalary - contribution) <= 100000,
+      }
+    }
+
     setResult({
       ...res,
       monthly: Math.round(res.net / 12),
-      biweekly: Math.round(res.net / 26),
-      ...marginalAnalysis(annualSalary),
+      perPaycheck,
+      grossPerPaycheck,
+      periodLabel: period.label,
+      periods: period.periods,
+      contributionImpact,
+      ...marginalAnalysis(annualSalary, contribution),
       cliff: cliffNote(annualSalary),
     })
   }
@@ -172,7 +220,7 @@ export default function SalaryCalc() {
 
   return (
     <div>
-      <h1 className="text-base font-semibold text-gray-700 mb-4">Salary Take-Home Calculator 2026</h1>
+      <h1 className="text-base font-semibold text-gray-700 mb-4">Paycheck &amp; Salary Take-Home Calculator 2026</h1>
 
       <div className="mb-4">
         <label className="text-xs text-gray-500 block mb-1">Select Country</label>
@@ -227,6 +275,26 @@ export default function SalaryCalc() {
         </div>
       )}
 
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">{RETIREMENT_LABEL[country]} (% of salary)</label>
+          <input type="number" min="0" max="100" step="1" value={retirementPct}
+            onChange={(e) => setRetirementPct(e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+        </div>
+        <div>
+          <label className="text-xs text-gray-500 block mb-1">Show pay per</label>
+          <select value={payFrequency} onChange={(e) => setPayFrequency(e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="weekly">Week</option>
+            <option value="biweekly">2 weeks (biweekly)</option>
+            <option value="semimonthly">Twice a month</option>
+            <option value="monthly">Month</option>
+            <option value="annual">Year</option>
+          </select>
+        </div>
+      </div>
+
       <button onClick={calc}
         className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors">
         Calculate Take-Home Pay
@@ -234,6 +302,18 @@ export default function SalaryCalc() {
 
       {result && (
         <div className="mt-5">
+          {/* Per-paycheck take-home is the headline most people came for. */}
+          <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-5 mb-3">
+            <p className="text-sm text-indigo-600 font-semibold mb-1">Take-home pay</p>
+            <p className="text-3xl font-black text-indigo-700">
+              {fmt(result.perPaycheck)}
+              <span className="text-lg text-gray-400 font-normal"> {result.periodLabel}</span>
+            </p>
+            <p className="text-xs text-gray-500 mt-1">
+              from {fmt(result.grossPerPaycheck)} gross{result.periods > 1 ? `, across ${result.periods} pay periods a year` : ''}
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 gap-2 mb-3">
             {[
               { label: 'Gross Annual', val: fmt(result.gross) },
@@ -247,6 +327,35 @@ export default function SalaryCalc() {
               </div>
             ))}
           </div>
+
+          {/* The differentiator: what a pre-tax contribution actually costs you.
+              Because the marginal rate here is accurate (state / NI / taper),
+              the "true cost" is too — most calculators only approximate it. */}
+          {result.contributionImpact && (
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 mb-3">
+              <p className="text-sm font-semibold text-emerald-800 mb-2">{RETIREMENT_LABEL[country]} impact</p>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div>
+                  <p className="text-xs text-gray-500 mb-0.5">You contribute</p>
+                  <p className="text-base font-bold text-gray-800">{fmt(result.contributionImpact.contribution)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 mb-0.5">Take-home drops by</p>
+                  <p className="text-base font-bold text-gray-800">{fmt(result.contributionImpact.trueCost)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 mb-0.5">Tax saving</p>
+                  <p className="text-base font-bold text-emerald-600">{fmt(result.contributionImpact.taxSaving)}</p>
+                </div>
+              </div>
+              <p className="text-xs text-emerald-700 leading-relaxed mt-3">
+                Every {fmt(100)} you put in only costs you{' '}
+                <strong>{fmt(Math.round(result.contributionImpact.effectiveCostRate))}</strong> of take-home pay —
+                the rest is tax you no longer pay.
+                {result.contributionImpact.restoresAllowance && ' By bringing your income back under £100,000 you also restore your full personal allowance, which is why take-home barely moves.'}
+              </p>
+            </div>
+          )}
 
           {/* Effective vs marginal rate — the number that actually answers
               "is a raise worth it" and "should I put this into a pension". */}
@@ -376,6 +485,8 @@ export default function SalaryCalc() {
             {[
               { q: 'What is take-home pay?', a: 'Take-home pay (also called net pay) is your salary after all deductions — income tax, social security, national insurance, and other mandatory contributions. It\'s the actual amount deposited into your bank account each payday.' },
               { q: 'How much tax do I pay on $100,000 in the US?', a: 'On a $100,000 salary (2026 brackets, single, after the $16,100 standard deduction), federal income tax is about $13,400, plus Social Security (6.2%) and Medicare (1.45%). State tax is on top and varies: in California it is roughly $5,300, giving total deductions near $26,300 and take-home around $73,700. In no-income-tax states like Texas or Florida there is no state line, so take-home is closer to $79,000.' },
+              { q: 'How much does a 401(k) or pension contribution reduce my paycheck?', a: 'Less than the amount you contribute, because it comes out before tax. Enter a contribution percentage above and the calculator shows the "true cost" — for example, if you are in a 30% marginal band, every $100 into a 401(k) only lowers your take-home by about $70. In the UK, salary-sacrifice pension also cuts National Insurance, and if it brings your income back under £100,000 it restores the tapered personal allowance, so £100 in can cost as little as £38 of take-home.' },
+              { q: 'What is the difference between my effective and marginal tax rate?', a: 'Your effective rate is total tax as a share of your whole salary. Your marginal rate is what you pay on the next pound or dollar you earn — it is always higher, and it is the number that tells you what a pay rise is really worth or how much a pension contribution saves. Both are shown with every result above.' },
               { q: 'What is the UK personal allowance for 2026?', a: 'The personal allowance for 2026/27 is £12,570. You pay no income tax on earnings below this amount. Above £12,570, you pay 20% basic rate, 40% higher rate (above £50,270), and 45% additional rate (above £125,140).' },
               { q: 'How does Australian tax work?', a: 'Australia uses a progressive tax system with a tax-free threshold of A$18,200. Rates range from 19% to 45%. A Medicare levy of 2% applies to most taxpayers. Employers also contribute 11.5% of your salary to your superannuation (pension) fund in 2026.' },
             ].map((item, i) => (
