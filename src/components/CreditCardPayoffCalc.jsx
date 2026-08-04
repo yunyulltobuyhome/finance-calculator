@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { GrowthChart, SplitBar, toSeries } from './ResultChart'
 import useShareableState from '../hooks/useShareableState'
 
@@ -185,16 +184,6 @@ export default function CreditCardPayoffCalc() {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-base font-bold text-gray-800 mb-3">Payoff by Balance</h2>
-          <div className="flex flex-wrap gap-2">
-            {[1000, 2000, 3000, 5000, 7500, 10000, 15000, 20000].map(b => (
-              <Link key={b} to={`/credit-card-payoff/${b}`} className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5 text-sm">
-                ${b.toLocaleString()}
-              </Link>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   )

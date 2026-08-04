@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { GrowthChart, SplitBar, toSeries } from './ResultChart'
 import useShareableState from '../hooks/useShareableState'
 
@@ -180,16 +179,6 @@ export default function AutoLoanCalc() {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-base font-bold text-gray-800 mb-3">Car Payment by Loan Amount</h2>
-          <div className="flex flex-wrap gap-2">
-            {[15000, 20000, 25000, 30000, 35000, 40000, 50000].map(a => (
-              <Link key={a} to={`/auto-loan/${a}`} className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5 text-sm">
-                ${a.toLocaleString()}
-              </Link>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   )

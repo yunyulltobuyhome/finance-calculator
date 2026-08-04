@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
-const POPULAR_PRICES = [200000, 250000, 300000, 350000, 400000, 450000, 500000, 600000, 750000, 1000000]
 
 const RATES = {
   uk_standard: [
@@ -278,17 +276,6 @@ export default function StampDutyCalc() {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-base font-bold text-gray-800 mb-3">Stamp Duty by House Price</h2>
-          <div className="flex flex-wrap gap-2">
-            {POPULAR_PRICES.map(p => (
-              <Link key={p} to={`/stamp-duty/${p}`}
-                className="text-indigo-600 hover:underline bg-gray-50 rounded-lg px-3 py-1.5 text-sm">
-                £{p.toLocaleString()}
-              </Link>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   )

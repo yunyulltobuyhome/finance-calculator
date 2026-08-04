@@ -15,8 +15,13 @@ export default function NotFound() {
     <div className="max-w-2xl mx-auto px-4 md:px-8 py-12 text-center">
       <Helmet>
         <title>Page Not Found — JoinCalc</title>
-        {/* Avoid a soft 404: tell crawlers not to index missing pages. */}
+        {/* Avoid a soft 404: tell crawlers not to index missing pages. The host
+            serves the prerendered home shell for unmatched URLs, so that HTML
+            still carries the home canonical — point this page at the home page
+            explicitly rather than leaving two conflicting canonicals, which
+            Google resolves by ignoring both. */}
         <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://joincalc.com/" />
       </Helmet>
 
       <p className="text-6xl mb-4">🧮</p>

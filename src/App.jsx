@@ -26,10 +26,6 @@ import TermsOfService from './components/TermsOfService'
 import About from './components/About'
 import Contact from './components/Contact'
 import Home from './components/Home'
-import SalaryLanding from './components/SalaryLanding'
-import StampDutyLanding from './components/StampDutyLanding'
-import CapitalGainsLanding from './components/CapitalGainsLanding'
-import MortgageLanding from './components/MortgageLanding'
 import VATCalc from './components/VATCalc'
 import PayRiseCalc from './components/PayRiseCalc'
 import CreditCardPayoffCalc from './components/CreditCardPayoffCalc'
@@ -39,8 +35,6 @@ import HourlyToSalaryCalc from './components/HourlyToSalaryCalc'
 import DebtConsolidationCalc from './components/DebtConsolidationCalc'
 import TaxTablesUK from './components/TaxTablesUK'
 import TaxTablesUS from './components/TaxTablesUS'
-import AutoLoanLanding from './components/AutoLoanLanding'
-import CreditCardLanding from './components/CreditCardLanding'
 import GuidesIndex from './components/GuidesIndex'
 import ArticlePage from './components/ArticlePage'
 import NotFound from './components/NotFound'
@@ -463,18 +457,20 @@ export function Layout() {
   const path = location.pathname !== '/' ? location.pathname.replace(/\/+$/, '') : '/'
   const isStatic = STATIC_PAGES.includes(path)
   const isHome = path === '/'
-  // Programmatic SEO landing pages (e.g. /salary/50000-after-tax-uk) and guide
-  // articles own their own <Helmet>, heading and disclaimer, so they render
-  // without the card chrome. (After normalisation, /salary/ no longer matches.)
-  const isLanding = ['/salary/', '/stamp-duty/', '/capital-gains/', '/mortgage/', '/auto-loan/', '/credit-card-payoff/'].some(p => path.startsWith(p))
+  // Guide articles own their own <Helmet>, heading and disclaimer, so they
+  // render without the calculator card chrome.
   const isGuide = path === '/guides' || path.startsWith('/guides/')
   // Static pages (about/contact/privacy/terms) set their own <Helmet>, so the
   // layout must not also emit title/description/canonical for them.
-  const ownsMeta = isLanding || isGuide || isStatic
+  const ownsMeta = isGuide || isStatic
   const currentTab = allTabs.find(t => t.path === path)
   const relatedGuide = CALC_GUIDE[path]
-  // Unknown URL → 404 page (renders without the calculator card/chrome).
-  const isUnknown = !isHome && !isStatic && !isGuide && !isLanding && !currentTab
+  // Unknown URL → 404 page (renders without the calculator card/chrome). This
+  // now includes the old /stamp-duty/300000-style template pages, which were
+  // removed: near-duplicate "template + number" pages are a known trigger for
+  // an AdSense "low value content" review, and since they were already out of
+  // the sitemap and blocked in robots.txt they earned nothing to offset that.
+  const isUnknown = !isHome && !isStatic && !isGuide && !currentTab
   const [mobileOpen, setMobileOpen] = useState(false)
 
   // Embeddable calculators render chrome-less (no sidebar/header/footer/cookie
@@ -522,16 +518,20 @@ export function Layout() {
     <div className="min-h-screen bg-gray-50 flex">
       <Helmet>
         {/* Page-specific tags are skipped on pages that own their own <Helmet>
-            (/salary/:slug landings and /guides articles). */}
-        {!ownsMeta && <title>{seoTitle}</title>}
-        {!ownsMeta && <meta name="description" content={seoDesc} />}
-        {!ownsMeta && <meta name="keywords" content={seoKeywords} />}
-        {!ownsMeta && <meta property="og:title" content={seoTitle} />}
-        {!ownsMeta && <meta property="og:description" content={seoDesc} />}
-        {!ownsMeta && <meta property="og:url" content={canonicalUrl} />}
-        {!ownsMeta && <meta name="twitter:title" content={seoTitle} />}
-        {!ownsMeta && <meta name="twitter:description" content={seoDesc} />}
-        {!ownsMeta && <link rel="canonical" href={canonicalUrl} />}
+            (/guides articles) and on unknown URLs, where NotFound owns the
+            head. Emitting a canonical for a URL that does not exist would
+            declare a deleted page authoritative — and because the SPA fallback
+            serves the prerendered home shell, it would also collide with the
+            home canonical already baked into that HTML. */}
+        {!ownsMeta && !isUnknown && <title>{seoTitle}</title>}
+        {!ownsMeta && !isUnknown && <meta name="description" content={seoDesc} />}
+        {!ownsMeta && !isUnknown && <meta name="keywords" content={seoKeywords} />}
+        {!ownsMeta && !isUnknown && <meta property="og:title" content={seoTitle} />}
+        {!ownsMeta && !isUnknown && <meta property="og:description" content={seoDesc} />}
+        {!ownsMeta && !isUnknown && <meta property="og:url" content={canonicalUrl} />}
+        {!ownsMeta && !isUnknown && <meta name="twitter:title" content={seoTitle} />}
+        {!ownsMeta && !isUnknown && <meta name="twitter:description" content={seoDesc} />}
+        {!ownsMeta && !isUnknown && <link rel="canonical" href={canonicalUrl} />}
         {/* Route-independent defaults below */}
         <meta name="author" content="JoinCalc" />
         {/* Landing/guide pages set their own robots; the 404 sets noindex. */}
@@ -608,12 +608,6 @@ export function Layout() {
           <div className={(isStatic || isHome || ownsMeta || isUnknown) ? '' : 'bg-white rounded-2xl border border-gray-200 p-6'}>
             <Routes>
               <Route path="/"                   element={<Home />} />
-              <Route path="/salary/:slug"       element={<SalaryLanding />} />
-              <Route path="/stamp-duty/:slug"   element={<StampDutyLanding />} />
-              <Route path="/capital-gains/:slug" element={<CapitalGainsLanding />} />
-              <Route path="/mortgage/:slug"     element={<MortgageLanding />} />
-              <Route path="/auto-loan/:slug"    element={<AutoLoanLanding />} />
-              <Route path="/credit-card-payoff/:slug" element={<CreditCardLanding />} />
               <Route path="/vat"                element={<VATCalc />} />
               <Route path="/pay-rise"           element={<PayRiseCalc />} />
               <Route path="/credit-card-payoff" element={<CreditCardPayoffCalc />} />

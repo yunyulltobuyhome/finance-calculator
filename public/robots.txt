@@ -5,41 +5,10 @@ Disallow: /api/
 # Embed pages are noindex utility iframes — don't spend crawl budget on them.
 Disallow: /embed/
 
-# Temporarily hidden from crawling: large clusters of programmatic
-# "template + number" landing pages (e.g. /salary/50000-after-tax-uk,
-# /stamp-duty/300000). These are still live and linked for direct visitors,
-# but are excluded from crawling/indexing while the site is under AdSense
-# review, since a high ratio of near-duplicate template pages relative to
-# original content is a common trigger for a "low value content" review flag.
-# Re-enable (remove these six Disallow/Allow blocks + re-add to sitemap.xml)
-# once approved.
-#
-# Each base calculator page is explicitly re-Allowed (with and without a
-# trailing slash) so it stays crawlable even if the host normalizes
-# /salary -> /salary/ before Google evaluates the path — an Allow rule wins
-# over a Disallow rule of the same specificity.
-Disallow: /salary/
-Allow: /salary$
-Allow: /salary/$
-
-Disallow: /stamp-duty/
-Allow: /stamp-duty$
-Allow: /stamp-duty/$
-
-Disallow: /capital-gains/
-Allow: /capital-gains$
-Allow: /capital-gains/$
-
-Disallow: /mortgage/
-Allow: /mortgage$
-Allow: /mortgage/$
-
-Disallow: /auto-loan/
-Allow: /auto-loan$
-Allow: /auto-loan/$
-
-Disallow: /credit-card-payoff/
-Allow: /credit-card-payoff$
-Allow: /credit-card-payoff/$
+# The six Disallow/Allow blocks that used to sit here hid the programmatic
+# "template + number" landing pages (/stamp-duty/300000 and friends) from
+# crawling. Those pages have now been removed from the site entirely, so the
+# rules are gone too — nothing under /salary/, /stamp-duty/ etc. needs blocking,
+# and the broad Disallow risked shadowing the real calculator pages.
 
 Sitemap: https://joincalc.com/sitemap.xml
