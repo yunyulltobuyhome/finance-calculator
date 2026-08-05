@@ -69,6 +69,50 @@ export default function TaxTablesUK() {
         ✓ Checked against HMRC &amp; GOV.UK · July 2026
       </p>
 
+      {/* The tables are the easy part. This is the context that actually
+          answers what people came to work out. */}
+      <section className="mb-8 text-sm text-gray-600 leading-relaxed space-y-3">
+        <h2 className="text-base font-bold text-gray-800">How to read these tables</h2>
+        <p>
+          Income Tax and National Insurance are charged separately, on different rules, and both come out of the
+          same payslip — which is why your take-home never matches the Income Tax table on its own. The bands
+          below are <strong>marginal</strong>: crossing into the higher rate does not tax your whole salary at
+          40%, only the pounds above £50,270.
+        </p>
+        <div className="overflow-x-auto">
+          <T headers={['Salary', 'Income Tax', 'National Insurance', 'Total deducted', 'Effective rate']} rows={[
+            ['£30,000', '£3,486', '£1,394', '£4,880', '16.3%'],
+            ['£55,000', '£9,432', '£3,111', '£12,543', '22.8%'],
+            ['£110,000', '£33,432', '£4,211', '£37,643', '34.2%'],
+          ]} />
+        </div>
+        <p className="text-xs text-gray-400">
+          England, Wales and Northern Ireland, standard tax code, no pension or student loan. Scotland sets its
+          own Income Tax bands.
+        </p>
+        <p>
+          Notice that National Insurance moves the opposite way to Income Tax. NI is 8% between £12,570 and
+          £50,270 but only <strong>2%</strong> above it, so at exactly the point Income Tax doubles from 20% to
+          40%, NI drops by six points. The combined marginal rate goes from 28% to 42% — a real jump, but not the
+          doubling the headline rates suggest.
+        </p>
+        <h3 className="text-sm font-bold text-gray-800 pt-2">The £100,000 trap</h3>
+        <p>
+          The most expensive band in the UK system is not the 45% additional rate — it is the stretch between
+          £100,000 and £125,140. The personal allowance is withdrawn by £1 for every £2 earned above £100,000, so
+          each extra pound is taxed at 40% <em>and</em> costs you 50p of tax-free allowance. The effective rate on
+          that slice is <strong>60%</strong>, or 62% once the 2% NI is added — higher than anything paid by
+          someone on £200,000.
+        </p>
+        <p>
+          This is why a pension contribution is worth far more in that band than anywhere else. Salary sacrifice
+          reduces the income the taper is measured against, so contributing enough to bring your income back to
+          £100,000 restores the full allowance: £1,000 sacrificed can cost as little as £380 of take-home pay.
+          A bonus that pushes you just over £100,000 is often worth redirecting into a pension for exactly this
+          reason.
+        </p>
+      </section>
+
       <Section title="Income Tax bands" calc={{ path: '/salary', label: 'Take-home calculator' }}
         note="The personal allowance shrinks by £1 for every £2 earned above £100,000, disappearing entirely at £125,140. Scotland sets its own bands.">
         <T headers={['Band', 'Taxable income', 'Rate']} rows={[
@@ -182,12 +226,45 @@ export default function TaxTablesUK() {
         ]} />
       </Section>
 
+      <section className="mb-8 text-sm text-gray-600 leading-relaxed space-y-3 border-t border-gray-100 pt-6">
+        <h2 className="text-base font-bold text-gray-800">Where these numbers change what you do</h2>
+        <p>
+          <strong>Capital Gains Tax stacks on top of your income.</strong> The £3,000 annual exempt amount comes
+          off first, then whatever is left is taxed at 18% for the part that still fits inside your basic-rate
+          band and 24% above it. A £20,000 gain for a basic-rate taxpayer leaves £17,000 taxable — about £3,060.
+          Because the allowance renews each April, splitting a large disposal across two tax years can save the
+          tax on a second £3,000, and transfers between spouses are exempt, which doubles the allowance available
+          to a couple.
+        </p>
+        <p>
+          <strong>Dividends are taxed far more lightly than salary.</strong> After the £500 allowance the rates
+          are 8.75%, 33.75% and 39.35% — and dividends carry no National Insurance at all. That gap is the whole
+          reason company directors take a small salary and the rest as dividends, though the profit has already
+          borne Corporation Tax on the way out.
+        </p>
+        <p>
+          <strong>Stamp duty is banded, not a cliff.</strong> Only the slice of the price inside each band is
+          charged at that band's rate, so nudging just over £250,000 costs 5% on the excess, not on the whole
+          purchase. The genuine cliff is first-time buyer relief, which stops entirely above £500,000 — at
+          £500,001 a first-time buyer pays the full standard rate on the lot.
+        </p>
+        <p>
+          <strong>Student loan repayments behave like an extra tax band.</strong> You repay 9% of everything above
+          your plan's threshold (6% for Postgraduate), on top of Income Tax and NI. For a Plan 2 graduate earning
+          above £50,270 the combined marginal deduction is 51%, and someone with both an undergraduate and a
+          postgraduate loan pays more still.
+        </p>
+      </section>
+
       <div className="mt-10 space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-6">
         <h2 className="text-base font-bold text-gray-800">Frequently Asked Questions</h2>
         {[
           { q: 'When does the 2026/27 tax year run?', a: 'The UK tax year runs from 6 April 2026 to 5 April 2027. New rates and thresholds normally take effect from the first day of the tax year.' },
-          { q: 'Why do the thresholds stay the same each year?', a: 'Several thresholds — including the £12,570 personal allowance and £50,270 higher-rate threshold — have been frozen for multiple years. As wages rise with inflation, more income drifts into higher bands, a effect known as fiscal drag.' },
+          { q: 'Why do the thresholds stay the same each year?', a: 'Several thresholds — including the £12,570 personal allowance and £50,270 higher-rate threshold — have been frozen for multiple years. As wages rise with inflation, more income drifts into higher bands, an effect known as fiscal drag.' },
           { q: 'Do these rates apply in Scotland?', a: 'National Insurance, VAT, CGT and most other taxes apply UK-wide, but Scotland sets its own income tax bands and rates, and Scotland and Wales replace stamp duty with LBTT and LTT respectively.' },
+          { q: 'What is the 60% tax trap?', a: 'Between £100,000 and £125,140 the personal allowance is withdrawn by £1 for every £2 earned, so each extra pound is taxed at 40% and also costs 50p of tax-free allowance. The effective rate on that band is 60%, or 62% with National Insurance — higher than the 45% additional rate paid above £125,140.' },
+          { q: 'How much of a pay rise do I actually keep?', a: 'It depends on the band you are in, not your average rate. A basic-rate taxpayer keeps about 72p of each extra pound after 20% tax and 8% NI; a higher-rate taxpayer keeps 58p; someone in the £100,000–£125,140 taper keeps only 38p. Add a student loan and each figure drops a further 9p.' },
+          { q: 'Does a pension contribution save tax at my marginal rate?', a: 'Yes. Contributions come out before Income Tax, so relief is given at the highest rate you pay — and with salary sacrifice National Insurance is saved too. This is most powerful in the £100,000–£125,140 band, where sacrificing back under £100,000 also restores the full personal allowance.' },
         ].map((f, i) => (
           <div key={i} className="bg-gray-50 rounded-lg p-4">
             <p className="font-semibold text-gray-700 mb-1">{f.q}</p>

@@ -68,6 +68,49 @@ export default function TaxTablesUS() {
         ✓ Checked against IRS · July 2026
       </p>
 
+      {/* Tables on their own tell you almost nothing — this is the part most
+          rate-table pages leave out, and it is what the numbers actually mean. */}
+      <section className="mb-8 text-sm text-gray-600 leading-relaxed space-y-3">
+        <h2 className="text-base font-bold text-gray-800">How to read these tables</h2>
+        <p>
+          Almost every number below applies to <strong>taxable income</strong>, not the salary on your offer
+          letter. Taxable income is what is left after subtracting the standard deduction — $16,100 for a single
+          filer in 2026. Someone earning $75,000 therefore has $58,900 of taxable income, and the brackets are
+          applied to that smaller figure, not to $75,000.
+        </p>
+        <p>
+          The brackets are <strong>marginal</strong>, which is the single most misunderstood thing about US tax.
+          Landing in the 22% bracket does not mean 22% of your income disappears. Each slice of income is taxed
+          only at the rate for the band it falls in. On that $58,900 of taxable income the first $11,925 is taxed
+          at 10%, the next $36,550 at 12%, and only the final $10,425 at 22% — a total federal income tax of about
+          $7,872. That is <strong>10.5% of the $75,000 salary</strong>, even though the person is "in the 22%
+          bracket". Your <em>effective</em> rate is what you actually pay; your <em>marginal</em> rate only tells
+          you what the next dollar costs.
+        </p>
+        <p>
+          A raise can therefore never leave you worse off through the brackets alone. Crossing into a higher band
+          only changes the tax on the dollars above the threshold.
+        </p>
+        <div className="overflow-x-auto">
+          <T headers={['Salary (single)', 'Taxable income', 'Federal income tax', 'Effective rate', 'Marginal rate']} rows={[
+            ['$45,000', '$28,900', '$3,230', '7.2%', '12%'],
+            ['$75,000', '$58,900', '$7,872', '10.5%', '22%'],
+            ['$120,000', '$103,900', '$17,783', '14.8%', '24%'],
+          ]} />
+        </div>
+        <p className="text-xs text-gray-400">
+          Federal income tax only, standard deduction, no other adjustments. FICA and state tax come on top —
+          see below.
+        </p>
+        <p>
+          Two costs sit outside these brackets and catch people out. <strong>FICA</strong> (Social Security and
+          Medicare) is charged on your gross wages, not your taxable income, so it applies from the first dollar
+          with no deduction — that is another $5,738 on a $75,000 salary. And <strong>state income tax</strong> is
+          entirely separate: it can be nothing at all in Texas or Florida, or several thousand dollars in
+          California or New York on the same salary.
+        </p>
+      </section>
+
       <Section title="Federal income tax brackets — Single" calc={{ path: '/salary', label: 'Take-home calculator' }}
         note="Applied to taxable income (after the standard deduction). Only the slice inside each bracket is taxed at that rate.">
         <T headers={['Taxable income', 'Rate']} rows={[
@@ -135,12 +178,43 @@ export default function TaxTablesUS() {
         ]} />
       </Section>
 
+      <section className="mb-8 text-sm text-gray-600 leading-relaxed space-y-3 border-t border-gray-100 pt-6">
+        <h2 className="text-base font-bold text-gray-800">Where these numbers change what you do</h2>
+        <p>
+          <strong>The 0% capital gains band is the most valuable line on this page</strong> and the most
+          overlooked. A single filer with taxable income up to $49,450 pays <em>nothing</em> on long-term gains.
+          Gains stack on top of your income, so with $60,000 of income a $20,000 long-term gain sits entirely
+          above that ceiling and is taxed at 15% — about $3,000. Realising gains in a low-income year, or
+          spreading a large sale across two tax years, is what turns that band into real money.
+        </p>
+        <p>
+          <strong>Holding period is the difference between two completely different tax bills.</strong> Sell at
+          364 days and the gain is short-term, taxed as ordinary income at up to 37%. Sell at 366 days and the
+          same gain is long-term, capped at 20% and often 15%. Nothing else about the trade changes.
+        </p>
+        <p>
+          <strong>The Social Security wage cap creates a mid-year pay rise.</strong> Social Security stops at
+          $184,500 of wages, so anyone earning above that sees their take-home jump once they cross it — the 6.2%
+          simply stops. Medicare has no cap and continues on every dollar.
+        </p>
+        <p>
+          <strong>401(k) contributions are worth your marginal rate, not the average.</strong> Because they come
+          out before income tax, every dollar contributed saves tax at the highest rate you pay. In the 24%
+          bracket, $1,000 into a 401(k) reduces take-home by roughly $760, not $1,000. FICA is still charged on
+          the full amount, which is why the saving is your income-tax rate rather than your whole marginal wedge.
+        </p>
+      </section>
+
       <div className="mt-10 space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-6">
         <h2 className="text-base font-bold text-gray-800">Frequently Asked Questions</h2>
         {[
           { q: 'Are these the rates for my 2026 paychecks or my 2026 tax return?', a: 'These are the 2026 tax-year figures — they apply to income earned during calendar year 2026, which you report on the return filed in early 2027.' },
           { q: 'Do tax brackets change every year?', a: 'Yes. The IRS adjusts bracket thresholds, the standard deduction and contribution limits for inflation each fall, effective the following January.' },
           { q: 'Does moving into a higher bracket raise tax on all my income?', a: 'No — the US system is marginal. Only the dollars inside each bracket are taxed at that bracket’s rate, so a raise can never leave you with less after-tax income from the brackets alone.' },
+          { q: 'What is the difference between my effective and marginal tax rate?', a: 'Your marginal rate is the rate on your next dollar — the bracket you are sitting in. Your effective rate is the total tax divided by your whole income, and it is always lower because the earlier slices were taxed at lower rates. On a $75,000 salary the marginal rate is 22% but the effective federal rate is about 10.5%.' },
+          { q: 'Should I itemise instead of taking the standard deduction?', a: 'Only if your itemised deductions add up to more than $16,100 (single). For most people with no mortgage interest and modest state taxes, the standard deduction is larger, which is why the great majority of filers take it.' },
+          { q: 'Do these federal rates include state income tax?', a: 'No. State income tax is charged separately and varies enormously — Texas, Florida, Nevada and Washington levy none, while California runs a progressive schedule up to 12.3%. Our take-home calculator applies the real state brackets on top of these federal figures.' },
+          { q: 'Why is tax taken from my paycheck different from these tables?', a: 'Payroll withholding is an estimate based on the W-4 you filed, not a final calculation. It also includes FICA, which sits outside the income tax brackets entirely. The tables here determine what you actually owe; the difference is settled as a refund or a balance due when you file.' },
         ].map((f, i) => (
           <div key={i} className="bg-gray-50 rounded-lg p-4">
             <p className="font-semibold text-gray-700 mb-1">{f.q}</p>
