@@ -311,6 +311,69 @@ export default function HolidayCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">What the 5.6 Weeks Actually Means</h2>
+          <p className="leading-relaxed mb-3">
+            Almost every UK worker is entitled to 5.6 weeks of paid holiday a year. The figure is expressed in
+            <em> weeks</em> rather than days deliberately, because that is what makes it work for every pattern:
+            your entitlement is 5.6 × the number of days you normally work per week. Five days a week gives 28
+            days; three days a week gives 16.8 days — the same amount of time off, measured in your own working
+            weeks.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The statutory maximum is capped at 28 days, so working six days a week does not push entitlement
+            beyond that. Anything above 28 days is contractual generosity rather than a legal requirement.
+          </p>
+          <p className="leading-relaxed">
+            The most common misunderstanding concerns bank holidays. There are eight in England and Wales, and
+            an employer <strong>may</strong> count them within the 5.6 weeks — which is exactly why so many
+            contracts read "20 days plus bank holidays". That is the statutory minimum expressed differently, not
+            a benefit above it. Neither is there any automatic right to take a bank holiday off or to be paid
+            extra for working it; that depends entirely on your contract.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Irregular Hours, Part Years and Carrying Over</h2>
+          <p className="leading-relaxed mb-3">
+            Entitlement builds up from your first day of employment, not after a probation period. In a first
+            year an employer may operate an accrual system, under which you build roughly one twelfth of the
+            annual entitlement each month. Leave in your final year is pro-rated to your leaving date, and
+            anything untaken must be paid out — a payment treated as ordinary earnings and taxed normally.
+          </p>
+          <p className="leading-relaxed mb-3">
+            For irregular-hours and part-year workers, entitlement now accrues at 12.07% of hours worked in each
+            pay period. That percentage is not arbitrary: 5.6 weeks of holiday divided by the 46.4 working weeks
+            that remain in a year is 12.07%. Employers may also use rolled-up holiday pay for these workers,
+            paying the 12.07% uplift alongside each payslip rather than when leave is taken — legal for this
+            group, but it must be itemised separately.
+          </p>
+          <p className="leading-relaxed">
+            The basic four weeks derived from EU law generally cannot be carried into the next leave year, though
+            the additional 1.6 weeks may be by agreement. The important exception is that workers unable to take
+            leave through long-term sickness or family leave can carry it forward, and holiday continues to
+            accrue throughout sick leave and maternity leave.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Holiday Pay Should Reflect Normal Pay</h2>
+          <p className="leading-relaxed mb-3">
+            Being paid for leave is not the same as being paid your basic rate. Case law has established that
+            holiday pay must reflect <em>normal</em> remuneration, so for the basic four weeks it should include
+            regular overtime, commission and shift premiums — not just contractual base pay. Someone whose income
+            depends heavily on commission or regular overtime may be receiving less holiday pay than they are
+            entitled to.
+          </p>
+          <p className="leading-relaxed">
+            Where pay varies, the reference period for calculating a week's pay is the previous 52 paid weeks,
+            ignoring any week in which no pay was received and going back up to 104 weeks to find them. One rule
+            has no exceptions worth noting: statutory holiday cannot be "bought out" while you are still
+            employed. An employer may pay for contractual leave above the statutory minimum, but the 5.6 weeks
+            must actually be taken as time off — the entitlement exists for rest, not as an alternative wage.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

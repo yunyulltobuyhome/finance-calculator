@@ -309,6 +309,62 @@ export default function MortgageAffordabilityCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">What Lenders Approve vs What You Can Actually Afford</h2>
+          <p className="leading-relaxed mb-3">
+            These are two different numbers, and confusing them is the most expensive mistake in the whole
+            process. A lender's maximum is calculated from your gross income before tax, before retirement
+            contributions, and before childcare, commuting or the higher bills that come with a bigger home.
+            The 36/43 and 4.5x figures above are what an underwriter will sign off — not a budget that leaves
+            you comfortable.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The gap is easiest to see in take-home terms. On a $95,000 US salary, gross monthly income is about
+            $7,900, so a 36% housing ratio permits roughly $2,850 a month. But take-home after federal tax, FICA
+            and state tax is closer to $5,800 — meaning that "approved" payment is nearly half of the money that
+            actually reaches your account, before a single utility bill. Underwriters do not see that; they see
+            the gross figure.
+          </p>
+          <p className="leading-relaxed">
+            A useful discipline is to run the payment you are considering through a take-home calculation first
+            and live on the remainder for two or three months before committing. If it is uncomfortable while
+            renting, it will not become comfortable once maintenance and property tax arrive.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">The Costs That Are Not in the Payment</h2>
+          <p className="leading-relaxed mb-3">
+            Affordability calculators, including this one, size the mortgage itself. Ownership carries a second
+            layer of cost that rent does not, and it is routinely underestimated:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed mb-3">
+            <li><strong>Property tax and insurance.</strong> In the US these are usually escrowed into the monthly payment, so the real cheque is meaningfully larger than the principal-and-interest figure.</li>
+            <li><strong>Mortgage insurance.</strong> Putting down less than 20% typically adds PMI in the US until you reach that equity level — a cost that buys you nothing and disappears once you cross it.</li>
+            <li><strong>Maintenance.</strong> A common planning rule is 1% of the property value a year. On a $350,000 home that is $3,500 annually, or roughly $290 a month that never appears on any approval letter.</li>
+            <li><strong>Buying costs.</strong> UK buyers face stamp duty on completion, which on a £350,000 home is £5,000 for a home mover and can be far more on an additional property. US closing costs commonly run 2–5% of the price.</li>
+          </ul>
+          <p className="leading-relaxed">
+            Add these together and the sustainable purchase price is often 10–20% below the maximum a lender
+            will offer. That is not pessimism — it is the difference between the loan being approved and the
+            budget being livable.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Why the Same Salary Buys Very Different Homes</h2>
+          <p className="leading-relaxed mb-3">
+            Two applicants on identical incomes routinely receive very different offers, because the inputs that
+            move the number most are not income at all:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed">
+            <li><strong>Existing debt.</strong> In the US, monthly debt payments come straight off your borrowing capacity. A $400 car payment can reduce the mortgage you qualify for by roughly $60,000–$70,000 at typical rates — clearing it before applying is often worth more than a raise.</li>
+            <li><strong>The interest rate.</strong> Rates set how much payment converts into principal. The same monthly payment buys a substantially smaller loan at 8% than at 5%, which is why affordability shifts even when salaries do not.</li>
+            <li><strong>The term.</strong> Stretching from 25 to 30 or 35 years lowers the monthly payment and raises the maximum — while increasing total interest considerably. It buys approval, not value.</li>
+            <li><strong>The deposit.</strong> A larger deposit raises the purchase price directly and can unlock a better rate band, which raises it again.</li>
+          </ul>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

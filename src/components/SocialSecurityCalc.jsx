@@ -293,6 +293,64 @@ export default function SocialSecurityCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">When You Claim Changes the Cheque Permanently</h2>
+          <p className="leading-relaxed mb-3">
+            The single largest decision in Social Security is timing, and it is irreversible in practice. Claiming
+            at 62 — the earliest age — locks in a permanently reduced benefit, roughly 30% below what you would
+            receive at full retirement age. Delaying past full retirement age earns delayed retirement credits of
+            about 8% a year until 70, after which there is no further gain.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The spread between the extremes is therefore very large: someone who would receive $2,000 a month at
+            full retirement age gets roughly $1,400 at 62 and about $2,480 at 70. That difference applies for the
+            rest of your life and is adjusted for inflation each year, so it compounds in real terms.
+          </p>
+          <p className="leading-relaxed">
+            Claiming early is not automatically wrong. It pays more cheques, and the arithmetic favours it if
+            your health or family history suggests a shorter horizon, or if the alternative is drawing down
+            investments during a market fall. Delaying is effectively buying inflation-protected longevity
+            insurance — most valuable precisely when you live longer than expected.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">How the Benefit Itself Is Worked Out</h2>
+          <p className="leading-relaxed mb-3">
+            Your benefit is based on your highest 35 years of indexed earnings. Two consequences follow that most
+            people are unaware of:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed mb-3">
+            <li><strong>Fewer than 35 years means zeros.</strong> Missing years are averaged in as $0, so working an extra year late in your career can replace a zero — or a low early-career year — and lift the benefit noticeably.</li>
+            <li><strong>The formula is progressive.</strong> It replaces a much higher share of income for lower earners than for higher earners, so an extra dollar of lifetime earnings is worth far more to the benefit of someone with a modest record.</li>
+            <li><strong>Earnings above the cap do not count.</strong> Social Security tax stops at $184,500 of wages, and so does benefit accrual — income above that adds nothing to your eventual cheque.</li>
+          </ul>
+          <p className="leading-relaxed">
+            If you claim before full retirement age while still working, the earnings test temporarily withholds
+            part of the benefit above an annual limit. It is worth understanding that this is a deferral rather
+            than a loss: your benefit is recalculated upward at full retirement age to account for what was
+            withheld.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Spousal Benefits and Tax on the Benefit</h2>
+          <p className="leading-relaxed mb-3">
+            A spouse can claim up to 50% of the higher earner's full retirement age benefit if that exceeds their
+            own record — which matters enormously for anyone who spent years out of paid work. Survivor benefits
+            work differently and are often the stronger planning consideration: a widow or widower can step up to
+            100% of what the deceased was receiving. That is the main reason the higher earner in a couple
+            frequently delays to 70, since doing so raises the survivor benefit for whoever lives longer.
+          </p>
+          <p className="leading-relaxed">
+            Finally, Social Security is not automatically tax-free. Depending on your combined income, up to 85%
+            of the benefit can be subject to federal income tax, and some states tax it as well. This interacts
+            with retirement account withdrawals — taking a large sum from a traditional 401(k) or IRA can push
+            more of your Social Security into taxable territory, which is why the two decisions are best planned
+            together rather than separately.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

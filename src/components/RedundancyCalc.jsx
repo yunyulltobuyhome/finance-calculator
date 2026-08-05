@@ -241,6 +241,70 @@ export default function RedundancyCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">How Statutory Redundancy Pay Is Built Up</h2>
+          <p className="leading-relaxed mb-3">
+            Statutory redundancy pay is calculated from three things: your age during each year of service, your
+            weekly pay, and how long you have worked there. You need at least two years' continuous service to
+            qualify at all.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The age bands are what make it non-obvious. Each full year of service earns half a week's pay for
+            years worked under 22, one week's pay for years worked between 22 and 40, and one and a half weeks'
+            pay for years worked at 41 or over. Because the entitlement is assessed year by year, someone whose
+            employment spans a birthday accrues at different rates within the same job — which is why a simple
+            "years × weeks" estimate is usually wrong.
+          </p>
+          <p className="leading-relaxed">
+            Two caps then apply. Weekly pay counts only up to £751 in England, Wales and Scotland (£749 in
+            Northern Ireland), and only the most recent 20 years of service are counted. Anyone earning well
+            above the cap will find the statutory figure is far below a fifth of their actual salary — the cap,
+            not the length of service, is usually the binding constraint.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Tax, and the £30,000 Threshold</h2>
+          <p className="leading-relaxed mb-3">
+            Genuine redundancy payments are tax-free up to £30,000, and statutory redundancy pay is always
+            treated as genuine. Above that threshold the excess is taxed as income at your marginal rate, and
+            since a large payment often lands in a single month, PAYE frequently over-deducts at first — that is
+            usually reclaimed later rather than lost.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The exemption is narrower than people expect. It covers compensation for losing the job itself, not
+            money you were owed anyway. These are taxed in full as normal earnings:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed mb-3">
+            <li><strong>Pay in lieu of notice.</strong> Since the PENP rules, notice pay is taxable whether or not your contract provides for it.</li>
+            <li><strong>Accrued holiday pay.</strong> Untaken leave is paid out as ordinary earnings and taxed normally.</li>
+            <li><strong>Outstanding salary and bonuses</strong> up to your leaving date.</li>
+          </ul>
+          <p className="leading-relaxed">
+            National Insurance is not charged on the redundancy element at all, even above £30,000 — only income
+            tax applies to the excess. One planning point worth knowing: redirecting part of a large payment into
+            a pension can keep taxable income below a threshold such as £100,000, where the personal allowance
+            begins to taper.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Statutory Is a Floor, Not the Offer</h2>
+          <p className="leading-relaxed mb-3">
+            The figure this calculator produces is the legal minimum. Many employers pay enhanced redundancy —
+            through a contractual scheme, a collective agreement, or simply as part of a settlement — and those
+            terms can be considerably more generous, sometimes a month's pay per year of service with no weekly
+            cap. Always check your contract and staff handbook before assuming the statutory number is the offer.
+          </p>
+          <p className="leading-relaxed">
+            You are also entitled to more than money: a proper consultation process, notice or pay in lieu of it,
+            and reasonable time off to look for work. If you are asked to sign a settlement agreement waiving
+            your right to claim unfair dismissal, the employer must contribute towards independent legal advice —
+            and that advice is the point at which to test whether the amount is reasonable, because signing
+            closes off a tribunal claim permanently.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

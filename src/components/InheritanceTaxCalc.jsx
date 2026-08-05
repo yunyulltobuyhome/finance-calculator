@@ -292,6 +292,67 @@ export default function InheritanceTaxCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Why Most Estates Pay Nothing</h2>
+          <p className="leading-relaxed mb-3">
+            Inheritance tax generates more anxiety than bills. In the US the federal estate tax exemption is
+            $15,000,000 per person, so the overwhelming majority of estates never come close — the tax applies to
+            a very small fraction of deaths. In the UK the thresholds are far lower, but they still combine into
+            a larger allowance than most people assume.
+          </p>
+          <p className="leading-relaxed mb-3">
+            A UK individual has a £325,000 nil-rate band. If a home passes to direct descendants — children,
+            grandchildren, including step and adopted — the residence nil-rate band adds a further £175,000,
+            giving £500,000. Crucially, anything unused passes to a surviving spouse, so a married couple can
+            reach <strong>£1,000,000</strong> between them before 40% applies to the excess.
+          </p>
+          <p className="leading-relaxed">
+            That transferability is the single most misunderstood part of the system. People frequently plan
+            around £325,000 when the practical figure for a couple with a home is three times larger.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Gifts, the Seven-Year Rule and the Charity Rate</h2>
+          <p className="leading-relaxed mb-3">
+            The UK does not tax lifetime gifts directly, but it does look back at them. Most gifts are
+            "potentially exempt": survive seven years from the date of the gift and they fall out of the estate
+            entirely. Die within that window and they are pulled back in, though taper relief reduces the tax on
+            gifts made more than three years before death.
+          </p>
+          <p className="leading-relaxed mb-3">
+            Two details make a large practical difference. First, giving away an asset while continuing to
+            benefit from it — most commonly signing over a house but still living in it rent-free — is treated as
+            a gift with reservation of benefit, and it stays in the estate no matter how many years pass.
+            Second, leaving 10% or more of the net estate to charity reduces the rate on the remainder from 40%
+            to 36%, which can mean the charity receives a substantial sum at a much smaller cost to the other
+            beneficiaries than the headline suggests.
+          </p>
+          <p className="leading-relaxed">
+            Pensions are the other major planning point: UK pension pots have generally sat outside the estate
+            for inheritance tax, which is why they are often drawn last while other assets are spent first.
+            Rules here have been under active review, so this is one to confirm before acting.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Two Systems That Work in Opposite Directions</h2>
+          <p className="leading-relaxed mb-3">
+            The UK and US both tax wealth at death, but the mechanics differ in ways that matter if you have
+            assets in both, or hold citizenship in one and live in the other:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed mb-3">
+            <li><strong>Who pays.</strong> UK inheritance tax is charged on the estate before distribution. US federal estate tax is also on the estate, but several US states levy a separate inheritance tax on the recipient.</li>
+            <li><strong>Capital gains treatment.</strong> This is the biggest divergence. US heirs generally receive a "stepped-up basis" — the asset is revalued at the date of death, wiping out the accumulated gain. UK beneficiaries receive assets at probate value for CGT, so a later sale is measured from there rather than from the original purchase.</li>
+            <li><strong>Scale.</strong> The US exemption is roughly thirty times the UK nil-rate band, which is why estate planning is a mainstream concern in the UK and a high-net-worth concern in the US.</li>
+          </ul>
+          <p className="leading-relaxed">
+            Cross-border estates are genuinely complicated — domicile, not just residence, determines UK
+            exposure, and it can persist for years after leaving. If assets sit in more than one country, this
+            is a point to take proper advice on rather than an estimate.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

@@ -227,6 +227,70 @@ export default function BuyVsRentCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Rent Is Not "Throwing Money Away"</h2>
+          <p className="leading-relaxed mb-3">
+            The most repeated argument for buying is also the most misleading. Renting does cost money you never
+            get back — but so does a large part of owning. Mortgage interest, property tax, insurance,
+            maintenance and the buying costs themselves all disappear exactly the way rent does. Only the
+            principal portion of a payment builds equity.
+          </p>
+          <p className="leading-relaxed mb-3">
+            That distinction matters most early on, because a repayment mortgage is heavily interest-weighted at
+            the start. In the first years of a typical 30-year loan the majority of each payment is interest, so
+            a buyer paying $2,000 a month may be building only a few hundred dollars of equity — while paying
+            for maintenance and property tax that a renter does not.
+          </p>
+          <p className="leading-relaxed">
+            The honest comparison is not rent versus the whole mortgage payment. It is rent versus the
+            <em> unrecoverable</em> costs of owning: interest, tax, insurance, maintenance and the amortised cost
+            of buying and selling. Framed that way, the answer depends far more on how long you stay than on
+            which option feels more responsible.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Time Horizon Decides It More Than Price</h2>
+          <p className="leading-relaxed mb-3">
+            Buying carries large one-off costs at both ends — stamp duty or closing costs going in, agent fees
+            and legal costs coming out. Those are fixed regardless of how long you stay, so the longer you hold,
+            the more years there are to spread them over. This produces a break-even point, and it is usually
+            measured in years rather than months.
+          </p>
+          <p className="leading-relaxed mb-3">
+            A UK buyer at £350,000 pays £5,000 in stamp duty alone as a home mover, before legal fees, surveys
+            and moving costs; US closing costs commonly run 2–5% of the price. Selling then costs several
+            percent more. If you move again within two or three years, those round-trip costs can easily exceed
+            any equity built or appreciation earned.
+          </p>
+          <p className="leading-relaxed">
+            This is why the same numbers can favour renting for someone whose job might relocate and buying for
+            someone settled in the area — with no disagreement about the price of the house at all.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">The Comparison Most People Forget to Make</h2>
+          <p className="leading-relaxed mb-3">
+            A deposit is not idle money. Committing £50,000 or $60,000 to a property means it is no longer
+            invested elsewhere, and a fair comparison has to account for what it would otherwise have earned.
+            If renting is cheaper month to month, the difference plus the un-committed deposit can be invested —
+            and over a long horizon that alternative is not trivial.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The catch is that this only holds if the difference is genuinely invested rather than absorbed into
+            spending. A mortgage is a forced savings plan: the principal accumulates whether or not you feel
+            disciplined that month. For many people that behavioural effect is worth more than a theoretical
+            return they would not have captured.
+          </p>
+          <p className="leading-relaxed">
+            Owning also fixes most of your housing cost against inflation, while rent generally rises with it —
+            a benefit that compounds over decades. Set against that are the risks renters do not carry: a
+            boiler, a roof, a service charge increase, or negative equity if prices fall. Neither option is
+            simply better; the calculator above exists to put your own numbers on the trade-off.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

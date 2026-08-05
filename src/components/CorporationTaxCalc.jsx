@@ -202,6 +202,65 @@ export default function CorporationTaxCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">What Counts as Taxable Profit</h2>
+          <p className="leading-relaxed mb-3">
+            Corporation tax is charged on profit, not turnover — and the profit figure HMRC uses is not always
+            the one in your accounts. You deduct allowable business expenses incurred wholly and exclusively for
+            the trade, then adjust for items treated differently for tax.
+          </p>
+          <p className="leading-relaxed mb-3">
+            The most significant adjustment is capital spending. Buying equipment is not a straightforward
+            expense: depreciation in your accounts is added back, and capital allowances are claimed instead.
+            The Annual Investment Allowance lets most companies write off qualifying plant and machinery in full
+            in the year of purchase, which can move a company below a threshold in a single stroke.
+          </p>
+          <p className="leading-relaxed">
+            Two other items catch small companies out. <strong>Client entertaining is never deductible</strong>,
+            however commercially necessary it felt. And <strong>salary is deductible but dividends are not</strong> —
+            dividends are paid out of profit that has already borne corporation tax, which is the whole reason
+            the salary-versus-dividend split is a real decision rather than a formality.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Why the Effective Rate Sits Between 19% and 25%</h2>
+          <p className="leading-relaxed mb-3">
+            The headline rates suggest a cliff at £50,000, but there isn't one. Marginal relief smooths the
+            transition, so a company earning £51,000 is not suddenly taxed at 25% on everything. What actually
+            happens is subtler and worth understanding: the relief tapers away across the £50,000–£250,000 band,
+            which means profit inside that range is effectively taxed at about <strong>26.5%</strong> at the
+            margin — higher than the 25% main rate itself.
+          </p>
+          <p className="leading-relaxed mb-3">
+            That is the practical consequence: for a company in that band, an extra £1,000 of profit costs more
+            tax than it would for a large company above £250,000. It is also why deductible spending, pension
+            contributions and capital allowances are worth most precisely in that range.
+          </p>
+          <p className="leading-relaxed">
+            Both thresholds are divided by the number of associated companies. If you control two companies, the
+            small profits rate applies only up to £25,000 each rather than £50,000 — a rule that regularly
+            surprises anyone who set up a second company for a separate venture.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Deadlines That Run in the Wrong Order</h2>
+          <p className="leading-relaxed mb-3">
+            Corporation tax has an unusual quirk: the payment deadline falls <em>before</em> the filing deadline.
+            Tax is due nine months and one day after the end of your accounting period, but the CT600 return is
+            not due until twelve months after it. In practice you must calculate the liability well before you
+            are required to file it.
+          </p>
+          <p className="leading-relaxed">
+            Larger companies with profits above £1.5 million pay in quarterly instalments instead. Interest runs
+            on late payment from the due date, and HMRC pays credit interest on tax paid early — modest, but it
+            makes paying ahead of the deadline no worse than neutral. If a company makes a loss, it can often be
+            carried back against the previous year's profit to generate a refund, which is worth checking before
+            simply carrying it forward.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[

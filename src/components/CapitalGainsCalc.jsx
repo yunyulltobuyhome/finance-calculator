@@ -328,6 +328,66 @@ export default function CapitalGainsCalc() {
         </div>
 
         <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Gains Stack on Top of Your Income</h2>
+          <p className="leading-relaxed mb-3">
+            This is the mechanic that surprises people most, and it is why the same gain produces a different
+            bill for two different people. A capital gain is not taxed in isolation — it sits on top of your
+            other income, and the rate depends on where it lands once stacked.
+          </p>
+          <p className="leading-relaxed mb-3">
+            In the <strong>UK</strong>, subtract the £3,000 annual exempt amount first, then the remainder is
+            charged at 18% for whatever still fits inside your basic-rate band and 24% above it. Someone earning
+            £30,000 with a £20,000 gain pays 18% on most of it; someone earning £70,000 with the identical gain
+            pays 24% on all of it, because their income has already used up the basic-rate band.
+          </p>
+          <p className="leading-relaxed">
+            In the <strong>US</strong>, long-term gains have their own 0%/15%/20% schedule, but the band you land
+            in is decided by your total taxable income including the gain. A single filer with $60,000 of income
+            has already passed the $49,450 ceiling of the 0% band, so a $20,000 long-term gain is taxed at 15% —
+            about $3,000. Had their income been low enough in that year, some or all of it could have been
+            taxed at nothing.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Timing Is the Largest Lever You Control</h2>
+          <p className="leading-relaxed mb-3">
+            You rarely choose the size of a gain, but you usually choose when to realise it — and that decision
+            moves the tax more than anything else:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 leading-relaxed mb-3">
+            <li><strong>Hold past one year (US).</strong> Selling at 364 days makes the gain short-term, taxed as ordinary income at up to 37%. Selling at 366 days caps it at 20% and often 15%. Nothing else about the transaction changes.</li>
+            <li><strong>Use each year's allowance (UK).</strong> The £3,000 exemption cannot be carried forward — unused, it is simply lost. Splitting a large disposal across two tax years captures it twice.</li>
+            <li><strong>Realise in a low-income year.</strong> A career break, a sabbatical or a year of self-employment losses can drop you into a lower CGT band, sometimes the US 0% band entirely.</li>
+            <li><strong>Harvest losses.</strong> Losses on other assets offset gains in the same year. In the UK unused losses can be carried forward indefinitely once reported to HMRC.</li>
+          </ul>
+          <p className="leading-relaxed">
+            Married couples have an additional option: transfers between spouses are exempt in both countries, so
+            moving an asset before sale can use two annual allowances and potentially two lower rate bands
+            instead of one.
+          </p>
+        </div>
+
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-2">What Counts as a Disposal</h2>
+          <p className="leading-relaxed mb-3">
+            A common and expensive assumption is that tax is only due when money reaches your bank account. Both
+            HMRC and the IRS treat a disposal far more broadly: selling, gifting to anyone other than a spouse,
+            swapping one asset for another, or spending an asset all count. Crypto is the clearest case — trading
+            one token for another, or paying for something with it, is a taxable event even though no currency
+            was withdrawn.
+          </p>
+          <p className="leading-relaxed">
+            Two further points catch people out. A main residence is generally exempt in the UK under Private
+            Residence Relief and benefits from a large exclusion in the US, but second homes and buy-to-let
+            property are fully within scope — and UK residential property gains must be reported and paid within
+            60 days of completion, not at the next self-assessment deadline. High earners in the US should also
+            expect the 3.8% Net Investment Income Tax on top once income exceeds $200,000 single or $250,000
+            married.
+          </p>
+        </div>
+
+        <div>
           <h2 className="text-base font-bold text-gray-800 mb-3">Frequently Asked Questions</h2>
           <div className="space-y-3">
             {[
