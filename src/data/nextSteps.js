@@ -55,9 +55,14 @@ export const NEXT_STEPS = {
 
   // ── Income & employment ────────────────────────────────────────────────
   '/salary': [
+    { path: '/state-tax-comparison', why: 'See what the same salary is worth in another state' },
     { path: '/national-insurance', why: 'Break down the NI deducted from your pay' },
     { path: '/pay-rise', why: 'See what a raise actually adds after tax' },
-    { path: '/student-loan', why: 'Add your loan repayment to the deductions' },
+  ],
+  '/state-tax-comparison': [
+    { path: '/salary', why: 'Full breakdown for one state, with 401(k) and paychecks' },
+    { path: '/mortgage', why: 'What you could borrow on that take-home' },
+    { path: '/buy-vs-rent', why: 'Whether to buy once you have moved' },
   ],
   '/pay-rise': [
     { path: '/salary', why: 'Full take-home breakdown on the new figure' },

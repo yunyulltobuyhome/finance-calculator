@@ -6,6 +6,7 @@ import DividendCalc from './components/DividendCalc'
 import LoanCalc from './components/LoanCalc'
 import CompoundCalc from './components/CompoundCalc'
 import SalaryCalc from './components/SalaryCalc'
+import StateTaxComparison from './components/StateTaxComparison'
 import BuyVsRentCalc from './components/BuyVsRentCalc'
 import StampDutyCalc from './components/StampDutyCalc'
 import CapitalGainsCalc from './components/CapitalGainsCalc'
@@ -230,6 +231,14 @@ const NAV = [
         keywords: 'paycheck calculator, salary calculator 2026, take home pay calculator, biweekly paycheck calculator, 401k paycheck impact calculator, after tax income calculator',
         lastUpdated: 'April 2026',
         source: "IRS, HMRC, CRA & ATO",
+      },
+      {
+        label: 'State Tax Comparison', icon: '🗺️', path: '/state-tax-comparison',
+        title: "US State Tax Comparison 2026 — Take-Home Pay by State | JoinCalc",
+        description: "Compare your take-home pay across Texas, Florida, California, New York and more. See exactly what state income tax costs you and what moving would save. Free, instant.",
+        keywords: 'state tax comparison, states with no income tax, california vs texas taxes, take home pay by state, moving to texas tax savings, state income tax calculator 2026',
+        lastUpdated: 'April 2026',
+        source: "IRS & state revenue schedules",
       },
       {
         label: 'Hourly to Salary', icon: '⏱️', path: '/hourly-to-salary',
@@ -630,6 +639,8 @@ export function Layout() {
               <Route path="/dividend"           element={<DividendCalc />} />
               <Route path="/loan"               element={<LoanCalc />} />
               <Route path="/salary"             element={<SalaryCalc />} />
+
+              <Route path="/state-tax-comparison" element={<StateTaxComparison />} />
               <Route path="/compound"           element={<CompoundCalc />} />
               <Route path="/redundancy"         element={<RedundancyCalc />} />
               <Route path="/national-insurance" element={<NICalc />} />
