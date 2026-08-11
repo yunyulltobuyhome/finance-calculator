@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { US, usTakeHome } from '../lib/usTax'
 
 export default function MortgageAffordabilityCalc() {
   const [country, setCountry] = useState('us')
+  const [usState, setUsState] = useState('California')
   const [annualIncome, setAnnualIncome] = useState('')
   const [monthlyDebts, setMonthlyDebts] = useState('')
   const [downPayment, setDownPayment] = useState('')
@@ -63,7 +65,28 @@ export default function MortgageAffordabilityCalc() {
       ? (((debts + scenarios[1].maxPayment) / monthlyIncome) * 100).toFixed(1)
       : null
 
-    setResult({ country: 'us', scenarios, monthlyIncome, debts, down, dti, rate, term })
+    // Every affordability calculator — including the scenarios above — sizes the
+    // loan from GROSS income, because that is what underwriters use. Nobody is
+    // paid gross. Running the same salary through the tax engine shows what the
+    // lender's "36% of income" is as a share of the money that actually arrives,
+    // and what the same rule of thumb gives when applied to take-home instead.
+    const tax = usTakeHome(income, usState)
+    const netMonthly = tax.monthlyNet
+    const lenderPayment = scenarios[1].maxPayment
+    const shareOfTakeHome = netMonthly > 0 ? (lenderPayment / netMonthly) * 100 : 0
+    const comfortablePayment = Math.max(0, netMonthly * 0.28 - debts)
+    const trueAffordability = {
+      ...tax,
+      netMonthly,
+      lenderPayment: Math.round(lenderPayment),
+      shareOfTakeHome,
+      comfortablePayment: Math.round(comfortablePayment),
+      comfortableLoan: Math.round(calcMaxLoan(comfortablePayment)),
+      comfortableHome: Math.round(calcMaxLoan(comfortablePayment)) + down,
+      lenderHome: Math.round(scenarios[1].maxHome),
+    }
+
+    setResult({ country: 'us', scenarios, monthlyIncome, debts, down, dti, rate, term, trueAffordability })
   }
 
   const calculateUK = () => {
@@ -138,6 +161,17 @@ export default function MortgageAffordabilityCalc() {
               <input type="number" value={partnerIncome} onChange={e => setPartnerIncome(e.target.value)} placeholder="0"
                 className="w-full pl-7 pr-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
             </div>
+          </div>
+        )}
+
+        {country === 'us' && (
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">State</label>
+            <p className="text-xs text-gray-400 mb-1">Used to work out your real take-home pay</p>
+            <select value={usState} onChange={e => setUsState(e.target.value)}
+              className="w-full px-3 py-3 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+              {US.states.map(s => <option key={s.name}>{s.name}</option>)}
+            </select>
           </div>
         )}
 
@@ -224,6 +258,62 @@ export default function MortgageAffordabilityCalc() {
               </div>
             </div>
           ))}
+
+          {/* The differentiator: every other affordability calculator stops at
+              the gross-income scenarios above. This reframes them against the
+              money that actually lands in your account. */}
+          {result.country === 'us' && result.trueAffordability && result.trueAffordability.netMonthly > 0 && (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 space-y-3">
+              <div>
+                <p className="text-sm font-bold text-amber-900">What that looks like on your actual pay</p>
+                <p className="text-xs text-amber-800 mt-0.5">
+                  Lenders size loans from gross income. You are not paid gross — here is the same salary
+                  after federal tax, {usState} state tax and FICA.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-white rounded-lg p-3">
+                  <p className="text-xs text-gray-400">Gross monthly</p>
+                  <p className="font-bold text-gray-800">{fmt(result.monthlyIncome)}</p>
+                </div>
+                <div className="bg-white rounded-lg p-3">
+                  <p className="text-xs text-gray-400">Actual take-home</p>
+                  <p className="font-bold text-gray-800">{fmt(result.trueAffordability.netMonthly)}</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg p-4">
+                <p className="text-xs text-gray-500 mb-1">
+                  The &ldquo;Standard&rdquo; payment a lender would approve ({fmt(result.trueAffordability.lenderPayment)}) is
+                </p>
+                <p className="text-3xl font-black text-amber-700">
+                  {result.trueAffordability.shareOfTakeHome.toFixed(0)}%
+                  <span className="text-sm text-gray-400 font-normal"> of your take-home pay</span>
+                </p>
+                <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
+                  Before utilities, property tax, insurance or maintenance. The 36% rule is measured against
+                  gross income, which is why an approval can feel unaffordable in practice.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-lg p-4">
+                <p className="text-xs text-gray-500 mb-1">Applying the 28% rule to take-home instead</p>
+                <div className="flex items-baseline gap-2">
+                  <p className="text-2xl font-black text-emerald-700">{fmt(result.trueAffordability.comfortablePayment)}</p>
+                  <span className="text-sm text-gray-400">/mo</span>
+                </div>
+                <p className="text-sm text-gray-600 mt-1">
+                  ≈ <strong>{fmt(result.trueAffordability.comfortableHome)}</strong> home price, vs{' '}
+                  <strong>{fmt(result.trueAffordability.lenderHome)}</strong> the lender would approve.
+                </p>
+                <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
+                  Neither number is &ldquo;correct&rdquo; — the first is a budget that leaves room, the second is the
+                  maximum an underwriter will sign. Most buyers are comfortable somewhere between them.
+                </p>
+              </div>
+            </div>
+          )}
 
           {result.country === 'us' && result.dti && (
             <div className="bg-gray-50 rounded-xl p-4 text-sm space-y-2">

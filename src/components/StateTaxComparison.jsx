@@ -1,36 +1,12 @@
 import { Link } from 'react-router-dom'
-import { SALARY_TAX_DATA } from '../data/salaryTaxRates'
 import useShareableState from '../hooks/useShareableState'
 import { SplitBar } from './ResultChart'
-
-const US = SALARY_TAX_DATA.US
-
-function bracketTax(taxable, brackets) {
-  let tax = 0
-  for (const b of brackets) if (taxable > b.min) tax += (Math.min(taxable, b.max) - b.min) * b.rate
-  return tax
-}
-
-function stateTax(gross, s) {
-  const taxable = Math.max(0, gross - (s.deduction || 0))
-  return s.brackets ? bracketTax(taxable, s.brackets) : taxable * (s.flat || 0)
-}
+import { US, usTakeHome } from '../lib/usTax'
 
 // Federal tax and FICA are identical in every state, so the entire difference
 // in take-home between states is the state income tax line.
 function breakdown(gross, s) {
-  const federal = bracketTax(Math.max(0, gross - US.standardDeduction), US.brackets)
-  const state = stateTax(gross, s)
-  const fica = Math.min(gross, US.socialSecurityCap) * US.socialSecurity + gross * US.medicare
-  const net = gross - federal - state - fica
-  return {
-    name: s.name,
-    hasTax: !s.brackets && !s.flat ? false : state > 0,
-    federal: Math.round(federal),
-    state: Math.round(state),
-    fica: Math.round(fica),
-    net: Math.round(net),
-  }
+  return { name: s.name, ...usTakeHome(gross, s.name) }
 }
 
 const fmt = (n) => '$' + Math.round(n).toLocaleString()

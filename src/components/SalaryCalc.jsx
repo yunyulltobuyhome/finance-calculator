@@ -1,23 +1,6 @@
 import { useState } from 'react'
 import { SALARY_TAX_DATA } from '../data/salaryTaxRates'
-
-// Sum a progressive bracket schedule for a given taxable amount.
-function bracketTax(taxable, brackets) {
-  let tax = 0
-  for (const b of brackets) {
-    if (taxable > b.min) tax += (Math.min(taxable, b.max) - b.min) * b.rate
-  }
-  return tax
-}
-
-// US state income tax. Handles bracketed states (their schedule applied after
-// the state standard deduction), flat states, and no-income-tax states.
-function usStateTax(gross, stateData) {
-  if (!stateData) return 0
-  const taxable = Math.max(0, gross - (stateData.deduction || 0))
-  if (stateData.brackets) return bracketTax(taxable, stateData.brackets)
-  return taxable * (stateData.flat || 0)
-}
+import { bracketTax, usStateTax } from '../lib/usTax'
 
 // Pay frequencies people actually get paid on, with the number of periods a
 // year — this is what "biweekly paycheck calculator" and friends look for.
