@@ -26,6 +26,7 @@ import Privacy from './components/Privacy'
 import TermsOfService from './components/TermsOfService'
 import About from './components/About'
 import Contact from './components/Contact'
+import Methodology from './components/Methodology'
 import Home from './components/Home'
 import VATCalc from './components/VATCalc'
 import PayRiseCalc from './components/PayRiseCalc'
@@ -322,7 +323,7 @@ const NAV = [
 ]
 
 const allTabs = NAV.flatMap(g => g.items)
-const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact', '/uk-tax-rates-2026', '/us-tax-rates-2026']
+const STATIC_PAGES = ['/privacy', '/terms', '/about', '/contact', '/methodology', '/uk-tax-rates-2026', '/us-tax-rates-2026']
 
 const CALC_CATEGORY = {}
 NAV.forEach(g => g.items.forEach(it => { CALC_CATEGORY[it.path] = g.category }))
@@ -376,6 +377,7 @@ function SiteFooter() {
         <Link to="/" className="hover:text-indigo-500">All Calculators</Link>
         <Link to="/guides" className="hover:text-indigo-500">Guides</Link>
         <Link to="/uk-tax-rates-2026" className="hover:text-indigo-500">2026 Tax Tables</Link>
+        <Link to="/methodology" className="hover:text-indigo-500">How We Calculate</Link>
         <Link to="/about" className="hover:text-indigo-500">About</Link>
         <Link to="/contact" className="hover:text-indigo-500">Contact</Link>
         <Link to="/privacy" className="hover:text-indigo-500">Privacy Policy</Link>
@@ -653,6 +655,8 @@ export function Layout() {
               <Route path="/privacy"            element={<Privacy />} />
               <Route path="/terms"              element={<TermsOfService />} />
               <Route path="/about"              element={<About />} />
+              <Route path="/methodology"        element={<Methodology />} />
+
               <Route path="/contact"            element={<Contact />} />
               <Route path="*"                  element={<NotFound />} />
             </Routes>
