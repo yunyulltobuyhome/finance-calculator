@@ -522,17 +522,19 @@ export function Layout() {
     )
   }
 
+  // Search Console shows ~82% of impressions come from the UK, so the site
+  // identity leads with UK tax rather than describing four countries equally.
   const seoTitle = isHome
-    ? 'Free Financial Calculators 2026 — Tax, Salary & More | JoinCalc'
-    : isStatic ? 'JoinCalc — Free Financial Calculators'
+    ? 'UK Tax Calculators 2026/27 — Stamp Duty, NI, Take-Home Pay | JoinCalc'
+    : isStatic ? 'JoinCalc — UK Tax & Money Calculators'
     : currentTab?.title || 'JoinCalc'
 
   const seoDesc = isHome
-    ? '25 free calculators for tax, salary, mortgage, debt and retirement — 2026 rates for the US & UK. Instant answers in your browser, no sign-up ever.'
+    ? 'Free UK tax calculators for 2026/27 — stamp duty, National Insurance, take-home pay, VAT, capital gains, corporation tax and more, built on HMRC rates. Instant, no sign-up, nothing leaves your browser.'
     : currentTab?.description || ''
 
   const seoKeywords = isHome
-    ? 'financial calculator, stamp duty calculator 2026, corporation tax calculator UK, self employed tax calculator, social security calculator 2026, pension credit calculator, national insurance calculator, mortgage affordability, 401k calculator, salary calculator'
+    ? 'uk tax calculator 2026, stamp duty calculator, national insurance calculator, take home pay calculator uk, vat calculator, capital gains tax calculator uk, corporation tax calculator, self employed tax calculator, student loan repayment calculator, redundancy pay calculator'
     : currentTab?.keywords || ''
 
   // Normalise trailing slash so the canonical matches the prerendered one
@@ -636,7 +638,7 @@ export function Layout() {
         {isHome && (
           <header className="hidden md:block bg-white border-b border-gray-200 px-8 py-4">
             <div className="text-lg font-bold text-gray-800">All Calculators</div>
-            <p className="text-sm text-gray-400 mt-0.5">Free financial calculators for US, UK, Canada & Australia — updated for 2026</p>
+            <p className="text-sm text-gray-400 mt-0.5">Free UK tax &amp; money calculators — HMRC rates for 2026/27</p>
           </header>
         )}
 

@@ -4,52 +4,38 @@ import { GUIDES } from '../content/guides'
 
 const CATEGORIES = [
   {
-    title: '🏦 Tax Calculators',
+    title: '🇬🇧 UK Tax Calculators',
     color: 'bg-indigo-600',
     items: [
-      { label: 'Stamp Duty Calculator', desc: 'UK SDLT for buyers & investors', path: '/stamp-duty', icon: '🏛️' },
-      { label: 'Capital Gains Tax', desc: 'US & UK CGT — stocks, property, crypto', path: '/capital-gains', icon: '📊' },
-      { label: 'Inheritance Tax', desc: 'UK IHT & US Estate Tax 2026', path: '/inheritance-tax', icon: '🏦' },
-      { label: 'National Insurance', desc: 'Employee NI contributions 2026/27', path: '/national-insurance', icon: '🏥' },
-      { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer tax estimate', path: '/self-employed', icon: '🧾' },
-      { label: 'Corporation Tax', desc: 'UK company tax + Marginal Relief 2026', path: '/corporation-tax', icon: '🏢' },
+      { label: 'Stamp Duty Calculator', desc: 'SDLT for buyers, movers & investors', path: '/stamp-duty', icon: '🏛️' },
+      { label: 'National Insurance', desc: 'Class 1 employee NI 2026/27', path: '/national-insurance', icon: '🏥' },
+      { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer, Class 4 NI', path: '/self-employed', icon: '🧾' },
+      { label: 'Corporation Tax', desc: 'Company tax + Marginal Relief 2026/27', path: '/corporation-tax', icon: '🏢' },
       { label: 'VAT Calculator', desc: 'Add or remove UK VAT (20% / 5%)', path: '/vat', icon: '🧮' },
+      { label: 'Capital Gains Tax', desc: 'UK CGT — shares, property, crypto', path: '/capital-gains', icon: '📊' },
+      { label: 'Inheritance Tax', desc: 'Nil-rate band, RNRB & the 36% rate', path: '/inheritance-tax', icon: '🏦' },
     ],
   },
   {
-    title: '🏠 Property',
-    color: 'bg-blue-600',
-    items: [
-      { label: 'Buy vs Rent', desc: 'Should you buy or keep renting?', path: '/buy-vs-rent', icon: '🏠' },
-      { label: 'Mortgage Affordability', desc: 'How much can you borrow?', path: '/mortgage', icon: '🔑' },
-      { label: 'Mortgage Refinance', desc: 'Savings & break-even point', path: '/refinance', icon: '🔄' },
-    ],
-  },
-  {
-    title: '📈 Investing & Retirement',
-    color: 'bg-emerald-600',
-    items: [
-      { label: 'FIRE Calculator', desc: 'When can you retire early?', path: '/fire', icon: '🔥' },
-      { label: '401k & Pension', desc: 'Project your retirement pot', path: '/retirement', icon: '🧓' },
-      { label: 'Roth vs Traditional IRA', desc: 'Compare IRA options for 2026', path: '/roth-ira', icon: '🏦' },
-      { label: 'Social Security', desc: 'US benefit estimate — ages 62–70', path: '/social-security', icon: '🇺🇸' },
-      { label: 'Pension Credit', desc: 'UK Guarantee & Savings Credit 2026', path: '/pension-credit', icon: '🧓' },
-      { label: 'Dividend Income', desc: 'Passive income from dividends', path: '/dividend', icon: '💰' },
-      { label: 'Compound Interest', desc: 'Watch your money grow', path: '/compound', icon: '📈' },
-    ],
-  },
-  {
-    title: '💼 Income & Employment',
+    title: '🇬🇧 UK Pay & Employment',
     color: 'bg-orange-500',
     items: [
-      { label: 'Salary & Tax', desc: 'Take-home pay — US, UK, CA, AU', path: '/salary', icon: '💼' },
-      { label: 'State Tax Comparison', desc: 'Same salary across 7 US states', path: '/state-tax-comparison', icon: '🗺️' },
-      { label: 'Hourly to Salary', desc: '$25/hr = how much a year?', path: '/hourly-to-salary', icon: '⏱️' },
-      { label: 'Pay Rise Calculator', desc: 'How much of a rise you keep after tax', path: '/pay-rise', icon: '📈' },
-      { label: 'Redundancy Pay', desc: 'UK statutory redundancy entitlement', path: '/redundancy', icon: '📋' },
-      { label: 'Holiday Entitlement', desc: 'UK annual leave calculator', path: '/holiday', icon: '🌴' },
-      { label: 'Student Loan', desc: 'UK repayment calculator — all plans', path: '/student-loan', icon: '🎓' },
-      { label: 'Loan Calculator', desc: 'Monthly payments & amortization', path: '/loan', icon: '🏦' },
+      { label: 'Salary & Take-Home Pay', desc: 'Income tax, NI, pension & student loan', path: '/salary', icon: '💼' },
+      { label: 'Pay Rise Calculator', desc: 'How much of a rise you actually keep', path: '/pay-rise', icon: '📈' },
+      { label: 'Student Loan', desc: 'Repayments — Plans 1, 2, 4, 5 & PG', path: '/student-loan', icon: '🎓' },
+      { label: 'Redundancy Pay', desc: 'Statutory entitlement & the £30k rule', path: '/redundancy', icon: '📋' },
+      { label: 'Holiday Entitlement', desc: '5.6 weeks for any working pattern', path: '/holiday', icon: '🌴' },
+      { label: 'Pension Credit', desc: 'Guarantee & Savings Credit 2026/27', path: '/pension-credit', icon: '🧓' },
+      { label: 'Hourly to Salary', desc: 'Convert an hourly rate to annual pay', path: '/hourly-to-salary', icon: '⏱️' },
+    ],
+  },
+  {
+    title: '🏠 Property & Mortgages',
+    color: 'bg-blue-600',
+    items: [
+      { label: 'Mortgage Affordability', desc: 'What you can borrow — and afford', path: '/mortgage', icon: '🔑' },
+      { label: 'Buy vs Rent', desc: 'Should you buy or keep renting?', path: '/buy-vs-rent', icon: '🏠' },
+      { label: 'Mortgage Refinance', desc: 'Savings & break-even point', path: '/refinance', icon: '🔄' },
     ],
   },
   {
@@ -57,8 +43,28 @@ const CATEGORIES = [
     color: 'bg-rose-600',
     items: [
       { label: 'Credit Card Payoff', desc: 'Months to clear + interest saved', path: '/credit-card-payoff', icon: '💳' },
-      { label: 'Auto Loan', desc: 'Monthly car payment & total cost', path: '/auto-loan', icon: '🚗' },
       { label: 'Debt Consolidation', desc: 'One loan vs your cards — who wins?', path: '/debt-consolidation', icon: '📉' },
+      { label: 'Auto Loan', desc: 'Monthly car payment & total cost', path: '/auto-loan', icon: '🚗' },
+      { label: 'Loan Calculator', desc: 'Monthly payments & amortisation', path: '/loan', icon: '🏦' },
+    ],
+  },
+  {
+    title: '📈 Investing & Retirement',
+    color: 'bg-emerald-600',
+    items: [
+      { label: 'Compound Interest', desc: 'Watch your money grow', path: '/compound', icon: '📈' },
+      { label: 'FIRE Calculator', desc: 'When could you retire early?', path: '/fire', icon: '🔥' },
+      { label: 'Pension & 401k', desc: 'Project your retirement pot', path: '/retirement', icon: '🧓' },
+      { label: 'Dividend Income', desc: 'Income from dividends, after tax', path: '/dividend', icon: '💰' },
+    ],
+  },
+  {
+    title: '🇺🇸 US Tools',
+    color: 'bg-slate-600',
+    items: [
+      { label: 'State Tax Comparison', desc: 'Same salary across 7 US states', path: '/state-tax-comparison', icon: '🗺️' },
+      { label: 'Social Security', desc: 'Benefit estimate — claiming ages 62–70', path: '/social-security', icon: '🇺🇸' },
+      { label: 'Roth vs Traditional IRA', desc: 'Compare IRA options for 2026', path: '/roth-ira', icon: '🏦' },
     ],
   },
 ]
@@ -83,11 +89,12 @@ export default function Home() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-black text-gray-800 mb-2">Free Financial Calculators 2026</h1>
+        <h1 className="text-2xl font-black text-gray-800 mb-2">UK Tax &amp; Money Calculators 2026/27</h1>
         <p className="text-gray-500 text-sm mb-3">
-          Tax, property, retirement and debt calculators for the US, UK, Canada and Australia — built on the
-          2026 rates published by the IRS, HMRC, CRA and ATO. Free, no sign-up, and every calculation runs in
-          your browser, so your numbers are never sent anywhere.
+          Stamp duty, National Insurance, take-home pay, VAT, capital gains and more — built on the 2026/27
+          rates published by HMRC and GOV.UK, and checked against them. Free, no sign-up, and every calculation
+          runs in your browser, so your numbers are never sent anywhere. US, Canadian and Australian tools are
+          included where the same calculator supports them.
         </p>
         {/* What separates this from the dozens of other calculator sites, stated
             up front and linked so it can be checked rather than just claimed. */}
