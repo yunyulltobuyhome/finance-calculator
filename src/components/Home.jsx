@@ -43,6 +43,7 @@ const CATEGORIES = [
     color: 'bg-orange-500',
     items: [
       { label: 'Salary & Tax', desc: 'Take-home pay — US, UK, CA, AU', path: '/salary', icon: '💼' },
+      { label: 'State Tax Comparison', desc: 'Same salary across 7 US states', path: '/state-tax-comparison', icon: '🗺️' },
       { label: 'Hourly to Salary', desc: '$25/hr = how much a year?', path: '/hourly-to-salary', icon: '⏱️' },
       { label: 'Pay Rise Calculator', desc: 'How much of a rise you keep after tax', path: '/pay-rise', icon: '📈' },
       { label: 'Redundancy Pay', desc: 'UK statutory redundancy entitlement', path: '/redundancy', icon: '📋' },
@@ -83,10 +84,27 @@ export default function Home() {
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-black text-gray-800 mb-2">Free Financial Calculators 2026</h1>
-        <p className="text-gray-500 text-sm">
-          Free, accurate, and up-to-date calculators for tax, property, retirement, and investing.
-          Updated for US, UK, Canada and Australia. No sign-up required.
+        <p className="text-gray-500 text-sm mb-3">
+          Tax, property, retirement and debt calculators for the US, UK, Canada and Australia — built on the
+          2026 rates published by the IRS, HMRC, CRA and ATO. Free, no sign-up, and every calculation runs in
+          your browser, so your numbers are never sent anywhere.
         </p>
+        {/* What separates this from the dozens of other calculator sites, stated
+            up front and linked so it can be checked rather than just claimed. */}
+        <div className="flex flex-wrap gap-2">
+          <Link to="/methodology"
+            className="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 rounded-full px-3 py-1.5 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+            🧪 <span className="font-medium">Published methodology</span>
+          </Link>
+          <Link to="/tax-cliffs"
+            className="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 rounded-full px-3 py-1.5 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+            🔍 <span className="font-medium">Original analysis</span>
+          </Link>
+          <Link to="/about"
+            className="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 rounded-full px-3 py-1.5 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+            👤 <span className="font-medium">Who runs this site</span>
+          </Link>
+        </div>
       </div>
 
       {/* Search — find a calculator or guide */}

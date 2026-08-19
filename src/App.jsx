@@ -430,6 +430,13 @@ function Sidebar({ onClose }) {
           <span className="text-base w-5 text-center">📊</span>
           <span>2026 Tax Tables</span>
         </Link>
+        <Link to="/tax-cliffs" onClick={onClose}
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
+            path === '/tax-cliffs' ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+          }`}>
+          <span className="text-base w-5 text-center">🔍</span>
+          <span>Tax Cliffs &amp; Quirks</span>
+        </Link>
         {NAV.map((group) => (
           <div key={group.category} className="mb-4">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
@@ -450,9 +457,28 @@ function Sidebar({ onClose }) {
           </div>
         ))}
       </div>
-      <div className="p-4 border-t border-gray-100 space-y-1">
-        <Link to="/about" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">About JoinCalc</Link>
-        <Link to="/contact" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Contact</Link>
+      {/* Who is behind the numbers belongs in the navigation, not buried as
+          fine print — for tax content it is part of the answer, not a legal
+          footnote. */}
+      <div className="px-3 pt-3 border-t border-gray-100">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
+          ℹ️ About This Site
+        </p>
+        {[
+          { path: '/about', icon: '👤', label: 'Who runs JoinCalc' },
+          { path: '/methodology', icon: '🧪', label: 'How we calculate' },
+          { path: '/contact', icon: '✉️', label: 'Contact & corrections' },
+        ].map(item => (
+          <Link key={item.path} to={item.path} onClick={onClose}
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-sm font-medium transition-all ${
+              path === item.path ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+            }`}>
+            <span className="text-base w-5 text-center">{item.icon}</span>
+            <span>{item.label}</span>
+          </Link>
+        ))}
+      </div>
+      <div className="p-4 space-y-1">
         <Link to="/privacy" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Privacy Policy</Link>
         <Link to="/terms" onClick={onClose} className="block text-xs text-gray-400 hover:text-indigo-500">Terms of Service</Link>
         <p className="text-xs text-gray-300 mt-2">© 2026 JoinCalc</p>
