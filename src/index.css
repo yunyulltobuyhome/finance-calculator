@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Headings carry the site's character; body text stays a plain reading face. */
+  h1, h2 {
+    font-family: theme('fontFamily.display');
+    letter-spacing: -0.011em;
+  }
+
+  /* Money lines up. Every figure on this site sits in a column next to another
+     figure, so proportional digits are the wrong default for it. */
+  table, input[type='number'], .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /* A visible, high-contrast focus ring — required for keyboard use and a
+     detail generic templates usually drop. */
+  :focus-visible {
+    outline: 2px solid theme('colors.indigo.600');
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Clean "Save as PDF" output: drop the app chrome, ads and action buttons so
    the printed page is just the calculator + its results. */
 @media print {

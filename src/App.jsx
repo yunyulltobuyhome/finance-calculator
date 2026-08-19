@@ -73,10 +73,10 @@ const DISCLAIMER = "Results are estimates only and do not constitute financial, 
 
 const NAV = [
   {
-    category: '🏦 Tax Calculators',
+    category: 'Tax Calculators',
     items: [
       {
-        label: 'Stamp Duty', icon: '🏛️', path: '/stamp-duty',
+        label: 'Stamp Duty', path: '/stamp-duty',
         title: "Stamp Duty Calculator UK 2026 — Instant & Free | JoinCalc",
         description: "See exactly what stamp duty you'll pay in seconds — 2026 SDLT bands, first-time buyer relief and the second-home surcharge. Free, no sign-up.",
         keywords: 'stamp duty calculator 2026, UK SDLT calculator, stamp duty land tax, first time buyer stamp duty',
@@ -84,7 +84,7 @@ const NAV = [
         source: "HMRC",
       },
       {
-        label: 'Capital Gains', icon: '📊', path: '/capital-gains',
+        label: 'Capital Gains', path: '/capital-gains',
         title: "Capital Gains Tax Calculator 2026 — US & UK | JoinCalc",
         description: "Work out your exact CGT bill in seconds for shares, property or crypto — 2026 US & UK rates and allowances built in. Free, no sign-up.",
         keywords: 'capital gains tax calculator 2026, UK CGT calculator, US capital gains tax, long term capital gains',
@@ -92,7 +92,7 @@ const NAV = [
         source: "HMRC & IRS",
       },
       {
-        label: 'Inheritance Tax', icon: '🏦', path: '/inheritance-tax',
+        label: 'Inheritance Tax', path: '/inheritance-tax',
         title: "Inheritance Tax Calculator 2026 (UK & US) | JoinCalc",
         description: "Estimate inheritance tax in seconds — UK nil-rate band & RNRB or the $15M US exemption, with a full breakdown. Free and anonymous.",
         keywords: 'inheritance tax calculator 2026, UK IHT calculator, US estate tax calculator, nil rate band',
@@ -100,7 +100,7 @@ const NAV = [
         source: "HMRC & IRS",
       },
       {
-        label: 'National Insurance', icon: '🏥', path: '/national-insurance',
+        label: 'National Insurance', path: '/national-insurance',
         title: "National Insurance Calculator 2026/27 (UK) | JoinCalc",
         description: "See exactly how much National Insurance you'll pay in 2026/27, plus your take-home pay, with the 8% and 2% bands explained. Free & instant.",
         keywords: 'national insurance calculator 2026, NI calculator UK, how much national insurance do I pay',
@@ -108,7 +108,7 @@ const NAV = [
         source: "HMRC",
       },
       {
-        label: 'Self-Employed Tax', icon: '🧾', path: '/self-employed',
+        label: 'Self-Employed Tax', path: '/self-employed',
         title: "Self-Employed Tax Calculator UK 2026/27 | JoinCalc",
         description: "Sole trader or freelancer? See your Income Tax, Class 4 NI and take-home profit for 2026/27 in seconds. HMRC rates. Free, no sign-up.",
         keywords: 'self employed tax calculator UK 2026, sole trader tax calculator, freelancer tax calculator UK, class 4 national insurance calculator',
@@ -116,7 +116,7 @@ const NAV = [
         source: "HMRC",
       },
       {
-        label: 'Corporation Tax', icon: '🏢', path: '/corporation-tax',
+        label: 'Corporation Tax', path: '/corporation-tax',
         title: "Corporation Tax Calculator UK 2026/27 | JoinCalc",
         description: "Work out your company's 2026/27 Corporation Tax in seconds — 19% and 25% rates with Marginal Relief calculated for you. Free, no sign-up.",
         keywords: 'corporation tax calculator UK 2026, UK company tax calculator, marginal relief calculator, small profits rate 2026',
@@ -124,7 +124,7 @@ const NAV = [
         source: "HMRC",
       },
       {
-        label: 'VAT', icon: '🧮', path: '/vat',
+        label: 'VAT', path: '/vat',
         title: "VAT Calculator UK — Add or Remove VAT Instantly | JoinCalc",
         description: "Add or strip UK VAT in one click at 20%, 5% or 0% — see the net, VAT and gross instantly, without the common ÷1.2 mistake. Free tool.",
         keywords: 'vat calculator uk, add vat calculator, remove vat calculator, 20% vat calculator, how to work out vat',
@@ -134,10 +134,10 @@ const NAV = [
     ],
   },
   {
-    category: '🏠 Property',
+    category: 'Property',
     items: [
       {
-        label: 'Buy vs Rent', icon: '🏠', path: '/buy-vs-rent',
+        label: 'Buy vs Rent', path: '/buy-vs-rent',
         title: "Buy vs Rent Calculator — Which Saves You More? | JoinCalc",
         description: "Renting or buying: which leaves you better off? Compare the true long-term costs for the US, UK, Canada & Australia in seconds. Free.",
         keywords: 'buy vs rent calculator, rent or buy calculator, should I buy or rent',
@@ -145,7 +145,7 @@ const NAV = [
         source: "standard cost-comparison methodology",
       },
       {
-        label: 'Mortgage', icon: '🔑', path: '/mortgage',
+        label: 'Mortgage', path: '/mortgage',
         title: "How Much Can I Borrow? Mortgage Calculator 2026 | JoinCalc",
         description: "See how much mortgage you could borrow in seconds — UK income multiples (4–5.5x) and the US DTI method side by side. Free, no sign-up.",
         keywords: 'mortgage affordability calculator 2026, how much can I borrow, mortgage calculator UK',
@@ -153,7 +153,7 @@ const NAV = [
         source: "standard DTI & income-multiple methodology",
       },
       {
-        label: 'Refinance', icon: '🔄', path: '/refinance',
+        label: 'Refinance', path: '/refinance',
         title: "Refinance Calculator — Should I Refinance? | JoinCalc",
         description: "See your new payment, monthly savings and exact break-even month before you refinance — plus lifetime interest compared. Free & instant.",
         keywords: 'mortgage refinance calculator, refinance calculator, should i refinance, refinance break even calculator, refinance savings',
@@ -163,10 +163,10 @@ const NAV = [
     ],
   },
   {
-    category: '📈 Investing & Retirement',
+    category: 'Investing & Retirement',
     items: [
       {
-        label: 'FIRE', icon: '🔥', path: '/fire',
+        label: 'FIRE', path: '/fire',
         title: "FIRE Calculator — When Can I Retire Early? | JoinCalc",
         description: "Find your FIRE number and the age you could retire early, using the 4% rule and your real savings rate. Takes 30 seconds — free, no sign-up.",
         keywords: 'FIRE calculator, financial independence retire early, FIRE number calculator',
@@ -174,7 +174,7 @@ const NAV = [
         source: "the 4% rule methodology",
       },
       {
-        label: '401k / Pension', icon: '🧓', path: '/retirement',
+        label: '401k / Pension', path: '/retirement',
         title: "401k & Pension Calculator 2026 — Your Pot at 65 | JoinCalc",
         description: "Project your 401k or pension pot to retirement — employer match, 2026 IRS $24,500 limit and UK £60k allowance included. Free, no sign-up.",
         keywords: '401k calculator 2026, pension calculator UK, retirement savings calculator',
@@ -182,7 +182,7 @@ const NAV = [
         source: "IRS & GOV.UK",
       },
       {
-        label: 'Roth vs Traditional IRA', icon: '🏦', path: '/roth-ira',
+        label: 'Roth vs Traditional IRA', path: '/roth-ira',
         title: "Roth vs Traditional IRA Calculator 2026 | JoinCalc",
         description: "Roth or Traditional? Compare projected after-tax values side by side with 2026 IRS limits and income phase-outs. Decide in seconds — free.",
         keywords: 'roth ira calculator 2026, roth vs traditional ira, ira contribution limit 2026',
@@ -190,7 +190,7 @@ const NAV = [
         source: "IRS",
       },
       {
-        label: 'Social Security', icon: '🇺🇸', path: '/social-security',
+        label: 'Social Security', path: '/social-security',
         title: "Social Security Calculator 2026 — Benefit by Age | JoinCalc",
         description: "Estimate your monthly Social Security check and compare claiming at 62, 67 or 70 — see exactly what waiting is worth. Free, no sign-up.",
         keywords: 'social security calculator 2026, when to claim social security, social security retirement benefit estimate, full retirement age calculator',
@@ -198,7 +198,7 @@ const NAV = [
         source: "SSA",
       },
       {
-        label: 'Pension Credit', icon: '🧓', path: '/pension-credit',
+        label: 'Pension Credit', path: '/pension-credit',
         title: "Pension Credit Calculator UK 2026/27 | JoinCalc",
         description: "Check in seconds whether you qualify for Pension Credit and how much — Guarantee and Savings Credit at 2026/27 rates. Free and anonymous.",
         keywords: 'pension credit calculator UK 2026, guarantee credit calculator, pension credit eligibility, how much pension credit',
@@ -206,7 +206,7 @@ const NAV = [
         source: "GOV.UK",
       },
       {
-        label: 'Dividend Income', icon: '💰', path: '/dividend',
+        label: 'Dividend Income', path: '/dividend',
         title: "Dividend Income Calculator — Live Off Dividends? | JoinCalc",
         description: "See the dividend income your portfolio could pay — with DRIP reinvestment and dividend growth compounding year by year. Free, no sign-up.",
         keywords: 'dividend calculator, dividend income calculator, DRIP calculator',
@@ -214,7 +214,7 @@ const NAV = [
         source: "IRS & HMRC",
       },
       {
-        label: 'Compound Interest', icon: '📈', path: '/compound',
+        label: 'Compound Interest', path: '/compound',
         title: "Compound Interest Calculator — Watch Money Grow | JoinCalc",
         description: "See what your savings become with compound growth and monthly deposits — S&P 500 and savings-account presets built in. Free, instant results.",
         keywords: 'compound interest calculator, compound growth calculator',
@@ -224,10 +224,10 @@ const NAV = [
     ],
   },
   {
-    category: '💼 Income & Employment',
+    category: 'Income & Employment',
     items: [
       {
-        label: 'Salary & Tax', icon: '💼', path: '/salary',
+        label: 'Salary & Tax', path: '/salary',
         title: "Paycheck & Salary Calculator 2026 — Take-Home Pay After Tax | JoinCalc",
         description: "Your real take-home pay per paycheck for 2026 — weekly, biweekly or monthly, after income tax, NI/FICA and 401(k)/pension. See what a raise or contribution really costs. US, UK, Canada & Australia.",
         keywords: 'paycheck calculator, salary calculator 2026, take home pay calculator, biweekly paycheck calculator, 401k paycheck impact calculator, after tax income calculator',
@@ -235,7 +235,7 @@ const NAV = [
         source: "IRS, HMRC, CRA & ATO",
       },
       {
-        label: 'State Tax Comparison', icon: '🗺️', path: '/state-tax-comparison',
+        label: 'State Tax Comparison', path: '/state-tax-comparison',
         title: "US State Tax Comparison 2026 — Take-Home Pay by State | JoinCalc",
         description: "Compare your take-home pay across Texas, Florida, California, New York and more. See exactly what state income tax costs you and what moving would save. Free, instant.",
         keywords: 'state tax comparison, states with no income tax, california vs texas taxes, take home pay by state, moving to texas tax savings, state income tax calculator 2026',
@@ -243,7 +243,7 @@ const NAV = [
         source: "IRS & state revenue schedules",
       },
       {
-        label: 'Hourly to Salary', icon: '⏱️', path: '/hourly-to-salary',
+        label: 'Hourly to Salary', path: '/hourly-to-salary',
         title: "Hourly to Salary Calculator — Wage to Annual Pay | JoinCalc",
         description: "Convert any hourly rate to yearly, monthly and weekly pay in one click — e.g. $25/hour is $52,000 a year. Free, instant, no sign-up.",
         keywords: 'hourly to salary calculator, hourly wage to annual salary, 25 an hour is how much a year, wage converter',
@@ -251,7 +251,7 @@ const NAV = [
         source: "standard payroll formula",
       },
       {
-        label: 'Pay Rise', icon: '📈', path: '/pay-rise',
+        label: 'Pay Rise', path: '/pay-rise',
         title: "Pay Rise Calculator UK — What You Actually Keep | JoinCalc",
         description: "Got a pay rise? See your new salary and how much of the rise survives tax and NI — most people keep just 58–72%. Free, instant answer.",
         keywords: 'pay rise calculator uk, salary increase calculator, pay rise after tax, how much of my pay rise will i keep',
@@ -259,7 +259,7 @@ const NAV = [
         source: "HMRC",
       },
       {
-        label: 'Redundancy Pay', icon: '📋', path: '/redundancy',
+        label: 'Redundancy Pay', path: '/redundancy',
         title: "Redundancy Pay Calculator UK 2026 | JoinCalc",
         description: "Facing redundancy? Check your exact statutory entitlement in seconds — 2026 £751 weekly cap and the £30,000 tax-free limit. Free tool.",
         keywords: 'redundancy pay calculator UK 2026, statutory redundancy calculator',
@@ -267,7 +267,7 @@ const NAV = [
         source: "GOV.UK",
       },
       {
-        label: 'Holiday Entitlement', icon: '🌴', path: '/holiday',
+        label: 'Holiday Entitlement', path: '/holiday',
         title: "Holiday Entitlement Calculator UK 2026 | JoinCalc",
         description: "Work out your exact statutory holiday allowance — full-time, part-time and irregular hours, including bank holidays. Free & instant.",
         keywords: 'holiday entitlement calculator UK 2026, statutory holiday calculator',
@@ -275,7 +275,7 @@ const NAV = [
         source: "GOV.UK",
       },
       {
-        label: 'Student Loan', icon: '🎓', path: '/student-loan',
+        label: 'Student Loan', path: '/student-loan',
         title: "Student Loan Repayment Calculator UK — All Plans | JoinCalc",
         description: "See your real monthly student loan repayment for Plan 1, 2, 4, 5 or Postgraduate — and when it's written off. Free, takes 20 seconds.",
         keywords: 'student loan calculator UK 2026, student loan repayment calculator, plan 2 student loan',
@@ -283,7 +283,7 @@ const NAV = [
         source: "GOV.UK",
       },
       {
-        label: 'Loan Calculator', icon: '🏦', path: '/loan',
+        label: 'Loan Calculator', path: '/loan',
         title: "Loan Repayment Calculator — Payment & Interest | JoinCalc",
         description: "Get your exact monthly payment, total interest and full amortization schedule for any loan, rate and term. Free — no sign-up, no email.",
         keywords: 'loan calculator, monthly payment calculator, amortization calculator',
@@ -293,10 +293,10 @@ const NAV = [
     ],
   },
   {
-    category: '💳 Loans & Debt',
+    category: 'Loans & Debt',
     items: [
       {
-        label: 'Credit Card Payoff', icon: '💳', path: '/credit-card-payoff',
+        label: 'Credit Card Payoff', path: '/credit-card-payoff',
         title: "Credit Card Payoff Calculator — Debt-Free Date | JoinCalc",
         description: "Find your debt-free date and total interest — and see what paying more than the minimum really saves you. Free, private, instant.",
         keywords: 'credit card payoff calculator, credit card interest calculator, pay off credit card, minimum payment calculator, debt payoff calculator',
@@ -304,7 +304,7 @@ const NAV = [
         source: "standard amortization formula",
       },
       {
-        label: 'Auto Loan', icon: '🚗', path: '/auto-loan',
+        label: 'Auto Loan', path: '/auto-loan',
         title: "Auto Loan Calculator — Monthly Car Payment | JoinCalc",
         description: "Get your real monthly car payment with tax, down payment and trade-in included — plus total interest by term. Free, no sign-up.",
         keywords: 'auto loan calculator, car loan calculator, car payment calculator, monthly car payment, vehicle finance calculator',
@@ -312,7 +312,7 @@ const NAV = [
         source: "standard amortization formula",
       },
       {
-        label: 'Debt Consolidation', icon: '📉', path: '/debt-consolidation',
+        label: 'Debt Consolidation', path: '/debt-consolidation',
         title: "Debt Consolidation Calculator — Will You Save? | JoinCalc",
         description: "Compare your current debts against a consolidation loan — new payment, total interest with fees, and exactly how much you save (or lose). Free.",
         keywords: 'debt consolidation calculator, debt consolidation loan calculator, should i consolidate debt, consolidation savings calculator',
@@ -359,7 +359,6 @@ function RelatedCalcs({ path }) {
         {items.map(t => (
           <Link key={t.path} to={t.path}
             className="flex items-start gap-2.5 bg-gray-50 hover:bg-indigo-50 rounded-lg px-3 py-2.5 transition-colors group">
-            <span className="mt-0.5">{t.icon}</span>
             <span className="min-w-0">
               <span className="block text-sm font-medium text-gray-700 group-hover:text-indigo-600 leading-tight">{t.label}</span>
               {t.why && <span className="block text-xs text-gray-500 mt-0.5 leading-snug">{t.why}</span>}
@@ -413,28 +412,24 @@ function Sidebar({ onClose }) {
           className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
             path === '/' ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
           }`}>
-          <span className="text-base w-5 text-center">🏠</span>
           <span>All Calculators</span>
         </Link>
         <Link to="/guides" onClick={onClose}
           className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
             path.startsWith('/guides') ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
           }`}>
-          <span className="text-base w-5 text-center">📚</span>
           <span>Money Guides</span>
         </Link>
         <Link to="/uk-tax-rates-2026" onClick={onClose}
           className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
             path.includes('-tax-rates-') ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
           }`}>
-          <span className="text-base w-5 text-center">📊</span>
           <span>2026 Tax Tables</span>
         </Link>
         <Link to="/tax-cliffs" onClick={onClose}
           className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-3 text-sm font-medium transition-all ${
             path === '/tax-cliffs' ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
           }`}>
-          <span className="text-base w-5 text-center">🔍</span>
           <span>Tax Cliffs &amp; Quirks</span>
         </Link>
         {NAV.map((group) => (
@@ -449,7 +444,6 @@ function Sidebar({ onClose }) {
                   className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-sm font-medium transition-all ${
                     isActive ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
                   }`}>
-                  <span className="text-base w-5 text-center">{tab.icon}</span>
                   <span>{tab.label}</span>
                 </Link>
               )
@@ -462,18 +456,17 @@ function Sidebar({ onClose }) {
           footnote. */}
       <div className="px-3 pt-3 border-t border-gray-100">
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-2 mb-1">
-          ℹ️ About This Site
+          About This Site
         </p>
         {[
-          { path: '/about', icon: '👤', label: 'Who runs JoinCalc' },
-          { path: '/methodology', icon: '🧪', label: 'How we calculate' },
-          { path: '/contact', icon: '✉️', label: 'Contact & corrections' },
+          { path: '/about', label: 'Who runs JoinCalc' },
+          { path: '/methodology', label: 'How we calculate' },
+          { path: '/contact', label: 'Contact & corrections' },
         ].map(item => (
           <Link key={item.path} to={item.path} onClick={onClose}
             className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-sm font-medium transition-all ${
               path === item.path ? 'bg-indigo-600 text-white' : 'text-gray-600 hover:bg-gray-100'
             }`}>
-            <span className="text-base w-5 text-center">{item.icon}</span>
             <span>{item.label}</span>
           </Link>
         ))}
@@ -611,7 +604,7 @@ export function Layout() {
             </svg>
           </button>
           <Link to="/"><Logo size="sm" theme="light" /></Link>
-          {currentTab && <span className="text-gray-400 text-xs ml-auto">{currentTab.icon} {currentTab.label}</span>}
+          {currentTab && <span className="text-gray-400 text-xs ml-auto">{currentTab.label}</span>}
         </header>
 
         {!isHome && !isStatic && currentTab && (
@@ -622,7 +615,6 @@ export function Layout() {
               <span className="text-gray-600">{currentTab.label}</span>
             </nav>
             <div className="flex items-center gap-2">
-              <span className="text-xl">{currentTab.icon}</span>
               <div className="text-lg font-bold text-gray-800">{currentTab.label}</div>
               {currentTab.lastUpdated && (
                 <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full"
@@ -699,7 +691,7 @@ export function Layout() {
               {relatedGuide && (
                 <Link to={`/guides/${relatedGuide.slug}`}
                   className="block bg-white border border-gray-200 rounded-xl p-4 hover:border-indigo-300 hover:bg-indigo-50 transition-colors">
-                  <p className="text-xs text-indigo-500 font-semibold mb-0.5">📖 Read the guide</p>
+                  <p className="text-xs text-indigo-500 font-semibold mb-0.5">Read the guide</p>
                   <p className="text-sm font-bold text-gray-800">{relatedGuide.label}</p>
                 </Link>
               )}

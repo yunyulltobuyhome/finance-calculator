@@ -4,67 +4,67 @@ import { GUIDES } from '../content/guides'
 
 const CATEGORIES = [
   {
-    title: '🇬🇧 UK Tax Calculators',
+    title: 'UK Tax Calculators',
     color: 'bg-indigo-600',
     items: [
-      { label: 'Stamp Duty Calculator', desc: 'SDLT for buyers, movers & investors', path: '/stamp-duty', icon: '🏛️' },
-      { label: 'National Insurance', desc: 'Class 1 employee NI 2026/27', path: '/national-insurance', icon: '🏥' },
-      { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer, Class 4 NI', path: '/self-employed', icon: '🧾' },
-      { label: 'Corporation Tax', desc: 'Company tax + Marginal Relief 2026/27', path: '/corporation-tax', icon: '🏢' },
-      { label: 'VAT Calculator', desc: 'Add or remove UK VAT (20% / 5%)', path: '/vat', icon: '🧮' },
-      { label: 'Capital Gains Tax', desc: 'UK CGT — shares, property, crypto', path: '/capital-gains', icon: '📊' },
-      { label: 'Inheritance Tax', desc: 'Nil-rate band, RNRB & the 36% rate', path: '/inheritance-tax', icon: '🏦' },
+      { label: 'Stamp Duty Calculator', desc: 'SDLT for buyers, movers & investors', path: '/stamp-duty' },
+      { label: 'National Insurance', desc: 'Class 1 employee NI 2026/27', path: '/national-insurance' },
+      { label: 'Self-Employed Tax', desc: 'Sole trader & freelancer, Class 4 NI', path: '/self-employed' },
+      { label: 'Corporation Tax', desc: 'Company tax + Marginal Relief 2026/27', path: '/corporation-tax' },
+      { label: 'VAT Calculator', desc: 'Add or remove UK VAT (20% / 5%)', path: '/vat' },
+      { label: 'Capital Gains Tax', desc: 'UK CGT — shares, property, crypto', path: '/capital-gains' },
+      { label: 'Inheritance Tax', desc: 'Nil-rate band, RNRB & the 36% rate', path: '/inheritance-tax' },
     ],
   },
   {
-    title: '🇬🇧 UK Pay & Employment',
-    color: 'bg-orange-500',
+    title: 'UK Pay & Employment',
+    color: 'bg-indigo-700',
     items: [
-      { label: 'Salary & Take-Home Pay', desc: 'Income tax, NI, pension & student loan', path: '/salary', icon: '💼' },
-      { label: 'Pay Rise Calculator', desc: 'How much of a rise you actually keep', path: '/pay-rise', icon: '📈' },
-      { label: 'Student Loan', desc: 'Repayments — Plans 1, 2, 4, 5 & PG', path: '/student-loan', icon: '🎓' },
-      { label: 'Redundancy Pay', desc: 'Statutory entitlement & the £30k rule', path: '/redundancy', icon: '📋' },
-      { label: 'Holiday Entitlement', desc: '5.6 weeks for any working pattern', path: '/holiday', icon: '🌴' },
-      { label: 'Pension Credit', desc: 'Guarantee & Savings Credit 2026/27', path: '/pension-credit', icon: '🧓' },
-      { label: 'Hourly to Salary', desc: 'Convert an hourly rate to annual pay', path: '/hourly-to-salary', icon: '⏱️' },
+      { label: 'Salary & Take-Home Pay', desc: 'Income tax, NI, pension & student loan', path: '/salary' },
+      { label: 'Pay Rise Calculator', desc: 'How much of a rise you actually keep', path: '/pay-rise' },
+      { label: 'Student Loan', desc: 'Repayments — Plans 1, 2, 4, 5 & PG', path: '/student-loan' },
+      { label: 'Redundancy Pay', desc: 'Statutory entitlement & the £30k rule', path: '/redundancy' },
+      { label: 'Holiday Entitlement', desc: '5.6 weeks for any working pattern', path: '/holiday' },
+      { label: 'Pension Credit', desc: 'Guarantee & Savings Credit 2026/27', path: '/pension-credit' },
+      { label: 'Hourly to Salary', desc: 'Convert an hourly rate to annual pay', path: '/hourly-to-salary' },
     ],
   },
   {
-    title: '🏠 Property & Mortgages',
-    color: 'bg-blue-600',
+    title: 'Property & Mortgages',
+    color: 'bg-indigo-600',
     items: [
-      { label: 'Mortgage Affordability', desc: 'What you can borrow — and afford', path: '/mortgage', icon: '🔑' },
-      { label: 'Buy vs Rent', desc: 'Should you buy or keep renting?', path: '/buy-vs-rent', icon: '🏠' },
-      { label: 'Mortgage Refinance', desc: 'Savings & break-even point', path: '/refinance', icon: '🔄' },
+      { label: 'Mortgage Affordability', desc: 'What you can borrow — and afford', path: '/mortgage' },
+      { label: 'Buy vs Rent', desc: 'Should you buy or keep renting?', path: '/buy-vs-rent' },
+      { label: 'Mortgage Refinance', desc: 'Savings & break-even point', path: '/refinance' },
     ],
   },
   {
-    title: '💳 Loans & Debt',
-    color: 'bg-rose-600',
+    title: 'Loans & Debt',
+    color: 'bg-indigo-700',
     items: [
-      { label: 'Credit Card Payoff', desc: 'Months to clear + interest saved', path: '/credit-card-payoff', icon: '💳' },
-      { label: 'Debt Consolidation', desc: 'One loan vs your cards — who wins?', path: '/debt-consolidation', icon: '📉' },
-      { label: 'Auto Loan', desc: 'Monthly car payment & total cost', path: '/auto-loan', icon: '🚗' },
-      { label: 'Loan Calculator', desc: 'Monthly payments & amortisation', path: '/loan', icon: '🏦' },
+      { label: 'Credit Card Payoff', desc: 'Months to clear + interest saved', path: '/credit-card-payoff' },
+      { label: 'Debt Consolidation', desc: 'One loan vs your cards — who wins?', path: '/debt-consolidation' },
+      { label: 'Auto Loan', desc: 'Monthly car payment & total cost', path: '/auto-loan' },
+      { label: 'Loan Calculator', desc: 'Monthly payments & amortisation', path: '/loan' },
     ],
   },
   {
-    title: '📈 Investing & Retirement',
-    color: 'bg-emerald-600',
+    title: 'Investing & Retirement',
+    color: 'bg-indigo-600',
     items: [
-      { label: 'Compound Interest', desc: 'Watch your money grow', path: '/compound', icon: '📈' },
-      { label: 'FIRE Calculator', desc: 'When could you retire early?', path: '/fire', icon: '🔥' },
-      { label: 'Pension & 401k', desc: 'Project your retirement pot', path: '/retirement', icon: '🧓' },
-      { label: 'Dividend Income', desc: 'Income from dividends, after tax', path: '/dividend', icon: '💰' },
+      { label: 'Compound Interest', desc: 'Watch your money grow', path: '/compound' },
+      { label: 'FIRE Calculator', desc: 'When could you retire early?', path: '/fire' },
+      { label: 'Pension & 401k', desc: 'Project your retirement pot', path: '/retirement' },
+      { label: 'Dividend Income', desc: 'Income from dividends, after tax', path: '/dividend' },
     ],
   },
   {
-    title: '🇺🇸 US Tools',
-    color: 'bg-slate-600',
+    title: 'US Tools',
+    color: 'bg-indigo-800',
     items: [
-      { label: 'State Tax Comparison', desc: 'Same salary across 7 US states', path: '/state-tax-comparison', icon: '🗺️' },
-      { label: 'Social Security', desc: 'Benefit estimate — claiming ages 62–70', path: '/social-security', icon: '🇺🇸' },
-      { label: 'Roth vs Traditional IRA', desc: 'Compare IRA options for 2026', path: '/roth-ira', icon: '🏦' },
+      { label: 'State Tax Comparison', desc: 'Same salary across 7 US states', path: '/state-tax-comparison' },
+      { label: 'Social Security', desc: 'Benefit estimate — claiming ages 62–70', path: '/social-security' },
+      { label: 'Roth vs Traditional IRA', desc: 'Compare IRA options for 2026', path: '/roth-ira' },
     ],
   },
 ]
@@ -101,15 +101,15 @@ export default function Home() {
         <div className="flex flex-wrap gap-2">
           <Link to="/methodology"
             className="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 rounded-full px-3 py-1.5 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
-            🧪 <span className="font-medium">Published methodology</span>
+            <span className="font-medium">Published methodology</span>
           </Link>
           <Link to="/tax-cliffs"
             className="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 rounded-full px-3 py-1.5 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
-            🔍 <span className="font-medium">Original analysis</span>
+            <span className="font-medium">Original analysis</span>
           </Link>
           <Link to="/about"
             className="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 rounded-full px-3 py-1.5 text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors">
-            👤 <span className="font-medium">Who runs this site</span>
+            <span className="font-medium">Who runs this site</span>
           </Link>
         </div>
       </div>
@@ -141,7 +141,6 @@ export default function Home() {
               {calcMatches.map(item => (
                 <Link key={item.path} to={item.path} className="bg-white hover:bg-indigo-50 transition-colors p-4 group">
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">{item.icon}</span>
                     <div>
                       <p className="text-sm font-bold text-gray-800 group-hover:text-indigo-600 transition-colors leading-tight">{item.label}</p>
                       <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{item.desc}</p>
@@ -156,7 +155,7 @@ export default function Home() {
               {guideMatches.map(g => (
                 <Link key={g.slug} to={`/guides/${g.slug}`}
                   className="block bg-white border border-gray-200 rounded-xl p-3 hover:border-indigo-300 hover:bg-indigo-50 transition-colors">
-                  <p className="text-sm font-semibold text-gray-800 leading-tight">📖 {g.h1}</p>
+                  <p className="text-sm font-semibold text-gray-800 leading-tight">{g.h1}</p>
                   <p className="text-xs text-gray-400 mt-1">{g.readMins} min read</p>
                 </Link>
               ))}
@@ -185,7 +184,6 @@ export default function Home() {
                 <Link key={item.path} to={item.path}
                   className="bg-white hover:bg-indigo-50 transition-colors p-4 group">
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">{item.icon}</span>
                     <div>
                       <p className="text-sm font-bold text-gray-800 group-hover:text-indigo-600 transition-colors leading-tight">
                         {item.label}
@@ -233,13 +231,12 @@ export default function Home() {
         </p>
         <div className="grid grid-cols-2 gap-3 text-xs">
           {[
-            { icon: '✅', text: 'Updated for 2026 tax rates' },
-            { icon: '✅', text: 'US, UK, Canada & Australia' },
-            { icon: '✅', text: 'No sign-up required' },
-            { icon: '✅', text: 'All calculations in your browser' },
+            { text: 'Updated for 2026 tax rates' },
+            { text: 'US, UK, Canada & Australia' },
+            { text: 'No sign-up required' },
+            { text: 'All calculations in your browser' },
           ].map((item, i) => (
             <div key={i} className="flex items-center gap-2 text-gray-500">
-              <span>{item.icon}</span>
               <span>{item.text}</span>
             </div>
           ))}

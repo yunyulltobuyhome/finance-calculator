@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
 const POPULAR = [
-  { label: 'Salary Take-Home', path: '/salary', icon: '💼' },
-  { label: 'Stamp Duty', path: '/stamp-duty', icon: '🏛️' },
-  { label: 'VAT Calculator', path: '/vat', icon: '🧮' },
-  { label: 'Mortgage', path: '/mortgage', icon: '🔑' },
-  { label: 'Capital Gains Tax', path: '/capital-gains', icon: '📊' },
-  { label: 'National Insurance', path: '/national-insurance', icon: '🏥' },
+  { label: 'Salary Take-Home', path: '/salary' },
+  { label: 'Stamp Duty', path: '/stamp-duty' },
+  { label: 'VAT Calculator', path: '/vat' },
+  { label: 'Mortgage', path: '/mortgage' },
+  { label: 'Capital Gains Tax', path: '/capital-gains' },
+  { label: 'National Insurance', path: '/national-insurance' },
 ]
 
 export default function NotFound() {
@@ -34,7 +34,6 @@ export default function NotFound() {
         {POPULAR.map(c => (
           <Link key={c.path} to={c.path}
             className="flex items-center gap-2 text-sm text-gray-600 bg-white border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl px-3 py-3 transition-colors">
-            <span>{c.icon}</span>
             <span className="font-medium leading-tight text-left">{c.label}</span>
           </Link>
         ))}

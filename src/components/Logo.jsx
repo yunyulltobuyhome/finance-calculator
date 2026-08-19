@@ -9,21 +9,21 @@ export default function Logo({ size = 'md', theme = 'light' }) {
   if (theme === 'icon') {
     return (
       <svg width={s.iconSize} height={s.iconSize} viewBox="0 0 100 100" fill="none">
-        <rect width="100" height="100" rx="20" fill="#4F46E5"/>
-        <rect x="15" y="18" width="70" height="22" rx="4" fill="white" opacity="0.9"/>
-        <text x="50" y="34" textAnchor="middle" fill="#4F46E5"
+        <rect width="100" height="100" rx="6" fill="#164254"/>
+        <rect x="15" y="18" width="70" height="22" rx="2" fill="white" opacity="0.9"/>
+        <text x="50" y="34" textAnchor="middle" fill="#164254"
           style={{ fontFamily: 'system-ui', fontSize: 14, fontWeight: 700 }}>42</text>
-        <rect x="15" y="46" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="35" y="46" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="55" y="46" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="75" y="46" width="16" height="11" rx="3" fill="#A5B4FC"/>
-        <rect x="15" y="61" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="35" y="61" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="55" y="61" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="75" y="61" width="16" height="11" rx="3" fill="#A5B4FC"/>
-        <rect x="15" y="76" width="36" height="11" rx="3" fill="white" opacity="0.9"/>
-        <rect x="55" y="76" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="75" y="76" width="16" height="11" rx="3" fill="#A5B4FC"/>
+        <rect x="15" y="46" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="35" y="46" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="55" y="46" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="75" y="46" width="16" height="11" rx="1" fill="#79A9B7"/>
+        <rect x="15" y="61" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="35" y="61" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="55" y="61" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="75" y="61" width="16" height="11" rx="1" fill="#79A9B7"/>
+        <rect x="15" y="76" width="36" height="11" rx="1" fill="white" opacity="0.9"/>
+        <rect x="55" y="76" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="75" y="76" width="16" height="11" rx="1" fill="#79A9B7"/>
       </svg>
     )
   }
@@ -32,21 +32,21 @@ export default function Logo({ size = 'md', theme = 'light' }) {
     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
       {/* 아이콘 */}
       <svg width={s.iconSize} height={s.iconSize} viewBox="0 0 100 100" fill="none">
-        <rect width="100" height="100" rx="20" fill="#4F46E5"/>
-        <rect x="15" y="18" width="70" height="22" rx="4" fill="white" opacity="0.9"/>
-        <text x="50" y="34" textAnchor="middle" fill="#4F46E5"
+        <rect width="100" height="100" rx="6" fill="#164254"/>
+        <rect x="15" y="18" width="70" height="22" rx="2" fill="white" opacity="0.9"/>
+        <text x="50" y="34" textAnchor="middle" fill="#164254"
           style={{ fontFamily: 'system-ui', fontSize: 14, fontWeight: 700 }}>42</text>
-        <rect x="15" y="46" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="35" y="46" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="55" y="46" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="75" y="46" width="16" height="11" rx="3" fill="#A5B4FC"/>
-        <rect x="15" y="61" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="35" y="61" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="55" y="61" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="75" y="61" width="16" height="11" rx="3" fill="#A5B4FC"/>
-        <rect x="15" y="76" width="36" height="11" rx="3" fill="white" opacity="0.9"/>
-        <rect x="55" y="76" width="16" height="11" rx="3" fill="white" opacity="0.7"/>
-        <rect x="75" y="76" width="16" height="11" rx="3" fill="#A5B4FC"/>
+        <rect x="15" y="46" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="35" y="46" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="55" y="46" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="75" y="46" width="16" height="11" rx="1" fill="#79A9B7"/>
+        <rect x="15" y="61" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="35" y="61" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="55" y="61" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="75" y="61" width="16" height="11" rx="1" fill="#79A9B7"/>
+        <rect x="15" y="76" width="36" height="11" rx="1" fill="white" opacity="0.9"/>
+        <rect x="55" y="76" width="16" height="11" rx="1" fill="white" opacity="0.7"/>
+        <rect x="75" y="76" width="16" height="11" rx="1" fill="#79A9B7"/>
       </svg>
 
       {/* 텍스트 */}
@@ -56,14 +56,14 @@ export default function Logo({ size = 'md', theme = 'light' }) {
             fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
             fontSize: s.fontSize,
             fontWeight: 700,
-            color: theme === 'dark' ? 'white' : '#4F46E5',
+            color: theme === 'dark' ? 'white' : '#164254',
             letterSpacing: '-0.5px',
           }}>Join</span>
           <span style={{
             fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif',
             fontSize: s.fontSize,
             fontWeight: 300,
-            color: theme === 'dark' ? '#A5B4FC' : '#4F46E5',
+            color: theme === 'dark' ? '#79A9B7' : '#164254',
             letterSpacing: '-0.5px',
           }}>Calc</span>
         </div>

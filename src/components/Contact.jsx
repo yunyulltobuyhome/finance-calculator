@@ -18,7 +18,7 @@ export default function Contact() {
 
       <div className="space-y-6 text-sm text-gray-600">
         <section className="bg-indigo-50 border border-indigo-200 rounded-xl p-5">
-          <h2 className="text-base font-bold text-gray-800 mb-2">📧 Email</h2>
+          <h2 className="text-base font-bold text-gray-800 mb-2">Email</h2>
           <p className="leading-relaxed mb-3">
             The fastest way to reach us is by email. We read every message.
           </p>
@@ -33,9 +33,9 @@ export default function Contact() {
           <ul className="space-y-2">
             {[
               ['📊 Rate corrections', 'Found a tax rate or threshold that looks out of date? Tell us the calculator and the correct figure with a source, and we\'ll fix it quickly.'],
-              ['💡 Calculator requests', 'Need a calculator we don\'t offer yet? Suggestions help us decide what to build next.'],
-              ['📣 Advertising & partnerships', 'For advertising or partnership enquiries, email us with details of your proposal.'],
-              ['🔒 Privacy requests', 'Questions about how we handle data, cookies, or advertising — or a request relating to your privacy — are always welcome.'],
+              ['Calculator requests', 'Need a calculator we don\'t offer yet? Suggestions help us decide what to build next.'],
+              ['Advertising & partnerships', 'For advertising or partnership enquiries, email us with details of your proposal.'],
+              ['Privacy requests', 'Questions about how we handle data, cookies, or advertising — or a request relating to your privacy — are always welcome.'],
             ].map(([title, body]) => (
               <li key={title} className="bg-gray-50 rounded-lg p-4">
                 <p className="font-semibold text-gray-700 mb-1">{title}</p>

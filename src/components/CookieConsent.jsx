@@ -37,7 +37,7 @@ export default function CookieConsent() {
     <div className="no-print fixed bottom-0 inset-x-0 z-50 p-3 md:p-4">
       <div className="max-w-3xl mx-auto bg-white border border-gray-200 shadow-xl rounded-2xl p-4 md:flex md:items-center md:gap-4">
         <p className="text-xs text-gray-600 leading-relaxed flex-1">
-          🍪 We use cookies to keep JoinCalc free, including cookies set by Google AdSense to show
+          We use cookies to keep JoinCalc free, including cookies set by Google AdSense to show
           relevant ads. Calculations always run in your browser and we collect no personal data.
           See our{' '}
           <Link to="/privacy" className="text-indigo-600 hover:underline font-medium">Privacy Policy</Link>.
