@@ -25,9 +25,17 @@ export default function About() {
         <section>
           <h2 className="text-base font-bold text-gray-800 mb-3">Who runs this site</h2>
           <p className="leading-relaxed mb-3">
-            JoinCalc is an independent site, built and maintained by one person rather than a company or an
-            editorial team. There is no staff behind the word &ldquo;we&rdquo; anywhere on this site, and it seems
-            more useful to say so than to imply otherwise.
+            JoinCalc is built and maintained by <strong>Yunsung Nam</strong>, working from Incheon, Republic of
+            Korea. It is an independent site — not a company, not an editorial team. There is no staff behind
+            the word &ldquo;we&rdquo; anywhere on this site, and it seems more useful to say so than to imply
+            otherwise.
+          </p>
+          <p className="leading-relaxed mb-3">
+            An obvious question follows: why would someone in Korea build US and UK tax calculators? Because the
+            rules these tools implement are published, precise and testable. Whether a UK salary of £110,000
+            attracts a 62% marginal rate is not a matter of local knowledge or opinion — it falls out of HMRC&apos;s
+            published thresholds, and it can be checked by anyone. That is the part of this problem I can do
+            well, and the site is deliberately limited to it.
           </p>
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
             <p className="font-semibold text-gray-700 mb-1.5">I am not an accountant, tax adviser or financial planner.</p>
