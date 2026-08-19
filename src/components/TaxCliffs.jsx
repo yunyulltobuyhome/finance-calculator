@@ -49,12 +49,12 @@ export default function TaxCliffs() {
   return (
     <div className="max-w-2xl">
       <Helmet>
-        <title>Tax Cliffs &amp; Quirks — What We Found Running the Numbers | JoinCalc</title>
+        <title>Tax Cliffs &amp; Quirks — Original UK Tax Analysis | JoinCalc</title>
         <meta name="description" content="Original analysis from our own tax engine: the UK salary where you keep only 29p of the next pound, the US income where a raise lowers your marginal rate, and the exact point California overtakes Illinois." />
         <meta name="keywords" content="60% tax trap uk, worst salary to earn uk, does a pay rise lower take home, marginal tax rate cliff, social security wage cap raise, california vs illinois tax crossover" />
         <link rel="canonical" href="https://joincalc.com/tax-cliffs/" />
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-        <meta property="og:title" content="Tax Cliffs & Quirks — What We Found Running the Numbers | JoinCalc" />
+        <meta property="og:title" content="Tax Cliffs & Quirks — Original UK Tax Analysis | JoinCalc" />
         <meta property="og:description" content="Five things the tax rules do that almost nobody expects, computed from published rates — with the exact figures." />
         <meta property="og:url" content="https://joincalc.com/tax-cliffs/" />
       </Helmet>

@@ -11,7 +11,7 @@
 export const GUIDES = [
   {
     slug: 'how-is-stamp-duty-calculated-uk',
-    title: 'How Is Stamp Duty Calculated in the UK? (2026 Guide) | JoinCalc',
+    title: 'How Is Stamp Duty Calculated in the UK? 2026 | JoinCalc',
     h1: 'How Is Stamp Duty Calculated in the UK?',
     description: 'A plain-English 2026 guide to how UK Stamp Duty Land Tax (SDLT) is worked out — the bands, first-time buyer relief, the second-home surcharge, and worked examples.',
     keywords: 'how is stamp duty calculated, stamp duty bands 2026, sdlt calculation, first time buyer stamp duty, second home stamp duty surcharge',
@@ -78,7 +78,7 @@ export const GUIDES = [
 
   {
     slug: 'how-much-capital-gains-tax-uk',
-    title: 'How Much Capital Gains Tax Will I Pay? (UK 2026 Guide) | JoinCalc',
+    title: 'How Much Capital Gains Tax Will I Pay? UK 2026 | JoinCalc',
     h1: 'How Much Capital Gains Tax Will I Pay in the UK?',
     description: 'Understand UK Capital Gains Tax for 2026: the £3,000 annual exempt amount, the 18% and 24% rates, how your income changes the rate, and worked examples for shares and property.',
     keywords: 'how much capital gains tax, uk cgt rates 2026, capital gains tax allowance 2026, cgt on shares, cgt on property uk',
@@ -145,7 +145,7 @@ export const GUIDES = [
 
   {
     slug: 'how-is-national-insurance-calculated-uk',
-    title: 'How Is National Insurance Calculated? (UK 2026/27 Guide) | JoinCalc',
+    title: 'How Is National Insurance Calculated? UK 2026/27 | JoinCalc',
     h1: 'How Is National Insurance Calculated in the UK?',
     description: 'A clear 2026/27 guide to UK National Insurance: the £12,570 threshold, the 8% and 2% employee rates, what employers pay, and worked examples of your monthly deduction.',
     keywords: 'how is national insurance calculated, national insurance rates 2026, how much national insurance do i pay, class 1 ni 2026, ni threshold 2026',
@@ -206,7 +206,7 @@ export const GUIDES = [
 
   {
     slug: 'how-much-redundancy-pay-uk',
-    title: 'How Much Redundancy Pay Am I Entitled To? (UK 2026 Guide) | JoinCalc',
+    title: 'How Much Redundancy Pay Am I Entitled To? UK 2026 | JoinCalc',
     h1: 'How Much Redundancy Pay Am I Entitled To?',
     description: 'A 2026 guide to UK statutory redundancy pay: who qualifies, the age-based formula, the £751 weekly cap, the 20-year limit, and how the first £30,000 is tax-free.',
     keywords: 'how much redundancy pay, statutory redundancy pay 2026, redundancy pay calculator uk, redundancy weekly cap 2026, is redundancy pay taxed',
@@ -319,7 +319,7 @@ export const GUIDES = [
 
   {
     slug: 'uk-vat-rates-explained',
-    title: 'UK VAT Rates Explained (2026) — Standard, Reduced & Zero | JoinCalc',
+    title: 'UK VAT Rates 2026 — Standard, Reduced & Zero | JoinCalc',
     h1: 'UK VAT Rates Explained',
     description: 'A simple guide to UK VAT in 2026: the 20% standard, 5% reduced and 0% zero rates, what each applies to, the £90,000 registration threshold, and how to add or remove VAT.',
     keywords: 'uk vat rate, what is the vat rate, vat rates explained, how to work out vat, vat registration threshold 2026',
@@ -406,7 +406,7 @@ export const GUIDES = [
 
   {
     slug: 'student-loan-repayments-explained',
-    title: 'UK Student Loan Repayments Explained (Plan 1, 2, 4, 5 & PG) | JoinCalc',
+    title: 'UK Student Loan Repayments — Plans 1, 2, 4, 5 & PG | JoinCalc',
     h1: 'UK Student Loan Repayments Explained',
     description: 'How UK student loan repayments work in 2026: the repayment thresholds for Plan 1, 2, 4, 5 and Postgraduate loans, the 9% rate, and when loans are written off.',
     keywords: 'student loan repayment uk, plan 2 student loan threshold, when do i repay student loan, student loan plan 5, postgraduate loan repayment',
@@ -758,7 +758,7 @@ export const GUIDES = [
 
   {
     slug: 'do-i-pay-national-insurance-on-my-pension',
-    title: 'Do I Pay National Insurance on My Pension? (UK 2026) | JoinCalc',
+    title: 'Do I Pay National Insurance on My Pension? | JoinCalc',
     h1: 'Do I Pay National Insurance on My Pension?',
     description: 'No — pension income is not subject to National Insurance in the UK, though it is still taxed. See exactly what is and isn\'t deducted from your pension.',
     keywords: 'do i pay national insurance on my pension, is pension income taxed, ni on pension uk, tax on private pension 2026',
@@ -795,7 +795,7 @@ export const GUIDES = [
 
   {
     slug: 'is-redundancy-pay-taxed-if-i-get-a-new-job',
-    title: 'Is Redundancy Pay Taxed If I Get a New Job Straight Away? | JoinCalc',
+    title: 'Is Redundancy Pay Taxed If I Start a New Job? | JoinCalc',
     h1: 'Is Redundancy Pay Taxed If I Get a New Job Straight Away?',
     description: 'No — the £30,000 tax-free redundancy allowance applies regardless of whether you start a new job immediately. Here\'s exactly how it works.',
     keywords: 'is redundancy pay taxed if i get a new job, redundancy pay new job same year, tax free redundancy allowance, redundancy pay and new employment',
@@ -878,7 +878,7 @@ export const GUIDES = [
 
   {
     slug: 'do-i-pay-tax-on-dividends-from-my-own-company',
-    title: 'Do I Pay Tax on Dividends From My Own Limited Company? | JoinCalc',
+    title: 'Do I Pay Tax on Dividends From My Own Company? | JoinCalc',
     h1: 'Do I Pay Tax on Dividends From My Own Limited Company?',
     description: 'Yes — dividends from your own limited company are taxed at dividend rates after a £500 allowance, separately from salary. Here\'s how it works for 2026/27.',
     keywords: 'do i pay tax on dividends from my own company, director dividend tax uk, dividend allowance 2026, limited company dividend tax',

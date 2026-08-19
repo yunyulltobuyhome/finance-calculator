@@ -228,7 +228,7 @@ const NAV = [
     items: [
       {
         label: 'Salary & Tax', path: '/salary',
-        title: "Paycheck & Salary Calculator 2026 — Take-Home Pay After Tax | JoinCalc",
+        title: "Paycheck & Salary Calculator 2026 — Take-Home Pay | JoinCalc",
         description: "Your real take-home pay per paycheck for 2026 — weekly, biweekly or monthly, after income tax, NI/FICA and 401(k)/pension. See what a raise or contribution really costs. US, UK, Canada & Australia.",
         keywords: 'paycheck calculator, salary calculator 2026, take home pay calculator, biweekly paycheck calculator, 401k paycheck impact calculator, after tax income calculator',
         lastUpdated: 'April 2026',
@@ -236,7 +236,7 @@ const NAV = [
       },
       {
         label: 'State Tax Comparison', path: '/state-tax-comparison',
-        title: "US State Tax Comparison 2026 — Take-Home Pay by State | JoinCalc",
+        title: "US State Tax Comparison 2026 — Pay by State | JoinCalc",
         description: "Compare your take-home pay across Texas, Florida, California, New York and more. See exactly what state income tax costs you and what moving would save. Free, instant.",
         keywords: 'state tax comparison, states with no income tax, california vs texas taxes, take home pay by state, moving to texas tax savings, state income tax calculator 2026',
         lastUpdated: 'April 2026',
@@ -518,7 +518,7 @@ export function Layout() {
   // Search Console shows ~82% of impressions come from the UK, so the site
   // identity leads with UK tax rather than describing four countries equally.
   const seoTitle = isHome
-    ? 'UK Tax Calculators 2026/27 — Stamp Duty, NI, Take-Home Pay | JoinCalc'
+    ? 'UK Tax Calculators 2026/27 — Stamp Duty, NI & Pay | JoinCalc'
     : isStatic ? 'JoinCalc — UK Tax & Money Calculators'
     : currentTab?.title || 'JoinCalc'
 
